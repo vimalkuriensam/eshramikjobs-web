@@ -4,4 +4,13 @@
     background-size: cover;
     height: calc(100vh - 10rem);
   }
+
+  &__heroContainer {
+    padding: 15rem 14rem;
+  }
+
+  &__heroInput {
+    opacity: 0.85;
+    height: 5.4rem;
+  }
 }

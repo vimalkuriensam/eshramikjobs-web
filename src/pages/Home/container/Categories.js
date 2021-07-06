@@ -1,7 +1,7 @@
 import React from "react";
 
 const Categories = () => {
-  return <div>Categories</div>;
+  return <section className="section-home-categories">Categories</section>;
 };
 
 export default Categories;

@@ -13,4 +13,18 @@
     opacity: 0.85;
     height: 5.4rem;
   }
+
+  &__ad {
+    min-height: 55.1rem;
+    background-image: linear-gradient(
+        to right,
+        rgba($color-primary, 0.7),
+        rgba($color-primary, 0.7)
+      ),
+      url("/assets/images/home-ad.png");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

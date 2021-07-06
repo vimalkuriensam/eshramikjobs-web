@@ -7,6 +7,7 @@ const Button = ({
   content = "Default",
   onButtonClick,
   className,
+  icon = "Plus",
   ...rest
 }) => {
   return (
@@ -15,9 +16,9 @@ const Button = ({
       onClick={onButtonClick}
       {...rest}
     >
-      {(variant == 3 || variant == 4) && (
+      {(variant == 2 || variant == 3) && (
         <span className="btn__icon">
-          <Icon name="Plus" />
+          <Icon name={icon} />
         </span>
       )}
       {content && <span>{content}</span>}

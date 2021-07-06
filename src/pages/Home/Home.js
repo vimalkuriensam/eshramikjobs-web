@@ -1,11 +1,11 @@
 import React from "react";  
 
-import Input from "../../components/atoms/Input";
+import TextArea from "../../components/atoms/TextArea";
 
 const Home = () => {
   return (
     <div style={{ padding: "3rem" }}>
-      <Input placeholder="Name" variant="1" />
+      <TextArea />
     </div>
   );
 };

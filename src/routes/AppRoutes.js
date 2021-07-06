@@ -4,11 +4,13 @@ import { Redirect, Router, Route, Switch } from "react-router-dom";
 import history from "../utils/history";
 import ScrollTop from "../utils/ScrollTop";
 
+import Header from "../components/organisms/Header";
 import { Home as HomeView } from "../pages";
 
 const AppRoutes = () => (
   <Router history={history}>
     <ScrollTop />
+    <Header />
     <Switch>
       <Route path="/" exact>
         <Redirect to="/home" />

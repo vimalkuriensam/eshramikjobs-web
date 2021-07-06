@@ -13,6 +13,11 @@
   src: url("/assets/fonts/Poppins-Light.ttf");
 }
 
+@font-face {
+  font-family: "proxima-nova-regular";
+  src: url("/assets/fonts/ProximaNova-Regular.otf");
+}
+
 @import "./abstracts/variables";
 @import "./abstracts/functions";
 @import "./abstracts/mixins";

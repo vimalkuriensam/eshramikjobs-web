@@ -16,7 +16,7 @@ const Button = ({
       onClick={onButtonClick}
       {...rest}
     >
-      {(variant == 2 || variant == 3) && (
+      {[2, 3, 4].includes(+variant) && (
         <span className="btn__icon">
           <Icon name={icon} />
         </span>

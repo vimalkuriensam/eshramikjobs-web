@@ -16,6 +16,12 @@ const Home = () => {
       <div>
         <Button content="" icon="Search" variant="2" />
       </div>
+      <div>
+        <Button content="" icon="ArrowDown" variant="3" />
+      </div>
+      <div>
+        <Button content="Click a photo" icon="Camera" variant="4" />
+      </div>
     </div>
   );
 };

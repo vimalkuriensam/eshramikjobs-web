@@ -11,7 +11,7 @@ const Hero = () => {
         <div>
           <Title variant="pr-35-1">Find Job</Title>
         </div>
-        <div className="row">
+        <div className="row u-margin-top-2">
           <div className="col-3-of-7">
             <Input
               variant="1"

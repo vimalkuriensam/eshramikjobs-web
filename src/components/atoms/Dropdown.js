@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 import Input from "./Input";
 import Text from "./Text";
+import Button from "./Button";
 
 const Dropdown = ({ contents, value, onHandleDropdownValue, className }) => {
   useEffect(() => {
@@ -49,12 +50,7 @@ const Dropdown = ({ contents, value, onHandleDropdownValue, className }) => {
           <Text variant="r-14-400-2">{val || "Select"}</Text>
         </span>
         <span>
-          <Icon
-            name="DownArrow"
-            className={`form__dropdown-1--icon ${
-              active ? "form__dropdown-1--icon-invert" : null
-            }`}
-          />
+          <Button variant="2" icon="ArrowDown" content="" />
         </span>
       </div>
       {active && (

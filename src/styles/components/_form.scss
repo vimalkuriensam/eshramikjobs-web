@@ -174,4 +174,54 @@
       }
     }
   }
+
+  &__checkbox-1 {
+    display: inline-block;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    &--input {
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &--label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      > * {
+        &:not(:first-child) {
+          margin-left: 1rem;
+        }
+      }
+    }
+
+    &--container {
+      border: 2px solid $color-primary;
+      border-radius: 0.3rem;
+      cursor: pointer;
+      width: 2rem;
+      height: 2rem;
+      position: relative;
+      overflow: hidden;
+      &::after {
+        content: "\1F5F8";
+        color: $color-white;
+        padding: 0 0.3rem;
+        display: block;
+        height: 2rem;
+        width: 2rem;
+        @include absCenter;
+        font-weight: 700;
+        background-color: $color-primary;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+    }
+
+    &--input:checked + &--label &--container::after {
+      opacity: 1;
+    }
+  }
 }

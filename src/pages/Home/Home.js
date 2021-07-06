@@ -1,11 +1,11 @@
 import React from "react";
 
-import Dropdown from "../../components/atoms/Dropdown";
+import Checkbox from "../../components/atoms/Checkbox";
 
 const Home = () => {
   return (
     <div style={{ padding: "3rem" }}>
-      <Dropdown contents={["a", "b"]} />
+      <Checkbox id="add-match" title="Permanent address as previous" />
     </div>
   );
 };

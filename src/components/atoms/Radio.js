@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-import Text from "./Text";
+// import Text from "./Text";
 
 const Radio = ({ value, id, name, title, onHandleRadioClick }) => {
   const radioRef = useRef(null);
@@ -22,7 +22,8 @@ const Radio = ({ value, id, name, title, onHandleRadioClick }) => {
         onClick={onHandleClick}
       >
         <div className="form__radio--button">&nbsp;</div>
-        <Text variant="r-14-400-1">{title}</Text>
+        <div>{title}</div>
+        {/*<Text variant="r-14-400-1">{title}</Text>*/}
       </label>
     </div>
   );

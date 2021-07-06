@@ -198,7 +198,7 @@
     }
 
     &--container {
-      border: 2px solid $color-primary;
+      background: $color-grey-light-1;
       border-radius: 0.3rem;
       cursor: pointer;
       width: 2rem;
@@ -212,9 +212,10 @@
         display: block;
         height: 2rem;
         width: 2rem;
+        padding: 0rem .4rem;
         @include absCenter;
         font-weight: 700;
-        background-color: $color-primary;
+        background-color: $color-tertiary;
         opacity: 0;
         transition: opacity 0.2s;
       }

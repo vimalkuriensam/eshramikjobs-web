@@ -6,6 +6,7 @@ import ScrollTop from "../utils/ScrollTop";
 
 import Header from "../components/organisms/Header";
 import Login from "../components/organisms/Login";
+import Loader from "../components/organisms/Loader";
 import { Home as HomeView, Signup as SignupView } from "../pages";
 
 const AppRoutes = () => (
@@ -13,6 +14,7 @@ const AppRoutes = () => (
     <ScrollTop />
     <Header />
     <Login />
+    <Loader />
     <Switch>
       <Route path="/" exact>
         <Redirect to="/home" />

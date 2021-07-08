@@ -2,6 +2,7 @@ import { SET_LOGIN_STATE } from "../actions/utils.action";
 
 const utilsReducerDefaultState = {
   loginState: false,
+  loaderState: false,
 };
 
 const utilsReducer = (state = utilsReducerDefaultState, { type, value }) => {

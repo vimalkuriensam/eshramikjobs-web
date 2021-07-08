@@ -1,0 +1,35 @@
+.home {
+  &__hero {
+    background-image: url("/assets/images/home-banner.png");
+    background-size: cover;
+    height: calc(100vh - 10rem);
+  }
+
+  &__heroContainer {
+    padding: 14rem;
+  }
+
+  &__heroInput {
+    opacity: 0.85;
+    height: 5.4rem;
+  }
+
+  &__feedback {
+    min-height: 66.5rem;
+    background: $color-secondary;
+  }
+
+  &__ad {
+    min-height: 55.1rem;
+    background-image: linear-gradient(
+        to right,
+        rgba($color-primary, 0.7),
+        rgba($color-primary, 0.7)
+      ),
+      url("/assets/images/home-ad.png");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

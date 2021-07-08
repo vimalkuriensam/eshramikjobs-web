@@ -1,0 +1,11 @@
+@keyframes moveInTop {
+  0% {
+    transform: translate(-50%, -50rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(-50%, -50%);
+    opacity: 1;
+  }
+}

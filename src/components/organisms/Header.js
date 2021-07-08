@@ -10,10 +10,11 @@ import history from "../../utils/history";
 const Header = ({ dispatch }) => {
   const onSetLogin = () => dispatch(loginState({ state: true }));
   const onSetSignup = () => history.push("/register");
+  const onSetHome = () => history.push("/");
   return (
     <div className="header">
       <div className="header__logo-box">
-        <Image className="header__logo" name="Logo" />
+        <Image onIconClick={onSetHome} className="header__logo" name="Logo" />
       </div>
       <div className="header__actions">
         <NavLink

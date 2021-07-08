@@ -175,6 +175,18 @@
     }
   }
 
+  &__divider {
+    position: relative;
+    height: 2rem;
+    > div {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      height: 1rem;
+      border-top: 1px solid rgba($color-black, 0.1);
+    }
+  }
+
   &__checkbox-1 {
     display: inline-block;
     -webkit-user-select: none; /* Safari */
@@ -212,7 +224,7 @@
         display: block;
         height: 2rem;
         width: 2rem;
-        padding: 0rem .4rem;
+        padding: 0rem 0.4rem;
         @include absCenter;
         font-weight: 700;
         background-color: $color-tertiary;

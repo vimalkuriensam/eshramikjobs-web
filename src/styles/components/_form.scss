@@ -48,12 +48,19 @@
   }
 
   &__radioGroup {
-    display: flex;
-    align-items: center;
-    height: 4.4rem;
+    min-height: 4.4rem;
     > * {
       &:not(:first-child) {
-        margin-left: 3%;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  &__radioRows {
+    display: flex;
+    > * {
+      &:not(:first-child) {
+        margin-left: 3rem;
       }
     }
   }

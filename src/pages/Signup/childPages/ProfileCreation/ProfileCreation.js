@@ -5,7 +5,12 @@ import Image from "../../../../components/atoms/Image";
 import Stepper from "./container/Stepper";
 import PersonalInformation from "./container/PersonalInformation";
 import Qualification from "./container/Qualification";
-import { PROFILE_COMPONENTS } from "./data";
+import Profession from "./container/Profession";
+import Skills from "./container/Skills";
+import EmployeeDetails from "./container/EmployeeDetails";
+import Overseas from "./container/Overseas";
+import Upload from "./container/Upload";
+import Resume from "./container/Resume";
 
 const ProfileCreation = ({ match }) => {
   const step = match.params.step;
@@ -27,6 +32,8 @@ const ProfileCreation = ({ match }) => {
         return <Upload />;
       case "8":
         return <Resume />;
+      default:
+        return <PersonalInformation />;
     }
   };
   return (
@@ -36,7 +43,7 @@ const ProfileCreation = ({ match }) => {
       <Title variant="pm-26-1" className="u-text-center u-width-100">
         Create your Eshramik resume
       </Title>
-      <Stepper total={5} />
+      <Stepper step={step} total={8} />
       {getComponent()}
     </section>
   );

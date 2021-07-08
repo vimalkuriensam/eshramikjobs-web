@@ -6,7 +6,7 @@ import ScrollTop from "../utils/ScrollTop";
 
 import Header from "../components/organisms/Header";
 import Login from "../components/organisms/Login";
-import { Home as HomeView } from "../pages";
+import { Home as HomeView, Signup as SignupView } from "../pages";
 
 const AppRoutes = () => (
   <Router history={history}>
@@ -18,6 +18,7 @@ const AppRoutes = () => (
         <Redirect to="/home" />
       </Route>
       <Route path="/home" component={HomeView} />
+      <Route path="/register" component={SignupView} />
     </Switch>
   </Router>
 );

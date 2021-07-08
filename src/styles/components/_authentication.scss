@@ -71,4 +71,16 @@
     font-family: "poppins-medium";
     font-size: 24;
   }
+
+  &__hexagon1 {
+    position: absolute;
+    top: 0;
+    left: -12rem;
+  }
+
+  &__hexagon2 {
+    position: absolute;
+    bottom: 0;
+    right: -12rem;
+  }
 }

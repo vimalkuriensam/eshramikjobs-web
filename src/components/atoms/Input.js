@@ -35,6 +35,7 @@ const Input = ({
       placeholder={placeholder}
       onChange={onHandleText}
       className={`form__input-${variant} ${className}`}
+      type={type}
       {...rest}
     />
   );

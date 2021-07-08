@@ -1,7 +1,16 @@
-import React from 'react';
+import React from "react";
+
+import Input from "../atoms/Input";
+import Popup from "../molecules/Popup";
 
 const Login = () => {
-    return <div>Login</div>
-}
+  return (
+    <Popup>
+      <div>
+        <Input placeholder="Email" />
+      </div>
+    </Popup>
+  );
+};
 
 export default Login;

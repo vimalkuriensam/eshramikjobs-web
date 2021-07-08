@@ -1,11 +1,9 @@
 import React from "react";
 
-import Title from "../../../../../components/atoms/Title";
-import FormInput from "../../../../../components/molecules/FormInput";
-import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import Button from "../../../../../components/atoms/Button";
+import Title from "../../../../../components/atoms/Title";
+import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
-import Checkbox from "../../../../../components/atoms/Checkbox";
 
 const Qualification = () => {
   return (
@@ -57,6 +55,9 @@ const Qualification = () => {
           </div>
           <div className="row">
             <FormDropdown title="College/University" />
+          </div>
+          <div className="row">
+            <Button content="next" variant="1-3" />
           </div>
         </div>
       </div>

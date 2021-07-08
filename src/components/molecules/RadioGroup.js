@@ -2,12 +2,17 @@ import React from "react";
 
 import Radio from "../atoms/Radio";
 
-const RadioGroup = ({ contents, value, className, onHandleRadioClick }) => {
-  const rows = [...Array(Math.ceil(contents.length / 3))];
+const RadioGroup = ({
+  contents,
+  value,
+  className,
+  onHandleRadioClick,
+  column = 3,
+}) => {
+  const rows = [...Array(Math.ceil(contents.length / column))];
   const radioRows = rows.map((row, index) =>
-    contents.slice(index * 3, index * 3 + 3)
+    contents.slice(index * column, index * column + column)
   );
-  console.log(radioRows);
   return (
     <div className={`form__radioGroup ${className}`}>
       {radioRows.map((contents, index) => (

@@ -3,12 +3,18 @@ import React from "react";
 import Button from "../atoms/Button";
 import Image from "../atoms/Image";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { loginState } from "../../redux/actions/utils.action";
+import history from "../../utils/history";
 
-const Header = () => {
+const Header = ({ dispatch }) => {
+  const onSetLogin = () => dispatch(loginState({ state: true }));
+  const onSetSignup = () => history.push("/register");
+  const onSetHome = () => history.push("/");
   return (
     <div className="header">
       <div className="header__logo-box">
-        <Image className="header__logo" name="Logo" />
+        <Image onIconClick={onSetHome} className="header__logo" name="Logo" />
       </div>
       <div className="header__actions">
         <NavLink
@@ -25,11 +31,11 @@ const Header = () => {
         >
           About us
         </NavLink>
-        <Button variant="1-1" content="Login" />
-        <Button variant="1-1" content="Signup" />
+        <Button variant="1-1" onButtonClick={onSetLogin} content="Login" />
+        <Button variant="1-1" content="Signup" onButtonClick={onSetSignup} />
       </div>
     </div>
   );
 };
 
-export default Header;
+export default connect()(Header);

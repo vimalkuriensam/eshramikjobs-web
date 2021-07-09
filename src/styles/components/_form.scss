@@ -34,6 +34,18 @@
     }
   }
 
+  &__input-3 {
+    width: 6.6rem;
+    height: 6.9rem;
+    border-radius: 1rem;
+    background: $color-grey-light-1;
+    border: 1px solid $color-grey-light-1;
+    outline: none;
+    text-align: center;
+    font-size: 4rem;
+    font-family: 'poppins-regular';
+  }
+
   &__textarea {
     resize: none;
     border-radius: 1rem;

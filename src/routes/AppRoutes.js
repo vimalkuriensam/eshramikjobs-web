@@ -7,6 +7,7 @@ import ScrollTop from "../utils/ScrollTop";
 import Header from "../components/organisms/Header";
 import Login from "../components/organisms/Login";
 import Loader from "../components/organisms/Loader";
+import Footer from "../components/organisms/Footer";
 import {
   Home as HomeView,
   Signup as SignupView,
@@ -27,6 +28,7 @@ const AppRoutes = () => (
       <Route path="/register" exact component={SignupView} />
       <Route path="/register/profile/:step" component={ProfileCreationView} />
     </Switch>
+    <Footer />
   </Router>
 );
 

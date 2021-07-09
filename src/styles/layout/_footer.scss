@@ -1,0 +1,15 @@
+.footer {
+  padding: 9rem 7rem;
+
+  &__linkContent {
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+      color: darken($color-grey-dark, 10%);
+    }
+  }
+
+  &__title {
+    margin-top: -1rem;
+  }
+}

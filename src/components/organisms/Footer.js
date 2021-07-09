@@ -4,6 +4,7 @@ import Text from "../atoms/Text";
 import Title from "../atoms/Title";
 import { FOOTER_MAIN_CONTENTS } from "../../utils/data";
 import Button from "../atoms/Button";
+import Icon from "../atoms/Icon";
 
 const Footer = () => {
   return (
@@ -27,6 +28,7 @@ const Footer = () => {
         </div>
         <div className="col-1-of-4">
           <Title variant="pr-28-1" className="footer__title">Eshramik on Mobile</Title>
+          <Icon name="GooglePlay" />
         </div>
       </div>
     </div>

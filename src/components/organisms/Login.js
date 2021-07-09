@@ -21,7 +21,7 @@ const Login = ({ isLogin, dispatch }) => {
             <Input placeholder="Email" variant="2" />
             <Input
               placeholder="Password"
-              className="u-margin-top-5"
+              className="u-margin-top-50"
               type="password"
               variant="2"
             />

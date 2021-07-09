@@ -1,14 +1,14 @@
 import React from "react";
 
-import Text from "../atoms/Text";
+import Title from "../atoms/Title";
 import RadioGroup from "./RadioGroup";
 
 const FormRadioGroup = ({ title, className, ...rest }) => {
   return (
     <div>
-      <Text variant="r-14-400-1" className={`${className}--title`}>
+      <Title variant="pr-16-1" className={`${className}--title u-margin-bottom-10`}>
         {title}
-      </Text>
+      </Title>
       <RadioGroup className={className} {...rest} />
     </div>
   );

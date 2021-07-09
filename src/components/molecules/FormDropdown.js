@@ -1,12 +1,12 @@
 import React from "react";
 
 import Dropdown from "../atoms/Dropdown";
-import Text from "../atoms/Text";
+import Title from "../atoms/Title";
 
 const FormDropdown = ({ title, ...rest }) => {
   return (
     <div className="form__dropdownGroup">
-      <Text variant="r-14-400-1">{title}</Text>
+      <Title variant="pr-16-1" className="u-margin-bottom-10">{title}</Title>
       <Dropdown {...rest} />
     </div>
   );

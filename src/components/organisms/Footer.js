@@ -26,9 +26,22 @@ const Footer = () => {
             </div>
           ))}
         </div>
-        <div className="col-1-of-4">
-          <Title variant="pr-28-1" className="footer__title">Eshramik on Mobile</Title>
-          <Icon name="GooglePlay" />
+        <div className="col-1-of-4 u-text-center">
+          <Title variant="pr-28-1" className="footer__title">
+            Eshramik on Mobile
+          </Title>
+          <Button
+            variant="2"
+            icon="GooglePlay"
+            content="Google play"
+            className="footer__cta"
+          />
+          <Button
+            variant="2"
+            icon="Apple"
+            content="App store"
+            className="footer__cta"
+          />
         </div>
       </div>
     </div>

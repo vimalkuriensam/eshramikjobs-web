@@ -4,7 +4,6 @@ import Icon from "../../../components/atoms/Icon";
 import Text from "../../../components/atoms/Text";
 
 const CategoryCard = ({ category }) => {
-  console.log(category);
   return (
     <div className="home__card">
       <Icon name={category.icon} />

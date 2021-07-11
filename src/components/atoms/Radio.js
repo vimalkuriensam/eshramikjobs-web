@@ -11,6 +11,7 @@ const Radio = ({ value, id, name, title, onHandleRadioClick }) => {
       <input
         type="radio"
         checked={value}
+        readOnly
         id={id}
         name={name}
         className="form__radio--input"

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+
+import moment from "moment";
 
 import Title from "../../../../components/atoms/Title";
 import Image from "../../../../components/atoms/Image";
@@ -14,10 +16,66 @@ import Resume from "./container/Resume";
 
 const ProfileCreation = ({ match }) => {
   const step = match.params.step;
+
+  const [profileProps, setProfileProps] = useState({
+    1: {
+      name: "",
+      gender: "male",
+      dateOfBirth: moment().valueOf(),
+      maritalStatus: "single",
+      email: "",
+      address: {
+        houseNo: "",
+        street: "",
+        state: "",
+        district: "",
+        region: "",
+        pin: "",
+      },
+      permanentAddress: {
+        houseNo: "",
+        street: "",
+        state: "",
+        district: "",
+        region: "",
+        pin: "",
+      },
+      sameAsAddress: false,
+    },
+  });
+
+  const onHandleProfileInfo = (type, { target }) => {
+    const { value } = target;
+    setProfileProps((prevState) => ({
+      ...prevState,
+      [step]: { ...prevState[step], [type]: value },
+    }));
+  };
+
+  const onHandleSetAddress = (type1, type2, { target }) => {
+    const { value } = target;
+    setProfileProps((prevState) => ({
+      ...prevState,
+      [step]: {
+        ...prevState[step],
+        [type1]: {
+          ...prevState[step][type1],
+          [type2]: value,
+        },
+      },
+    }));
+  };
+
   const getComponent = () => {
     switch (step) {
       case "1":
-        return <PersonalInformation />;
+        return (
+          <PersonalInformation
+            info={profileProps[step]}
+            onHandleProfileInfo={onHandleProfileInfo}
+            onHandleSetAddress={onHandleSetAddress}
+          />
+        );
       case "2":
         return <Qualification />;
       case "3":

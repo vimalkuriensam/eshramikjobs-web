@@ -211,6 +211,19 @@
     }
   }
 
+  &__calendar {
+    position: relative;
+    > * {
+      &:first-child {
+        display: inline-block!important;
+        position: absolute!important;
+        z-index: 10;
+        top: 1rem;
+        left: 1.2rem;
+      }
+    }
+  }
+
   &__checkbox-1 {
     display: inline-block;
     -webkit-user-select: none; /* Safari */

@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import utilsReducer from "../reducers/utils.reducer";
+import authenticationReducer from "../reducers/authentication.reducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -26,6 +27,7 @@ const store = createStore(
   persistReducer(
     persistConfig,
     combineReducers({
+      auth: authenticationReducer,
       utils: utilsReducer,
     })
   ),

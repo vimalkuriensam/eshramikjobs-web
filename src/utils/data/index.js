@@ -1,3 +1,5 @@
+export const BASE_URL = "https://eshramik-api.herokuapp.com";
+
 export const FOOTER_MAIN_CONTENTS = {
   rows: [
     {

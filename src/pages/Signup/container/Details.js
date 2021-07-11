@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
 import Button from "../../../components/atoms/Button";
 import Checkbox from "../../../components/atoms/Checkbox";
@@ -6,8 +7,9 @@ import Input from "../../../components/atoms/Input";
 import Text from "../../../components/atoms/Text";
 import validator from "validator";
 import { SIGNUP_DEFAULT_PROPS, SIGNUP_ERRORS } from "../data";
+import { setLogin } from "../../../redux/actions/authentication.action";
 
-const Details = () => {
+const Details = ({ dispatch }) => {
   const [signupProps, setSignupProps] = useState(SIGNUP_DEFAULT_PROPS);
   const [signupError, setSignupError] = useState(SIGNUP_DEFAULT_PROPS);
   const [isError, setIsError] = useState(false);
@@ -51,12 +53,9 @@ const Details = () => {
     e.preventDefault();
     const errorMatch = Object.values(signupError).some((error) => !!error);
     const itemMatch = Object.values(signupProps).every((val) => !!val);
-    console.log(errorMatch, itemMatch);
     if (errorMatch) setIsError(true);
     else if (!itemMatch) setIsItem(true);
-    else {
-      console.log(signupProps)
-    }
+    else dispatch(setLogin(signupProps));    
   };
 
   const onSetSignupPolicy = ({ target }) => setSignupPolicy(target.value);
@@ -158,4 +157,4 @@ const Details = () => {
   );
 };
 
-export default Details;
+export default connect()(Details);

@@ -13,8 +13,8 @@ const apiService = () => {
   api.interceptors.request.use(async (config) => {
     try {
       store.dispatch(setLoader({ state: true }));
-      //   const token = store.getState().user?.token;
-      //   if (token) config.headers["Authorization"] = "Bearer " + token;
+      const token = store.getState().auth?.accessToken;
+      if (token) config.headers["Authorization"] = "Bearer " + token;
       config.headers["Content-Type"] = "application/json";
     } catch (e) {
       alert("error", e);

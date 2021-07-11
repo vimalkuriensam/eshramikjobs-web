@@ -24,6 +24,7 @@
 }
 
 @import "aos/dist/aos.css";
+@import "react-datepicker/dist/react-datepicker.css";
 
 @import "./abstracts/variables";
 @import "./abstracts/functions";
@@ -48,4 +49,5 @@
 @import "./pages/authentication";
 @import "./pages/home";
 
+@import "./vendors/calendar";
 @import "./vendors/scroll";

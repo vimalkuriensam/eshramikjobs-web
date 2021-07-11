@@ -6,6 +6,7 @@ import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import Button from "../../../../../components/atoms/Button";
 import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
 import Checkbox from "../../../../../components/atoms/Checkbox";
+import Calendar from "../../../../../components/atoms/Calendar";
 
 const PersonalInformation = () => {
   return (
@@ -15,6 +16,9 @@ const PersonalInformation = () => {
         <div className="col-1-of-2">
           <div className="row">
             <FormInput title="Full name" placeholder="" variant="1" />
+          </div>
+          <div className="row">
+            <Calendar />
           </div>
           <div className="row">
             <FormRadioGroup

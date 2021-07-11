@@ -13,7 +13,12 @@ const Categories = () => {
   const categoryLists = categoryRows.map((row, index) => (
     <div className="row" key={index}>
       {row.map((category, idx) => (
-        <div className="col-1-of-4" key={`${index}-${idx}`}>
+        <div
+          className="col-1-of-4"
+          data-aos="zoom-out-up"
+          data-aos-duration="470"
+          key={`${index}-${idx}`}
+        >
           <CategoryCard category={category} />
         </div>
       ))}

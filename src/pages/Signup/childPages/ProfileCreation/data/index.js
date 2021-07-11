@@ -24,3 +24,21 @@ export const PROFILE_COMPONENTS = {
     component: "Resume",
   },
 };
+
+export const OVERSEAS_OPPORTUNITY = {
+  title: "Overseas opportunity",
+  overseasRadio: {
+    title: "Are you interested in overseas opportunity",
+    contents: [
+      { id: "true", title: "Yes", name: "overseas" },
+      { id: "false", title: "No", name: "overseas" },
+    ],
+  },
+  passport: {
+    title: "Do you have a valid Indian passport?",
+    contents: [
+      { id: "true", title: "Yes", name: "passport" },
+      { id: "false", title: "No", name: "passport" },
+    ],
+  },
+};

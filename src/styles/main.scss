@@ -23,6 +23,8 @@
   src: url("/assets/fonts/ProximaNova-Regular.otf");
 }
 
+@import "aos/dist/aos.css";
+
 @import "./abstracts/variables";
 @import "./abstracts/functions";
 @import "./abstracts/mixins";

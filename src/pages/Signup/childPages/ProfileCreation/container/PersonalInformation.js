@@ -7,6 +7,7 @@ import Button from "../../../../../components/atoms/Button";
 import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
 import Checkbox from "../../../../../components/atoms/Checkbox";
 import Calendar from "../../../../../components/atoms/Calendar";
+import FormCalendar from "../../../../../components/molecules/FormCalendar";
 
 const PersonalInformation = () => {
   return (
@@ -18,7 +19,10 @@ const PersonalInformation = () => {
             <FormInput title="Full name" placeholder="" variant="1" />
           </div>
           <div className="row">
-            <Calendar />
+            <FormCalendar
+              title="Date of birth"
+              onHandleDate={({ target }) => console.log(target.value)}
+            />
           </div>
           <div className="row">
             <FormRadioGroup

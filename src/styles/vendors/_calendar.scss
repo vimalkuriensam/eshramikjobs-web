@@ -40,6 +40,7 @@
   height: 4rem;
   font-size: 1.4rem;
   padding: 1rem 0;
+  font-family: "poppins-regular";
 }
 
 .react-datepicker-wrapper {
@@ -56,5 +57,40 @@
     border: none;
     padding: 0 4.5rem;
     font-size: 1.8rem;
+    font-family: "poppins-regular";
   }
+}
+.react-datepicker__year-dropdown,
+.react-datepicker__month-dropdown,
+.react-datepicker__month-year-dropdown {
+  height: 30rem;
+  overflow-y: scroll;
+  background: $color-white;
+}
+
+.react-datepicker__year-option {
+  font-size: 1.6rem;
+  padding: 1rem;
+}
+
+.react-datepicker__year-read-view--selected-year {
+  font-size: 1.4rem;
+}
+
+.react-datepicker__header {
+  background: $color-white;
+  border-bottom: none;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  font-family: "poppins-regular";
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background: $color-tertiary;
+  color: $color-white;
+  font-weight: 700;
 }

@@ -9,6 +9,7 @@ const Input = ({
   placeholder = "Enter Text",
   className,
   type = "text",
+  refCallback,
   ...rest
 }) => {
   if (type == "file") {
@@ -37,6 +38,7 @@ const Input = ({
       onChange={onHandleText}
       className={`form__input-${variant} ${className}`}
       type={type}
+      ref={refCallback}
       {...rest}
     />
   );

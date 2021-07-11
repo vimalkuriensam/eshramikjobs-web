@@ -92,6 +92,22 @@
     padding-left: 2rem;
   }
 
+  &__loginEmailContainer {
+    position: relative;
+  }
+
+  &__loginInputError {
+    > input {
+      border: 2px solid #ce0606;
+    }
+  }
+
+  &__loginError {
+    position: absolute;
+    top: 5.4rem;
+    left: 0;
+  }
+
   &__hexagon {
     width: 100px;
     height: 57.735px;

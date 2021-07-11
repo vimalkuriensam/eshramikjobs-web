@@ -5,6 +5,7 @@ const Input = ({
   onHandleText,
   onHandleFile,
   variant,
+  content="Upload Document",
   placeholder = "Enter Text",
   className,
   type = "text",
@@ -15,16 +16,16 @@ const Input = ({
     return (
       <div>
         <Button
-          variant="2"
+          variant="4"
           onButtonClick={() => ref.current.click()}
-          content="Upload Document"
+          content={content}
+          {...rest}
         />
         <input
           ref={ref}
           className="form__inputfile"
           onChange={onHandleFile}
           type="file"
-          {...rest}
           multiple
         />
       </div>

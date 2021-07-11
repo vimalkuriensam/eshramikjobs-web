@@ -43,7 +43,11 @@
     outline: none;
     text-align: center;
     font-size: 4rem;
-    font-family: 'poppins-regular';
+    font-family: "poppins-regular";
+  }
+
+  &__inputfile {
+    display: none;
   }
 
   &__textarea {

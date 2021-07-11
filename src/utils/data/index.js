@@ -97,3 +97,5 @@ export const FOOTER_MAIN_CONTENTS = {
     },
   ],
 };
+
+export const INVALID_EMAIL = "Invalid Email Format";

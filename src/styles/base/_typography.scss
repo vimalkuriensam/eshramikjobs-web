@@ -127,4 +127,9 @@ body {
     font-size: 1.8rem;
     color: $color-primary;
   }
+
+  &--error {
+    font-size: 1.4rem;
+    color: #ce0606;
+  }
 }

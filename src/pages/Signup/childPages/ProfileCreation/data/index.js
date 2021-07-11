@@ -42,3 +42,14 @@ export const OVERSEAS_OPPORTUNITY = {
     ],
   },
 };
+
+export const RESUME_UPLOAD = {
+  title: "Upload photo",
+  resumeCopy: {
+    title: "Do you need a copy of Resume?",
+    contents: [
+      { id: "true", title: "Yes", name: "resume" },
+      { id: "false", title: "No", name: "resume" },
+    ],
+  },
+};

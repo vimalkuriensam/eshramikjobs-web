@@ -15,6 +15,11 @@
     box-shadow: 0 0 0 0.2rem rgba($color-tertiary, 0.3);
   }
 
+  &:disabled {
+    background: $color-grey-dark;
+    cursor: not-allowed;
+  }
+
   &--1-1 {
     border-radius: 0.8rem;
     height: 3.5rem;
@@ -79,14 +84,14 @@
     align-items: center;
     color: $color-grey-dark;
     font-size: 2rem;
-    font-family: 'proxima-nova-regular';
+    font-family: "proxima-nova-regular";
     &:hover {
       background: darken($color-white, 4%);
     }
 
     &:active {
-        box-shadow: 0 0 0 0.2rem rgba($color-secondary, 0.3);
-      }
+      box-shadow: 0 0 0 0.2rem rgba($color-secondary, 0.3);
+    }
     > * {
       &:not(:first-child) {
         margin-left: 1.8rem;

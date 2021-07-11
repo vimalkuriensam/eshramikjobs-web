@@ -2,13 +2,10 @@ import React from "react";
 
 import Title from "../../../../../components/atoms/Title";
 import Image from "../../../../../components/atoms/Image";
-import FormInput from "../../../../../components/molecules/FormInput";
 import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import Button from "../../../../../components/atoms/Button";
-import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
-import Checkbox from "../../../../../components/atoms/Checkbox";
 
-const Profession = () => {
+const Profession = ({ info, onHandleProfessionInfo }) => {
   return (
     <div>
       <div className="row">
@@ -20,10 +17,24 @@ const Profession = () => {
             <Title variant="pr-24-1">3. Profession</Title>
           </div>
           <div className="row">
-            <FormDropdown title="Technical" />
+            <FormDropdown
+              value={info.technical}
+              onHandleDropdownValue={onHandleProfessionInfo.bind(
+                this,
+                "technical"
+              )}
+              title="Technical"
+            />
           </div>
           <div className="row">
-            <FormDropdown title="Non technical" />
+            <FormDropdown
+              value={info.nonTechnical}
+              onHandleDropdownValue={onHandleProfessionInfo.bind(
+                this,
+                "nonTechnical"
+              )}
+              title="Non technical"
+            />
           </div>
           <div className="row">
             <Button content="next" variant="1-3" />

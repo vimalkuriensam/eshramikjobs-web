@@ -42,9 +42,13 @@ const ProfileCreation = ({ match }) => {
       },
       sameAsAddress: false,
     },
+    3: {
+      technical: "",
+      nonTechnical: "",
+    },
   });
 
-  const onHandleProfileInfo = (type, { target }) => {
+  const onHandleInfo = (type, { target }) => {
     const { value } = target;
     setProfileProps((prevState) => ({
       ...prevState,
@@ -72,14 +76,19 @@ const ProfileCreation = ({ match }) => {
         return (
           <PersonalInformation
             info={profileProps[step]}
-            onHandleProfileInfo={onHandleProfileInfo}
+            onHandleProfileInfo={onHandleInfo}
             onHandleSetAddress={onHandleSetAddress}
           />
         );
       case "2":
         return <Qualification />;
       case "3":
-        return <Profession />;
+        return (
+          <Profession
+            info={profileProps[step]}
+            onHandleProfessionInfo={onHandleInfo}
+          />
+        );
       case "4":
         return <Skills />;
       case "5":

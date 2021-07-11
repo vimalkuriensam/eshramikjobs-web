@@ -6,6 +6,8 @@ import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import Button from "../../../../../components/atoms/Button";
 import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
 import Checkbox from "../../../../../components/atoms/Checkbox";
+import FormCalendar from "../../../../../components/molecules/FormCalendar";
+import Dropdown from "../../../../../components/atoms/Dropdown";
 
 const EmployeeDetails = () => {
   return (
@@ -21,39 +23,25 @@ const EmployeeDetails = () => {
             />
           </div>
           <div className="row">
+            <FormCalendar title="Start Date" />
+          </div>
+          <div className="row">
+            <FormCalendar title="End Date" />
+          </div>
+          <div className="row">
             <FormDropdown title="Job title" />
           </div>
         </div>
 
         <div className="col-1-of-2">
           <div className="row">
-            <FormDropdown title="District" />
+            <FormDropdown title="Job location" />
           </div>
           <div className="row">
-            <Checkbox className="u-margin-top-50">
-              Permanent address as previous
-            </Checkbox>
+            <Dropdown />
           </div>
           <div className="row">
-            <FormInput title="House number" placeholder="" variant="1" />
-          </div>
-          <div className="row">
-            <FormInput title="Street locality" placeholder="" variant="1" />
-          </div>
-          <div className="row">
-            <FormInput title="Pin code" placeholder="" variant="1" />
-          </div>
-          <div className="row">
-            <FormDropdown title="State" />
-          </div>
-          <div className="row">
-            <FormDropdown title="City" />
-          </div>
-          <div className="row">
-            <FormDropdown title="District" />
-          </div>
-          <div className="row">
-            <FormInput title="Email" placeholder="" variant="1" />
+            <FormInput title="Last drawn salary" variant="1" placeholder="" />
           </div>
           <div className="row">
             <Button content="next" variant="1-3" />

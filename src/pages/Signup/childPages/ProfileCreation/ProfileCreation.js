@@ -13,6 +13,7 @@ import EmployeeDetails from "./container/EmployeeDetails";
 import Overseas from "./container/Overseas";
 import Upload from "./container/Upload";
 import Resume from "./container/Resume";
+import { EMPLOYEE_DETAILS_DEFAULT_VALUE } from "../../data";
 
 const ProfileCreation = ({ match }) => {
   const step = match.params.step;
@@ -45,6 +46,9 @@ const ProfileCreation = ({ match }) => {
     3: {
       technical: "",
       nonTechnical: "",
+    },
+    5: {
+      empDetails: [{ ...EMPLOYEE_DETAILS_DEFAULT_VALUE }],
     },
     6: {
       overseas: false,
@@ -102,6 +106,17 @@ const ProfileCreation = ({ match }) => {
     }
   };
 
+  const onAddExperience = () =>
+    setProfileProps((prevState) => ({
+      ...prevState,
+      [step]: {
+        empDetails: [
+          ...prevState[step].empDetails,
+          { ...EMPLOYEE_DETAILS_DEFAULT_VALUE },
+        ],
+      },
+    }));
+
   const getComponent = () => {
     switch (step) {
       case "1":
@@ -124,7 +139,12 @@ const ProfileCreation = ({ match }) => {
       case "4":
         return <Skills />;
       case "5":
-        return <EmployeeDetails />;
+        return (
+          <EmployeeDetails
+            info={profileProps[step].empDetails}
+            onAddExperience={onAddExperience}
+          />
+        );
       case "6":
         return (
           <Overseas

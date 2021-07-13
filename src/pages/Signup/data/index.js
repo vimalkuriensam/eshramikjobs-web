@@ -9,3 +9,14 @@ export const SIGNUP_DEFAULT_PROPS = {
   email: "",
   mobile: "",
 };
+
+export const EMPLOYEE_DETAILS_DEFAULT_VALUE = {
+  name: "",
+  startDate: "",
+  endDate: "",
+  title: "",
+  state: "",
+  city: "",
+  salary: "",
+  description: "",
+};

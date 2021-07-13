@@ -25,6 +25,14 @@ export const PROFILE_COMPONENTS = {
   },
 };
 
+export const SKILLS_CONTENT = {
+  radioContent: [
+    { id: "highlyskilled", title: "Highly skilled", name: "skill" },
+    { id: "semiskilled", title: "Semi skilled", name: "skill" },
+    { id: "unskilled", title: "Unskilled", name: "skill" },
+  ],
+};
+
 export const OVERSEAS_OPPORTUNITY = {
   title: "Overseas opportunity",
   overseasRadio: {

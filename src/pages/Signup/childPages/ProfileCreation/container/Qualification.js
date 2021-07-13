@@ -5,7 +5,7 @@ import Title from "../../../../../components/atoms/Title";
 import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
 
-const Qualification = () => {
+const Qualification = ({ info }) => {
   return (
     <div>
       <Title variant="pr-24-1">2. Qualification</Title>

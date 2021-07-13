@@ -6,7 +6,7 @@ import Title from "../../../../../components/atoms/Title";
 import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
 import { OVERSEAS_OPPORTUNITY } from "../data";
 
-const Overseas = ({ info, onHandleOverseasInfo}) => {
+const Overseas = ({ info, onHandleOverseasInfo, onHandleSave }) => {
   return (
     <div>
       <div className="row">
@@ -19,10 +19,13 @@ const Overseas = ({ info, onHandleOverseasInfo}) => {
           </div>
           <div className="row">
             <FormRadioGroup
-              value={info.overseas}
+              value={info.overseas.toString()}
               title={OVERSEAS_OPPORTUNITY.overseasRadio.title}
               contents={OVERSEAS_OPPORTUNITY.overseasRadio.contents}
-              onHandleRadioClick={onHandleOverseasInfo.bind(this, 'overseas')}
+              onHandleRadioClick={({ target }) => {
+                const value = parseBool(target.value);
+                onHandleOverseasInfo("overseas", { target: { value } });
+              }}
             />
           </div>
           <div className="row">
@@ -30,11 +33,14 @@ const Overseas = ({ info, onHandleOverseasInfo}) => {
               value={info.passport}
               title={OVERSEAS_OPPORTUNITY.passport.title}
               contents={OVERSEAS_OPPORTUNITY.passport.contents}
-              onHandleRadioClick={onHandleOverseasInfo.bind(this, 'passport')}
+              onHandleRadioClick={({ target }) => {
+                const value = parseBool(target.value);
+                onHandleOverseasInfo("passport", { target: { value } });
+              }}
             />
           </div>
           <div className="row">
-            <Button content="next" variant="1-3" />
+            <Button onButtonClick={onHandleSave} content="next" variant="1-3" />
           </div>
         </div>
       </div>

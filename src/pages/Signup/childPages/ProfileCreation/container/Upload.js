@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Button from "../../../../../components/atoms/Button";
 import Image from "../../../../../components/atoms/Image";
@@ -7,7 +7,12 @@ import Title from "../../../../../components/atoms/Title";
 import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
 import { RESUME_UPLOAD } from "../data";
 
-const Upload = ({ info, onHandleImage, onHandleUploadInfo }) => {
+const Upload = ({ info, onHandleImage, onHandleSave }) => {
+  const [resumeCopy, setResumeCopy] = useState(false);
+  const onHandleResumeCopy = ({ target }) => {
+    const { value } = target;
+    setResumeCopy(value);
+  };
   return (
     <div>
       <div className="row">
@@ -37,14 +42,14 @@ const Upload = ({ info, onHandleImage, onHandleUploadInfo }) => {
           )}
           <div className="row">
             <FormRadioGroup
-              value={info.resumeCopy.toString()}
+              value={resumeCopy.toString()}
               title={RESUME_UPLOAD.resumeCopy.title}
               contents={RESUME_UPLOAD.resumeCopy.contents}
-              onHandleRadioClick={onHandleUploadInfo.bind(this, "resumeCopy")}
+              onHandleRadioClick={onHandleResumeCopy}
             />
           </div>
           <div className="row">
-            <Button content="next" variant="1-3" />
+            <Button onButtonClick={onHandleSave} content="next" variant="1-3" />
           </div>
         </div>
       </div>

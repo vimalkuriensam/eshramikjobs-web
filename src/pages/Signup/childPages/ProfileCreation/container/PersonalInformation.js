@@ -26,7 +26,7 @@ const PersonalInformation = ({
   permanentRegion,
   onHandleProfileInfo,
   onHandleSetAddress,
-  onHandleSaveHandle,
+  onHandleSave,
   dispatch,
 }) => {
   const onHandlePin = ({ target }) => {
@@ -284,11 +284,7 @@ const PersonalInformation = ({
             />
           </div>
           <div className="row">
-            <Button
-              onButtonClick={onHandleSaveHandle}
-              content="next"
-              variant="1-3"
-            />
+            <Button onButtonClick={onHandleSave} content="next" variant="1-3" />
           </div>
         </div>
       </div>

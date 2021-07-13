@@ -49,6 +49,13 @@ const ProfileCreation = ({ match, dispatch }) => {
       technical: "",
       nonTechnical: "",
     },
+    4: {
+      skills: "",
+      experience: {
+        year: "",
+        month: "",
+      },
+    },
     5: {
       empDetails: [{ ...EMPLOYEE_DETAILS_DEFAULT_VALUE }],
     },
@@ -58,7 +65,6 @@ const ProfileCreation = ({ match, dispatch }) => {
     },
     7: {
       file: null,
-      resumeCopy: true,
     },
   });
 
@@ -132,8 +138,7 @@ const ProfileCreation = ({ match, dispatch }) => {
     }));
   };
 
-  const onHandleSaveHandle = () =>
-    dispatch(createProfile(profileProps[step], step));
+  const onHandleSave = () => dispatch(createProfile(profileProps[step], step));
 
   const getComponent = () => {
     switch (step) {
@@ -143,7 +148,7 @@ const ProfileCreation = ({ match, dispatch }) => {
             info={profileProps[step]}
             onHandleProfileInfo={onHandleInfo}
             onHandleSetAddress={onHandleSetAddress}
-            onHandleSaveHandle={onHandleSaveHandle}
+            onHandleSave={onHandleSave}
           />
         );
       case "2":
@@ -156,7 +161,14 @@ const ProfileCreation = ({ match, dispatch }) => {
           />
         );
       case "4":
-        return <Skills />;
+        return (
+          <Skills
+            info={profileProps[step]}
+            onHandleSkillInfo={onHandleInfo}
+            onHandleSave={onHandleSave}
+            onHandleSetExperience={onHandleSetAddress}
+          />
+        );
       case "5":
         return (
           <EmployeeDetails
@@ -170,6 +182,7 @@ const ProfileCreation = ({ match, dispatch }) => {
           <Overseas
             info={profileProps[step]}
             onHandleOverseasInfo={onHandleInfo}
+            onHandleSave={onHandleSave}
           />
         );
       case "7":
@@ -178,10 +191,11 @@ const ProfileCreation = ({ match, dispatch }) => {
             info={profileProps[step]}
             onHandleImage={onHandleImage}
             onHandleUploadInfo={onHandleInfo}
+            onHandleSave={onHandleSave}
           />
         );
       case "8":
-        return <Resume />;
+        return <Resume info={profileProps[step]} />;
       default:
         return (
           <PersonalInformation

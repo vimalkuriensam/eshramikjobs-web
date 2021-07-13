@@ -46,6 +46,14 @@ const ProfileCreation = ({ match }) => {
       technical: "",
       nonTechnical: "",
     },
+    6: {
+      overseas: false,
+      passport: false,
+    },
+    7: {
+      file: null,
+      resumeCopy: true,
+    },
   });
 
   const onHandleInfo = (type, { target }) => {
@@ -68,6 +76,30 @@ const ProfileCreation = ({ match }) => {
         },
       },
     }));
+  };
+
+  const onHandleImage = ({ target }) => {
+    const file = target.files[0];
+    const allowedFileTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+    ];
+    const type = file.type.split(".")[file.type.split(".").length - 1];
+    if (allowedFileTypes.includes(type)) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = (e) => {
+        setProfileProps((prevState) => ({
+          ...prevState,
+          [step]: {
+            ...prevState[step],
+            file: e.target.result,
+          },
+        }));
+      };
+    }
   };
 
   const getComponent = () => {
@@ -94,9 +126,20 @@ const ProfileCreation = ({ match }) => {
       case "5":
         return <EmployeeDetails />;
       case "6":
-        return <Overseas />;
+        return (
+          <Overseas
+            info={profileProps[step]}
+            onHandleOverseasInfo={onHandleInfo}
+          />
+        );
       case "7":
-        return <Upload />;
+        return (
+          <Upload
+            info={profileProps[step]}
+            onHandleImage={onHandleImage}
+            onHandleUploadInfo={onHandleInfo}
+          />
+        );
       case "8":
         return <Resume />;
       default:

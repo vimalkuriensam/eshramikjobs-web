@@ -7,7 +7,7 @@ import Title from "../../../../../components/atoms/Title";
 import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
 import { RESUME_UPLOAD } from "../data";
 
-const Upload = () => {
+const Upload = ({ info, onHandleImage, onHandleUploadInfo }) => {
   return (
     <div>
       <div className="row">
@@ -19,12 +19,28 @@ const Upload = () => {
             <Title variant="pr-24-1">{RESUME_UPLOAD.title}</Title>
           </div>
           <div className="row">
-            <Input type="file" content="Select Photo" icon="Photos" />
+            <Input
+              onHandleFile={onHandleImage}
+              type="file"
+              content="Select Photo"
+              icon="Photos"
+            />
           </div>
+          {info.file && (
+            <div className="authentication__profileContainer">
+              <Image
+                className="authentication__profileImage"
+                name={info.file}
+                type="binary"
+              />
+            </div>
+          )}
           <div className="row">
             <FormRadioGroup
+              value={info.resumeCopy.toString()}
               title={RESUME_UPLOAD.resumeCopy.title}
               contents={RESUME_UPLOAD.resumeCopy.contents}
+              onHandleRadioClick={onHandleUploadInfo.bind(this, "resumeCopy")}
             />
           </div>
           <div className="row">

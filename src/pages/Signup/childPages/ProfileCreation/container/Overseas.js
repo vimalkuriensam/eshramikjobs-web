@@ -6,7 +6,7 @@ import Title from "../../../../../components/atoms/Title";
 import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
 import { OVERSEAS_OPPORTUNITY } from "../data";
 
-const Overseas = () => {
+const Overseas = ({ info, onHandleOverseasInfo}) => {
   return (
     <div>
       <div className="row">
@@ -19,14 +19,18 @@ const Overseas = () => {
           </div>
           <div className="row">
             <FormRadioGroup
+              value={info.overseas}
               title={OVERSEAS_OPPORTUNITY.overseasRadio.title}
               contents={OVERSEAS_OPPORTUNITY.overseasRadio.contents}
+              onHandleRadioClick={onHandleOverseasInfo.bind(this, 'overseas')}
             />
           </div>
           <div className="row">
             <FormRadioGroup
+              value={info.passport}
               title={OVERSEAS_OPPORTUNITY.passport.title}
               contents={OVERSEAS_OPPORTUNITY.passport.contents}
+              onHandleRadioClick={onHandleOverseasInfo.bind(this, 'passport')}
             />
           </div>
           <div className="row">

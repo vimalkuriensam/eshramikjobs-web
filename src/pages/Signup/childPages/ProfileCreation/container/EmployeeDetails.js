@@ -8,6 +8,7 @@ import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
 import Checkbox from "../../../../../components/atoms/Checkbox";
 import FormCalendar from "../../../../../components/molecules/FormCalendar";
 import Dropdown from "../../../../../components/atoms/Dropdown";
+import TextArea from "../../../../../components/atoms/TextArea";
 
 const EmployeeDetails = () => {
   return (
@@ -42,6 +43,9 @@ const EmployeeDetails = () => {
           </div>
           <div className="row">
             <FormInput title="Last drawn salary" variant="1" placeholder="" />
+          </div>
+          <div className="row">
+            <FormInput type="textarea" title="Job description" />
           </div>
           <div className="row">
             <Button content="next" variant="1-3" />

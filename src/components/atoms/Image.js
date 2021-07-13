@@ -4,7 +4,7 @@ const Image = ({ name, className, onIconClick, type = "png" }) => (
   <img
     onClick={onIconClick}
     className={className}
-    src={`/assets/images/${name}.${type}`}
+    src={`${type == "binary" ? name : "/assets/images/" + name + "." + type}`}
   />
 );
 

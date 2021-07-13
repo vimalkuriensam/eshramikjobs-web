@@ -108,6 +108,18 @@
     left: 0;
   }
 
+  &__profileContainer {
+    height: 22.7rem;
+    border-radius: 1rem;
+    border: 2px solid $color-secondary;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  &__profileImage {
+    height: 22.7rem;
+  }
+
   &__hexagon {
     width: 100px;
     height: 57.735px;

@@ -120,6 +120,18 @@
     height: 22.7rem;
   }
 
+  &__deleteContainer {
+    text-align: right;
+    > div {
+      display: block!important;
+    }
+  }
+
+  &__delete {
+    height: 3rem;
+    fill: $color-tertiary;
+  }
+
   &__hexagon {
     width: 100px;
     height: 57.735px;

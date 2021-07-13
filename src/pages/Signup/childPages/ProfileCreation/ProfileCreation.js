@@ -14,16 +14,18 @@ import Overseas from "./container/Overseas";
 import Upload from "./container/Upload";
 import Resume from "./container/Resume";
 import { EMPLOYEE_DETAILS_DEFAULT_VALUE } from "../../data";
+import { connect } from "react-redux";
+import { createProfile } from "../../../../redux/actions/profile.actions";
 
-const ProfileCreation = ({ match }) => {
+const ProfileCreation = ({ match, dispatch }) => {
   const step = match.params.step;
 
   const [profileProps, setProfileProps] = useState({
     1: {
-      name: "",
-      gender: "male",
-      dateOfBirth: moment().valueOf(),
-      maritalStatus: "single",
+      fullName: "",
+      gender: "",
+      dateOfBirth: moment().format("yyyy-MM-DD"),
+      maritalStatus: "",
       email: "",
       address: {
         houseNo: "",
@@ -117,6 +119,22 @@ const ProfileCreation = ({ match }) => {
       },
     }));
 
+  const onDeleteExperience = (index) => {
+    const empDetailsCopy = JSON.parse(
+      JSON.stringify(profileProps[step].empDetails)
+    );
+    empDetailsCopy.splice(index, 1);
+    setProfileProps((prevState) => ({
+      ...prevState,
+      [step]: {
+        empDetails: [...empDetailsCopy],
+      },
+    }));
+  };
+
+  const onHandleSaveHandle = () =>
+    dispatch(createProfile(profileProps[step], step));
+
   const getComponent = () => {
     switch (step) {
       case "1":
@@ -125,6 +143,7 @@ const ProfileCreation = ({ match }) => {
             info={profileProps[step]}
             onHandleProfileInfo={onHandleInfo}
             onHandleSetAddress={onHandleSetAddress}
+            onHandleSaveHandle={onHandleSaveHandle}
           />
         );
       case "2":
@@ -143,6 +162,7 @@ const ProfileCreation = ({ match }) => {
           <EmployeeDetails
             info={profileProps[step].empDetails}
             onAddExperience={onAddExperience}
+            onDeleteExperience={onDeleteExperience}
           />
         );
       case "6":
@@ -163,7 +183,13 @@ const ProfileCreation = ({ match }) => {
       case "8":
         return <Resume />;
       default:
-        return <PersonalInformation />;
+        return (
+          <PersonalInformation
+            info={profileProps[step]}
+            onHandleProfileInfo={onHandleInfo}
+            onHandleSetAddress={onHandleSetAddress}
+          />
+        );
     }
   };
   return (
@@ -179,4 +205,4 @@ const ProfileCreation = ({ match }) => {
   );
 };
 
-export default ProfileCreation;
+export default connect()(ProfileCreation);

@@ -24,7 +24,7 @@ const Dropdown = ({ contents, value, onHandleDropdownValue, className }) => {
 
   useEffect(() => {
     if (value) setVal(value);
-  }, []);
+  }, [value]);
   const menuRef = useRef();
 
   const onHandleListToggle = () => setActive((prevState) => !prevState);

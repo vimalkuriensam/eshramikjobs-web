@@ -8,6 +8,8 @@ const Delete = ({ className, style }) => (
     viewBox="0 0 100 125"
     style={{ enableBackground: "new 0 0 100 100" }}
     space="preserve"
+    className={className}
+    style={style}
   >
     <switch>
       <foreignObject

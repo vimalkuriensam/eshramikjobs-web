@@ -9,7 +9,7 @@ import Dropdown from "../../../../../components/atoms/Dropdown";
 import Divider from "../../../../../components/atoms/Divider";
 import Icon from "../../../../../components/atoms/Icon";
 
-const EmployeeDetails = ({ info, onAddExperience }) => {
+const EmployeeDetails = ({ info, onAddExperience, onDeleteExperience }) => {
   return (
     <div>
       <Title variant="pr-24-1">5. Employeement details</Title>
@@ -20,8 +20,12 @@ const EmployeeDetails = ({ info, onAddExperience }) => {
               <Divider />
               <div className="row">
                 <div className="col-1-of-2">&nbsp;</div>
-                <div className="col-1-of-2">
-                  <Icon name="Delete" />
+                <div className="col-1-of-2 authentication__deleteContainer">
+                  <Icon
+                    name="Delete"
+                    className="authentication__delete"
+                    onIconClick={onDeleteExperience.bind(this, index)}
+                  />
                 </div>
               </div>
             </div>

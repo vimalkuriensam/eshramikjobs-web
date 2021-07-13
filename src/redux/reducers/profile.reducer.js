@@ -1,0 +1,60 @@
+import {
+  SET_ADDRESS_REGION,
+  SET_COLLEGE,
+  SET_DEGREE,
+  SET_INSTITUTION,
+  SET_NON_TECHNICAL_COURSE,
+  SET_PERMANENT_REGION,
+  SET_TECHNICAL_COURSE,
+} from "../actions/profile.actions";
+
+const profileReducerDefaultState = {
+  addressState: [],
+  addressDistrict: [],
+  addressRegion: [],
+  permanentAddressState: [],
+  permanentAddressDistrict: [],
+  permanentAddressRegion: [],
+  boardName: ["state", "cbse", "icse"],
+  institutionName: [],
+  degree: [],
+  college: [],
+  technical: [],
+  nonTechnical: [],
+};
+
+const profileReducer = (
+  state = profileReducerDefaultState,
+  {
+    type,
+    states,
+    district,
+    region,
+    institution,
+    degree,
+    college,
+    technical,
+    nonTechnical,
+  }
+) => {
+  switch (type) {
+    case SET_ADDRESS_REGION:
+      return { ...state, addressRegion: region };
+    case SET_PERMANENT_REGION:
+      return { ...state, permanentAddressRegion: region };
+    case SET_INSTITUTION:
+      return { ...state, institutionName: institution };
+    case SET_DEGREE:
+      return { ...state, degree };
+    case SET_COLLEGE:
+      return { ...state, college };
+    case SET_TECHNICAL_COURSE:
+      return { ...state, technical };
+    case SET_NON_TECHNICAL_COURSE:
+      return { ...state, nonTechnical };
+    default:
+      return state;
+  }
+};
+
+export default profileReducer;

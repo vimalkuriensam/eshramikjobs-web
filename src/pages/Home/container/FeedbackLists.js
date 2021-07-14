@@ -43,6 +43,7 @@ const FeedbackLists = ({ feedbacks }) => {
             >
               <div className="home__feedbackText">
                 <Text variant="pl-17-1 u-text-justify">{feedback.text}</Text>
+                <span className="home__feedbackCaret">&nbsp;</span>
               </div>
               <Image name={feedback.picture} />
             </div>

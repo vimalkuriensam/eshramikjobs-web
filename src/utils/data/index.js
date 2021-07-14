@@ -1,3 +1,6 @@
+
+import { setLogout } from "../../redux/actions/authentication.action";
+
 export const BASE_URL = "https://eshramik-api.herokuapp.com";
 
 export const FEEDBACKS = [
@@ -140,3 +143,54 @@ export const FOOTER_MAIN_CONTENTS = {
 };
 
 export const INVALID_EMAIL = "Invalid Email Format";
+
+export const PROFILE_CONTENTS = {
+  rows: [
+    {
+      columns: [
+        {
+          text: "Edit Profile",
+          type: "link",
+          to: "/",
+        },
+        {
+          text: "Saved jobs",
+          type: "link",
+          to: "/",
+        },
+      ],
+    },
+    {
+      columns: [
+        {
+          text: "Recommended jobs",
+          type: "link",
+          to: "/",
+        },
+        {
+          text: "Settings",
+          type: "link",
+          to: "/",
+        },
+      ],
+    },
+    {
+      columns: [
+        {
+          text: "Applied jobs",
+          type: "link",
+          to: "/",
+        },
+        {
+          text: "logout",
+          type: "process",
+          to: "logout",
+        },
+      ],
+    },
+  ],
+};
+
+export const funcMap = {
+  logout: (dispatch) => dispatch(setLogout()),
+};

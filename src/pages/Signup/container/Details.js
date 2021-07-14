@@ -7,7 +7,7 @@ import Input from "../../../components/atoms/Input";
 import Text from "../../../components/atoms/Text";
 import validator from "validator";
 import { SIGNUP_DEFAULT_PROPS, SIGNUP_ERRORS } from "../data";
-import { setLogin } from "../../../redux/actions/authentication.action";
+import { setSignup } from "../../../redux/actions/authentication.action";
 
 const Details = ({ dispatch }) => {
   const [signupProps, setSignupProps] = useState(SIGNUP_DEFAULT_PROPS);
@@ -55,7 +55,7 @@ const Details = ({ dispatch }) => {
     const itemMatch = Object.values(signupProps).every((val) => !!val);
     if (errorMatch) setIsError(true);
     else if (!itemMatch) setIsItem(true);
-    else dispatch(setLogin(signupProps));    
+    else dispatch(setSignup(signupProps));    
   };
 
   const onSetSignupPolicy = ({ target }) => setSignupPolicy(target.value);

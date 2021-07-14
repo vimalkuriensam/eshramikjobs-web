@@ -11,6 +11,7 @@ import Text from "../atoms/Text";
 import { loginState } from "../../redux/actions/utils.action";
 import { INVALID_EMAIL } from "../../utils/data";
 import history from "../../utils/history";
+import { setLogin } from "../../redux/actions/authentication.action";
 
 const Login = ({ isLogin, dispatch }) => {
   const onSetLogin = () => dispatch(loginState({ state: false }));
@@ -29,6 +30,7 @@ const Login = ({ isLogin, dispatch }) => {
   const onSubmitEmail = () => {
     const isEmail = validator.isEmail(email);
     if (isEmail) {
+      dispatch(setLogin({ email }))
     } else setError(INVALID_EMAIL);
   };
 

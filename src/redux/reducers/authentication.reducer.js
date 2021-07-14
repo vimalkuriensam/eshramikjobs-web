@@ -1,4 +1,4 @@
-import { SET_ACCESS_TOKEN } from "../actions/authentication.action";
+import { SET_ACCESS_TOKEN, SET_LOGOUT } from "../actions/authentication.action";
 
 const authenticationReducerDefaultState = {
   accessToken: null,
@@ -18,6 +18,8 @@ const authenticationReducer = (
         accessToken: payload.accessToken,
         refreshToken: payload.refreshToken,
       };
+    case SET_LOGOUT:
+      return { ...authenticationReducerDefaultState };
     default:
       return state;
   }

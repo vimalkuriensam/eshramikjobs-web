@@ -9,7 +9,7 @@ import {
   setOTP,
 } from "../../../../../redux/actions/authentication.action";
 
-const Details = ({ dispatch, mobile }) => {
+const Details = ({ dispatch, mobile, email }) => {
   const [resendTime, setResendTime] = useState(60);
   const [timerId, setTimerId] = useState();
   const [autoSubmitId, setAutoSubmitId] = useState();
@@ -44,6 +44,7 @@ const Details = ({ dispatch, mobile }) => {
       dispatch(
         setOTP({
           mobile,
+          email,
           otp: otpArray.join(""),
         })
       );

@@ -113,9 +113,21 @@
   }
 
   &__feedbackText {
+    position: relative;
     background: $color-white;
     box-shadow: 0 0.3rem 1.9rem rgba($color-black, 0.14);
     padding: 2.5rem 2.9rem;
     border-radius: 0.5rem;
+  }
+
+  &__feedbackCaret {
+    position: absolute;
+    width: 3.5rem;
+    height: 3rem;
+    background: $color-white;
+    bottom: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
   }
 }

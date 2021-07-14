@@ -23,19 +23,19 @@ const Overseas = ({ info, onHandleOverseasInfo, onHandleSave }) => {
               title={OVERSEAS_OPPORTUNITY.overseasRadio.title}
               contents={OVERSEAS_OPPORTUNITY.overseasRadio.contents}
               onHandleRadioClick={({ target }) => {
-                const value = parseBool(target.value);
+                const value = target.value == "true";
                 onHandleOverseasInfo("overseas", { target: { value } });
               }}
             />
           </div>
           <div className="row">
             <FormRadioGroup
-              value={info.passport}
+              value={info.validPassport.toString()}
               title={OVERSEAS_OPPORTUNITY.passport.title}
               contents={OVERSEAS_OPPORTUNITY.passport.contents}
               onHandleRadioClick={({ target }) => {
-                const value = parseBool(target.value);
-                onHandleOverseasInfo("passport", { target: { value } });
+                const value = target.value == "true";
+                onHandleOverseasInfo("validPassport", { target: { value } });
               }}
             />
           </div>

@@ -24,7 +24,7 @@ const ProfileCreation = ({ match, dispatch }) => {
     1: {
       fullName: "",
       gender: "",
-      dateOfBirth: moment().format("yyyy-MM-DD"),
+      dob: moment().format("yyyy-MM-DD"),
       maritalStatus: "",
       email: "",
       address: {
@@ -58,7 +58,7 @@ const ProfileCreation = ({ match, dispatch }) => {
       nonTechnical: "",
     },
     4: {
-      skills: "",
+      skill: "",
       experience: {
         year: "",
         month: "",
@@ -69,7 +69,7 @@ const ProfileCreation = ({ match, dispatch }) => {
     },
     6: {
       overseas: false,
-      passport: false,
+      validPassport: false,
     },
     7: {
       file: null,

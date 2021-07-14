@@ -70,10 +70,10 @@ const PersonalInformation = ({
           <div className="row">
             <FormCalendar
               title="Date of birth"
-              value={moment(info.dateOfBirth).valueOf()}
+              value={moment(info.dob).valueOf()}
               onHandleDate={({ target }) => {
                 const date = moment(target.value).format("yyyy-MM-DD");
-                onHandleProfileInfo("dateOfBirth", { target: { value: date } });
+                onHandleProfileInfo("dob", { target: { value: date } });
               }}
             />
           </div>

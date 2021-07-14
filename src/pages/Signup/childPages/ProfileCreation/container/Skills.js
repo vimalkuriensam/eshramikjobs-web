@@ -26,10 +26,10 @@ const Skills = ({
           </div>
           <div className="row u-margin-bottom-0">
             <RadioGroup
-              value={info.skills}
+              value={info.skill}
               column={2}
               contents={SKILLS_CONTENT.radioContent}
-              onHandleRadioClick={onHandleSkillInfo.bind(this, "skills")}
+              onHandleRadioClick={onHandleSkillInfo.bind(this, "skill")}
             />
           </div>
           <div className="authentication__experienceContainer">

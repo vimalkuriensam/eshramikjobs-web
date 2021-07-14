@@ -56,11 +56,16 @@
     }
   }
 
-  &__feedback {
+  &__feedbackLists {
+    position: relative;
+    overflow: hidden;
+    min-height: 40rem;
+    margin-top: 3.5rem;
     > ul {
       display: flex;
       left: 0%;
       position: relative;
+      transition: 0.5s;
       > li {
         margin: 0rem 4.4rem;
         list-style: none;
@@ -69,10 +74,42 @@
     }
   }
 
+  &__feedbackArrow {
+    height: 20rem;
+    fill: $color-tertiary;
+    cursor: pointer;
+    opacity: 0.4;
+    z-index: 1000;
+    transition: 0.2s;
+    &:hover {
+      opacity: 1;
+    }
+
+    &--right {
+      position: absolute;
+      top: 5rem;
+      right: 0%;
+    }
+
+    &--left {
+      transform: rotateY(180deg);
+      position: absolute;
+      top: 5rem;
+      left: 0%;
+    }
+  }
+
   &__feedbackContainer {
     text-align: center;
     max-width: 39.7rem;
     height: 28.5rem;
+    transform: scale(0.8);
+    opacity: 0.3;
+    transition: 0.5s;
+    &--current {
+      opacity: 1;
+      transform: scaleX(1);
+    }
   }
 
   &__feedbackText {

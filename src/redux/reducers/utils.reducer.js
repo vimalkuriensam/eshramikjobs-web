@@ -1,8 +1,10 @@
+import { FEEDBACKS } from "../../utils/data";
 import { SET_LOADER_STATE, SET_LOGIN_STATE } from "../actions/utils.action";
 
 const utilsReducerDefaultState = {
   loginState: false,
   loaderState: false,
+  feedbacks: FEEDBACKS,
 };
 
 const utilsReducer = (state = utilsReducerDefaultState, { type, value }) => {

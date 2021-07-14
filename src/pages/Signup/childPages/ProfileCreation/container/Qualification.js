@@ -4,8 +4,9 @@ import Button from "../../../../../components/atoms/Button";
 import Title from "../../../../../components/atoms/Title";
 import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
+import { QUALIFICATION_SCHOOL, QUALIFICATION_SPECIALIZATION } from "../data";
 
-const Qualification = ({ info }) => {
+const Qualification = ({ info, onHandleQualificationInfo }) => {
   return (
     <div>
       <Title variant="pr-24-1">2. Qualification</Title>
@@ -14,18 +15,13 @@ const Qualification = ({ info }) => {
         <div className="col-1-of-2">
           <div className="row">
             <FormRadioGroup
-              title="School"
-              contents={[
-                { id: "na", title: "NA", name: "school" },
-                { id: "5g", title: "5th grade", name: "school" },
-                { id: "8g", title: "8th grade", name: "school" },
-                { id: "highschool", title: "High School", name: "school" },
-                {
-                  id: "seniorsecondary",
-                  title: "Senior Secondary",
-                  name: "school",
-                },
-              ]}
+              value={info.school}
+              title={QUALIFICATION_SCHOOL.title}
+              contents={QUALIFICATION_SCHOOL.contents}
+              onHandleRadioClick={onHandleQualificationInfo.bind(
+                this,
+                "school"
+              )}
             />
           </div>
 
@@ -35,14 +31,13 @@ const Qualification = ({ info }) => {
 
           <div className="row">
             <FormRadioGroup
-              title="Specialization/field of study"
-              contents={[
-                { id: "iti", title: "ITI", name: "field" },
-                { id: "nctvt", title: "NCTVT", name: "field" },
-                { id: "certification", title: "Certification", name: "field" },
-                { id: "diploma", title: "Diploma", name: "field" },
-                { id: "others", title: "Others", name: "field" },
-              ]}
+              value={info.specialization}
+              title={QUALIFICATION_SPECIALIZATION.title}
+              contents={QUALIFICATION_SPECIALIZATION.contents}
+              onHandleRadioClick={onHandleQualificationInfo.bind(
+                this,
+                "specialization"
+              )}
             />
           </div>
         </div>

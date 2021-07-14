@@ -45,6 +45,14 @@ const ProfileCreation = ({ match, dispatch }) => {
       },
       sameAsAddress: false,
     },
+    2: {
+      school: "",
+      board: "",
+      specialization: "",
+      institution: "",
+      degree: "",
+      college: "",
+    },
     3: {
       technical: "",
       nonTechnical: "",
@@ -152,7 +160,13 @@ const ProfileCreation = ({ match, dispatch }) => {
           />
         );
       case "2":
-        return <Qualification />;
+        return (
+          <Qualification
+            info={profileProps[step]}
+            onHandleQualificationInfo={onHandleInfo}
+            onHandleSave={onHandleSave}
+          />
+        );
       case "3":
         return (
           <Profession

@@ -10,6 +10,7 @@ import { QUALIFICATION_SCHOOL, QUALIFICATION_SPECIALIZATION } from "../data";
 const Qualification = ({
   info,
   onHandleQualificationInfo,
+  onHandleSave,
   boards,
   colleges,
   degrees,
@@ -37,7 +38,15 @@ const Qualification = ({
           </div>
 
           <div className="row">
-            <FormDropdown title="Board name" contents={boards} />
+            <FormDropdown
+              title="Board name"
+              contents={boards}
+              value={info.board}
+              onHandleDropdownValue={onHandleQualificationInfo.bind(
+                this,
+                "board"
+              )}
+            />
           </div>
 
           <div className="row">
@@ -54,16 +63,40 @@ const Qualification = ({
         </div>
         <div className="col-1-of-2">
           <div className="row">
-            <FormDropdown title="Institution name" contents={institutionList} />
+            <FormDropdown
+              title="Institution name"
+              contents={institutionList}
+              value={info.institution}
+              onHandleDropdownValue={onHandleQualificationInfo.bind(
+                this,
+                "institution"
+              )}
+            />
           </div>
           <div className="row u-margin-top-55">
-            <FormDropdown title="Degree" contents={degreeList} />
+            <FormDropdown
+              title="Degree"
+              value={info.degree}
+              onHandleDropdownValue={onHandleQualificationInfo.bind(
+                this,
+                "degree"
+              )}
+              contents={degreeList}
+            />
           </div>
           <div className="row">
-            <FormDropdown title="College/University" contents={collegesList} />
+            <FormDropdown
+              title="College/University"
+              contents={collegesList}
+              value={info.college}
+              onHandleDropdownValue={onHandleQualificationInfo.bind(
+                this,
+                "college"
+              )}
+            />
           </div>
           <div className="row">
-            <Button content="next" variant="1-3" />
+            <Button onButtonClick={onHandleSave} content="next" variant="1-3" />
           </div>
         </div>
       </div>

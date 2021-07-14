@@ -190,6 +190,7 @@ const ProfileCreation = ({ match, dispatch }) => {
           <Profession
             info={profileProps[step]}
             onHandleProfessionInfo={onHandleInfo}
+            onHandleSave={onHandleSave}
           />
         );
       case "4":

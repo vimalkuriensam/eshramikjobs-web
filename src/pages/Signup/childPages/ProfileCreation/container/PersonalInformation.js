@@ -34,7 +34,6 @@ const PersonalInformation = ({
     if (!pin || validator.isNumeric(pin)) {
       if (pin.length == 6)
         dispatch(getAddressByPin(pin)).then((response) => {
-          console.log(response);
           if (response.length) {
             onHandleSetAddress("address", "state", {
               target: { value: response[0].state },
@@ -43,7 +42,6 @@ const PersonalInformation = ({
               target: { value: response[0].district },
             });
             const regionContents = response.map((val) => val.post_office);
-            console.log(regionContents);
             dispatch(setAddressRegion({ region: regionContents }));
           }
         });
@@ -132,6 +130,7 @@ const PersonalInformation = ({
           </div>
           <div className="row">
             <FormDropdown
+              placeholder=""
               onHandleDropdownValue={onHandleSetAddress.bind(
                 this,
                 "address",
@@ -143,6 +142,7 @@ const PersonalInformation = ({
           </div>
           <div className="row">
             <FormDropdown
+              placeholder=""
               value={info.address.district}
               title="District"
               onHandleDropdownValue={onHandleSetAddress.bind(
@@ -157,6 +157,7 @@ const PersonalInformation = ({
         <div className="col-1-of-2">
           <div className="row">
             <FormDropdown
+              placeholder=""
               value={info.address.region}
               contents={addressRegion}
               title="Region"
@@ -230,6 +231,7 @@ const PersonalInformation = ({
           </div>
           <div className="row">
             <FormDropdown
+              placeholder=""
               value={
                 info.sameAsAddress
                   ? info.address.state
@@ -245,6 +247,7 @@ const PersonalInformation = ({
           </div>
           <div className="row">
             <FormDropdown
+              placeholder=""
               value={
                 info.sameAsAddress
                   ? info.address.district
@@ -260,6 +263,7 @@ const PersonalInformation = ({
           </div>
           <div className="row">
             <FormDropdown
+              placeholder=""
               value={
                 info.sameAsAddress
                   ? info.address.region

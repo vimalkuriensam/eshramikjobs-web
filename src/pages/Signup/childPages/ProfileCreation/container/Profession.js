@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 const Profession = ({
   info,
   onHandleProfessionInfo,
+  onHandleSave,
   technicals,
   nonTechnicals,
 }) => {
@@ -51,7 +52,7 @@ const Profession = ({
             />
           </div>
           <div className="row">
-            <Button content="next" variant="1-3" />
+            <Button onButtonClick={onHandleSave} content="next" variant="1-3" />
           </div>
         </div>
       </div>

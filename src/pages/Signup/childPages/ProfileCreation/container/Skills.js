@@ -2,15 +2,20 @@ import React from "react";
 
 import Title from "../../../../../components/atoms/Title";
 import Image from "../../../../../components/atoms/Image";
-import FormInput from "../../../../../components/molecules/FormInput";
-import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import Button from "../../../../../components/atoms/Button";
 import RadioGroup from "../../../../../components/molecules/RadioGroup";
-import Checkbox from "../../../../../components/atoms/Checkbox";
+import { SKILLS_CONTENT } from "../data";
+import FormDropdown from "../../../../../components/molecules/FormDropdown";
+import Text from "../../../../../components/atoms/Text";
 
-const Skills = () => {
+const Skills = ({
+  info,
+  onHandleSkillInfo,
+  onHandleSetExperience,
+  onHandleSave,
+}) => {
   return (
-    <div>
+    <div style={{ paddingBottom: "12rem" }}>
       <div className="row">
         <div className="col-1-of-2">
           <Image name="profile-banner" />
@@ -19,18 +24,52 @@ const Skills = () => {
           <div className="row">
             <Title variant="pr-24-1">4. Skills</Title>
           </div>
-          <div className="row">
+          <div className="row u-margin-bottom-0">
             <RadioGroup
+              value={info.skill}
               column={2}
-              contents={[
-                { id: "highlyskilled", title: "Highly skilled", name: "skill" },
-                { id: "semiskilled", title: "Semi skilled", name: "skill" },
-                { id: "unskilled", title: "Unskillded", name: "skill" },
-              ]}
+              contents={SKILLS_CONTENT.radioContent}
+              onHandleRadioClick={onHandleSkillInfo.bind(this, "skill")}
             />
           </div>
+          <div className="authentication__experienceContainer">
+            <Title variant="pr-24-1">Total experience</Title>
+            <div className="row">
+              <div className="col-1-of-2">
+                <FormDropdown
+                  placeholder="YY"
+                  value={info.experience.year.toString()}
+                  contents={[...Array(25).keys()]}
+                  onHandleDropdownValue={({ target }) => {
+                    const value = parseInt(target.value);
+                    onHandleSetExperience("experience", "year", {
+                      target: { value },
+                    });
+                  }}
+                />
+              </div>
+              <div className="col-1-of-2">
+                <FormDropdown
+                  placeholder="MM"
+                  value={info.experience.month.toString()}
+                  contents={[...Array(12).keys()]}
+                  onHandleDropdownValue={({ target }) => {
+                    const value = parseInt(target.value);
+                    onHandleSetExperience("experience", "month", {
+                      target: { value },
+                    });
+                  }}
+                />
+              </div>
+            </div>
+            <Text variant="pl-16-1">{`${
+              info.experience.year ? info.experience.year + " year" : ""
+            } ${
+              info.experience.month ? info.experience.month + " months" : ""
+            }`}</Text>
+          </div>
           <div className="row">
-            <Button content="next" variant="1-3" />
+            <Button onButtonClick={onHandleSave} content="next" variant="1-3" />
           </div>
         </div>
       </div>

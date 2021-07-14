@@ -5,7 +5,13 @@ import Input from "./Input";
 import Text from "./Text";
 import Button from "./Button";
 
-const Dropdown = ({ contents, value, onHandleDropdownValue, className }) => {
+const Dropdown = ({
+  contents,
+  value,
+  placeholder = "Select",
+  onHandleDropdownValue,
+  className,
+}) => {
   useEffect(() => {
     const handler = (event) => {
       if (!menuRef.current.contains(event.target)) setActive(false);
@@ -24,7 +30,7 @@ const Dropdown = ({ contents, value, onHandleDropdownValue, className }) => {
 
   useEffect(() => {
     if (value) setVal(value);
-  }, []);
+  }, [value]);
   const menuRef = useRef();
 
   const onHandleListToggle = () => setActive((prevState) => !prevState);
@@ -47,7 +53,7 @@ const Dropdown = ({ contents, value, onHandleDropdownValue, className }) => {
     <div className={`form__dropdown-1 ${className}`} ref={menuRef}>
       <div className="form__dropdown-1--value" onClick={onHandleListToggle}>
         <span>
-          <Text variant="r-14-400-2">{val || "Select"}</Text>
+          <Text variant="r-14-400-2">{val || placeholder}</Text>
         </span>
         <span>
           <Button variant="2" icon="ArrowDown" content="" />

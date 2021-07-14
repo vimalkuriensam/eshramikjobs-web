@@ -19,7 +19,7 @@ const Checkbox = ({
       <input
         type="checkbox"
         id={id}
-        value={value}
+        checked={value}
         className="form__checkbox-1--input"
         ref={checkRef}
         onChange={onHandleInputChange}

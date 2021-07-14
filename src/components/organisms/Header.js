@@ -1,16 +1,58 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Button from "../atoms/Button";
 import Image from "../atoms/Image";
+import Text from "../atoms/Text";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginState } from "../../redux/actions/utils.action";
 import history from "../../utils/history";
+import { Fragment } from "react";
+import { funcMap, PROFILE_CONTENTS } from "../../utils/data";
 
-const Header = ({ dispatch }) => {
+const Header = ({ dispatch, isLogged }) => {
+  useEffect(() => {
+    const handler = (event) => {
+      if (!popupRef.current?.contains(event.target)) setProfileState(false);
+    };
+    document.addEventListener("mousedown", handler);
+  });
+
+  const [profileState, setProfileState] = useState(false);
+  const popupRef = useRef();
   const onSetLogin = () => dispatch(loginState({ state: true }));
   const onSetSignup = () => history.push("/register");
   const onSetHome = () => history.push("/");
+
+  const onHandleProfileState = () => setProfileState((prevState) => !prevState);
+
+  const onHandleProfileAction = (content) => {
+    switch (content.type) {
+      case "process":
+        return funcMap[content.to](dispatch);
+      default:
+        history.push(content.to);
+    }
+  };
+
+  const profilePopup = () => (
+    <div className="header__profileContainer" ref={popupRef}>
+      <div className="header__profileCaret">&nbsp;</div>
+      {PROFILE_CONTENTS.rows.map((rContent, index) => (
+        <div className="row header__profileLists" key={index}>
+          {rContent.columns.map((cContent, idx) => (
+            <div
+              className={`col-1-of-${rContent.columns.length} header__profileList`}
+              key={idx}
+              onClick={onHandleProfileAction.bind(this, cContent)}
+            >
+              <Text variant="pl-12-1">{cContent.text}</Text>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
   return (
     <div className="header">
       <div className="header__logo-box">
@@ -31,11 +73,56 @@ const Header = ({ dispatch }) => {
         >
           About us
         </NavLink>
-        <Button variant="1-1" onButtonClick={onSetLogin} content="Login" />
-        <Button variant="1-1" content="Signup" onButtonClick={onSetSignup} />
+        {isLogged && (
+          <Fragment>
+            <NavLink
+              className="header__link"
+              activeClassName="header__link--active"
+              to="/about"
+            >
+              Jobs
+            </NavLink>
+            <NavLink
+              className="header__link"
+              activeClassName="header__link--active"
+              to="/about"
+            >
+              Companies
+            </NavLink>
+            <NavLink
+              className="header__link"
+              activeClassName="header__link--active"
+              to="/about"
+            >
+              Notification
+            </NavLink>
+            <span className="u-position-relative">
+              <span onClick={onHandleProfileState}>
+                <Text variant="pr-18-1" className="u-cursor-pointer">
+                  Profile
+                </Text>
+              </span>
+              {profileState && <span>{profilePopup()}</span>}
+            </span>
+          </Fragment>
+        )}
+        {!isLogged && (
+          <Fragment>
+            <Button variant="1-1" onButtonClick={onSetLogin} content="Login" />
+            <Button
+              variant="1-1"
+              content="Signup"
+              onButtonClick={onSetSignup}
+            />
+          </Fragment>
+        )}
       </div>
     </div>
   );
 };
 
-export default connect()(Header);
+const mapStateToProps = (state) => ({
+  isLogged: !!state.auth.accessToken,
+});
+
+export default connect(mapStateToProps)(Header);

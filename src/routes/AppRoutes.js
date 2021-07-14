@@ -12,6 +12,7 @@ import {
   Home as HomeView,
   Signup as SignupView,
   ProfileCreation as ProfileCreationView,
+  OTP as OTPView,
 } from "../pages";
 
 const AppRoutes = () => (
@@ -27,6 +28,7 @@ const AppRoutes = () => (
       <Route path="/home" component={HomeView} />
       <Route path="/register" exact component={SignupView} />
       <Route path="/register/profile/:step" component={ProfileCreationView} />
+      <Route path="/register/otp" component={OTPView} />
     </Switch>
     <Footer />
   </Router>

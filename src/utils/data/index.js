@@ -1,3 +1,54 @@
+import { setLogout } from "../../redux/actions/authentication.action";
+import {
+  getColleges,
+  getDegrees,
+  getInstitutions,
+  getNonTechnicalCourses,
+  getState,
+  getTechnicalCourses,
+} from "../../redux/actions/profile.actions";
+
+export const BASE_URL = "https://eshramik-api.herokuapp.com";
+
+export const FEEDBACKS = [
+  {
+    text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+    picture: "dummy-user",
+  },
+  {
+    text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+    picture: "dummy-user",
+  },
+  {
+    text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+    picture: "dummy-user",
+  },
+  {
+    text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+    picture: "dummy-user",
+  },
+  {
+    text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+    picture: "dummy-user",
+  },
+  {
+    text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+    picture: "dummy-user",
+  },
+];
+
 export const FOOTER_MAIN_CONTENTS = {
   rows: [
     {
@@ -96,4 +147,90 @@ export const FOOTER_MAIN_CONTENTS = {
       ],
     },
   ],
+};
+
+export const INVALID_EMAIL = "Invalid Email Format";
+
+export const PROFILE_CONTENTS = {
+  rows: [
+    {
+      columns: [
+        {
+          text: "Edit Profile",
+          type: "link",
+          to: "/",
+        },
+        {
+          text: "Saved jobs",
+          type: "link",
+          to: "/",
+        },
+      ],
+    },
+    {
+      columns: [
+        {
+          text: "Recommended jobs",
+          type: "link",
+          to: "/",
+        },
+        {
+          text: "Settings",
+          type: "link",
+          to: "/",
+        },
+      ],
+    },
+    {
+      columns: [
+        {
+          text: "Applied jobs",
+          type: "link",
+          to: "/",
+        },
+        {
+          text: "logout",
+          type: "process",
+          to: "logout",
+        },
+      ],
+    },
+  ],
+};
+
+export const funcMap = {
+  logout: (dispatch) => dispatch(setLogout()),
+  0: async (dispatch) => {
+    await dispatch(getState());
+    return true;
+  },
+  1: async (dispatch) => {
+    await dispatch(getColleges());
+    await dispatch(getDegrees());
+    await dispatch(getInstitutions());
+    return true;
+  },
+  2: async (dispatch) => {
+    await dispatch(getTechnicalCourses());
+    await dispatch(getNonTechnicalCourses());
+    return true;
+  },
+  3: (dispatch) => {
+    return true;
+  },
+  4: async (dispatch) => {
+    await dispatch(getTechnicalCourses());
+    await dispatch(getNonTechnicalCourses());
+    await dispatch(getState());
+    return true;
+  },
+  5: (dispatch) => {
+    return true;
+  },
+  6: (dispatch) => {
+    return true;
+  },
+  7: (dispatch) => {
+    return true;
+  },
 };

@@ -13,6 +13,8 @@ import moment from "moment";
 import { connect } from "react-redux";
 import {
   getAddressByPin,
+  getDistrict,
+  getRegion,
   setAddressRegion,
 } from "../../../../../redux/actions/profile.actions";
 
@@ -29,11 +31,19 @@ const PersonalInformation = ({
   onHandleSave,
   dispatch,
 }) => {
+  const addressStatesList = addressStates.map(
+    (addressState) => addressState.state
+  );
+  const addressDistrictList = addressDistrict.map(
+    (district) => district.district
+  );
+  let addressRegionList = addressRegion.map((region) => region.post_office);
   const onHandlePin = ({ target }) => {
     const pin = target.value;
     if (!pin || validator.isNumeric(pin)) {
       if (pin.length == 6)
         dispatch(getAddressByPin(pin)).then((response) => {
+          console.log(response);
           if (response.length) {
             onHandleSetAddress("address", "state", {
               target: { value: response[0].state },
@@ -41,8 +51,7 @@ const PersonalInformation = ({
             onHandleSetAddress("address", "district", {
               target: { value: response[0].district },
             });
-            const regionContents = response.map((val) => val.post_office);
-            dispatch(setAddressRegion({ region: regionContents }));
+            dispatch(setAddressRegion({ region: response }));
           }
         });
       onHandleSetAddress("address", "pin", {
@@ -52,7 +61,7 @@ const PersonalInformation = ({
   };
 
   return (
-    <div>
+    <div style={{ paddingBottom: "13rem" }}>
       <Title variant="pr-24-1">1. Personal Information</Title>
       <div className="row">
         <div className="col-1-of-2">
@@ -131,11 +140,12 @@ const PersonalInformation = ({
           <div className="row">
             <FormDropdown
               placeholder=""
-              onHandleDropdownValue={onHandleSetAddress.bind(
-                this,
-                "address",
-                "state"
-              )}
+              onHandleDropdownValue={(event) => {
+                const { value } = event.target;
+                dispatch(getDistrict({ state: value }));
+                onHandleSetAddress("address", "state", event);
+              }}
+              contents={addressStatesList}
               value={info.address.state}
               title="State"
             />
@@ -143,13 +153,14 @@ const PersonalInformation = ({
           <div className="row">
             <FormDropdown
               placeholder=""
+              contents={addressDistrictList}
               value={info.address.district}
               title="District"
-              onHandleDropdownValue={onHandleSetAddress.bind(
-                this,
-                "address",
-                "district"
-              )}
+              onHandleDropdownValue={(event) => {
+                const { value } = event.target;
+                dispatch(getRegion({ district: value }));
+                onHandleSetAddress("address", "district", event);
+              }}
             />
           </div>
         </div>
@@ -159,7 +170,7 @@ const PersonalInformation = ({
             <FormDropdown
               placeholder=""
               value={info.address.region}
-              contents={addressRegion}
+              contents={addressRegionList}
               title="Region"
               onHandleDropdownValue={onHandleSetAddress.bind(
                 this,
@@ -237,11 +248,12 @@ const PersonalInformation = ({
                   ? info.address.state
                   : info.permanentAddress.state
               }
-              onHandleDropdownValue={onHandleSetAddress.bind(
-                this,
-                "permanentAddress",
-                "state"
-              )}
+              onHandleDropdownValue={(event) => {
+                const { value } = event.target;
+                dispatch(getDistrict({ state: value }));
+                onHandleSetAddress("permanentAddress", "state", event);
+              }}
+              contents={addressStatesList}
               title="State"
             />
           </div>
@@ -253,11 +265,12 @@ const PersonalInformation = ({
                   ? info.address.district
                   : info.permanentAddress.district
               }
-              onHandleDropdownValue={onHandleSetAddress.bind(
-                this,
-                "permanentAddress",
-                "district"
-              )}
+              contents={addressDistrictList}
+              onHandleDropdownValue={(event) => {
+                const { value } = event.target;
+                dispatch(getRegion({ district: value }));
+                onHandleSetAddress("permanentAddress", "district", event);
+              }}
               title="District"
             />
           </div>
@@ -274,7 +287,7 @@ const PersonalInformation = ({
                 "permanentAddress",
                 "region"
               )}
-              contents={info.sameAsAddress ? addressRegion : permanentRegion}
+              contents={addressRegionList}
               title="Region"
             />
           </div>

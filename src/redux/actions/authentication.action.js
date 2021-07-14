@@ -1,5 +1,6 @@
 import apiService from "../../authInterceptor/authAxios";
 import history from "../../utils/history";
+import { getState } from "./profile.actions";
 import { loginState } from "./utils.action";
 
 export const SET_LOGIN = "SET_LOGIN";
@@ -65,8 +66,10 @@ export const setOTP =
       });
       if (status == 200) {
         dispatch(setAccessToken(data["data"]));
-        if (mobile) history.push("/register/profile/1");
-        else history.push("/");
+        if (mobile) {
+          const response = await dispatch(getState());
+          if (response) history.push("/register/profile/1");
+        } else history.push("/");
       }
     } catch (e) {
       throw e;

@@ -200,6 +200,10 @@ export const PROFILE_CONTENTS = {
 
 export const funcMap = {
   logout: (dispatch) => dispatch(setLogout()),
+  0: async (dispatch) => {
+    await dispatch(getState());
+    return true;
+  },
   1: async (dispatch) => {
     await dispatch(getColleges());
     await dispatch(getDegrees());

@@ -121,7 +121,6 @@ const ProfileCreation = ({ match, dispatch }) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
       fileReader.onload = (e) => {
-        console.log(e.target.result);
         setProfileProps((prevState) => ({
           ...prevState,
           [step]: {
@@ -130,13 +129,6 @@ const ProfileCreation = ({ match, dispatch }) => {
           },
         }));
       };
-      // setProfileProps((prevState) => ({
-      //   ...prevState,
-      //   [step]: {
-      //     ...prevState[step],
-      //     file,
-      //   },
-      // }));
     }
   };
 

@@ -58,7 +58,10 @@ export const setAddressRegion = ({ region }) => ({
 export const getState = () => async (dispatch) => {
   try {
     const { status, data } = await apiService().get("profile/get_state");
-    if (status == 200) dispatch(setAddressState({ state: data.data }));
+    if (status == 200) {
+      dispatch(setAddressState({ state: data.data }));
+      return true;
+    }
   } catch (e) {
     throw e;
   }
@@ -72,6 +75,19 @@ export const getDistrict =
         `profile/get_district/${state}`
       );
       if (status == 200) dispatch(setAddressDistrict({ district: data.data }));
+    } catch (e) {
+      throw e;
+    }
+  };
+
+export const getRegion =
+  ({ district }) =>
+  async (dispatch) => {
+    try {
+      const { status, data } = await apiService().get(
+        `profile/get_city/${district}`
+      );
+      if (status == 200) dispatch(setAddressRegion({ region: data.data }));
     } catch (e) {
       throw e;
     }

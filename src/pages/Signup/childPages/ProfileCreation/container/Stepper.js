@@ -8,7 +8,8 @@ import history from "../../../../../utils/history";
 
 const Stepper = ({ step = 1, total = 1, dispatch }) => {
   const onHandlePage = async (val) => {
-    await funcMap[+step](dispatch);
+    console.log(val,step);
+    await funcMap[(+step-1) + val](dispatch);
     history.push(`/register/profile/${+step + val}`);
   }
   return (

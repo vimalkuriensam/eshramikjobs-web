@@ -1,4 +1,5 @@
 import apiService from "../../authInterceptor/authAxios";
+import { funcMap } from "../../utils/data";
 import history from "../../utils/history";
 
 export const SET_ADDRESS_STATE = "SET_ADDRESS_STATE";
@@ -17,12 +18,13 @@ export const SET_NON_TECHNICAL_COURSE = "SET_NON_TECHNICAL_COURSE";
 
 export const createProfile = (info, step) => async (dispatch) => {
   try {
-    console.log(info, step);
     if (step == 1 && info.sameAsAddress) delete info.permanentAddress;
-    const response = await apiService().post(`/profile/create/${step}`, info);
-    console.log(response);
+    const { status } = await apiService().post(`/profile/create/${step}`, info);
+    if (status == 200) {
+      const response = await funcMap[step](dispatch);
+      if (response) history.push(`/register/profile/${+step + 1}`);
+    }
   } catch (e) {
-    history.push(`/register/profile/${+step + 1}`);
     throw e;
   }
 };
@@ -63,11 +65,11 @@ export const getState = () => async (dispatch) => {
 };
 
 export const getDistrict =
-  ({ district }) =>
+  ({ state }) =>
   async (dispatch) => {
     try {
       const { status, data } = await apiService().get(
-        `profile/get_district/${district}`
+        `profile/get_district/${state}`
       );
       if (status == 200) dispatch(setAddressDistrict({ district: data.data }));
     } catch (e) {
@@ -87,31 +89,38 @@ export const setDegrees = ({ degrees }) => ({
 
 export const setTechnicalCourses = ({ technicalCourse }) => ({
   type: SET_TECHNICAL_COURSE,
-  technicalCourse,
+  technical: technicalCourse,
 });
 
 export const setNonTechnicalCourses = ({ nonTechnicalCourse }) => ({
   type: SET_NON_TECHNICAL_COURSE,
-  nonTechnicalCourse,
+  nonTechnical: nonTechnicalCourse,
 });
 
-export const getInstitutions =
-  ({}) =>
-  async (dispatch) => {
-    try {
-      const { status, data } = await apiService().get(
-        "/education/get/institute"
-      );
-      if (status == 200) dispatch(setInstitutions({ institution: data.data }));
-    } catch (e) {
-      throw e;
+export const setColleges = ({ colleges }) => ({
+  type: SET_COLLEGE,
+  colleges,
+});
+
+export const getInstitutions = () => async (dispatch) => {
+  try {
+    const { status, data } = await apiService().get("/education/get/institute");
+    if (status == 200) {
+      dispatch(setInstitutions({ institution: data.data }));
+      return true;
     }
-  };
+  } catch (e) {
+    throw e;
+  }
+};
 
 export const getDegrees = () => async (dispatch) => {
   try {
     const { status, data } = await apiService().get("/education/get/courses");
-    if (status == 200) dispatch(setDegrees({ degrees: data.data }));
+    if (status == 200) {
+      dispatch(setDegrees({ degrees: data.data }));
+      return true;
+    }
   } catch (e) {
     throw e;
   }
@@ -120,8 +129,10 @@ export const getDegrees = () => async (dispatch) => {
 export const getTechnicalCourses = () => async (dispatch) => {
   try {
     const { status, data } = await apiService().get("/profile/get_tech");
-    if (status == 200)
+    if (status == 200) {
       dispatch(setTechnicalCourses({ technicalCourse: data.data }));
+      return true;
+    }
   } catch (e) {
     throw e;
   }
@@ -130,8 +141,24 @@ export const getTechnicalCourses = () => async (dispatch) => {
 export const getNonTechnicalCourses = () => async (dispatch) => {
   try {
     const { status, data } = await apiService().get("/profile/get_nontech");
-    if (status == 200)
+    if (status == 200) {
       dispatch(setNonTechnicalCourses({ nonTechnicalCourse: data.data }));
+      return true;
+    }
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const getColleges = () => async (dispatch) => {
+  try {
+    const { status, data } = await apiService().get(
+      "/education/get/university"
+    );
+    if (status == 200) {
+      dispatch(setColleges({ colleges: data.data }));
+      return true;
+    }
   } catch (e) {
     throw e;
   }

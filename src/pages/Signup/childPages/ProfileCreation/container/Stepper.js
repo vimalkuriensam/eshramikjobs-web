@@ -1,12 +1,16 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import Icon from "../../../../../components/atoms/Icon";
 import Text from "../../../../../components/atoms/Text";
+import { funcMap } from "../../../../../utils/data";
 import history from "../../../../../utils/history";
 
-const Stepper = ({ step = 1, total = 1 }) => {
-  const onHandlePage = (val) =>
+const Stepper = ({ step = 1, total = 1, dispatch }) => {
+  const onHandlePage = async (val) => {
+    await funcMap[+step](dispatch);
     history.push(`/register/profile/${+step + val}`);
+  }
   return (
     <div className="authentication__stepBox">
       <div className="authentication__stepContainer">
@@ -30,4 +34,4 @@ const Stepper = ({ step = 1, total = 1 }) => {
   );
 };
 
-export default Stepper;
+export default connect()(Stepper);

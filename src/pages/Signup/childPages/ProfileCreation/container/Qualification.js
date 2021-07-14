@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import Button from "../../../../../components/atoms/Button";
 import Title from "../../../../../components/atoms/Title";
@@ -6,9 +7,19 @@ import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import FormRadioGroup from "../../../../../components/molecules/FormRadioGroup";
 import { QUALIFICATION_SCHOOL, QUALIFICATION_SPECIALIZATION } from "../data";
 
-const Qualification = ({ info, onHandleQualificationInfo }) => {
+const Qualification = ({
+  info,
+  onHandleQualificationInfo,
+  boards,
+  colleges,
+  degrees,
+  institutions,
+}) => {
+  const collegesList = colleges.map((college) => college.name);
+  const institutionList = institutions.map((institution) => institution.name);
+  const degreeList = degrees.map((degree) => degree.name);
   return (
-    <div>
+    <div style={{ paddingBottom: "13rem" }}>
       <Title variant="pr-24-1">2. Qualification</Title>
 
       <div className="row">
@@ -26,7 +37,7 @@ const Qualification = ({ info, onHandleQualificationInfo }) => {
           </div>
 
           <div className="row">
-            <FormDropdown title="Board name" />
+            <FormDropdown title="Board name" contents={boards} />
           </div>
 
           <div className="row">
@@ -43,13 +54,13 @@ const Qualification = ({ info, onHandleQualificationInfo }) => {
         </div>
         <div className="col-1-of-2">
           <div className="row">
-            <FormDropdown title="Institution name" />
+            <FormDropdown title="Institution name" contents={institutionList} />
           </div>
           <div className="row u-margin-top-55">
-            <FormDropdown title="Degree" />
+            <FormDropdown title="Degree" contents={degreeList} />
           </div>
           <div className="row">
-            <FormDropdown title="College/University" />
+            <FormDropdown title="College/University" contents={collegesList} />
           </div>
           <div className="row">
             <Button content="next" variant="1-3" />
@@ -60,4 +71,11 @@ const Qualification = ({ info, onHandleQualificationInfo }) => {
   );
 };
 
-export default Qualification;
+const mapStateToProps = (state) => ({
+  colleges: state.profile.colleges,
+  degrees: state.profile.degrees,
+  institutions: state.profile.institutionName,
+  boards: state.profile.boardName,
+});
+
+export default connect(mapStateToProps)(Qualification);

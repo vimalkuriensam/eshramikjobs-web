@@ -4,10 +4,20 @@ import Title from "../../../../../components/atoms/Title";
 import Image from "../../../../../components/atoms/Image";
 import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import Button from "../../../../../components/atoms/Button";
+import { connect } from "react-redux";
 
-const Profession = ({ info, onHandleProfessionInfo }) => {
+const Profession = ({
+  info,
+  onHandleProfessionInfo,
+  technicals,
+  nonTechnicals,
+}) => {
+  const technicalList = technicals.map((technical) => technical.name);
+  const nonTechnicalList = nonTechnicals.map(
+    (nonTechnical) => nonTechnical.name
+  );
   return (
-    <div>
+    <div style={{ paddingBottom: "8rem" }}>
       <div className="row">
         <div className="col-1-of-2">
           <Image name="profile-banner" />
@@ -18,7 +28,9 @@ const Profession = ({ info, onHandleProfessionInfo }) => {
           </div>
           <div className="row">
             <FormDropdown
+              placeholder=""
               value={info.technical}
+              contents={technicalList}
               onHandleDropdownValue={onHandleProfessionInfo.bind(
                 this,
                 "technical"
@@ -28,7 +40,9 @@ const Profession = ({ info, onHandleProfessionInfo }) => {
           </div>
           <div className="row">
             <FormDropdown
+              placeholder=""
               value={info.nonTechnical}
+              contents={nonTechnicalList}
               onHandleDropdownValue={onHandleProfessionInfo.bind(
                 this,
                 "nonTechnical"
@@ -45,4 +59,9 @@ const Profession = ({ info, onHandleProfessionInfo }) => {
   );
 };
 
-export default Profession;
+const mapStateToProps = (state) => ({
+  technicals: state.profile.technical,
+  nonTechnicals: state.profile.nonTechnical,
+});
+
+export default connect(mapStateToProps)(Profession);

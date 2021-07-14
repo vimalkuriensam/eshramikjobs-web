@@ -1,5 +1,12 @@
-
 import { setLogout } from "../../redux/actions/authentication.action";
+import {
+  getColleges,
+  getDegrees,
+  getInstitutions,
+  getNonTechnicalCourses,
+  getState,
+  getTechnicalCourses,
+} from "../../redux/actions/profile.actions";
 
 export const BASE_URL = "https://eshramik-api.herokuapp.com";
 
@@ -193,4 +200,33 @@ export const PROFILE_CONTENTS = {
 
 export const funcMap = {
   logout: (dispatch) => dispatch(setLogout()),
+  1: async (dispatch) => {
+    await dispatch(getColleges());
+    await dispatch(getDegrees());
+    await dispatch(getInstitutions());
+    return true;
+  },
+  2: async (dispatch) => {
+    await dispatch(getTechnicalCourses());
+    await dispatch(getNonTechnicalCourses());
+    return true;
+  },
+  3: (dispatch) => {
+    return true;
+  },
+  4: async (dispatch) => {
+    await dispatch(getTechnicalCourses());
+    await dispatch(getNonTechnicalCourses());
+    await dispatch(getState());
+    return true;
+  },
+  5: (dispatch) => {
+    return true;
+  },
+  6: (dispatch) => {
+    return true;
+  },
+  7: (dispatch) => {
+    return true;
+  },
 };

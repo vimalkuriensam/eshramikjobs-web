@@ -98,6 +98,16 @@ const ProfileCreation = ({ match, dispatch }) => {
     }));
   };
 
+  const onHandleEmployeeDetails = (type, index, { target }) => {
+    const { value } = target;
+    let profilePropsCopy = [...profileProps[step].empDetails];
+    profilePropsCopy[index][type] = value;
+    setProfileProps((prevState) => ({
+      ...prevState,
+      [step]: { empDetails: [...profilePropsCopy] },
+    }));
+  };
+
   const onHandleImage = ({ target }) => {
     const file = target.files[0];
     const allowedFileTypes = [
@@ -111,6 +121,7 @@ const ProfileCreation = ({ match, dispatch }) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
       fileReader.onload = (e) => {
+        console.log(e.target.result);
         setProfileProps((prevState) => ({
           ...prevState,
           [step]: {
@@ -119,6 +130,13 @@ const ProfileCreation = ({ match, dispatch }) => {
           },
         }));
       };
+      // setProfileProps((prevState) => ({
+      //   ...prevState,
+      //   [step]: {
+      //     ...prevState[step],
+      //     file,
+      //   },
+      // }));
     }
   };
 
@@ -189,6 +207,8 @@ const ProfileCreation = ({ match, dispatch }) => {
             info={profileProps[step].empDetails}
             onAddExperience={onAddExperience}
             onDeleteExperience={onDeleteExperience}
+            onHandleEmployeeDetails={onHandleEmployeeDetails}
+            onHandleSave={onHandleSave}
           />
         );
       case "6":

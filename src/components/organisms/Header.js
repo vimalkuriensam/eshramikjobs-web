@@ -26,6 +26,7 @@ const Header = ({ dispatch, isLogged }) => {
 
   const onHandleProfileState = () => setProfileState((prevState) => !prevState);
 
+
   const onHandleProfileAction = (content) => {
     switch (content.type) {
       case "process":
@@ -79,14 +80,14 @@ const Header = ({ dispatch, isLogged }) => {
             <NavLink
               className="header__link"
               activeClassName="header__link--active"
-              to="/about"
+              to="/jobs"
             >
               Jobs
             </NavLink>
             <NavLink
               className="header__link"
               activeClassName="header__link--active"
-              to="/about"
+              to="/companies"
             >
               Companies
             </NavLink>

@@ -1,6 +1,8 @@
 import React from "react";
 import { Redirect, Router, Route, Switch } from "react-router-dom";
 
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 import history from "../utils/history";
 import ScrollTop from "../utils/ScrollTop";
 
@@ -23,16 +25,25 @@ const AppRoutes = () => (
     <Header />
     <Login />
     <Loader />
-    <Switch>
-      <Route path="/" exact>
-        <Redirect to="/home" />
-      </Route>
-      <Route path="/home" component={HomeView} />
-      <Route path="/register" component={RegisterChildView} />
-      <Route path="/jobs" component={JobsChildView} />
-      <Route path="/about" component={AboutUsView} />
-      <Route path="/companies" component={CompaniesView} />
-    </Switch>
+    <Route
+      render={({ location }) => (
+        <TransitionGroup>
+          <CSSTransition key={location.key} timeout={400} classNames="fade">
+            <Switch location={location}>
+              <Route path="/" exact>
+                <Redirect to="/home" />
+              </Route>
+              <Route path="/home" component={HomeView} />
+              <Route path="/register" component={RegisterChildView} />
+              <Route path="/jobs" component={JobsChildView} />
+              <Route path="/about" component={AboutUsView} />
+              <Route path="/companies" component={CompaniesView} />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      )}
+    />
+
     <Footer />
   </Router>
 );

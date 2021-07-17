@@ -130,4 +130,24 @@
     transform: translateX(-50%);
     clip-path: polygon(0 0, 100% 0, 50% 100%);
   }
+
+  &__sampleContainer {
+    display: flex;
+    width: 100%;
+    > * {
+      &:not(:first-child) {
+        margin-left: 1.6rem;
+      }
+    }
+  }
+
+  &__sampleJobs {
+    display: inline-block;
+    width: 66%;
+  }
+
+  &__sampleCompany {
+    display: inline-block;
+    width: 32.3%;
+  }
 }

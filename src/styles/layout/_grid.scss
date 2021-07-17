@@ -94,6 +94,42 @@
   .col-1-of-7 {
     width: calc(((100% - 6 *#{$gutter-horizontal}) / 7));
   }
+
+  .col-2-of-10 {
+    width: calc(
+      2 * ((100% - 9 *#{$gutter-horizontal}) / 10) + #{$gutter-horizontal}
+    );
+  }
+
+  .col-25-of-10 {
+    width: calc(
+      2.5 * ((100% - 9 *#{$gutter-horizontal}) / 10) + 1.5 * #{$gutter-horizontal}
+    );
+  }
+
+  .col-4-of-10 {
+    width: calc(
+      4 * ((100% - 9 *#{$gutter-horizontal}) / 10) + 3 * #{$gutter-horizontal}
+    );
+  }
+
+  .col-5-of-10 {
+    width: calc(
+      5 * ((100% - 9 *#{$gutter-horizontal}) / 10) + 4 * #{$gutter-horizontal}
+    );
+  }
+
+  .col-3-of-10 {
+    width: calc(
+      3 * ((100% - 9 *#{$gutter-horizontal}) / 10) + 2 * #{$gutter-horizontal}
+    );
+  }
+
+  .col-35-of-10 {
+    width: calc(
+      3.5 * ((100% - 9 *#{$gutter-horizontal}) / 10) + 2.5 * #{$gutter-horizontal}
+    );
+  }
 }
 
 .a-row {

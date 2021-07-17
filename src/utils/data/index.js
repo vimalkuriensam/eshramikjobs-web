@@ -1,3 +1,4 @@
+import moment from "moment";
 import { setLogout } from "../../redux/actions/authentication.action";
 import {
   getColleges,
@@ -234,3 +235,46 @@ export const funcMap = {
     return true;
   },
 };
+
+export const RECENT_JOBS_SAMPLES = [
+  {
+    image: "tata-motors",
+    title: "Tata motors",
+    degree: "Mechanical Engineering/diploma",
+    description: "Good academic records",
+    minExperience: 3,
+    maxExperience: 4,
+    location: "Pune",
+    date: moment().valueOf(),
+  },
+  {
+    image: "tata-motors",
+    title: "Tata motors",
+    degree: "Mechanical Engineering/diploma",
+    description: "Good academic records",
+    minExperience: 3,
+    maxExperience: 4,
+    location: "Pune",
+    date: moment().valueOf(),
+  },
+  {
+    image: "tata-motors",
+    title: "Tata motors",
+    degree: "Mechanical Engineering/diploma",
+    description: "Good academic records",
+    minExperience: 3,
+    maxExperience: 4,
+    location: "Pune",
+    date: moment().valueOf(),
+  },
+  {
+    image: "tata-motors",
+    title: "Tata motors",
+    degree: "Mechanical Engineering/diploma",
+    description: "Good academic records",
+    minExperience: 3,
+    maxExperience: 4,
+    location: "Pune",
+    date: moment().valueOf(),
+  },
+];

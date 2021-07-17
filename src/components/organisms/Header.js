@@ -11,10 +11,10 @@ import { Fragment } from "react";
 import { funcMap, PROFILE_CONTENTS } from "../../utils/data";
 
 const Header = ({ dispatch, isLogged }) => {
+  const handler = (event) => {
+    if (!popupRef.current?.contains(event.target)) setProfileState(false);
+  };
   useEffect(() => {
-    const handler = (event) => {
-      if (!popupRef.current?.contains(event.target)) setProfileState(false);
-    };
     document.addEventListener("mousedown", handler);
   });
 
@@ -31,6 +31,7 @@ const Header = ({ dispatch, isLogged }) => {
       case "process":
         return funcMap[content.to](dispatch);
       default:
+        setProfileState(false);
         history.push(content.to);
     }
   };

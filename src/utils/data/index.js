@@ -164,7 +164,7 @@ export const PROFILE_CONTENTS = {
         {
           text: "Saved jobs",
           type: "link",
-          to: "/",
+          to: "/jobs/saved",
         },
       ],
     },
@@ -173,7 +173,7 @@ export const PROFILE_CONTENTS = {
         {
           text: "Recommended jobs",
           type: "link",
-          to: "/",
+          to: "/jobs/recommended",
         },
         {
           text: "Settings",
@@ -187,7 +187,7 @@ export const PROFILE_CONTENTS = {
         {
           text: "Applied jobs",
           type: "link",
-          to: "/",
+          to: "/jobs/applied",
         },
         {
           text: "logout",

@@ -132,8 +132,13 @@
   }
 
   &__sampleContainer {
-    display: inline-block;
+    display: flex;
     width: 100%;
+    > * {
+      &:not(:first-child) {
+        margin-left: 1.6rem;
+      }
+    }
   }
 
   &__sampleJobs {

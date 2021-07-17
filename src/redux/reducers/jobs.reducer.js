@@ -46,6 +46,20 @@ const jobsReducerDefaultState = {
   recommended: [],
   applied: [],
   saved: [],
+  companies: [
+    "tata-motors",
+    "atlas-copco",
+    "tata-motors",
+    "atlas-copco",
+    "tata-motors",
+    "atlas-copco",
+    "tata-motors",
+    "atlas-copco",
+    "tata-motors",
+    "atlas-copco",
+    "tata-motors",
+    "atlas-copco",
+  ],
 };
 
 const jobsReducer = (state = jobsReducerDefaultState, { type }) => {

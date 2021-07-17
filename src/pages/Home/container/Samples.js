@@ -5,7 +5,7 @@ import Title from "../../../components/atoms/Title";
 import CompanyListings from "../../../components/organisms/CompanyListings";
 import WorkListings from "../../../components/organisms/JobListings";
 
-const Samples = ({ jobs }) => {
+const Samples = ({ jobs, companies }) => {
   return (
     <section className="section-home-samples">
       <div className="home__sampleContainer">
@@ -16,8 +16,10 @@ const Samples = ({ jobs }) => {
           <WorkListings jobs={jobs} />
         </div>
         <div className="home__sampleCompany">
-          <Title variant="pr-30-1">Companies</Title>
-          <CompanyListings />
+          <Title variant="pr-30-1" className="u-margin-bottom-50">
+            Companies
+          </Title>
+          <CompanyListings companies={companies} />
         </div>
       </div>
     </section>
@@ -26,6 +28,7 @@ const Samples = ({ jobs }) => {
 
 const mapStateToProps = (state) => ({
   jobs: state.jobs.recent,
+  companies: state.jobs.companies,
 });
 
 export default connect(mapStateToProps)(Samples);

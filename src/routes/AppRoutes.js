@@ -8,12 +8,9 @@ import Header from "../components/organisms/Header";
 import Login from "../components/organisms/Login";
 import Loader from "../components/organisms/Loader";
 import Footer from "../components/organisms/Footer";
-import {
-  Home as HomeView,
-  Signup as SignupView,
-  ProfileCreation as ProfileCreationView,
-  OTP as OTPView,
-} from "../pages";
+import { Home as HomeView } from "../pages";
+
+import { RegisterChildView } from "./childRoutes/Register";
 
 const AppRoutes = () => (
   <Router history={history}>
@@ -26,9 +23,7 @@ const AppRoutes = () => (
         <Redirect to="/home" />
       </Route>
       <Route path="/home" component={HomeView} />
-      <Route path="/register" exact component={SignupView} />
-      <Route path="/register/profile/:step" component={ProfileCreationView} />
-      <Route path="/register/otp" component={OTPView} />
+      <Route path="/register" component={RegisterChildView} />
     </Switch>
     <Footer />
   </Router>

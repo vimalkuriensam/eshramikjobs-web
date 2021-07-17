@@ -33,6 +33,7 @@
     min-width: 33rem;
     padding: 1.7rem 2.5rem;
     box-shadow: 0 0.3rem 1.4rem rgba($color-black, 0.2);
+    z-index: 1000;
     > * {
       &:not(:last-child) {
         margin-bottom: 1.5rem !important;

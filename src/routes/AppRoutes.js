@@ -1,6 +1,8 @@
 import React from "react";
 import { Redirect, Router, Route, Switch } from "react-router-dom";
 
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 import history from "../utils/history";
 import ScrollTop from "../utils/ScrollTop";
 
@@ -10,10 +12,12 @@ import Loader from "../components/organisms/Loader";
 import Footer from "../components/organisms/Footer";
 import {
   Home as HomeView,
-  Signup as SignupView,
-  ProfileCreation as ProfileCreationView,
-  OTP as OTPView,
+  AboutUs as AboutUsView,
+  Companies as CompaniesView,
 } from "../pages";
+
+import { RegisterChildView } from "./childRoutes/Register";
+import { JobsChildView } from "./childRoutes/Jobs";
 
 const AppRoutes = () => (
   <Router history={history}>
@@ -21,15 +25,24 @@ const AppRoutes = () => (
     <Header />
     <Login />
     <Loader />
-    <Switch>
-      <Route path="/" exact>
-        <Redirect to="/home" />
-      </Route>
-      <Route path="/home" component={HomeView} />
-      <Route path="/register" exact component={SignupView} />
-      <Route path="/register/profile/:step" component={ProfileCreationView} />
-      <Route path="/register/otp" component={OTPView} />
-    </Switch>
+    <Route
+      render={({ location }) => (
+        <TransitionGroup>
+          <CSSTransition key={location.key} timeout={400} classNames="fade">
+            <Switch location={location}>
+              <Route path="/" exact>
+                <Redirect to="/home" />
+              </Route>
+              <Route path="/home" component={HomeView} />
+              <Route path="/register" component={RegisterChildView} />
+              <Route path="/jobs" component={JobsChildView} />
+              <Route path="/about" component={AboutUsView} />
+              <Route path="/companies" component={CompaniesView} />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      )}
+    />
     <Footer />
   </Router>
 );

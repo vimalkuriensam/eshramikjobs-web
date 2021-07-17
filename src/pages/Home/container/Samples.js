@@ -4,8 +4,9 @@ import Title from "../../../components/atoms/Title";
 
 import CompanyListings from "../../../components/organisms/CompanyListings";
 import WorkListings from "../../../components/organisms/JobListings";
+import Profile from "./Profile";
 
-const Samples = ({ jobs, companies }) => {
+const Samples = ({ jobs, companies, isLogged }) => {
   return (
     <section className="section-home-samples">
       <div className="home__sampleContainer">
@@ -16,6 +17,11 @@ const Samples = ({ jobs, companies }) => {
           <WorkListings jobs={jobs} />
         </div>
         <div className="home__sampleCompany">
+          {isLogged && (
+            <div data-aos="fade-left">
+              <Profile />
+            </div>
+          )}
           <Title variant="pr-30-1" className="u-margin-bottom-50">
             Companies
           </Title>
@@ -27,6 +33,7 @@ const Samples = ({ jobs, companies }) => {
 };
 
 const mapStateToProps = (state) => ({
+  isLogged: !!state.auth.accessToken,
   jobs: state.jobs.recent,
   companies: state.jobs.companies,
 });

@@ -11,10 +11,10 @@ import { Fragment } from "react";
 import { funcMap, PROFILE_CONTENTS } from "../../utils/data";
 
 const Header = ({ dispatch, isLogged }) => {
+  const handler = (event) => {
+    if (!popupRef.current?.contains(event.target)) setProfileState(false);
+  };
   useEffect(() => {
-    const handler = (event) => {
-      if (!popupRef.current?.contains(event.target)) setProfileState(false);
-    };
     document.addEventListener("mousedown", handler);
   });
 
@@ -26,11 +26,13 @@ const Header = ({ dispatch, isLogged }) => {
 
   const onHandleProfileState = () => setProfileState((prevState) => !prevState);
 
+
   const onHandleProfileAction = (content) => {
     switch (content.type) {
       case "process":
         return funcMap[content.to](dispatch);
       default:
+        setProfileState(false);
         history.push(content.to);
     }
   };
@@ -78,14 +80,14 @@ const Header = ({ dispatch, isLogged }) => {
             <NavLink
               className="header__link"
               activeClassName="header__link--active"
-              to="/about"
+              to="/jobs"
             >
               Jobs
             </NavLink>
             <NavLink
               className="header__link"
               activeClassName="header__link--active"
-              to="/about"
+              to="/companies"
             >
               Companies
             </NavLink>

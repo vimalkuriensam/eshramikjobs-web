@@ -234,7 +234,7 @@ const ProfileCreation = ({ match, dispatch }) => {
     }
   };
   return (
-    <section className="section-profile-creaton">
+    <section className="section-profile-creaton page">
       <Image name="hexagon" className="authentication__hexagon1" />
       <Image name="hexagon" className="authentication__hexagon2" />
       <Title variant="pm-26-1" className="u-text-center u-width-100">

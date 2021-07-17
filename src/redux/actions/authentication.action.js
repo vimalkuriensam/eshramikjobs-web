@@ -51,7 +51,7 @@ export const setLogin =
 
 export const setLogout = () => (dispatch) => {
   dispatch({ type: SET_LOGOUT });
-  window.location.href = "/home";
+  history.push("/home");
 };
 
 export const setOTP =

@@ -7,13 +7,12 @@ import Hero from "./container/Hero";
 const OTP = ({ location }) => {
   const mobile = location?.state?.mobile;
   const email = location?.state?.email;
-  console.log(mobile, email);
   if (mobile || email) {
   } else {
     history.push("/register");
   }
   return (
-    <div>
+    <div className="page">
       <div className="row">
         <div className="col-1-of-2">
           <Hero />

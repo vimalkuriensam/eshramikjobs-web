@@ -7,7 +7,7 @@ import JobListings from "../../../../components/organisms/JobListings";
 
 const Applied = ({ appliedJobs, companies }) => {
   return (
-    <section className="section-home-samples">
+    <section className="section-home-samples page">
       <div className="home__sampleContainer">
         <div className="home__sampleJobs">
           <Title className="u-margin-bottom-50" variant="pr-30-1">

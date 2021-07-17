@@ -19,6 +19,12 @@ body {
   &--pr-16-1 {
     font-size: 1.6rem;
   }
+
+  &--pr-17-1 {
+    font-size: 1.7rem;
+    color: $color-primary;
+  }
+
   &--pr-19-1 {
     font-size: 1.9rem;
   }
@@ -99,6 +105,12 @@ body {
   &--pl-12-1 {
     font-family: "poppins-light";
     font-size: 1.2rem;
+  }
+
+  &--pl-12-2 {
+    font-family: "poppins-light";
+    font-size: 1.2rem;
+    color: $color-white;
   }
 
   &--pl-14-1 {

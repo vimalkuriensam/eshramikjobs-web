@@ -43,7 +43,6 @@ const AppRoutes = () => (
         </TransitionGroup>
       )}
     />
-
     <Footer />
   </Router>
 );

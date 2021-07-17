@@ -5,12 +5,13 @@ import Categories from "./container/Categories";
 import Feedback from "./container/Feedback";
 import Advertisement from "./container/Advertisement";
 import Samples from "./container/Samples";
+import { connect } from "react-redux";
 
-const Home = () => {
+const Home = ({ isLogged }) => {
   return (
-    <div>
+    <div className="page">
       <Hero />
-      <Categories />
+      {!isLogged && <Categories />}
       <Samples />
       <Feedback />
       <Advertisement />
@@ -18,4 +19,8 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => ({
+  isLogged: !!state.auth.accessToken,
+});
+
+export default connect(mapStateToProps)(Home);

@@ -33,4 +33,16 @@
     width: 13rem;
     height: 8.6rem;
   }
+
+  &__jobsLogo {
+    display: inline-block;
+    > div {
+      display: inline-block;
+      margin-top: 0.3rem;
+      margin-left: 0.5rem;
+      > svg {
+        padding-top: .5rem;
+      }
+    }
+  }
 }

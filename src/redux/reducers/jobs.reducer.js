@@ -1,65 +1,17 @@
-import moment from "moment";
+import {
+  APPLIED_JOBS_SAMPLES,
+  COMPANIES_SAMPLES,
+  RECENT_JOBS_SAMPLES,
+  RECOMMENDED_JOBS_SAMPLES,
+  SAVED_JOBS_SAMPLES,
+} from "../../utils/data";
 
 const jobsReducerDefaultState = {
-  recent: [
-    {
-      image: "tata-motors",
-      title: "Tata motors",
-      degree: "Mechanical Engineering/diploma",
-      description: "Good academic records",
-      minExperience: 3,
-      maxExperience: 4,
-      location: "Pune",
-      date: moment().valueOf(),
-    },
-    {
-      image: "tata-motors",
-      title: "Tata motors",
-      degree: "Mechanical Engineering/diploma",
-      description: "Good academic records",
-      minExperience: 3,
-      maxExperience: 4,
-      location: "Pune",
-      date: moment().valueOf(),
-    },
-    {
-      image: "tata-motors",
-      title: "Tata motors",
-      degree: "Mechanical Engineering/diploma",
-      description: "Good academic records",
-      minExperience: 3,
-      maxExperience: 4,
-      location: "Pune",
-      date: moment().valueOf(),
-    },
-    {
-      image: "tata-motors",
-      title: "Tata motors",
-      degree: "Mechanical Engineering/diploma",
-      description: "Good academic records",
-      minExperience: 3,
-      maxExperience: 4,
-      location: "Pune",
-      date: moment().valueOf(),
-    },
-  ],
-  recommended: [],
-  applied: [],
-  saved: [],
-  companies: [
-    "tata-motors",
-    "atlas-copco",
-    "tata-motors",
-    "atlas-copco",
-    "tata-motors",
-    "atlas-copco",
-    "tata-motors",
-    "atlas-copco",
-    "tata-motors",
-    "atlas-copco",
-    "tata-motors",
-    "atlas-copco",
-  ],
+  recent: RECENT_JOBS_SAMPLES,
+  recommended: RECOMMENDED_JOBS_SAMPLES,
+  applied: APPLIED_JOBS_SAMPLES,
+  saved: SAVED_JOBS_SAMPLES,
+  companies: COMPANIES_SAMPLES,
 };
 
 const jobsReducer = (state = jobsReducerDefaultState, { type }) => {

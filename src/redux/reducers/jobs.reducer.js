@@ -1,11 +1,4 @@
 import moment from "moment";
-import {
-  APPLIED_JOBS_SAMPLES,
-  COMPANIES_SAMPLES,
-  RECENT_JOBS_SAMPLES,
-  RECOMMENDED_JOBS_SAMPLES,
-  SAVED_JOBS_SAMPLES,
-} from "../../utils/data";
 
 const jobsReducerDefaultState = {
   recent: [

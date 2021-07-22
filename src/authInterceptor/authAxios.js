@@ -1,4 +1,8 @@
 import Axios from "axios";
+import {
+  getAccessToken,
+  setLogout,
+} from "../redux/actions/authentication.action";
 import { setLoader } from "../redux/actions/utils.action";
 
 import { store } from "../redux/stores/configureStore";
@@ -9,9 +13,10 @@ const apiService = () => {
   const api = Axios.create({
     baseURL: BASE_URL,
   });
-
+  let currentEndpoint = "";
   api.interceptors.request.use(async (config) => {
     try {
+      currentEndpoint = config.url;
       store.dispatch(setLoader({ state: true }));
       const token = store.getState().auth?.accessToken;
       if (token) config.headers["Authorization"] = "Bearer " + token;
@@ -35,8 +40,21 @@ const apiService = () => {
       //       status: INFO_STATUS.ERROR,
       //     })
       //   );
-      //   if (error.response.status === 403) history.push("/auth/signin");
-      return Promise.reject(error);
+      if (error.response.status === 403) {
+        const email = store.getState().auth?.email;
+        const refreshToken = store.getState().auth?.refreshToken;
+        if (email && refreshToken)
+          store.dispatch(getAccessToken({ refreshToken, email })).then(() => {
+            api(error.config);
+          });
+        else {
+          store.dispatch(setLogout());
+          history.push("/register");
+        }
+      } else if (error.response.status === 401) {
+        store.dispatch(setLogout());
+        history.push("/register");
+      } else return error;
     }
   );
 

@@ -159,7 +159,7 @@ export const PROFILE_CONTENTS = {
         {
           text: "Edit Profile",
           type: "link",
-          to: "/",
+          to: "/profile",
         },
         {
           text: "Saved jobs",

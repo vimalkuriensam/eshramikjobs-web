@@ -7,6 +7,10 @@
   padding: 1rem 14rem;
   justify-content: space-between;
 
+  &__logo-box {
+    cursor: pointer;
+  }
+
   &__link {
     font-family: "poppins-regular";
     font-size: 1.8rem;

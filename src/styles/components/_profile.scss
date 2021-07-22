@@ -5,6 +5,19 @@
     min-height: 31.1rem;
     border-radius: 0.8rem;
     box-shadow: 0 1px 0.6rem rgba($color-black, 0.16);
+    display: table;
+
+    &--left {
+      display: table-cell;
+      vertical-align: middle;
+      width: 25%;
+    }
+
+    &--right {
+      display: table-cell;
+      vertical-align: middle;
+      width: 75%;
+    }
   }
 
   &__navContainer {
@@ -51,5 +64,52 @@
         fill: $color-tertiary;
       }
     }
+  }
+
+  &__progress {
+    width: 80%;
+    background-image: linear-gradient(
+      to right,
+      $color-white 0%,
+      $color-white var(--set-progress),
+      #c8eaf5 var(--set-progress)
+    ) !important;
+    > .form__progress--label {
+      background: $color-white;
+      > div {
+        background: $color-white;
+        color: $color-tertiary;
+      }
+    }
+  }
+
+  &__octo,
+  &__octo div {
+    margin: 0 auto;
+    transform-origin: 50% 50%;
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
+  }
+  &__octo,
+  &__octo div {
+    width: 15rem;
+    height: 15rem;
+  }
+  &__octo {
+    transform: rotate(45deg);
+  }
+  &__octo1 {
+    transform: rotate(-45deg);
+    position: relative;
+  }
+
+  &__image {
+    width: 15rem;
+    height: 15rem;
+    position: absolute;
+    top: 0;
+    left: -15%;
+    transform: translateX(15%);
   }
 }

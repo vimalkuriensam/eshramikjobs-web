@@ -13,4 +13,15 @@
     border-radius: 0.8rem;
     box-shadow: 0 0 0.6rem rgba($color-black, 0.16);
   }
+
+  &__nav {
+    text-align: center;
+    padding: 3rem 1rem;
+    >div {
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
 }

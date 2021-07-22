@@ -1,0 +1,16 @@
+.profile {
+  &__main {
+    background: $color-primary;
+    width: 100%;
+    min-height: 31.1rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 1px 0.6rem rgba($color-black, 0.16);
+  }
+
+  &__navContainer {
+    width: 100%;
+    min-height: 45rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 0 0.6rem rgba($color-black, 0.16);
+  }
+}

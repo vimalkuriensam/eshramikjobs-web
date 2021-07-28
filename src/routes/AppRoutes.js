@@ -11,6 +11,7 @@ import Login from "../components/organisms/Login";
 import Loader from "../components/organisms/Loader";
 import Footer from "../components/organisms/Footer";
 import {
+  Dashboard as DashboardView,
   Home as HomeView,
   AboutUs as AboutUsView,
   Companies as CompaniesView,
@@ -38,6 +39,7 @@ const AppRoutes = () => (
                   <Route path="/" exact>
                     <Redirect to="/home" />
                   </Route>
+                  <Route path="/dashboard" component={DashboardView} />
                   <Route path="/home" component={HomeView} />
                   <Route path="/register" component={RegisterChildView} />
                   <Route path="/jobs" component={JobsChildView} />

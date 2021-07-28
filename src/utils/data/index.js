@@ -456,7 +456,7 @@ export const APPLIED_JOBS_SAMPLES = [
 export const NAVBAR_NAVS = [
   {
     text: "Dashboard",
-    to: "/",
+    to: "/dashboard",
   },
   {
     text: "Sales",

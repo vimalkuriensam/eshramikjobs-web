@@ -14,11 +14,12 @@ import {
   Home as HomeView,
   AboutUs as AboutUsView,
   Companies as CompaniesView,
-  Profile as ProfileView
+  Profile as ProfileView,
 } from "../pages";
 
 import { RegisterChildView } from "./childRoutes/Register";
 import { JobsChildView } from "./childRoutes/Jobs";
+import NavBar from "../components/organisms/Navbar";
 
 const AppRoutes = () => (
   <Router history={history}>
@@ -26,25 +27,30 @@ const AppRoutes = () => (
     <Header />
     <Login />
     <Loader />
-    <Route
-      render={({ location }) => (
-        <TransitionGroup>
-          <CSSTransition key={location.key} timeout={400} classNames="fade">
-            <Switch location={location}>
-              <Route path="/" exact>
-                <Redirect to="/home" />
-              </Route>
-              <Route path="/home" component={HomeView} />
-              <Route path="/register" component={RegisterChildView} />
-              <Route path="/jobs" component={JobsChildView} />
-              <Route path="/about" component={AboutUsView} />
-              <Route path="/companies" component={CompaniesView} />
-              <Route path="/profile" component={ProfileView}  />
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup>
-      )}
-    />
+    <div className="u-display-flex u-overflow-hidden u-width-100">
+      <NavBar />
+      <div className="navbar__outer">
+        <Route
+          render={({ location }) => (
+            <TransitionGroup>
+              <CSSTransition key={location.key} timeout={400} classNames="fade">
+                <Switch location={location}>
+                  <Route path="/" exact>
+                    <Redirect to="/home" />
+                  </Route>
+                  <Route path="/home" component={HomeView} />
+                  <Route path="/register" component={RegisterChildView} />
+                  <Route path="/jobs" component={JobsChildView} />
+                  <Route path="/about" component={AboutUsView} />
+                  <Route path="/companies" component={CompaniesView} />
+                  <Route path="/profile" component={ProfileView} />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+          )}
+        />
+      </div>
+    </div>
     <Footer />
   </Router>
 );

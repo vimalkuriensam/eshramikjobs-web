@@ -452,3 +452,26 @@ export const APPLIED_JOBS_SAMPLES = [
     date: moment().valueOf(),
   },
 ];
+
+export const NAVBAR_NAVS = [
+  {
+    text: "Dashboard",
+    to: "/",
+  },
+  {
+    text: "Sales",
+    to: "/sales",
+  },
+  {
+    text: "Enrolled Companies",
+    to: "/companies",
+  },
+  {
+    text: "Resumes Recieved",
+    to: "/companies",
+  },
+  {
+    text: "Create Jobs",
+    to: "/companies",
+  },
+];

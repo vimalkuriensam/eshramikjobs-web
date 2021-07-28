@@ -14,6 +14,7 @@ import {
   Home as HomeView,
   AboutUs as AboutUsView,
   Companies as CompaniesView,
+  Profile as ProfileView
 } from "../pages";
 
 import { RegisterChildView } from "./childRoutes/Register";
@@ -38,6 +39,7 @@ const AppRoutes = () => (
               <Route path="/jobs" component={JobsChildView} />
               <Route path="/about" component={AboutUsView} />
               <Route path="/companies" component={CompaniesView} />
+              <Route path="/profile" component={ProfileView}  />
             </Switch>
           </CSSTransition>
         </TransitionGroup>

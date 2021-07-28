@@ -159,6 +159,30 @@
     width: calc(100% / 4);
   }
 
+  .col-a-3-of-5 {
+    width: calc(3 * 100% / 5);
+  }
+
+  .col-a-2-of-5 {
+    width: calc(2 * 100% / 5);
+  }
+
+  .col-a-4-of-5 {
+    width: calc(4 * 100% / 5);
+  }
+
+  .col-a-1-of-5 {
+    width: calc(1 * 100% / 5);
+  }
+
+  .col-a-35-of-50 {
+    width: calc(3.5 * 100% / 5);
+  }
+
+  .col-a-15-of-50 {
+    width: calc(1.5 * 100% / 5);
+  }
+
   .col-a-1-of-6 {
     width: calc(100% / 6);
   }

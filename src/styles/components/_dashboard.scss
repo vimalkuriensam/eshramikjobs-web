@@ -1,2 +1,9 @@
 .dashboard {
+  &__subscriptionBox {
+    border-radius: 0.8rem;
+    min-height: 17.9rem;
+    background: $color-white;
+    box-shadow: 0 0.1rem 2rem rgba($color-black, 0.15);
+    padding: 2rem 2.3rem 1.1rem 2rem;
+  }
 }

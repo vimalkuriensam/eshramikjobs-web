@@ -13,6 +13,11 @@ body {
   font-size: 1.8rem;
   font-family: "poppins-regular";
   display: inline-block;
+  &--psm-18-1 {
+    font-size: 1.8rem;
+    font-family: 'poppins-semi-bold';
+  }
+
   &--pr-13-1 {
     font-size: 1.3rem;
   }
@@ -28,6 +33,10 @@ body {
   &--pr-17-2 {
     font-size: 1.7rem;
     color: $color-white;
+  }
+
+  &--pr-17-3 {
+    font-size: 1.7rem;
   }
 
   &--pr-19-1 {

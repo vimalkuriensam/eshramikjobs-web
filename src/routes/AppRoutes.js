@@ -29,8 +29,9 @@ const AppRoutes = () => (
     <Login />
     <Loader />
     <div className="u-display-flex u-overflow-hidden u-width-100">
-      <NavBar />
-      <div className="navbar__outer">
+      {/*<NavBar />*/}
+      <div style={{ width: "100%" }}>
+        {/*//className="navbar__outer">*/}
         <Route
           render={({ location }) => (
             <TransitionGroup>

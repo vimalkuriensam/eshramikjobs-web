@@ -1,2 +1,2 @@
 export { default } from "./Signup";
-export { ProfileCreation, OTP } from "./childPages";
+export { AdminLogin, ProfileCreation, OTP } from "./childPages";

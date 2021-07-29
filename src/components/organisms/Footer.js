@@ -5,6 +5,8 @@ import Title from "../atoms/Title";
 import { FOOTER_MAIN_CONTENTS } from "../../utils/data";
 import Button from "../atoms/Button";
 import Icon from "../atoms/Icon";
+import BlacklistComponent from "../../hoc/BlacklistComponent";
+import { withRouter } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -48,4 +50,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default withRouter(BlacklistComponent(Footer)(["/admin"]))

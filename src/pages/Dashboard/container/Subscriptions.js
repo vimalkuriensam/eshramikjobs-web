@@ -7,13 +7,21 @@ const Subscriptions = () => {
     <div>
       <div className="row">
         <div className="col-1-of-3">
-          <SubscriptionBox title="Active Subscription" value={50} />
+          <SubscriptionBox
+            title="Active Subscription"
+            value={50}
+            variant="primary"
+          />
         </div>
         <div className="col-1-of-3">
-          <SubscriptionBox title="Expired Subscription" value={25} />
+          <SubscriptionBox
+            title="Expired Subscription"
+            value={25}
+            variant="secondary"
+          />
         </div>
         <div className="col-1-of-3">
-          <SubscriptionBox title="Free Trial" value={5} />
+          <SubscriptionBox title="Free Trial" value={5} variant="tertiary" />
         </div>
       </div>
     </div>

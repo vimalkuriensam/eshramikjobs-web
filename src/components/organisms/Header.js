@@ -3,12 +3,13 @@ import React, { useEffect, useRef, useState } from "react";
 import Button from "../atoms/Button";
 import Image from "../atoms/Image";
 import Text from "../atoms/Text";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginState } from "../../redux/actions/utils.action";
 import history from "../../utils/history";
 import { Fragment } from "react";
 import { funcMap, PROFILE_CONTENTS } from "../../utils/data";
+import BlacklistComponent from "../../hoc/BlacklistComponent";
 
 const Header = ({ dispatch, isLogged }) => {
   const handler = (event) => {
@@ -127,4 +128,6 @@ const mapStateToProps = (state) => ({
   isLogged: !!state.auth.accessToken,
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(
+  withRouter(BlacklistComponent(Header)(["/admin"]))
+);

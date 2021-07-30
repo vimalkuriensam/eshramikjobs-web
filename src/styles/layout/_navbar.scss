@@ -1,0 +1,22 @@
+.navbar {
+  width: 27.3rem;
+  background: $color-primary;
+  &__outer {
+    width: 80%;
+  }
+
+  &__nav {
+    display: block;
+    padding: 3.5rem 4.5rem;
+    text-decoration: none;
+    color: $color-white;
+    font-size: 1.6rem;
+    font-family: "poppins-regular";
+    opacity: 0.8;
+    width: 27.3rem;
+
+    &--active {
+      opacity: 1;
+    }
+  }
+}

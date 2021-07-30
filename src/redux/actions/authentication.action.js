@@ -29,6 +29,24 @@ export const setSignup =
     }
   };
 
+export const adminLogin =
+  ({ info }) =>
+  async (dispatch) => {
+    try {
+      const { status, data } = await apiService().post(
+        "/auth/admin_login",
+        info
+      );
+      if (status == 200) {
+        const { accessToken, refreshToken } = data["data"];
+        dispatch(setAccessToken({ accessToken, refreshToken }));
+        history.push("/");
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
 export const setLogin =
   ({ email }) =>
   async (dispatch) => {
@@ -112,11 +130,9 @@ export const getAccessToken =
     }
   };
 
-export const setAccessToken = ({ accessToken }) => ({
+export const setAccessToken = (tokens) => ({
   type: SET_ACCESS_TOKEN,
-  payload: {
-    accessToken,
-  },
+  tokens,
 });
 
 export const setEmail = ({ email }) => ({

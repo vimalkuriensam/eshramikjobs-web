@@ -1,0 +1,82 @@
+.table {
+  &__container {
+    padding: 2rem 2.5rem;
+    background: $color-white;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.1rem 2rem rgba($color-black, 0.15);
+    width: 100%;
+
+    &--properties {
+      display: flex;
+      align-items: center;
+      > * {
+        &:not(:first-child) {
+          margin-left: 3rem;
+        }
+      }
+    }
+  }
+
+  &__dropdown {
+    > div {
+      border: none;
+      background: $color-white;
+      > * {
+        &:first-child {
+          > div {
+            color: $color-primary;
+          }
+        }
+        &:not(:first-child) {
+          > button {
+            background: $color-white;
+            > span > div > svg > path {
+              fill: $color-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__sort {
+    display: flex;
+    align-items: center;
+    > * {
+      min-width: 6.4rem;
+    }
+  }
+
+  &__listType {
+    display: flex;
+    align-items: center;
+
+    &--selected {
+      background: $color-tertiary;
+    }
+
+    &--grid {
+      > g > g {
+        fill: $color-white;
+      }
+    }
+
+    > span {
+      &:not(:first-child) {
+        margin-left: 2rem;
+      }
+      cursor: pointer;
+      height: 3rem;
+      width: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.8rem;
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

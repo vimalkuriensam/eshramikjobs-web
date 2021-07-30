@@ -13,9 +13,29 @@ body {
   font-size: 1.8rem;
   font-family: "poppins-regular";
   display: inline-block;
+  &--pm-17-1 {
+    font-size: 1.7rem;
+    font-family: "poppins-medium";
+  }
+
+  &--psm-18-1 {
+    font-size: 1.8rem;
+    font-family: "poppins-semi-bold";
+  }
+
   &--pr-13-1 {
     font-size: 1.3rem;
   }
+
+  &--pr-15-1 {
+    font-size: 1.5rem;
+  }
+
+  &--pr-15-2 {
+    font-size: 1.5rem;
+    color: $color-primary;
+  }
+
   &--pr-16-1 {
     font-size: 1.6rem;
   }
@@ -30,6 +50,10 @@ body {
     color: $color-white;
   }
 
+  &--pr-17-3 {
+    font-size: 1.7rem;
+  }
+
   &--pr-19-1 {
     font-size: 1.9rem;
   }
@@ -39,9 +63,17 @@ body {
     color: $color-tertiary;
   }
 
+  &--pr-20-2 {
+    font-size: 2rem;
+  }
+  
   &--pr-24-1 {
     font-size: 2.4rem;
     color: $color-primary;
+  }
+
+  &--pr-24-2 {
+    font-size: 2.4rem;
   }
 
   &--pr-25-1 {

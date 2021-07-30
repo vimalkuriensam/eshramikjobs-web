@@ -1,4 +1,27 @@
 .form {
+  &__tooltip {
+    position: relative;
+  }
+
+  &__tooltipText {
+    opacity: 0;
+    background: $color-black;
+    border-radius: 0.3rem;
+    color: $color-white;
+    padding: 0.3rem;
+    min-width: 13rem;
+    &--top {
+      position: absolute;
+      top: -3rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__tooltipContent:hover > &__tooltipText {
+    opacity: .8;
+  }
+
   &__input-1 {
     height: 4.4rem;
     width: 100%;
@@ -46,8 +69,70 @@
     font-family: "poppins-regular";
   }
 
+  &__input-5 {
+    width: 31.1rem;
+    height: 4rem;
+    border-radius: 1rem;
+    background: #f6f5fc;
+    border: 1px solid $color-grey-light-1;
+    outline: none;
+    text-align: left;
+    font-size: 1.8rem;
+    font-family: "poppins-regular";
+    padding: 0.5rem 3.5rem 0.5rem 1rem;
+    &::placeholder {
+      font-size: 1.8rem;
+    }
+  }
+
   &__inputfile {
     display: none;
+  }
+
+  &__search {
+    display: flex;
+    position: relative;
+
+    &--2 {
+      border-radius: 1rem;
+      border: 1px solid rgb(201, 204, 215);
+    }
+
+    &--icon {
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+      height: 3.5rem;
+      fill: $color-grey-dark;
+    }
+
+    &--icon2 {
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+      height: 3.5rem;
+      background: $color-primary;
+      stroke: $color-white;
+      stroke-width: 2;
+    }
+
+    &--icon5 {
+      // margin-right: 0.5rem;
+      // margin-top: 0.5rem;
+      height: 2rem;
+      width: 2rem;
+      stroke: #b9b9b9;
+      stroke-width: 1;
+      position: absolute;
+      fill: black;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &--input {
+      &::placeholder {
+        font-size: 1.4rem;
+      }
+    }
   }
 
   &__textarea {

@@ -1,12 +1,14 @@
 import React from "react";
 
-const Search = () => (
+const Search = ({ className, style }) => (
   <svg
     id="loupe"
     xmlns="http://www.w3.org/2000/svg"
     width="19.072"
     height="19.072"
     viewBox="0 0 19.072 19.072"
+    className={className}
+    style={style}
   >
     <g id="Group_59" data-name="Group 59">
       <g id="Group_58" data-name="Group 58">

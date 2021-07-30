@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode";
 import moment from "moment";
 import { setLogout } from "../../redux/actions/authentication.action";
 import {
@@ -452,3 +453,34 @@ export const APPLIED_JOBS_SAMPLES = [
     date: moment().valueOf(),
   },
 ];
+
+export const NAVBAR_NAVS = [
+  {
+    text: "Dashboard",
+    to: "/dashboard",
+  },
+  {
+    text: "Sales",
+    to: "/sales",
+  },
+  {
+    text: "Enrolled Companies",
+    to: "/companies",
+  },
+  {
+    text: "Resumes Recieved",
+    to: "/companies",
+  },
+  {
+    text: "Create Jobs",
+    to: "/companies",
+  },
+];
+
+export const userType = (token) => {
+  if (token) {
+    const { type, exp } = jwtDecode(token);
+    return { type, exp };
+  }
+  return { type: null, exp: null };
+};

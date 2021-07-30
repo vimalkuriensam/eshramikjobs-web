@@ -4,6 +4,11 @@
 }
 
 @font-face {
+  font-family: "poppins-semi-bold";
+  src: url("/assets/fonts/Poppins-SemiBold.ttf");
+}
+
+@font-face {
   font-family: "poppins-regular";
   src: url("/assets/fonts/Poppins-Regular.ttf");
 }
@@ -37,18 +42,22 @@
 
 @import "./components/authentication";
 @import "./components/button";
+@import "./components/dashboard";
 @import "./components/form";
 @import "./components/home";
 @import "./components/jobs";
 @import "./components/popup";
 @import "./components/profile";
+@import "./components/table";
 
 @import "./layout/footer";
 @import "./layout/header";
 @import "./layout/grid";
 @import "./layout/loader";
+@import "./layout/navbar";
 
 @import "./pages/authentication";
+@import "./pages/dashboard";
 @import "./pages/home";
 @import "./pages/profile";
 

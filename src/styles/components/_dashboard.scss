@@ -1,0 +1,39 @@
+.dashboard {
+  &__subscriptionBox {
+    border-radius: 0.8rem;
+    min-height: 17.9rem;
+    background: $color-white;
+    box-shadow: 0 0.1rem 2rem rgba($color-black, 0.15);
+    padding: 2rem 2.3rem 1.1rem 2rem;
+  }
+
+  &__subscriptionValue {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__tableContainer {
+    padding: 2rem 2.5rem;
+    background: $color-white;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.1rem 2rem rgba($color-black, 0.15);
+    width: 100%;
+  }
+
+  &__tableList {
+    padding: 2rem;
+  }
+
+  &__tableText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+  }
+
+  &__rows1 {
+    padding: 3.5rem 0;
+  }
+}

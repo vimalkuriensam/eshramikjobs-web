@@ -46,3 +46,38 @@ export const RESUME_LIST_CONTENTS = [
     age: 25,
   },
 ];
+
+export const COMPANIES_ENROLLED = [
+  {
+    image: "companies-enrolled/pic1",
+    name: "Nyati constructions",
+  },
+  {
+    image: "companies-enrolled/pic2",
+    name: "Kumar Builders",
+  },
+  {
+    image: "companies-enrolled/pic1",
+    name: "Nyati constructions",
+  },
+  {
+    image: "companies-enrolled/pic2",
+    name: "Kumar Builders",
+  },
+  {
+    image: "companies-enrolled/pic1",
+    name: "Nyati constructions",
+  },
+  {
+    image: "companies-enrolled/pic2",
+    name: "Kumar Builders",
+  },
+  {
+    image: "companies-enrolled/pic1",
+    name: "Nyati constructions",
+  },
+  {
+    image: "companies-enrolled/pic2",
+    name: "Kumar Builders",
+  },
+];

@@ -27,7 +27,6 @@ const Header = ({ dispatch, isLogged }) => {
 
   const onHandleProfileState = () => setProfileState((prevState) => !prevState);
 
-
   const onHandleProfileAction = (content) => {
     switch (content.type) {
       case "process":

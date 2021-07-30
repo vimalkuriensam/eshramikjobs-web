@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import Text from "../atoms/Text";
 import Title from "../atoms/Title";
 
-const SubscriptionBox = ({ title, value, variant, id }) => {
+const SubscriptionBox = ({ title, value, variant, id, onHandleView }) => {
   const PIE_VAL = {
     height: 88,
     width: 88,
@@ -20,25 +20,28 @@ const SubscriptionBox = ({ title, value, variant, id }) => {
   };
 
   const VAL_ENUM = { 0: "dark", 1: "light" };
-  const pie = d3.pie().value((d) => d.value);
+  useEffect(() => {
+    const pie = d3.pie().value((d) => d.value);
 
-  const svg = d3
-    .select(`#${id}`)
-    .append("svg")
-    .attr("width", PIE_VAL.width)
-    .attr("height", PIE_VAL.height);
-  const radius = Math.min(PIE_VAL.width, PIE_VAL.height) / 2;
+    const svg = d3
+      .select(`#${id}`)
+      .append("svg")
+      .attr("width", PIE_VAL.width)
+      .attr("height", PIE_VAL.height);
+    const radius = Math.min(PIE_VAL.width, PIE_VAL.height) / 2;
 
-  const g = svg
-    .append("g")
-    .attr("class", `chart-group-${id}`)
-    .attr("transform", `translate(${PIE_VAL.width / 2},${PIE_VAL.height / 2})`);
-  const data = [
-    { value: value, name: "completed" },
-    { value: 100 - value, name: "incomplete" },
-  ];
+    const g = svg
+      .append("g")
+      .attr("class", `chart-group-${id}`)
+      .attr(
+        "transform",
+        `translate(${PIE_VAL.width / 2},${PIE_VAL.height / 2})`
+      );
+    const data = [
+      { value: value, name: "completed" },
+      { value: 100 - value, name: "incomplete" },
+    ];
 
-  const arcElement = useCallback(() => {
     const arc = d3
       .arc()
       .innerRadius(radius - 10)
@@ -52,9 +55,7 @@ const SubscriptionBox = ({ title, value, variant, id }) => {
       .append("path")
       .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]])
       .attr("d", arc);
-  }, [data]);
-
-  arcElement();
+  }, []);
 
   return (
     <div className="dashboard__subscriptionBox">
@@ -80,7 +81,7 @@ const SubscriptionBox = ({ title, value, variant, id }) => {
                 </Title>
               </div>
             )}
-            <span className="u-cursor-pointer">
+            <span onClick={onHandleView} className="u-cursor-pointer">
               <Text variant="pr-14-2 u-margin-top-20">View all</Text>
             </span>
           </span>

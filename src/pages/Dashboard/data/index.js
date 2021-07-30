@@ -81,3 +81,27 @@ export const COMPANIES_ENROLLED = [
     name: "Kumar Builders",
   },
 ];
+
+export const SUBSCRIPTION_GROUP = [
+  {
+    title: "Active Subscription",
+    value: 50,
+    variant: "primary",
+    id: "active",
+    action: "/dashboard/active-subscription",
+  },
+  {
+    title: "Expired Subscription",
+    value: 25,
+    variant: "secondary",
+    id: "expired",
+    action: "/dashboard/expired-subscription",
+  },
+  {
+    title: "Free Trial",
+    value: 5,
+    variant: "tertiary",
+    id: "trial",
+    action: "/dashboard/trial-subscription",
+  },
+];

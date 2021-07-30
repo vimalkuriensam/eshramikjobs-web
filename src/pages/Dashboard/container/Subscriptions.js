@@ -1,35 +1,28 @@
 import React from "react";
 
 import SubscriptionBox from "../../../components/organisms/SubscriptionBox";
+import history from "../../../utils/history";
+import { SUBSCRIPTION_GROUP } from "../data";
 
 const Subscriptions = () => {
+  const onHandleSubscription = (value) => history.push(value);
   return (
     <div>
       <div className="row">
-        <div className="col-1-of-3">
-          <SubscriptionBox
-            title="Active Subscription"
-            value={50}
-            variant="primary"
-            id="active"
-          />
-        </div>
-        <div className="col-1-of-3">
-          <SubscriptionBox
-            title="Expired Subscription"
-            value={25}
-            variant="secondary"
-            id="expired"
-          />
-        </div>
-        <div className="col-1-of-3">
-          <SubscriptionBox
-            title="Free Trial"
-            value={5}
-            variant="tertiary"
-            id="trial"
-          />
-        </div>
+        {SUBSCRIPTION_GROUP.map((subscription, index) => (
+          <div className="col-1-of-3" key={index}>
+            <SubscriptionBox
+              title={subscription.title}
+              value={subscription.value}
+              variant={subscription.variant}
+              id={subscription.id}
+              onHandleView={onHandleSubscription.bind(
+                this,
+                subscription.action
+              )}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

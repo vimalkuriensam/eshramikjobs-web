@@ -50,4 +50,12 @@ const Footer = () => {
   );
 };
 
-export default withRouter(BlacklistComponent(Footer)(["/admin", "/dashboard"]))
+export default withRouter(
+  BlacklistComponent(Footer)([
+    "/admin",
+    "/dashboard",
+    "/active-subscription",
+    "/expired-subscription",
+    "/trial-subscription",
+  ])
+);

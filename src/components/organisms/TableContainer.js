@@ -16,7 +16,7 @@ const TableContainer = ({
   return (
     <div className={`table__container ${className}`}>
       <div className="u-space-between">
-        <Title variant="pm-17-1">{title}</Title>
+        {title && <Title variant="pm-17-1">{title}</Title>}
         {Object.values(contentCheck).some((val) => !!val) && (
           <div className="table__container--properties">
             {contentCheck.sort && (

@@ -63,9 +63,17 @@ body {
     color: $color-tertiary;
   }
 
+  &--pr-20-2 {
+    font-size: 2rem;
+  }
+  
   &--pr-24-1 {
     font-size: 2.4rem;
     color: $color-primary;
+  }
+
+  &--pr-24-2 {
+    font-size: 2.4rem;
   }
 
   &--pr-25-1 {

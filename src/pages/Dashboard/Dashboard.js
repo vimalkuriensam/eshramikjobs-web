@@ -1,5 +1,6 @@
 import React from "react";
 import Enrollment from "./container/Enrollment";
+import ResumeLists from "./container/ResumeLists";
 import Sales from "./container/Sales";
 import Subscriptions from "./container/Subscriptions";
 
@@ -15,6 +16,7 @@ const Dashboard = () => {
           <Enrollment />
         </div>
       </div>
+      <ResumeLists />
     </section>
   );
 };

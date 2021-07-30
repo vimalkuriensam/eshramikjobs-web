@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import * as d3 from "d3";
 
 import Text from "../atoms/Text";
@@ -38,19 +38,23 @@ const SubscriptionBox = ({ title, value, variant, id }) => {
     { value: 100 - value, name: "incomplete" },
   ];
 
-  const arc = d3
-    .arc()
-    .innerRadius(radius - 10)
-    .outerRadius(radius);
-  const arcs = g
-    .selectAll("arc")
-    .data(pie(data))
-    .enter()
-    .append("g")
-    .attr("class", "arc")
-    .append("path")
-    .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]])
-    .attr("d", arc);
+  const arcElement = useCallback(() => {
+    const arc = d3
+      .arc()
+      .innerRadius(radius - 10)
+      .outerRadius(radius);
+    const arcs = g
+      .selectAll("arc")
+      .data(pie(data))
+      .enter()
+      .append("g")
+      .attr("class", "arc")
+      .append("path")
+      .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]])
+      .attr("d", arc);
+  }, [data]);
+
+  arcElement();
 
   return (
     <div className="dashboard__subscriptionBox">
@@ -76,7 +80,9 @@ const SubscriptionBox = ({ title, value, variant, id }) => {
                 </Title>
               </div>
             )}
-            <Text variant="pr-14-2 u-margin-top-20">View all</Text>
+            <span className="u-cursor-pointer">
+              <Text variant="pr-14-2 u-margin-top-20">View all</Text>
+            </span>
           </span>
         </div>
       </div>

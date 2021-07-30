@@ -1,0 +1,39 @@
+.table {
+  &__container {
+    padding: 2rem 2.5rem;
+    background: $color-white;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.1rem 2rem rgba($color-black, 0.15);
+    width: 100%;
+  }
+
+  &__dropdown {
+    > div {
+      border: none;
+      background: $color-white;
+      > * {
+        &:first-child {
+          > div {
+            color: $color-primary;
+          }
+        }
+        &:not(:first-child) {
+          > button {
+            background: $color-white;
+            > span > div > svg > path {
+              fill: $color-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__sort {
+    display: flex;
+    align-items: center;
+    > * {
+      min-width: 6.4rem;
+    }
+  }
+}

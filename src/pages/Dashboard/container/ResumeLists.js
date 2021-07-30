@@ -31,33 +31,55 @@ const ResumeLists = () => {
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
             <ToolTip>
-              <Text variant="pl-16-1">{list.name}</Text>
+              <Text variant="pl-16-1" className="dashboard__tableText">
+                {list.name}
+              </Text>
             </ToolTip>
           </div>
           <div
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
-            <Text variant="pl-16-1">{list.designation}</Text>
+            <ToolTip>
+              <Text variant="pl-16-1" className="dashboard__tableText">
+                {list.designation}
+              </Text>
+            </ToolTip>
           </div>
           <div
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
-            <Text variant="pl-16-1">{list.skill}</Text>
+            <ToolTip>
+              <Text variant="pl-16-1" className="dashboard__tableText">
+                {list.skill}
+              </Text>
+            </ToolTip>
           </div>
           <div
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
-            <Text variant="pl-16-1">{list.education}</Text>
+            <ToolTip>
+              <Text variant="pl-16-1" className="dashboard__tableText">
+                {list.education}
+              </Text>
+            </ToolTip>
           </div>
           <div
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
-            <Text variant="pl-16-1">{list.gender}</Text>
+            <ToolTip>
+              <Text variant="pl-16-1" className="dashboard__tableText">
+                {list.gender}
+              </Text>
+            </ToolTip>
           </div>
           <div
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
-            <Text variant="pl-16-1">{list.age}</Text>
+            <ToolTip>
+              <Text variant="pl-16-1" className="dashboard__tableText">
+                {list.age}
+              </Text>
+            </ToolTip>
           </div>
         </div>
       ))}

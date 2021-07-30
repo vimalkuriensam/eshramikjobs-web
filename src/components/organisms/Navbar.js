@@ -5,9 +5,10 @@ import { NAVBAR_NAVS } from "../../utils/data";
 const NavBar = () => {
   return (
     <div className="navbar">
-      {NAVBAR_NAVS.map((nav) => (
+      {NAVBAR_NAVS.map((nav, index) => (
         <NavLink
           to={nav.to}
+          key={index}
           className="navbar__nav"
           activeClassName="navbar__nav--active"
         >

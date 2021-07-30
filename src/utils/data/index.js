@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode";
 import moment from "moment";
 import { setLogout } from "../../redux/actions/authentication.action";
 import {
@@ -475,3 +476,11 @@ export const NAVBAR_NAVS = [
     to: "/companies",
   },
 ];
+
+export const userType = (token) => {
+  if (token) {
+    const { type, exp } = jwtDecode(token);
+    return { type, exp };
+  }
+  return { type: null, exp: null };
+};

@@ -1,5 +1,5 @@
 .navbar {
-  width: 20%;
+  width: 27.3rem;
   background: $color-primary;
   &__outer {
     width: 80%;
@@ -13,9 +13,10 @@
     font-size: 1.6rem;
     font-family: "poppins-regular";
     opacity: 0.8;
+    width: 27.3rem;
 
     &--active {
-        opacity: 1;
+      opacity: 1;
     }
   }
 }

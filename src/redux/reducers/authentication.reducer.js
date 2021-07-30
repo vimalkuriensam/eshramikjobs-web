@@ -14,13 +14,16 @@ const authenticationReducerDefaultState = {
 
 const authenticationReducer = (
   state = authenticationReducerDefaultState,
-  { type, payload, email }
+  { type, payload, email, tokens }
 ) => {
   switch (type) {
     case SET_ACCESS_TOKEN:
       return {
         ...state,
-        accessToken: payload.accessToken,
+        accessToken: tokens.accessToken,
+        ...(tokens?.refreshToken && {
+          refreshToken: tokens.refreshToken,
+        }),
       };
     case SET_LOGOUT:
       return { ...authenticationReducerDefaultState };

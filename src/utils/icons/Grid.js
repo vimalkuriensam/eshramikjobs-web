@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 
 const Grid = ({ className, style }) => (
   <svg
@@ -16,7 +16,7 @@ const Grid = ({ className, style }) => (
         transform="translate(1194 828)"
         fill="none"
         stroke="#126353"
-        stroke-width="1"
+        strokeWidth="1"
       >
         <rect width="8" height="8" rx="2" stroke="none" />
         <rect x="0.5" y="0.5" width="7" height="7" rx="1.5" fill="none" />
@@ -27,7 +27,7 @@ const Grid = ({ className, style }) => (
         transform="translate(1205 828)"
         fill="none"
         stroke="#126353"
-        stroke-width="1"
+        strokeWidth="1"
       >
         <rect width="8" height="8" rx="2" stroke="none" />
         <rect x="0.5" y="0.5" width="7" height="7" rx="1.5" fill="none" />
@@ -38,7 +38,7 @@ const Grid = ({ className, style }) => (
         transform="translate(1194 838)"
         fill="none"
         stroke="#126353"
-        stroke-width="1"
+        strokeWidth="1"
       >
         <rect width="8" height="8" rx="2" stroke="none" />
         <rect x="0.5" y="0.5" width="7" height="7" rx="1.5" fill="none" />
@@ -49,7 +49,7 @@ const Grid = ({ className, style }) => (
         transform="translate(1205 838)"
         fill="none"
         stroke="#126353"
-        stroke-width="1"
+        strokeWidth="1"
       >
         <rect width="8" height="8" rx="2" stroke="none" />
         <rect x="0.5" y="0.5" width="7" height="7" rx="1.5" fill="none" />

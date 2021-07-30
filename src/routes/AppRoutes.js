@@ -11,13 +11,13 @@ import Login from "../components/organisms/Login";
 import Loader from "../components/organisms/Loader";
 import Footer from "../components/organisms/Footer";
 import {
-  Dashboard as DashboardView,
   Home as HomeView,
   AboutUs as AboutUsView,
   Companies as CompaniesView,
   Profile as ProfileView,
 } from "../pages";
 
+import { DashboardChildView } from "./childRoutes/Dashboard";
 import { RegisterChildView } from "./childRoutes/Register";
 import { JobsChildView } from "./childRoutes/Jobs";
 import NavBar from "../components/organisms/Navbar";
@@ -49,7 +49,7 @@ const AppRoutes = ({ tokenData }) => {
                     <Route path="/" exact>
                       <Redirect to={type == 3 ? "/dashboard" : "/home"} />
                     </Route>
-                    <Route path="/dashboard" component={DashboardView} />
+                    <Route path="/dashboard" component={DashboardChildView} />
                     <Route path="/home" component={HomeView} />
                     <Route path="/register" component={RegisterChildView} />
                     <Route path="/jobs" component={JobsChildView} />

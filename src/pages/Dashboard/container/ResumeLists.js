@@ -2,6 +2,7 @@ import React from "react";
 import Image from "../../../components/atoms/Image";
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
+import ToolTip from "../../../components/molecules/ToolTip";
 
 import TableContainer from "../../../components/organisms/TableContainer";
 import { RESUME_LIST_CONTENTS, RESUME_LIST_HEADER } from "../data";
@@ -13,10 +14,9 @@ const ResumeLists = () => {
         {RESUME_LIST_HEADER.map((list, index) => (
           <div
             className={`col-a-1-of-${RESUME_LIST_HEADER.length} u-text-center`}
+            key={index}
           >
-            <Title variant="pr-16-1" key={index}>
-              {list || ""}
-            </Title>
+            <Title variant="pr-16-1">{list || ""}</Title>
           </div>
         ))}
       </div>
@@ -30,7 +30,9 @@ const ResumeLists = () => {
           <div
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
-            <Text variant="pl-16-1">{list.name}</Text>
+            <ToolTip>
+              <Text variant="pl-16-1">{list.name}</Text>
+            </ToolTip>
           </div>
           <div
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}

@@ -1,4 +1,27 @@
 .form {
+  &__tooltip {
+    position: relative;
+  }
+
+  &__tooltipText {
+    opacity: 0;
+    background: $color-black;
+    border-radius: 0.3rem;
+    color: $color-white;
+    padding: 0.3rem;
+    min-width: 13rem;
+    &--top {
+      position: absolute;
+      top: -3rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__tooltipContent:hover > &__tooltipText {
+    opacity: 1;
+  }
+
   &__input-1 {
     height: 4.4rem;
     width: 100%;

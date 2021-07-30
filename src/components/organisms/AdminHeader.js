@@ -15,7 +15,9 @@ const AdminHeader = () => {
         <div className="adminHeader__contentMain--right">
           <Search variant="5" placeholder="" />
           <Icon name="Bell" />
-          <div className="adminHeader__userBox">&nbsp;</div>
+          <div className="adminHeader__userBox">
+            <Icon name="User" className="adminHeader__userIcon" />
+          </div>
         </div>
       </div>
     </div>

@@ -190,4 +190,8 @@
   .col-a-1-of-6 {
     width: calc(100% / 6);
   }
+
+  .col-a-3-of-6 {
+    width: calc(3 * 100% / 6);
+  }
 }

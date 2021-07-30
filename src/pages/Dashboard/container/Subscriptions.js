@@ -11,6 +11,7 @@ const Subscriptions = () => {
             title="Active Subscription"
             value={50}
             variant="primary"
+            id="active"
           />
         </div>
         <div className="col-1-of-3">
@@ -18,10 +19,16 @@ const Subscriptions = () => {
             title="Expired Subscription"
             value={25}
             variant="secondary"
+            id="expired"
           />
         </div>
         <div className="col-1-of-3">
-          <SubscriptionBox title="Free Trial" value={5} variant="tertiary" />
+          <SubscriptionBox
+            title="Free Trial"
+            value={5}
+            variant="tertiary"
+            id="trial"
+          />
         </div>
       </div>
     </div>

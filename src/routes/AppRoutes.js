@@ -15,6 +15,7 @@ import {
   AboutUs as AboutUsView,
   Companies as CompaniesView,
   Profile as ProfileView,
+  Resumes as ResumesChild,
 } from "../pages";
 
 import { DashboardChildView } from "./childRoutes/Dashboard";
@@ -50,6 +51,7 @@ const AppRoutes = ({ tokenData }) => {
                       <Redirect to={type == 3 ? "/dashboard" : "/home"} />
                     </Route>
                     <Route path="/dashboard" component={DashboardChildView} />
+                    <Route path="/resumes" component={ResumesChild} />
                     <Route path="/home" component={HomeView} />
                     <Route path="/register" component={RegisterChildView} />
                     <Route path="/jobs" component={JobsChildView} />

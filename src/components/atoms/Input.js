@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import Button from "./Button";
+import Icon from "./Icon";
 
 const Input = ({
   onHandleText,
@@ -12,8 +13,13 @@ const Input = ({
   refCallback,
   ...rest
 }) => {
+  const ref = useRef();
+
+  const onChangeNumber = (val) => {
+    if (val > 0) return ref.current.value++;
+    return ref.current.value--;
+  }
   if (type == "file") {
-    const ref = useRef();
     return (
       <div>
         <Button
@@ -33,15 +39,23 @@ const Input = ({
     );
   } else if (type == "number") {
     return (
-      <div>
+      <div className="form__input-number">
         <input
           placeholder={placeholder}
           onChange={onHandleText}
           className={`form__input-number-${variant} ${className}`}
           type="number"
-          ref={refCallback}
+          ref={ref}
           {...rest}
         />
+        <div className={`form__input-number-${variant}--action`}>
+          <button className={`form__input-number-${variant}--action1`} onClick={onChangeNumber.bind(this, -1)}>
+            <Icon name="Minus" />
+          </button>
+          <button className={`form__input-number-${variant}--action2`} onClick={onChangeNumber.bind(this, 1)}>
+            <Icon name="Plus2" />
+          </button>
+        </div>
       </div>
     );
   }

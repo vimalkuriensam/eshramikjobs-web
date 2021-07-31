@@ -16,7 +16,7 @@ const Minus = ({ className, style }) => (
       transform="translate(0 1)"
       fill="none"
       stroke="#fff"
-      stroke-width="2"
+      strokeWidth="2"
     />
   </svg>
 );

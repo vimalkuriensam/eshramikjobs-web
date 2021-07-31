@@ -57,6 +57,7 @@ export default withRouter(
     "/active-subscription",
     "/expired-subscription",
     "/trial-subscription",
-    "/resumes"
+    "/resumes",
+    "/create"
   ])
 );

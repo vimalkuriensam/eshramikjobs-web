@@ -16,7 +16,7 @@ const FormInput = ({ title, variant = "2", type = "input", ...rest }) => {
       {type == "textarea" ? (
         <TextArea {...rest} />
       ) : (
-        <Input variant={variant} {...rest} />
+        <Input variant={variant} type={type} {...rest} />
       )}
     </div>
   );

@@ -5,7 +5,7 @@ const Input = ({
   onHandleText,
   onHandleFile,
   variant,
-  content="Upload Document",
+  content = "Upload Document",
   placeholder = "Enter Text",
   className,
   type = "text",
@@ -28,6 +28,19 @@ const Input = ({
           onChange={onHandleFile}
           type="file"
           multiple
+        />
+      </div>
+    );
+  } else if (type == "number") {
+    return (
+      <div>
+        <input
+          placeholder={placeholder}
+          onChange={onHandleText}
+          className={`form__input-number-${variant} ${className}`}
+          type="number"
+          ref={refCallback}
+          {...rest}
         />
       </div>
     );

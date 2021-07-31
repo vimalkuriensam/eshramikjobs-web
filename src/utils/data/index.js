@@ -473,7 +473,7 @@ export const NAVBAR_NAVS = [
   },
   {
     text: "Create Jobs",
-    to: "/companies",
+    to: "/jobs/create",
   },
 ];
 

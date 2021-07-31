@@ -6,10 +6,11 @@ import {
   Applied as AppliedView,
   Recommended as RecommendedView,
   Saved as SavedView,
+  Create as CreateJobs,
 } from "../../pages";
 
 export const JobsChildView = () => {
-  const { path, url } = useRouteMatch();
+  const { path } = useRouteMatch();
   return (
     <Fragment>
       <Switch>
@@ -17,6 +18,7 @@ export const JobsChildView = () => {
         <Route path={`${path}/applied`} component={AppliedView} />
         <Route path={`${path}/recommended`} component={RecommendedView} />
         <Route path={`${path}/saved`} component={SavedView} />
+        <Route path={`${path}/create`} component={CreateJobs} />
       </Switch>
     </Fragment>
   );

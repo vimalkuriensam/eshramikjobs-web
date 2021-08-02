@@ -69,10 +69,9 @@ export const setLogin =
     }
   };
 
-export const setLogout = () => (dispatch) => {
-  dispatch({ type: SET_LOGOUT });
-  history.push("/home");
-};
+export const setLogout = () => ({
+  type: SET_LOGOUT,
+});
 
 export const setOTP =
   ({ otp, mobile = undefined, email = undefined, login = false }) =>

@@ -25,6 +25,7 @@ import NavBar from "../components/organisms/Navbar";
 import { connect } from "react-redux";
 import { userType } from "../utils/data";
 import AdminHeader from "../components/organisms/AdminHeader";
+import AdminRoute from "./AdminRoute";
 
 const AppRoutes = ({ tokenData }) => {
   const { type } = tokenData;
@@ -38,31 +39,19 @@ const AppRoutes = ({ tokenData }) => {
         {type && type == 3 && <NavBar />}
         <div style={{ width: "100%" }}>
           {/*//className="navbar__outer">*/}
-          <Route
-            render={({ location }) => (
-              <TransitionGroup>
-                <CSSTransition
-                  key={location.key}
-                  timeout={400}
-                  classNames="fade"
-                >
-                  <Switch location={location}>
-                    <Route path="/" exact>
-                      <Redirect to={type == 3 ? "/dashboard" : "/home"} />
-                    </Route>
-                    <Route path="/dashboard" component={DashboardChildView} />
-                    <Route path="/resumes" component={ResumesChild} />
-                    <Route path="/home" component={HomeView} />
-                    <Route path="/register" component={RegisterChildView} />
-                    <Route path="/jobs" component={JobsChildView} />
-                    <Route path="/about" component={AboutUsView} />
-                    <Route path="/companies" component={CompaniesView} />
-                    <Route path="/profile" component={ProfileView} />
-                  </Switch>
-                </CSSTransition>
-              </TransitionGroup>
-            )}
-          />
+          <Switch location={location}>
+            <Route path="/" exact>
+              <Redirect to={type == 3 ? "/dashboard" : "/home"} />
+            </Route>
+            <AdminRoute path="/dashboard" component={DashboardChildView} />
+            <Route path="/resumes" component={ResumesChild} />
+            <Route path="/home" component={HomeView} />
+            <Route path="/register" component={RegisterChildView} />
+            <Route path="/jobs" component={JobsChildView} />
+            <Route path="/about" component={AboutUsView} />
+            <Route path="/companies" component={CompaniesView} />
+            <Route path="/profile" component={ProfileView} />
+          </Switch>
         </div>
       </div>
       <Footer />

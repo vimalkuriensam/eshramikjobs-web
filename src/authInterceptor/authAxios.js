@@ -43,10 +43,11 @@ const apiService = () => {
       if (error.response.status === 403) {
         const email = store.getState().auth?.email;
         const refreshToken = store.getState().auth?.refreshToken;
-        if (email && refreshToken)
-          store.dispatch(getAccessToken({ refreshToken, email })).then(() => {
-            api(error.config);
-          });
+        if (email && refreshToken) {
+          const resp = store.dispatch(getAccessToken({ refreshToken, email }));
+          if (resp) return api.request(error.config);
+          else history.push("/");
+        }
         else {
           store.dispatch(setLogout());
           history.push("/register");

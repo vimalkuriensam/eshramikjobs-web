@@ -8,6 +8,7 @@ import {
   Saved as SavedView,
   Create as CreateJobs,
 } from "../../pages";
+import AdminRoute from "../AdminRoute";
 
 export const JobsChildView = () => {
   const { path } = useRouteMatch();
@@ -18,7 +19,7 @@ export const JobsChildView = () => {
         <Route path={`${path}/applied`} component={AppliedView} />
         <Route path={`${path}/recommended`} component={RecommendedView} />
         <Route path={`${path}/saved`} component={SavedView} />
-        <Route path={`${path}/create`} component={CreateJobs} />
+        <AdminRoute path={`${path}/create`} component={CreateJobs} />
       </Switch>
     </Fragment>
   );

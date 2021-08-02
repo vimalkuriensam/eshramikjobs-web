@@ -75,7 +75,7 @@ const Details = ({ dispatch, mobile, email }) => {
       }
     };
 
-  const onHandleResendOTP = () => dispatch(resendOTP({ mobile }));
+  const onHandleResendOTP = () => dispatch(resendOTP({ mobile, email }));
 
   const onHandleKeyPress = (index) => (e) => {
     if (e.key === "Backspace" && otpArray[index] === "") {

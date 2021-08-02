@@ -14,9 +14,9 @@ export const RegisterChildView = () => {
     <Fragment>
       <Switch>
         <Route exact path={path} component={SignupView} />
+        <Route path={`${path}/otp`} component={OTPView} />
         <Route path={`${path}/admin`} component={AdminLoginView} />
         <Route path={`${path}/profile/:step`} component={ProfileCreationView} />
-        <Route path={`${path}/otp`} component={OTPView} />
       </Switch>
     </Fragment>
   );

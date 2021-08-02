@@ -16,6 +16,7 @@ import {
   Companies as CompaniesView,
   Profile as ProfileView,
   Resumes as ResumesChild,
+  Create as CreateJobs,
 } from "../pages";
 
 import { DashboardChildView } from "./childRoutes/Dashboard";
@@ -43,10 +44,11 @@ const AppRoutes = ({ tokenData }) => {
             <Route path="/" exact>
               <Redirect to={type == 3 ? "/dashboard" : "/home"} />
             </Route>
+            <Route path="/register" component={RegisterChildView} />
             <AdminRoute path="/dashboard" component={DashboardChildView} />
+            <AdminRoute path="/createMain" component={CreateJobs} />
             <Route path="/resumes" component={ResumesChild} />
             <Route path="/home" component={HomeView} />
-            <Route path="/register" component={RegisterChildView} />
             <Route path="/jobs" component={JobsChildView} />
             <Route path="/about" component={AboutUsView} />
             <Route path="/companies" component={CompaniesView} />

@@ -4,9 +4,10 @@ import Details from "./container/Details";
 
 import Hero from "./container/Hero";
 
-const OTP = ({ location }) => {
-  const mobile = location?.state?.mobile;
-  const email = location?.state?.email;
+const OTP = ({ history }) => {
+  const mobile = history?.location?.state?.mobile;
+  const email = history?.location?.state?.email;
+  console.log(mobile, email);
   if (mobile || email) {
   } else {
     history.push("/register");

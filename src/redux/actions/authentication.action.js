@@ -77,6 +77,7 @@ export const setOTP =
   ({ otp, mobile = undefined, email = undefined, login = false }) =>
   async (dispatch) => {
     try {
+      console.log(mobile, email);
       const { data, status } = await apiService().post("/auth/verify", {
         ...(mobile && { mobile: `+91${mobile}` }),
         ...(email && { email }),
@@ -96,11 +97,12 @@ export const setOTP =
   };
 
 export const resendOTP =
-  ({ mobile }) =>
+  ({ mobile = null, email = null }) =>
   async (dispatch) => {
     try {
       const { data, status } = await apiService().post("/auth/resend", {
-        mobile: `+91${mobile}`,
+        ...(mobile && { mobile: `+91${mobile}` }),
+        ...(email && { email }),
       });
       if (status === 200) {
         const { accessToken, refreshToken } = data["data"];

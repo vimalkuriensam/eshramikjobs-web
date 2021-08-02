@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-const AdminRoute = ({
+const UserRoute = ({
   dispatch,
   isAuthenticated,
   component: Component,
@@ -13,11 +13,7 @@ const AdminRoute = ({
     <Route
       {...rest}
       component={(props) =>
-        isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/register/admin" />
-        )
+        isAuthenticated ? <Component {...props} /> : <Redirect to="/" />
       }
     ></Route>
   );
@@ -27,4 +23,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: !!state.auth.accessToken,
 });
 
-export default connect(mapStateToProps)(AdminRoute);
+export default connect(mapStateToProps)(UserRoute);

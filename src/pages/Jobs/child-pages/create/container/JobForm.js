@@ -33,9 +33,8 @@ const JobForm = ({ dispatch }) => {
     const info = JSON.parse(JSON.stringify(jobProps));
     if (info.locationRadio == "no") delete info.location;
     delete info.locationRadio;
-    console.log(info);
     const response = await dispatch(createJobs({ job: info }));
-    // if (response) history.push("/");
+    if (response) history.push("/");
   };
   return (
     <form className="jobs__form" onSubmit={onHandleJobSubmit}>

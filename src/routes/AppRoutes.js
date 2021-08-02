@@ -40,19 +40,34 @@ const AppRoutes = ({ tokenData }) => {
         {type && type == 3 && <NavBar />}
         <div style={{ width: "100%" }}>
           {/*//className="navbar__outer">*/}
-          <Switch location={location}>
-            <Route path="/" exact>
-              <Redirect to={type == 3 ? "/dashboard" : "/home"} />
-            </Route>
-            <Route path="/register" component={RegisterChildView} />
-            <AdminRoute path="/dashboard" component={DashboardChildView} />
-            <Route path="/resumes" component={ResumesChild} />
-            <Route path="/home" component={HomeView} />
-            <Route path="/jobs" component={JobsChildView} />
-            <Route path="/about" component={AboutUsView} />
-            <Route path="/companies" component={CompaniesView} />
-            <Route path="/profile" component={ProfileView} />
-          </Switch>
+          <Route
+            render={({ location }) => (
+              <TransitionGroup>
+                <CSSTransition
+                  key={location.key}
+                  timeout={400}
+                  classNames="fade"
+                >
+                  <Switch location={location}>
+                    <Route path="/" exact>
+                      <Redirect to={type == 3 ? "/dashboard" : "/home"} />
+                    </Route>
+                    <Route path="/register" component={RegisterChildView} />
+                    <AdminRoute
+                      path="/dashboard"
+                      component={DashboardChildView}
+                    />
+                    <Route path="/resumes" component={ResumesChild} />
+                    <Route path="/home" component={HomeView} />
+                    <Route path="/jobs" component={JobsChildView} />
+                    <Route path="/about" component={AboutUsView} />
+                    <Route path="/companies" component={CompaniesView} />
+                    <Route path="/profile" component={ProfileView} />
+                  </Switch>
+                </CSSTransition>
+              </TransitionGroup>
+            )}
+          />
         </div>
       </div>
       <Footer />

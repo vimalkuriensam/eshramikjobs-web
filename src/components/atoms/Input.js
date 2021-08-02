@@ -17,8 +17,8 @@ const Input = ({
 
   const onChangeNumber = (val) => {
     let value;
-    if (val > 0) value = ref.current.value++;
-    else value = ref.current.value--;
+    if (val > 0) value = +ref.current.value + 1;
+    else value = +ref.current.value - 1;
     console.log(value);
     onHandleText({ target: { value } });
   };
@@ -28,6 +28,7 @@ const Input = ({
         <Button
           variant="4"
           onButtonClick={() => ref.current.click()}
+          type="button"
           content={content}
           {...rest}
         />
@@ -55,12 +56,14 @@ const Input = ({
           <button
             className={`form__input-number-${variant}--action1`}
             onClick={onChangeNumber.bind(this, -1)}
+            type="button"
           >
             <Icon name="Minus" />
           </button>
           <button
             className={`form__input-number-${variant}--action2`}
             onClick={onChangeNumber.bind(this, 1)}
+            type="button"
           >
             <Icon name="Plus2" />
           </button>

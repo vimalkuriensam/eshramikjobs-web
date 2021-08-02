@@ -19,7 +19,7 @@
   }
 
   &__tooltipContent:hover > &__tooltipText {
-    opacity: .8;
+    opacity: 0.8;
   }
 
   &__input-1 {
@@ -85,6 +85,71 @@
     }
   }
 
+  &__input-number {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__input-number-1 {
+    height: 4.4rem;
+    width: 100%;
+    border-radius: 1rem;
+    background: $color-grey-light-1;
+    outline: none;
+    border: none;
+    padding: 0.9rem 1.8rem;
+    font-family: "poppins-regular";
+    font-size: 1.8rem;
+    &::placeholder {
+      font-family: "poppins-light";
+      font-size: 1.8rem;
+      color: #c8c5c5;
+    }
+
+    &--action {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      height: 4.4rem;
+      width: 8.8rem;
+      overflow: hidden;
+      border-top-right-radius: 0.8rem;
+      border-bottom-right-radius: 0.8rem;
+      border: 1px solid #707070;
+      border-left: none;
+    }
+
+    &--action1 {
+      height: 4.4rem;
+      width: 4.4rem;
+      background: $color-grey-light-4;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      &:hover {
+        background: darken($color-grey-light-4, 4%);
+      }
+    }
+
+    &--action2 {
+      height: 4.4rem;
+      width: 4.4rem;
+      background: $color-tertiary;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      &:hover {
+        background: darken($color-tertiary, 4%);
+      }
+    }
+  }
+
   &__inputfile {
     display: none;
   }
@@ -146,6 +211,12 @@
     padding: 1.5rem 1.7rem;
     font-size: 1.8rem;
     font-family: "poppins-regular";
+
+    &--1 {
+      background: $color-white;
+      border: 1px solid #707070;
+      min-height: 19rem;
+    }
   }
 
   &__radioGroup {

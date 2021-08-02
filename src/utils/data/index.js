@@ -469,11 +469,11 @@ export const NAVBAR_NAVS = [
   },
   {
     text: "Resumes Recieved",
-    to: "/companies",
+    to: "/resumes",
   },
   {
     text: "Create Jobs",
-    to: "/companies",
+    to: "/jobs/create",
   },
 ];
 

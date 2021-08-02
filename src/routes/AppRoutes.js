@@ -15,6 +15,8 @@ import {
   AboutUs as AboutUsView,
   Companies as CompaniesView,
   Profile as ProfileView,
+  Resumes as ResumesChild,
+  Create as CreateJobs,
 } from "../pages";
 
 import { DashboardChildView } from "./childRoutes/Dashboard";
@@ -24,6 +26,7 @@ import NavBar from "../components/organisms/Navbar";
 import { connect } from "react-redux";
 import { userType } from "../utils/data";
 import AdminHeader from "../components/organisms/AdminHeader";
+import AdminRoute from "./AdminRoute";
 
 const AppRoutes = ({ tokenData }) => {
   const { type } = tokenData;
@@ -49,9 +52,13 @@ const AppRoutes = ({ tokenData }) => {
                     <Route path="/" exact>
                       <Redirect to={type == 3 ? "/dashboard" : "/home"} />
                     </Route>
-                    <Route path="/dashboard" component={DashboardChildView} />
-                    <Route path="/home" component={HomeView} />
                     <Route path="/register" component={RegisterChildView} />
+                    <AdminRoute
+                      path="/dashboard"
+                      component={DashboardChildView}
+                    />
+                    <Route path="/resumes" component={ResumesChild} />
+                    <Route path="/home" component={HomeView} />
                     <Route path="/jobs" component={JobsChildView} />
                     <Route path="/about" component={AboutUsView} />
                     <Route path="/companies" component={CompaniesView} />

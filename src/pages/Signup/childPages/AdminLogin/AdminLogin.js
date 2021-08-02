@@ -4,7 +4,7 @@ import Details from "./container/Details";
 const AdminLogin = () => {
   return (
     <section className="section-admin">
-      <Details />
+     <Details />
     </section>
   );
 };

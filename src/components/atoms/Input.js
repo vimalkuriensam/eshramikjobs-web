@@ -16,9 +16,12 @@ const Input = ({
   const ref = useRef();
 
   const onChangeNumber = (val) => {
-    if (val > 0) return ref.current.value++;
-    return ref.current.value--;
-  }
+    let value;
+    if (val > 0) value = ref.current.value++;
+    else value = ref.current.value--;
+    console.log(value);
+    onHandleText({ target: { value } });
+  };
   if (type == "file") {
     return (
       <div>
@@ -49,10 +52,16 @@ const Input = ({
           {...rest}
         />
         <div className={`form__input-number-${variant}--action`}>
-          <button className={`form__input-number-${variant}--action1`} onClick={onChangeNumber.bind(this, -1)}>
+          <button
+            className={`form__input-number-${variant}--action1`}
+            onClick={onChangeNumber.bind(this, -1)}
+          >
             <Icon name="Minus" />
           </button>
-          <button className={`form__input-number-${variant}--action2`} onClick={onChangeNumber.bind(this, 1)}>
+          <button
+            className={`form__input-number-${variant}--action2`}
+            onClick={onChangeNumber.bind(this, 1)}
+          >
             <Icon name="Plus2" />
           </button>
         </div>

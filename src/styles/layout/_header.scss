@@ -72,6 +72,7 @@
   background: $color-white;
   display: flex;
   align-items: center;
+  position: relative;
 
   &__logoBox {
     display: flex;
@@ -100,6 +101,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
       > * {
         &:not(:first-child) {
           margin-left: 4.2rem;
@@ -114,6 +116,7 @@
     border-radius: 2.1rem;
     background-color: #f6f5fc;
     overflow: hidden;
+    position: relative;
   }
 
   &__userIcon {
@@ -121,5 +124,35 @@
     width: 3.5rem;
     fill: #ccc;
     transform: translateX(3px);
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 8rem;
+    right: 2.5rem;
+    display: inline-block;
+    min-width: 8rem;
+    height: 3rem;
+    background: $color-white;
+    box-shadow: 0 0 6rem rgba($color-black, 0.16);
+    text-align: center;
+    cursor: pointer;
+    animation: moveInBig 0.1s ease;
+
+    &:hover {
+      background: darken($color-white, 2%);
+    }
+    &::before {
+      content: "";
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      top: -1rem;
+      right: 50%;
+      background: white;
+      transform: translateX(50%);
+      box-shadow: 0 0 6rem rgba($color-black, 0.16);
+    }
   }
 }

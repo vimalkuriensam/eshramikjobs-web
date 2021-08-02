@@ -20,6 +20,7 @@ export const JobsChildView = () => {
         <UserRoute path={`${path}/applied`} component={AppliedView} />
         <UserRoute path={`${path}/recommended`} component={RecommendedView} />
         <UserRoute path={`${path}/saved`} component={SavedView} />
+        <AdminRoute path={`${path}/create`} component={CreateJobs} />
       </Switch>
     </Fragment>
   );

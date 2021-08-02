@@ -1,5 +1,4 @@
 import React from "react";
-import { Fragment } from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
@@ -12,7 +11,7 @@ const AdminRoute = ({
   return (
     <Route
       {...rest}
-      component={(props) =>
+      render={(props) =>
         isAuthenticated ? (
           <Component {...props} />
         ) : (

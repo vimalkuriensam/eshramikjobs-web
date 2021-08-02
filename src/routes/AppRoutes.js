@@ -46,7 +46,6 @@ const AppRoutes = ({ tokenData }) => {
             </Route>
             <Route path="/register" component={RegisterChildView} />
             <AdminRoute path="/dashboard" component={DashboardChildView} />
-            <AdminRoute path="/createMain" component={CreateJobs} />
             <Route path="/resumes" component={ResumesChild} />
             <Route path="/home" component={HomeView} />
             <Route path="/jobs" component={JobsChildView} />

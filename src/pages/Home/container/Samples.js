@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Title from "../../../components/atoms/Title";
 
 import CompanyListings from "../../../components/organisms/CompanyListings";
 import WorkListings from "../../../components/organisms/JobListings";
+import { getJobs } from "../../../redux/actions/jobs.action";
 import Profile from "./Profile";
 
-const Samples = ({ jobs, companies, isLogged }) => {
+const Samples = ({ jobs, companies, isLogged, dispatch }) => {
+  useEffect(() => {
+    dispatch(getJobs());
+  }, []);
   return (
     <section className="section-home-samples">
       <div className="home__sampleContainer">

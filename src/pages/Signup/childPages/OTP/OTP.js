@@ -1,17 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import history from "../../../../utils/history";
 import Details from "./container/Details";
 
 import Hero from "./container/Hero";
 
-const OTP = ({ history }) => {
-  const mobile = history?.location?.state?.mobile;
-  const email = history?.location?.state?.email;
-  console.log(mobile, email);
-  if (mobile || email) {
-  } else {
-    history.push("/register");
-  }
+const OTP = (props) => {
+  const mobile = props?.location?.state?.mobile;
+  const email = props?.location?.state?.email;
   return (
     <div className="page">
       <div className="row">

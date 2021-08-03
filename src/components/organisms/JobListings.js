@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import Button from "../atoms/Button";
 import Image from "../atoms/Image";
@@ -16,8 +17,8 @@ const JobListings = ({ jobs = [] }) => {
             description,
             minExperience,
             maxExperience,
-            location,
-            date,
+            city,
+            cr_date,
           },
           index
         ) => (
@@ -41,11 +42,13 @@ const JobListings = ({ jobs = [] }) => {
             <div className="col-35-of-10 jobs__cta">
               <div>
                 <Text variant="pl-17-2">Posted: </Text>
-                <Text variant="pl-16-1">&nbsp;2 hours before</Text>
+                <Text variant="pl-16-1">
+                  &nbsp;{moment(+cr_date).fromNow()}
+                </Text>
               </div>
               <div>
                 <Text variant="pl-17-2">Location: </Text>
-                <Text variant="pl-16-1">&nbsp;{location}</Text>
+                <Text variant="pl-16-1">&nbsp;{city}</Text>
               </div>
               <Button
                 variant="1-2"

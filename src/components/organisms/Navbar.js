@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import WhitelistComponent from "../../hoc/WhitelistComponent";
 import { NAVBAR_NAVS } from "../../utils/data";
 
 const NavBar = () => {
@@ -19,4 +20,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default WhitelistComponent(NavBar)(["/dashboard"]);

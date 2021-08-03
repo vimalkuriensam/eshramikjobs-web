@@ -4,12 +4,19 @@ import Title from "../../../components/atoms/Title";
 
 import CompanyListings from "../../../components/organisms/CompanyListings";
 import WorkListings from "../../../components/organisms/JobListings";
-import { getJobs } from "../../../redux/actions/jobs.action";
+import { getJobs, getRecentJobs } from "../../../redux/actions/jobs.action";
 import Profile from "./Profile";
 
 const Samples = ({ jobs, companies, isLogged, dispatch }) => {
   useEffect(() => {
-    dispatch(getJobs());
+    dispatch(
+      getRecentJobs({
+        pageNumber: 0,
+        itemsPerPage: 4,
+        jobTitle: null,
+        location: null,
+      })
+    );
   }, []);
   return (
     <section className="section-home-samples">

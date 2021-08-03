@@ -24,20 +24,21 @@ import { RegisterChildView } from "./childRoutes/Register";
 import { JobsChildView } from "./childRoutes/Jobs";
 import NavBar from "../components/organisms/Navbar";
 import { connect } from "react-redux";
-import { userType } from "../utils/data";
+import { userType, USER_TYPES } from "../utils/data";
 import AdminHeader from "../components/organisms/AdminHeader";
 import AdminRoute from "./AdminRoute";
+import UserRoute from "./UserRoute";
 
 const AppRoutes = ({ tokenData }) => {
   const { type } = tokenData;
   return (
     <Router history={history}>
       <ScrollTop />
-      {type == 3 ? <AdminHeader /> : <Header />}
+      {type == USER_TYPES.ADMIN ? <AdminHeader /> : <Header />}
       <Login />
       <Loader />
       <div className="u-display-flex u-overflow-hidden u-width-100">
-        {type && type == 3 && <NavBar />}
+        {type && type == USER_TYPES.ADMIN && <NavBar />}
         <div style={{ width: "100%" }}>
           {/*//className="navbar__outer">*/}
           <Route
@@ -57,12 +58,12 @@ const AppRoutes = ({ tokenData }) => {
                       path="/dashboard"
                       component={DashboardChildView}
                     />
-                    <Route path="/resumes" component={ResumesChild} />
+                    <AdminRoute path="/resumes" component={ResumesChild} />
                     <Route path="/home" component={HomeView} />
-                    <Route path="/jobs" component={JobsChildView} />
                     <Route path="/about" component={AboutUsView} />
-                    <Route path="/companies" component={CompaniesView} />
-                    <Route path="/profile" component={ProfileView} />
+                    <UserRoute path="/jobs" component={JobsChildView} />
+                    <UserRoute path="/companies" component={CompaniesView} />
+                    <UserRoute path="/profile" component={ProfileView} />
                   </Switch>
                 </CSSTransition>
               </TransitionGroup>

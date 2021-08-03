@@ -484,3 +484,9 @@ export const userType = (token) => {
   }
   return { type: null, exp: null };
 };
+
+export const USER_TYPES = {
+  USER: 1,
+  RECRUITER: 2,
+  ADMIN: 3,
+};

@@ -4,10 +4,12 @@ export const SET_RECENT_JOBS = "SET_RECENT_JOBS";
 export const SET_SAVED_JOBS = "SET_SAVED_JOBS";
 export const SET_APPLIED_JOBS = "SET_APPLIED_JOBS";
 export const SET_RECOMMENDED_JOBS = "SET_RECOMMENDED_JOBS";
+export const SET_JOB_DETAIL = "SET_JOB_DETAIL";
 export const CLEAR_RECENT_JOBS = "CLEAR_RECENT_JOBS";
 export const CLEAR_SAVED_JOBS = "CLEAR_SAVED_JOBS";
 export const CLEAR_APPLIED_JOBS = "CLEAR_APPLIED_JOBS";
 export const CLEAR_RECOMMENDED_JOBS = "CLEAR_RECOMMENDED_JOBS";
+export const CLEAR_JOB_DETAIL = "CLEAR_JOB_DETAIL";
 
 export const createJobs =
   ({ job }) =>
@@ -19,6 +21,30 @@ export const createJobs =
       throw e;
     }
   };
+
+export const getJob =
+  ({ id }) =>
+  async (dispatch) => {
+    try {
+      const { status, data } = await apiService().get(`/jobs/get/${id}`);
+      if (status == 200) {
+        dispatch(clearJobDetail());
+        dispatch(setJobDetail({ detail: data.data[0] }));
+        return true;
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
+export const setJobDetail = ({ detail }) => ({
+  type: SET_JOB_DETAIL,
+  detail,
+});
+
+export const clearJobDetail = () => ({
+  type: CLEAR_JOB_DETAIL,
+});
 
 export const getJobs =
   ({

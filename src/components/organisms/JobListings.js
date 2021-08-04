@@ -1,16 +1,20 @@
 import moment from "moment";
 import React from "react";
+import { connect } from "react-redux";
+import { loginState } from "../../redux/actions/utils.action";
+import { funcMap } from "../../utils/data";
 import Button from "../atoms/Button";
 import Image from "../atoms/Image";
 import Text from "../atoms/Text";
 import Title from "../atoms/Title";
 
-const JobListings = ({ jobs = [] }) => {
+const JobListings = ({ jobs = [], onHandleJobDetail }) => {
   return (
     <div>
       {jobs.map(
         (
           {
+            id,
             image,
             title,
             degree,
@@ -22,7 +26,12 @@ const JobListings = ({ jobs = [] }) => {
           },
           index
         ) => (
-          <div data-aos="fade-right" className="row jobs" key={index}>
+          <div
+            data-aos="fade-right"
+            className="row jobs"
+            key={index}
+            onClick={onHandleJobDetail.bind(this, id)}
+          >
             <div className="col-25-of-10 u-text-center">
               <Image className="jobs__imageContainer" name={image} />
             </div>
@@ -31,7 +40,9 @@ const JobListings = ({ jobs = [] }) => {
                 {title}
               </Title>
               <Text variant="pl-16-1">{degree}</Text>
-              <Text variant="pl-16-1">{description}</Text>
+              <Text variant="pl-16-1" className="jobs__descriptionSmall">
+                {description}
+              </Text>
               <div>
                 <Text variant="pl-17-2">Experience: </Text>
                 <Text variant="pl-16-1" className="u-margin-bottom-15">

@@ -6,10 +6,24 @@
   display: flex !important;
 }
 
+.u-display-block {
+  display: block!important;
+}
+
 .u-space-between {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
+}
+
+.u-align-center {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.u-flex-start {
+  display: flex !important;
+  align-items: flex-start !important;
 }
 
 .u-overflow-hidden {
@@ -22,6 +36,10 @@
 
 .u-margin-top-50 {
   margin-top: 5rem !important;
+}
+
+.u-margin-top-25 {
+  margin-top: 2.5rem !important;
 }
 
 .u-margin-top-4 {

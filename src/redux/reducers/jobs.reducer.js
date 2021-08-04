@@ -1,9 +1,11 @@
 import moment from "moment";
 import {
   CLEAR_APPLIED_JOBS,
+  CLEAR_JOB_DETAIL,
   CLEAR_RECENT_JOBS,
   CLEAR_RECOMMENDED_JOBS,
   CLEAR_SAVED_JOBS,
+  SET_JOB_DETAIL,
   SET_RECENT_JOBS,
 } from "../actions/jobs.action";
 
@@ -12,6 +14,7 @@ const jobsReducerDefaultState = {
   recommended: [],
   applied: [],
   saved: [],
+  detail: {},
   // recent: [
   //   {
   //     image: "tata-motors",
@@ -226,12 +229,19 @@ const jobsReducerDefaultState = {
   ],
 };
 
-const jobsReducer = (state = jobsReducerDefaultState, { type, jobs }) => {
+const jobsReducer = (
+  state = jobsReducerDefaultState,
+  { type, jobs, detail }
+) => {
   switch (type) {
     case CLEAR_RECENT_JOBS:
       return { ...state, recent: [] };
     case SET_RECENT_JOBS:
       return { ...state, recent: jobs };
+    case SET_JOB_DETAIL:
+      return { ...state, detail };
+    case CLEAR_JOB_DETAIL:
+      return { ...state, detail: {} };
     case CLEAR_APPLIED_JOBS:
       return { ...state, applied: [] };
     case CLEAR_RECOMMENDED_JOBS:

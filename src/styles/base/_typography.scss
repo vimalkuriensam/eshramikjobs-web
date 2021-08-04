@@ -27,6 +27,11 @@ body {
     font-size: 1.3rem;
   }
 
+  &--pr-13-2 {
+    font-size: 1.3rem;
+    color: #535353;
+  }
+
   &--pr-15-1 {
     font-size: 1.5rem;
   }
@@ -66,7 +71,7 @@ body {
   &--pr-20-2 {
     font-size: 2rem;
   }
-  
+
   &--pr-24-1 {
     font-size: 2.4rem;
     color: $color-primary;

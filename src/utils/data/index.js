@@ -1,6 +1,7 @@
 import jwtDecode from "jwt-decode";
 import moment from "moment";
 import { setLogout } from "../../redux/actions/authentication.action";
+import { getJob } from "../../redux/actions/jobs.action";
 import {
   getColleges,
   getDegrees,
@@ -202,6 +203,7 @@ export const PROFILE_CONTENTS = {
 
 export const funcMap = {
   logout: (dispatch) => dispatch(setLogout()),
+  getJob: async (dispatch, id) => await dispatch(getJob({ id })),
   0: async (dispatch) => {
     await dispatch(getState());
     return true;

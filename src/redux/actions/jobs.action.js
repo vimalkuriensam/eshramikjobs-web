@@ -28,8 +28,20 @@ export const getJob =
     try {
       const { status, data } = await apiService().get(`/jobs/get/${id}`);
       if (status == 200) {
+        const value = data.data[0];
+        const hasValue = value.hasOwnProperty("job_data");
+        let jobData = "";
+        if (hasValue) {
+          jobData = JSON.parse(value["job_data"]);
+          delete value.job_data;
+        }
+        const updatedValue = {
+          ...value,
+          ...(hasValue && { job_data: jobData }),
+        };
+        console.log(updatedValue);
         dispatch(clearJobDetail());
-        dispatch(setJobDetail({ detail: data.data[0] }));
+        dispatch(setJobDetail({ detail: updatedValue }));
         return true;
       }
     } catch (e) {
@@ -38,10 +50,10 @@ export const getJob =
   };
 
 export const applyJob =
-  ({ id }) =>
+  ({ id, type = "apply" }) =>
   async (dispatch) => {
     try {
-      const { status } = await apiService().post("/jobs/apply", {
+      const { status } = await apiService().post(`/jobs/${type}`, {
         jobId: id,
       });
       if (status == 200) await dispatch(getJob({ id }));

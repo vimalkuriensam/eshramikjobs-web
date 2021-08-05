@@ -145,7 +145,7 @@ export const FOOTER_MAIN_CONTENTS = {
         {
           type: "link",
           title: "Search Jobs",
-          to: "",
+          to: "searchJobs",
         },
         {
           type: "link",
@@ -208,6 +208,7 @@ export const PROFILE_CONTENTS = {
 
 export const funcMap = {
   logout: (dispatch) => dispatch(setLogout()),
+  searchJobs: () => window.scroll({ top: 0, left: 0, behavior: "smooth" }),
   savedJobs: async (dispatch) => {
     const response = await dispatch(
       getSavedJobs({

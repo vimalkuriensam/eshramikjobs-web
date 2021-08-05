@@ -9,19 +9,12 @@ import Text from "../atoms/Text";
 import Title from "../atoms/Title";
 
 const JobListings = ({ jobs = [], onHandleJobDetail }) => {
+  console.log(jobs);
   return (
     <div>
       {jobs.map(
         (
-          {
-            jobId,
-            image,
-            company_name,
-            title,
-            job_data,
-            city,
-            cr_date,
-          },
+          { jobId, image, company_name, title, job_data, city, cr_date },
           index
         ) => (
           <div
@@ -31,7 +24,12 @@ const JobListings = ({ jobs = [], onHandleJobDetail }) => {
             onClick={onHandleJobDetail.bind(this, jobId)}
           >
             <div className="col-25-of-10 u-text-center">
-              <Image className="jobs__imageContainer" name={image} />
+              <Image
+                className={`jobs__imageContainer ${
+                  !!image ? null : "jobs__noImageContainer"
+                }`}
+                name={image || "no-image-placeholder"}
+              />
             </div>
             <div className="col-4-of-10">
               <Title className="u-margin-vertical-15" variant="pr-19-1">
@@ -44,7 +42,8 @@ const JobListings = ({ jobs = [], onHandleJobDetail }) => {
               <div>
                 <Text variant="pl-17-2">Experience: </Text>
                 <Text variant="pl-17-1" className="u-margin-bottom-15">
-                  &nbsp;{job_data?.experience?.min} to {job_data?.experience?.max} years
+                  &nbsp;{job_data?.experience?.min} to{" "}
+                  {job_data?.experience?.max} years
                 </Text>
               </div>
             </div>

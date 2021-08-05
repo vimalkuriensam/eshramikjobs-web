@@ -72,6 +72,11 @@
     }
   }
 
+  &__noImageContainer {
+    width: 12rem;
+    height: 9rem;
+  }
+
   &__form {
     background: $color-white;
     width: 100%;

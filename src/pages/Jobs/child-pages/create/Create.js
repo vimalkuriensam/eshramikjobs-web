@@ -6,7 +6,7 @@ const Create = () => {
   return (
     <section className="section-dashboard">
       <Title variant="pr-24-2" className="u-margin-bottom-30">
-        Create Jobs
+        Post new job
       </Title>
       <JobForm />
     </section>

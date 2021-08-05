@@ -20,4 +20,4 @@ const NavBar = () => {
   );
 };
 
-export default WhitelistComponent(NavBar)(["/dashboard"]);
+export default NavBar;

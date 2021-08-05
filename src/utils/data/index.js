@@ -203,6 +203,9 @@ export const PROFILE_CONTENTS = {
 
 export const funcMap = {
   logout: (dispatch) => dispatch(setLogout()),
+  savedJobs: async (dispatch) => {},
+  appliedJobs: async (dispatch) => {},
+  recommendedJobs: async (dispatch) => {},
   getJob: async (dispatch, id) => await dispatch(getJob({ id })),
   0: async (dispatch) => {
     await dispatch(getState());

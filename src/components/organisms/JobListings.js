@@ -14,13 +14,11 @@ const JobListings = ({ jobs = [], onHandleJobDetail }) => {
       {jobs.map(
         (
           {
-            id,
+            jobId,
             image,
+            company_name,
             title,
-            degree,
-            description,
-            minExperience,
-            maxExperience,
+            job_data,
             city,
             cr_date,
           },
@@ -30,23 +28,23 @@ const JobListings = ({ jobs = [], onHandleJobDetail }) => {
             data-aos="fade-right"
             className="row jobs"
             key={index}
-            onClick={onHandleJobDetail.bind(this, id)}
+            onClick={onHandleJobDetail.bind(this, jobId)}
           >
             <div className="col-25-of-10 u-text-center">
               <Image className="jobs__imageContainer" name={image} />
             </div>
             <div className="col-4-of-10">
               <Title className="u-margin-vertical-15" variant="pr-19-1">
-                {title}
+                {company_name}
               </Title>
-              <Text variant="pl-16-1">{degree}</Text>
-              <Text variant="pl-16-1" className="jobs__descriptionSmall">
-                {description}
+              <Text variant="pl-17-1">{title}</Text>
+              <Text variant="pl-17-1" className="jobs__descriptionSmall">
+                {job_data?.description}
               </Text>
               <div>
                 <Text variant="pl-17-2">Experience: </Text>
-                <Text variant="pl-16-1" className="u-margin-bottom-15">
-                  &nbsp;{minExperience} to {maxExperience} years
+                <Text variant="pl-17-1" className="u-margin-bottom-15">
+                  &nbsp;{job_data?.experience?.min} to {job_data?.experience?.max} years
                 </Text>
               </div>
             </div>

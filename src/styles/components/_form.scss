@@ -217,6 +217,25 @@
       border: 1px solid #707070;
       min-height: 19rem;
     }
+
+    &--2 {
+      background: $color-white;
+      border: none;
+    }
+
+    &--textgroup {
+      display: inline-block;
+      height: 4.5rem;
+      padding: 0.9rem 1.3rem;
+      background: #e6e6e6;
+      border-radius: 0.8rem;
+      margin: .6rem 1.3rem;
+    }
+    &--groupings {
+      border: 1px solid #707070;
+      min-height: 9rem;
+      border-radius: 1rem;
+    }
   }
 
   &__radioGroup {

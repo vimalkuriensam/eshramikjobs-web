@@ -37,6 +37,19 @@ export const getJob =
     }
   };
 
+export const applyJob =
+  ({ id }) =>
+  async (dispatch) => {
+    try {
+      const { status } = await apiService().post("/jobs/apply", {
+        jobId: id,
+      });
+      if (status == 200) await dispatch(getJob({ id }));
+    } catch (e) {
+      throw e;
+    }
+  };
+
 export const setJobDetail = ({ detail }) => ({
   type: SET_JOB_DETAIL,
   detail,
@@ -52,6 +65,7 @@ export const getJobs =
     itemsPerPage = null,
     jobTitle = null,
     location = null,
+    type = "recent",
   } = {}) =>
   async (dispatch) => {
     try {
@@ -60,13 +74,30 @@ export const getJobs =
           ...(pageNumber && { page: pageNumber }),
           ...(itemsPerPage && { count: itemsPerPage }),
         },
-        search: {
-          ...(jobTitle && { text: jobTitle }),
-          ...(location && { location }),
-        },
+        ...(type == "recent" && {
+          search: {
+            ...(jobTitle && { text: jobTitle }),
+            ...(location && { location }),
+          },
+        }),
       };
-      const { status, data } = await apiService().post("/jobs/recent", info);
-      if (status == 200) return data.data;
+      const { status, data } = await apiService().post(`/jobs/${type}`, info);
+      if (status == 200) {
+        const value = data.data;
+        const updatedValueArr = value.map((val) => {
+          const hasValue = val.hasOwnProperty("job_data");
+          if (hasValue) {
+            var jobData = JSON.parse(val["job_data"]);
+            delete val.job_data;
+          }
+          const updatedValue = {
+            ...val,
+            ...(hasValue && { job_data: jobData }),
+          };
+          return updatedValue;
+        });
+        return updatedValueArr;
+      }
     } catch (e) {
       throw e;
     }
@@ -76,9 +107,15 @@ export const getRecentJobs =
   ({ pageNumber, itemsPerPage, jobTitle, location }) =>
   async (dispatch) => {
     try {
-      dispatch(clearRecentJobs);
+      dispatch(clearRecentJobs());
       const jobs = await dispatch(
-        getJobs({ pageNumber, itemsPerPage, jobTitle, location })
+        getJobs({
+          pageNumber,
+          itemsPerPage,
+          jobTitle,
+          location,
+          type: "recent",
+        })
       );
       if (jobs.length) dispatch(setRecentJobs({ jobs }));
     } catch (e) {
@@ -103,7 +140,13 @@ export const clearAppliedJobs = () => ({
   type: CLEAR_APPLIED_JOBS,
 });
 
-export const getSavedJobs = () => {};
+export const getSavedJobs = () => async (dispatch) => {
+  try {
+    const { status, data } = await apiService().get();
+  } catch (e) {
+    throw e;
+  }
+};
 
 export const setSavedJobs = () => {};
 

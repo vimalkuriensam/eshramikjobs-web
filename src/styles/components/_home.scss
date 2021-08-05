@@ -27,6 +27,7 @@
 
   &__ad {
     min-height: 55.1rem;
+    text-align: center;
     background-image: linear-gradient(
         to right,
         rgba($color-primary, 0.7),
@@ -234,7 +235,7 @@
   position: relative;
 }
 
-@media only screen and (max-width: 45rem) {
+@media only screen and (max-width: 55rem) {
   .home {
     &__heroContainer {
       padding: 8rem 4rem;
@@ -247,6 +248,44 @@
       display: block;
       > * {
         width: 100%;
+      }
+    }
+
+    &__ad {
+      padding: 0 6rem;
+      text-align: center;
+      > * {
+        font-size: 4rem;
+      }
+    }
+    &__sampleContainer {
+      display: block;
+    }
+    &__sampleJobs {
+      width: 100%;
+    }
+
+    &__sampleCompany {
+      width: 100%;
+      margin-left: 0 !important;
+    }
+
+    &__profileContainer {
+      margin-top: 6rem;
+    }
+
+    &__listContainer {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 70rem) {
+  .home {
+    &__feedbackText {
+      height: 20rem;
+      > * {
+        font-size: 0.9rem;
       }
     }
   }

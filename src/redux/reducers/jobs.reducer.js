@@ -5,8 +5,10 @@ import {
   CLEAR_RECENT_JOBS,
   CLEAR_RECOMMENDED_JOBS,
   CLEAR_SAVED_JOBS,
+  SET_APPLIED_JOBS,
   SET_JOB_DETAIL,
   SET_RECENT_JOBS,
+  SET_SAVED_JOBS,
 } from "../actions/jobs.action";
 
 const jobsReducerDefaultState = {
@@ -244,8 +246,12 @@ const jobsReducer = (
       return { ...state, detail: {} };
     case CLEAR_APPLIED_JOBS:
       return { ...state, applied: [] };
+    case SET_APPLIED_JOBS:
+      return { ...state, applied: jobs };
     case CLEAR_RECOMMENDED_JOBS:
       return { ...state, recommended: [] };
+    case SET_SAVED_JOBS:
+      return { ...state, saved: jobs };
     case CLEAR_SAVED_JOBS:
       return { ...state, saved: [] };
     default:

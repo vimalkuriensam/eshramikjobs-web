@@ -1,7 +1,11 @@
 import jwtDecode from "jwt-decode";
 import moment from "moment";
 import { setLogout } from "../../redux/actions/authentication.action";
-import { getJob } from "../../redux/actions/jobs.action";
+import {
+  getAppliedJobs,
+  getJob,
+  getSavedJobs,
+} from "../../redux/actions/jobs.action";
 import {
   getColleges,
   getDegrees,
@@ -10,6 +14,7 @@ import {
   getState,
   getTechnicalCourses,
 } from "../../redux/actions/profile.actions";
+import history from "../history";
 
 export const BASE_URL = "https://eshramik-api.herokuapp.com";
 
@@ -165,8 +170,8 @@ export const PROFILE_CONTENTS = {
         },
         {
           text: "Saved jobs",
-          type: "link",
-          to: "/jobs/saved",
+          type: "process",
+          to: "savedJobs",
         },
       ],
     },
@@ -188,8 +193,8 @@ export const PROFILE_CONTENTS = {
       columns: [
         {
           text: "Applied jobs",
-          type: "link",
-          to: "/jobs/applied",
+          type: "process",
+          to: "appliedJobs",
         },
         {
           text: "logout",
@@ -203,8 +208,28 @@ export const PROFILE_CONTENTS = {
 
 export const funcMap = {
   logout: (dispatch) => dispatch(setLogout()),
-  savedJobs: async (dispatch) => {},
-  appliedJobs: async (dispatch) => {},
+  savedJobs: async (dispatch) => {
+    const response = await dispatch(
+      getSavedJobs({
+        pageNumber: 0,
+        itemsPerPage: 4,
+        jobTitle: null,
+        location: null,
+      })
+    );
+    if (response) history.push("/jobs/saved");
+  },
+  appliedJobs: async (dispatch) => {
+    const response = await dispatch(
+      getAppliedJobs({
+        pageNumber: 0,
+        itemsPerPage: 4,
+        jobTitle: null,
+        location: null,
+      })
+    );
+    if (response) history.push("/jobs/applied");
+  },
   recommendedJobs: async (dispatch) => {},
   getJob: async (dispatch, id) => await dispatch(getJob({ id })),
   0: async (dispatch) => {

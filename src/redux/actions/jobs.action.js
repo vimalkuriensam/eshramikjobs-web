@@ -144,23 +144,61 @@ export const clearRecentJobs = () => ({
   type: CLEAR_RECENT_JOBS,
 });
 
-export const getAppliedJobs = () => {};
+export const getAppliedJobs =
+  ({ pageNumber, itemsPerPage, jobTitle, location }) =>
+  async (dispatch) => {
+    try {
+      dispatch(clearAppliedJobs());
+      const jobs = await dispatch(
+        getJobs({
+          pageNumber,
+          itemsPerPage,
+          jobTitle,
+          location,
+          type: "get_apply",
+        })
+      );
+      if (jobs.length) dispatch(setAppliedJobs({ jobs }));
+      return true;
+    } catch (e) {
+      throw e;
+    }
+  };
 
-export const setAppliedJobs = () => {};
+export const setAppliedJobs = ({ jobs }) => ({
+  type: SET_APPLIED_JOBS,
+  jobs,
+});
 
 export const clearAppliedJobs = () => ({
   type: CLEAR_APPLIED_JOBS,
 });
 
-export const getSavedJobs = () => async (dispatch) => {
-  try {
-    const { status, data } = await apiService().get();
-  } catch (e) {
-    throw e;
-  }
-};
+export const getSavedJobs =
+  ({ pageNumber, itemsPerPage, jobTitle, location }) =>
+  async (dispatch) => {
+    try {
+      dispatch(clearSavedJobs());
+      const jobs = await dispatch(
+        getJobs({
+          pageNumber,
+          itemsPerPage,
+          jobTitle,
+          location,
+          type: "saved",
+        })
+      );
+      if (jobs.length) dispatch(setSavedJobs({ jobs }));
+      return true;
+    } catch (e) {
+      throw e;
+    }
+  };
 
-export const setSavedJobs = () => {};
+export const setSavedJobs = ({ jobs }) => ({
+  type: SET_SAVED_JOBS,
+  jobs,
+});
 
 export const clearSavedJobs = () => ({
   type: CLEAR_SAVED_JOBS,

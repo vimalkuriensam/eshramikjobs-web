@@ -12,6 +12,11 @@
   &__heroInput {
     opacity: 0.85;
     height: 5.4rem;
+    border: 3px solid transparent;
+    &:active,
+    &:focus {
+      border: 3px solid $color-secondary;
+    }
   }
 
   &__feedback {
@@ -227,4 +232,22 @@
 .octo1 {
   transform: rotate(-45deg);
   position: relative;
+}
+
+@media only screen and (max-width: 45rem) {
+  .home {
+    &__heroContainer {
+      padding: 8rem 4rem;
+      text-align: center;
+    }
+
+    &__heroInputContainer {
+      margin: 1rem 0;
+      width: 100% !important;
+      display: block;
+      > * {
+        width: 100%;
+      }
+    }
+  }
 }

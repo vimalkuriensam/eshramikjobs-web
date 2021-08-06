@@ -2,7 +2,11 @@ import React from "react";
 
 import Text from "../atoms/Text";
 import Title from "../atoms/Title";
-import { FOOTER_MAIN_CONTENTS, funcMap } from "../../utils/data";
+import {
+  FOOTER_MAIN_CONTENTS,
+  funcMap,
+  USER_ROUTE_TYPES,
+} from "../../utils/data";
 import Button from "../atoms/Button";
 import Icon from "../atoms/Icon";
 import BlacklistComponent from "../../hoc/BlacklistComponent";
@@ -54,14 +58,10 @@ const Footer = () => {
 
 export default withRouter(
   BlacklistComponent(Footer)([
-    "/admin",
-    "/dashboard",
-    "/active-subscription",
-    "/expired-subscription",
-    "/trial-subscription",
-    "/resumes",
+    ...USER_ROUTE_TYPES.admin,
     "/create",
     "/signup",
     "/profile",
+    ...USER_ROUTE_TYPES.recruiter,
   ])
 );

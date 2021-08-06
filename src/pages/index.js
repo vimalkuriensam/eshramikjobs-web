@@ -20,6 +20,7 @@ export { default as Resumes } from "./Resumes";
 export {
   default as Signup,
   AdminLogin,
+  CompanyProfile,
   ProfileCreation,
   OTP,
   RecruiterSignup,

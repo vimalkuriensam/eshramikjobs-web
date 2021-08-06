@@ -142,5 +142,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(
-  withRouter(BlacklistComponent(Header)(["/admin", "/signup"]))
+  withRouter(BlacklistComponent(Header)(["/admin", "/signup", "/profile"]))
 );

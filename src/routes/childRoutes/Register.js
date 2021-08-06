@@ -3,10 +3,11 @@ import { Switch, useRouteMatch, Route } from "react-router-dom";
 
 import {
   AdminLogin as AdminLoginView,
+  CompanyProfile as CompanyProfileView,
   Signup as SignupView,
   ProfileCreation as ProfileCreationView,
   OTP as OTPView,
-  RecruiterSignup as RecruiterSignupView
+  RecruiterSignup as RecruiterSignupView,
 } from "../../pages";
 
 export const RegisterChildView = () => {
@@ -17,7 +18,8 @@ export const RegisterChildView = () => {
         <Route exact path={path} component={SignupView} />
         <Route path={`${path}/otp`} component={OTPView} />
         <Route path={`${path}/admin`} component={AdminLoginView} />
-        <Route path={`${path}/signup`} component={RecruiterSignupView} />
+        <Route path={`${path}/signup`} exact component={RecruiterSignupView} />
+        <Route path={`${path}/signup/profile`} component={CompanyProfileView} />
         <Route path={`${path}/profile/:step`} component={ProfileCreationView} />
       </Switch>
     </Fragment>

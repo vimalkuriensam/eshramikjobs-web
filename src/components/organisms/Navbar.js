@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import WhitelistComponent from "../../hoc/WhitelistComponent";
-import { NAVBAR_NAVS } from "../../utils/data";
+import BlacklistComponent from "../../hoc/BlacklistComponent";
+
+import { NAVBAR_NAVS, USER_ROUTE_TYPES } from "../../utils/data";
 
 const NavBar = () => {
   return (
@@ -20,4 +21,8 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default BlacklistComponent(NavBar)([
+  ...USER_ROUTE_TYPES.user,
+  ...USER_ROUTE_TYPES.recruiter,
+  ...USER_ROUTE_TYPES.default,
+]);

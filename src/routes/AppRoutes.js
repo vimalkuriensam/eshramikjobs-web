@@ -34,11 +34,12 @@ const AppRoutes = ({ tokenData }) => {
   return (
     <Router history={history}>
       <ScrollTop />
-      {type == USER_TYPES.ADMIN ? <AdminHeader /> : <Header />}
+      <AdminHeader />
+      <Header />
       <Login />
       <Loader />
       <div className="u-display-flex u-overflow-hidden u-width-100">
-        {type && type == USER_TYPES.ADMIN && <NavBar />}
+        <NavBar />
         <div style={{ width: "100%" }}>
           {/*//className="navbar__outer">*/}
           <Route

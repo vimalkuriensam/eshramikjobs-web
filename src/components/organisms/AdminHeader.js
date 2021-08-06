@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
+import BlacklistComponent from "../../hoc/BlacklistComponent";
 import { setLogout } from "../../redux/actions/authentication.action";
+import { USER_ROUTE_TYPES } from "../../utils/data";
 import history from "../../utils/history";
 import Icon from "../atoms/Icon";
 import Image from "../atoms/Image";
@@ -58,4 +60,10 @@ const AdminHeader = ({ dispatch }) => {
   );
 };
 
-export default connect()(AdminHeader);
+export default connect()(
+  BlacklistComponent(AdminHeader)([
+    ...USER_ROUTE_TYPES.user,
+    ...USER_ROUTE_TYPES.recruiter, 
+    ...USER_ROUTE_TYPES.default,
+  ])
+);

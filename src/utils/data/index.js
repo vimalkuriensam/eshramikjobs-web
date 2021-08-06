@@ -546,3 +546,34 @@ export const USER_TYPES = {
   RECRUITER: 2,
   ADMIN: 3,
 };
+
+export const USER_ROUTE_TYPES = {
+  user: [
+    "/register",
+    "/otp",
+    "/1",
+    "/2",
+    "/3",
+    "/4",
+    "/5",
+    "/6",
+    "/7",
+    "/home",
+    "/about",
+    "/applied",
+    "/recommended",
+    "/saved",
+    "/detail",
+    "/create",
+    "/companies",
+  ],
+  recruiter: ["/profile"],
+  admin: [
+    "/dashboard",
+    "/active-subscription",
+    "/expired-subscription",
+    "/trial-subscription",
+    "/resumes",
+  ],
+  default: ["/admin", "/signup"],
+};

@@ -4,8 +4,10 @@ import Image from "../../../components/atoms/Image";
 import Progress from "../../../components/atoms/Progress";
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
+import history from "../../../utils/history";
 
 const Profile = () => {
+  const onHandleUpdateProfile = () => history.push("/profile");
   return (
     <div className="home__profileContainer">
       <div className="home__imageContainer">
@@ -36,6 +38,7 @@ const Profile = () => {
         className="u-margin-top-40"
         variant="1-3"
         content="Update profile"
+        onButtonClick={onHandleUpdateProfile}
       />
     </div>
   );

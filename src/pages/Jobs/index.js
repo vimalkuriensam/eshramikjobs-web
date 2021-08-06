@@ -1,2 +1,2 @@
 export { default } from "./Jobs";
-export { Applied, Recommended, Saved, Create } from "./child-pages";
+export { Applied, Recommended, Saved, Create, Detail } from "./child-pages";

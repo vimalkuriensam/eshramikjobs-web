@@ -2,23 +2,32 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import Button from "../../../../../components/atoms/Button";
+import Title from "../../../../../components/atoms/Title";
 import FormInput from "../../../../../components/molecules/FormInput";
-import RadioGroup from "../../../../../components/molecules/RadioGroup";
 import { createJobs } from "../../../../../redux/actions/jobs.action";
 import history from "../../../../../utils/history";
 
 const JobForm = ({ dispatch }) => {
-  const [jobProps, setJobProps] = useState({
+  const JOB_PROPS_DEFAULT_VALUE = {
     name: "",
-    role: "",
     title: "",
-    location: "",
-    locationRadio: "yes",
-    address: "",
     city: "",
-    openings: 1,
-    description: "",
-  });
+    data: {
+      experience: {
+        min: 0,
+        max: 1,
+      },
+      salary: {
+        min: 0,
+        max: "",
+      },
+      skills: [],
+      positions: 1,
+      description: "",
+      responsibility: "",
+    },
+  };
+  const [jobProps, setJobProps] = useState({ ...JOB_PROPS_DEFAULT_VALUE });
 
   const onHandleJobProps = (type, { target }) => {
     const { value } = target;
@@ -28,13 +37,37 @@ const JobForm = ({ dispatch }) => {
     }));
   };
 
+  const onHandleData2 = (type1, type2, { target }) => {
+    const { value } = target;
+    setJobProps((prevState) => ({
+      ...prevState,
+      data: {
+        ...prevState["data"],
+        [type1]: {
+          ...prevState["data"][type1],
+          [type2]: value,
+        },
+      },
+    }));
+  };
+
+  const onHandleData1 = (type, { target }) => {
+    const { value } = target;
+    setJobProps((prevState) => ({
+      ...prevState,
+      data: {
+        ...prevState["data"],
+        [type]: value,
+      },
+    }));
+  };
+
   const onHandleJobSubmit = async (e) => {
     e.preventDefault();
-    const info = JSON.parse(JSON.stringify(jobProps));
-    if (info.locationRadio == "no") delete info.location;
-    delete info.locationRadio;
-    const response = await dispatch(createJobs({ job: info }));
-    if (response) history.push("/");
+    const response = await dispatch(createJobs({ job: jobProps }));
+    if (response) {
+      setJobProps({ ...JOB_PROPS_DEFAULT_VALUE });
+    }
   };
   return (
     <form className="jobs__form" onSubmit={onHandleJobSubmit}>
@@ -51,16 +84,6 @@ const JobForm = ({ dispatch }) => {
       <div className="row">
         <FormInput
           variant="1"
-          value={jobProps.role}
-          onHandleText={onHandleJobProps.bind(this, "role")}
-          title="Your role in hiring process"
-          className="jobs__formInput"
-          placeholder=""
-        />
-      </div>
-      <div className="row">
-        <FormInput
-          variant="1"
           value={jobProps.title}
           onHandleText={onHandleJobProps.bind(this, "title")}
           title="Job Title"
@@ -68,44 +91,30 @@ const JobForm = ({ dispatch }) => {
           placeholder=""
         />
       </div>
+      <Title variant="pr-16-1">Experience</Title>
       <div className="row">
-        <FormInput
-          variant="1"
-          value={jobProps.location}
-          onHandleText={onHandleJobProps.bind(this, "location")}
-          disabled={jobProps.locationRadio == "no"}
-          title="Where will the employee report to work"
-          className="jobs__formInput"
-          placeholder=""
-        />
-      </div>
-      <div className="row">
-        <RadioGroup
-          value={jobProps.locationRadio}
-          onHandleRadioClick={onHandleJobProps.bind(this, "locationRadio")}
-          contents={[
-            {
-              id: "yes",
-              title: "Employee report to specific location",
-              name: "report",
-            },
-            {
-              id: "no",
-              title: "Employee don't report to specific loaction",
-              name: "report",
-            },
-          ]}
-        />
-      </div>
-      <div className="row">
-        <FormInput
-          variant="1"
-          value={jobProps.address}
-          onHandleText={onHandleJobProps.bind(this, "address")}
-          title="Enter address"
-          className="jobs__formInput"
-          placeholder=""
-        />
+        <div className="col-1-of-2">
+          <FormInput
+            variant="1"
+            title="Minimum Experience (years)"
+            value={jobProps.data.experience.min}
+            onHandleText={onHandleData2.bind(this, "experience", "min")}
+            className="jobs__formInput"
+            type="number"
+            placeholder=""
+          />
+        </div>
+        <div className="col-1-of-2">
+          <FormInput
+            variant="1"
+            title="Maximum Experience (years)"
+            value={jobProps.data.experience.max}
+            onHandleText={onHandleData2.bind(this, "experience", "max")}
+            className="jobs__formInput"
+            type="number"
+            placeholder=""
+          />
+        </div>
       </div>
       <div className="row">
         <FormInput
@@ -120,9 +129,19 @@ const JobForm = ({ dispatch }) => {
       <div className="row">
         <FormInput
           variant="1"
-          title="How many hires?"
-          value={jobProps.openings}
-          onHandleText={onHandleJobProps.bind(this, "openings")}
+          value={jobProps.data.salary.max}
+          onHandleText={onHandleData2.bind(this, "salary", "max")}
+          title="Salary"
+          className="jobs__formInput"
+          placeholder=""
+        />
+      </div>
+      <div className="row">
+        <FormInput
+          variant="1"
+          title="How many positions?"
+          value={jobProps.data.positions}
+          onHandleText={onHandleData1.bind(this, "positions")}
           className="jobs__formInput"
           type="number"
           placeholder=""
@@ -132,18 +151,40 @@ const JobForm = ({ dispatch }) => {
         <FormInput
           variant="1"
           title="Job description"
-          value={jobProps.description}
-          onHandleText={onHandleJobProps.bind(this, "description")}
+          value={jobProps.data.description}
+          onHandleText={onHandleData1.bind(this, "description")}
           className="jobs__formInput"
           type="textarea"
           placeholder=""
         />
       </div>
-      <Button
-        variant="1-3"
-        content="Submit"
-        type="submit"
-      />
+      <div className="row">
+        <FormInput
+          variant="1"
+          title="Job Responsibility"
+          value={jobProps.data.responsibility}
+          onHandleText={onHandleData1.bind(this, "responsibility")}
+          className="jobs__formInput"
+          type="textarea"
+          placeholder=""
+        />
+      </div>
+      <div className="row">
+        <FormInput
+          variant="2"
+          title="Skills Required"
+          value={jobProps.data.skills.join(" ")}
+          onHandleText={({ target }) => {
+            const { value } = target;
+            const updatedValue = value.split(/[\s,]+/).filter((val) => !!val);
+            onHandleData1("skills", { target: { value: updatedValue } });
+          }}
+          className="jobs__formInput"
+          type="textarea"
+          placeholder=""
+        />
+      </div>
+      <Button variant="1-3" content="Submit" type="submit" />
     </form>
   );
 };

@@ -2,13 +2,14 @@ import React from "react";
 
 import Text from "../atoms/Text";
 import Title from "../atoms/Title";
-import { FOOTER_MAIN_CONTENTS } from "../../utils/data";
+import { FOOTER_MAIN_CONTENTS, funcMap } from "../../utils/data";
 import Button from "../atoms/Button";
 import Icon from "../atoms/Icon";
 import BlacklistComponent from "../../hoc/BlacklistComponent";
 import { withRouter } from "react-router-dom";
 
 const Footer = () => {
+  const onHandleFooterAction = (val) => funcMap[val]();
   return (
     <div className="footer">
       <div className="row">
@@ -19,6 +20,7 @@ const Footer = () => {
                 <div
                   key={idx}
                   className={`col-1-of-${rows.columns.length} u-text-center`}
+                  onClick={onHandleFooterAction.bind(this, column.to)}
                 >
                   <Text variant="pr-18-1 footer__linkContent">
                     {column.title}
@@ -58,6 +60,6 @@ export default withRouter(
     "/expired-subscription",
     "/trial-subscription",
     "/resumes",
-    "/create"
+    "/create",
   ])
 );

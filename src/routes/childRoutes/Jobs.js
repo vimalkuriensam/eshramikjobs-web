@@ -6,7 +6,8 @@ import {
   Applied as AppliedView,
   Recommended as RecommendedView,
   Saved as SavedView,
-  Create as CreateJobs,
+  Create as CreateView,
+  Detail as DetailView,
 } from "../../pages";
 import AdminRoute from "../AdminRoute";
 import UserRoute from "../UserRoute";
@@ -20,7 +21,8 @@ export const JobsChildView = () => {
         <UserRoute path={`${path}/applied`} component={AppliedView} />
         <UserRoute path={`${path}/recommended`} component={RecommendedView} />
         <UserRoute path={`${path}/saved`} component={SavedView} />
-        <AdminRoute path={`${path}/create`} component={CreateJobs} />
+        <UserRoute path={`${path}/detail`} component={DetailView} />
+        <AdminRoute path={`${path}/create`} component={CreateView} />
       </Switch>
     </Fragment>
   );

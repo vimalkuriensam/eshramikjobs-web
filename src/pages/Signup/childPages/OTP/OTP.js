@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
-import history from "../../../../utils/history";
-import Details from "./container/Details";
+import React from "react";
 
+import Details from "./container/Details";
 import Hero from "./container/Hero";
 
 const OTP = (props) => {

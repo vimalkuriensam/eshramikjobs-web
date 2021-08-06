@@ -12,21 +12,21 @@ const Hero = () => {
           <Title variant="pr-35-1">Find Job</Title>
         </div>
         <div className="row u-margin-top-2">
-          <div className="col-3-of-7">
+          <div className="col-3-of-7 home__heroInputContainer">
             <Input
               variant="1"
               className="home__heroInput"
               placeholder="Job title or company"
             />
           </div>
-          <div className="col-3-of-7">
+          <div className="col-3-of-7 home__heroInputContainer">
             <Input
               variant="1"
               className="home__heroInput"
               placeholder="Location"
             />
           </div>
-          <div className="col-1-of-7">
+          <div className="col-1-of-7 home__heroInputContainer">
             <Button variant="2" icon="Search" content="" />
           </div>
         </div>

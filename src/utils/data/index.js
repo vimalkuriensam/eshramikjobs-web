@@ -2,6 +2,14 @@ import jwtDecode from "jwt-decode";
 import moment from "moment";
 import { setLogout } from "../../redux/actions/authentication.action";
 import {
+  applyJob,
+  deleteJob,
+  getAppliedJobs,
+  getJob,
+  getRecentJobs,
+  getSavedJobs,
+} from "../../redux/actions/jobs.action";
+import {
   getColleges,
   getDegrees,
   getInstitutions,
@@ -9,6 +17,7 @@ import {
   getState,
   getTechnicalCourses,
 } from "../../redux/actions/profile.actions";
+import history from "../history";
 
 export const BASE_URL = "https://eshramik-api.herokuapp.com";
 
@@ -139,7 +148,7 @@ export const FOOTER_MAIN_CONTENTS = {
         {
           type: "link",
           title: "Search Jobs",
-          to: "",
+          to: "searchJobs",
         },
         {
           type: "link",
@@ -164,8 +173,8 @@ export const PROFILE_CONTENTS = {
         },
         {
           text: "Saved jobs",
-          type: "link",
-          to: "/jobs/saved",
+          type: "process",
+          to: "savedJobs",
         },
       ],
     },
@@ -187,8 +196,8 @@ export const PROFILE_CONTENTS = {
       columns: [
         {
           text: "Applied jobs",
-          type: "link",
-          to: "/jobs/applied",
+          type: "process",
+          to: "appliedJobs",
         },
         {
           text: "logout",
@@ -202,6 +211,51 @@ export const PROFILE_CONTENTS = {
 
 export const funcMap = {
   logout: (dispatch) => dispatch(setLogout()),
+  searchJobs: () => window.scroll({ top: 0, left: 0, behavior: "smooth" }),
+  savedJobs: async (dispatch) => {
+    const response = await dispatch(
+      getSavedJobs({
+        pageNumber: 0,
+        itemsPerPage: 4,
+        jobTitle: null,
+        location: null,
+      })
+    );
+    if (response) {
+      history.push("/jobs/saved");
+      return true;
+    }
+  },
+  applyJobLists: async (dispatch, id) => {
+    const response = await dispatch(applyJob({ id, type: "apply" }));
+    if (response)
+      dispatch(
+        getRecentJobs({
+          pageNumber: 0,
+          itemsPerPage: 4,
+          jobTitle: null,
+          location: null,
+        })
+      );
+  },
+  jobDelete: async (dispatch, id, type) =>
+    await dispatch(deleteJob({ id, type })),
+  appliedJobs: async (dispatch) => {
+    const response = await dispatch(
+      getAppliedJobs({
+        pageNumber: 0,
+        itemsPerPage: 4,
+        jobTitle: null,
+        location: null,
+      })
+    );
+    if (response) {
+      history.push("/jobs/applied");
+      return true;
+    }
+  },
+  recommendedJobs: async (dispatch) => {},
+  getJob: async (dispatch, id) => await dispatch(getJob({ id })),
   0: async (dispatch) => {
     await dispatch(getState());
     return true;
@@ -483,4 +537,10 @@ export const userType = (token) => {
     return { type, exp };
   }
   return { type: null, exp: null };
+};
+
+export const USER_TYPES = {
+  USER: 1,
+  RECRUITER: 2,
+  ADMIN: 3,
 };

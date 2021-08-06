@@ -12,6 +12,11 @@
   &__heroInput {
     opacity: 0.85;
     height: 5.4rem;
+    border: 3px solid transparent;
+    &:active,
+    &:focus {
+      border: 3px solid $color-secondary;
+    }
   }
 
   &__feedback {
@@ -22,6 +27,7 @@
 
   &__ad {
     min-height: 55.1rem;
+    text-align: center;
     background-image: linear-gradient(
         to right,
         rgba($color-primary, 0.7),
@@ -227,4 +233,60 @@
 .octo1 {
   transform: rotate(-45deg);
   position: relative;
+}
+
+@media only screen and (max-width: 55rem) {
+  .home {
+    &__heroContainer {
+      padding: 8rem 4rem;
+      text-align: center;
+    }
+
+    &__heroInputContainer {
+      margin: 1rem 0;
+      width: 100% !important;
+      display: block;
+      > * {
+        width: 100%;
+      }
+    }
+
+    &__ad {
+      padding: 0 6rem;
+      text-align: center;
+      > * {
+        font-size: 4rem;
+      }
+    }
+    &__sampleContainer {
+      display: block;
+    }
+    &__sampleJobs {
+      width: 100%;
+    }
+
+    &__sampleCompany {
+      width: 100%;
+      margin-left: 0 !important;
+    }
+
+    &__profileContainer {
+      margin-top: 6rem;
+    }
+
+    &__listContainer {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 70rem) {
+  .home {
+    &__feedbackText {
+      height: 20rem;
+      > * {
+        font-size: 0.9rem;
+      }
+    }
+  }
 }

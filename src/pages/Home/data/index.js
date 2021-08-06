@@ -32,3 +32,4 @@ export const CATEGORY_ITEMS = [
     icon: "Desktop",
   },
 ];
+

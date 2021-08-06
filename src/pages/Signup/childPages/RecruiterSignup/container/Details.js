@@ -12,7 +12,9 @@ import { funcMap } from "../../../../../utils/data";
 const Details = ({ dispatch }) => {
   const [loginProps, setLoginProps] = useState({
     un: "",
+    mobile: "",
     password: "",
+    confirmPassword: "",
   });
 
   const onHandleLogin = (type, { target }) => {
@@ -42,10 +44,14 @@ const Details = ({ dispatch }) => {
     <div className="authentication__adminDetails">
       <Image name="hexagon" className="authentication__hexagon1" />
       <Image name="hexagon" className="authentication__hexagon2" />
-      <Image name="Logo" onIconClick={onSetRoute.bind(this, 'home')} className="authentication__adminLogo" />
+      <Image
+        name="Logo"
+        onIconClick={onSetRoute.bind(this, "home")}
+        className="authentication__adminLogo"
+      />
       <div className="authentication__adminLoginBox">
         <Title className="u-margin-top-10" variant="pr-25-1">
-          Login
+          Sign Up
         </Title>
         <form onSubmit={onHandleSubmit} className="authentication__adminInput">
           <Input
@@ -58,25 +64,32 @@ const Details = ({ dispatch }) => {
           <Input
             variant="1"
             className="u-margin-top-2"
+            value={loginProps.mobile}
+            onHandleText={onHandleLogin.bind(this, "mobile")}
+            placeholder="Mobile"
+          />
+          <Input
+            variant="1"
+            className="u-margin-top-2"
             value={loginProps.password}
             onHandleText={onHandleLogin.bind(this, "password")}
             placeholder="Password"
             type="password"
           />
-          <div className="authentication__adminCTA">
-            <span>
-              <Text variant="pr-14-2">forgot password</Text>
-            </span>
-            <span onClick={onSetRoute.bind(this, 'recruiterSignup')}>
-              <Text variant="pr-14-2">Sign up</Text>
-            </span>
-          </div>
+          <Input
+            variant="1"
+            className="u-margin-top-2"
+            value={loginProps.confirmPassword}
+            onHandleText={onHandleLogin.bind(this, "confirmPassword")}
+            placeholder="Retype Password"
+            type="password"
+          />
           <Button
             disabled={buttonStatus()}
             variant="1-3"
             type="submit"
             className="u-margin-top-2"
-            content="Login"
+            content="Signup"
           />
         </form>
       </div>

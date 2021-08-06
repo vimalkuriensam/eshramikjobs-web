@@ -210,9 +210,25 @@
     text-align: center;
   }
 
+  &__recruiterDetails {
+    min-height: 100vh;
+    min-width: 100%;
+  }
+
+  &__companyProfileCTA {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    > button {
+      width: 18.5rem;
+      height: 4.8rem;
+    }
+  }
+
   &__adminLogo {
     width: 9.9rem;
     height: 7.2rem;
+    cursor: pointer;
   }
 
   &__adminLoginBox {
@@ -239,6 +255,20 @@
       &:not(:last-child) {
         margin-right: 1.5rem;
       }
+    }
+  }
+
+  &__logo {
+    height: 22rem;
+    border: 1px solid $color-secondary;
+    display: inline-block;
+    border-radius: 1rem;
+    width: 100%;
+    &--empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $color-white;
     }
   }
 }

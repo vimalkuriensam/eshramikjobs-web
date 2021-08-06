@@ -1,2 +1,8 @@
 export { default } from "./Signup";
-export { AdminLogin, ProfileCreation, OTP } from "./childPages";
+export {
+  AdminLogin,
+  CompanyProfile,
+  ProfileCreation,
+  OTP,
+  RecruiterSignup,
+} from "./childPages";

@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { loginState } from "../../redux/actions/utils.action";
 import history from "../../utils/history";
 import { Fragment } from "react";
-import { funcMap, PROFILE_CONTENTS } from "../../utils/data";
+import { funcMap, PROFILE_CONTENTS, USER_ROUTE_TYPES } from "../../utils/data";
 import BlacklistComponent from "../../hoc/BlacklistComponent";
 
 const Header = ({ dispatch, isLogged }) => {
@@ -112,7 +112,19 @@ const Header = ({ dispatch, isLogged }) => {
         )}
         {!isLogged && (
           <Fragment>
-            <Button variant="1-1" onButtonClick={onSetLogin} content="Login" />
+            <Button
+              variant="1-1"
+              content="Recruiter Login"
+              onButtonClick={onHandleProfileAction.bind(this, {
+                type: "link",
+                to: "/register/admin",
+              })}
+            />
+            <Button
+              variant="1-1"
+              onButtonClick={onSetLogin}
+              content="User Login"
+            />
             <Button
               variant="1-1"
               content="Signup"
@@ -130,5 +142,11 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(
-  withRouter(BlacklistComponent(Header)(["/admin"]))
+  withRouter(
+    BlacklistComponent(Header)([
+      ...USER_ROUTE_TYPES.admin,
+      ...USER_ROUTE_TYPES.recruiter,
+      ...USER_ROUTE_TYPES.default,
+    ])
+  )
 );

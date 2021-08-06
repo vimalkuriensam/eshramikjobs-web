@@ -72,6 +72,16 @@
     }
   }
 
+  &__formDropdown {
+    > div > div {
+      background: $color-white;
+      border: 1px solid #727272;
+      > span > button {
+        opacity: 1;
+      }
+    }
+  }
+
   &__noImageContainer {
     width: 12rem;
     height: 9rem;

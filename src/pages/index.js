@@ -7,7 +7,21 @@ export {
   TrialSubscription,
 } from "./Dashboard";
 export { default as Home } from "./Home";
-export { default as Jobs, Applied, Recommended, Saved, Create, Detail } from "./Jobs";
+export {
+  default as Jobs,
+  Applied,
+  Recommended,
+  Saved,
+  Create,
+  Detail,
+} from "./Jobs";
 export { default as Profile } from "./Profile";
 export { default as Resumes } from "./Resumes";
-export { default as Signup, AdminLogin, ProfileCreation, OTP } from "./Signup";
+export {
+  default as Signup,
+  AdminLogin,
+  CompanyProfile,
+  ProfileCreation,
+  OTP,
+  RecruiterSignup,
+} from "./Signup";

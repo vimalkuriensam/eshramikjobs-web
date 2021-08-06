@@ -210,6 +210,8 @@ export const PROFILE_CONTENTS = {
 };
 
 export const funcMap = {
+  home: () => history.push("/"),
+  recruiterSignup: () => history.push("/register/signup"),
   logout: (dispatch) => dispatch(setLogout()),
   searchJobs: () => window.scroll({ top: 0, left: 0, behavior: "smooth" }),
   savedJobs: async (dispatch) => {
@@ -543,4 +545,35 @@ export const USER_TYPES = {
   USER: 1,
   RECRUITER: 2,
   ADMIN: 3,
+};
+
+export const USER_ROUTE_TYPES = {
+  user: [
+    "/register",
+    "/otp",
+    "/1",
+    "/2",
+    "/3",
+    "/4",
+    "/5",
+    "/6",
+    "/7",
+    "/home",
+    "/about",
+    "/applied",
+    "/recommended",
+    "/saved",
+    "/detail",
+    "/create",
+    "/companies",
+  ],
+  recruiter: ["/profile"],
+  admin: [
+    "/dashboard",
+    "/active-subscription",
+    "/expired-subscription",
+    "/trial-subscription",
+    "/resumes",
+  ],
+  default: ["/admin", "/signup"],
 };

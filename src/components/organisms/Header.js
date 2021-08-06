@@ -112,7 +112,19 @@ const Header = ({ dispatch, isLogged }) => {
         )}
         {!isLogged && (
           <Fragment>
-            <Button variant="1-1" onButtonClick={onSetLogin} content="Login" />
+            <Button
+              variant="1-1"
+              content="Recruiter Login"
+              onButtonClick={onHandleProfileAction.bind(this, {
+                type: "link",
+                to: "/register/admin",
+              })}
+            />
+            <Button
+              variant="1-1"
+              onButtonClick={onSetLogin}
+              content="User Login"
+            />
             <Button
               variant="1-1"
               content="Signup"
@@ -130,5 +142,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(
-  withRouter(BlacklistComponent(Header)(["/admin"]))
+  withRouter(BlacklistComponent(Header)(["/admin", "/signup"]))
 );

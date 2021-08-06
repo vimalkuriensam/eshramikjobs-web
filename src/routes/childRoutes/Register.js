@@ -6,6 +6,7 @@ import {
   Signup as SignupView,
   ProfileCreation as ProfileCreationView,
   OTP as OTPView,
+  RecruiterSignup as RecruiterSignupView
 } from "../../pages";
 
 export const RegisterChildView = () => {
@@ -16,6 +17,7 @@ export const RegisterChildView = () => {
         <Route exact path={path} component={SignupView} />
         <Route path={`${path}/otp`} component={OTPView} />
         <Route path={`${path}/admin`} component={AdminLoginView} />
+        <Route path={`${path}/signup`} component={RecruiterSignupView} />
         <Route path={`${path}/profile/:step`} component={ProfileCreationView} />
       </Switch>
     </Fragment>

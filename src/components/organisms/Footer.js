@@ -61,5 +61,6 @@ export default withRouter(
     "/trial-subscription",
     "/resumes",
     "/create",
+    "/signup"
   ])
 );

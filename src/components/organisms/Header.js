@@ -27,10 +27,12 @@ const Header = ({ dispatch, isLogged }) => {
 
   const onHandleProfileState = () => setProfileState((prevState) => !prevState);
 
-  const onHandleProfileAction = (content) => {
+  const onHandleProfileAction = async (content) => {
     switch (content.type) {
       case "process":
-        return funcMap[content.to](dispatch);
+        const response = await funcMap[content.to](dispatch);
+        if (response) setProfileState(false);
+        break;
       default:
         setProfileState(false);
         history.push(content.to);

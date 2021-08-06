@@ -29,6 +29,11 @@ const Samples = ({ jobs, companies, isLogged, isAuthenticated, dispatch }) => {
       if (response) history.push("/jobs/detail");
     }
   };
+
+  const onHandleApplyJob = async (id, e) => {
+    e.stopPropagation();
+    await funcMap["applyJobLists"](dispatch, id);
+  }
   return (
     <section className="section-home-samples">
       <div className="home__sampleContainer">
@@ -36,7 +41,7 @@ const Samples = ({ jobs, companies, isLogged, isAuthenticated, dispatch }) => {
           <Title className="u-margin-bottom-50" variant="pr-30-1">
             Recent jobs
           </Title>
-          <WorkListings jobs={jobs} onHandleJobDetail={onHandleJobDetail} />
+          <WorkListings jobs={jobs} onHandleJobDetail={onHandleJobDetail} onHandleButtonApply={onHandleApplyJob} />
         </div>
         <div className="home__sampleCompany">
           {isLogged && (

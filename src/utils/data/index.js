@@ -2,8 +2,11 @@ import jwtDecode from "jwt-decode";
 import moment from "moment";
 import { setLogout } from "../../redux/actions/authentication.action";
 import {
+  applyJob,
+  deleteJob,
   getAppliedJobs,
   getJob,
+  getRecentJobs,
   getSavedJobs,
 } from "../../redux/actions/jobs.action";
 import {
@@ -218,8 +221,25 @@ export const funcMap = {
         location: null,
       })
     );
-    if (response) history.push("/jobs/saved");
+    if (response) {
+      history.push("/jobs/saved");
+      return true;
+    }
   },
+  applyJobLists: async (dispatch, id) => {
+    const response = await dispatch(applyJob({ id, type: "apply" }));
+    if (response)
+      dispatch(
+        getRecentJobs({
+          pageNumber: 0,
+          itemsPerPage: 4,
+          jobTitle: null,
+          location: null,
+        })
+      );
+  },
+  jobDelete: async (dispatch, id, type) =>
+    await dispatch(deleteJob({ id, type })),
   appliedJobs: async (dispatch) => {
     const response = await dispatch(
       getAppliedJobs({
@@ -229,7 +249,10 @@ export const funcMap = {
         location: null,
       })
     );
-    if (response) history.push("/jobs/applied");
+    if (response) {
+      history.push("/jobs/applied");
+      return true;
+    }
   },
   recommendedJobs: async (dispatch) => {},
   getJob: async (dispatch, id) => await dispatch(getJob({ id })),

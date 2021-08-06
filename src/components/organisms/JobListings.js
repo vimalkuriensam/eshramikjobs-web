@@ -1,20 +1,33 @@
 import moment from "moment";
 import React from "react";
-import { connect } from "react-redux";
-import { loginState } from "../../redux/actions/utils.action";
-import { funcMap } from "../../utils/data";
 import Button from "../atoms/Button";
 import Image from "../atoms/Image";
 import Text from "../atoms/Text";
 import Title from "../atoms/Title";
 
-const JobListings = ({ jobs = [], onHandleJobDetail }) => {
-  console.log(jobs);
+const JobListings = ({
+  jobs = [],
+  onHandleJobDetail,
+  onHandleButtonDelete,
+  onHandleButtonApply,
+}) => {
   return (
     <div>
       {jobs.map(
         (
-          { jobId, image, company_name, title, job_data, city, cr_date },
+          {
+            jobId,
+            image,
+            company_name,
+            title,
+            job_data,
+            city,
+            cr_date,
+            saveId = null,
+            ApplyId = null,
+            saveJobId = null,
+            applyJobId = null,
+          },
           index
         ) => (
           <div
@@ -23,6 +36,7 @@ const JobListings = ({ jobs = [], onHandleJobDetail }) => {
             key={index}
             onClick={onHandleJobDetail.bind(this, jobId)}
           >
+            {console.log(saveId, ApplyId, saveJobId, applyJobId)}
             <div className="col-25-of-10 u-text-center">
               <Image
                 className={`jobs__imageContainer ${
@@ -58,11 +72,25 @@ const JobListings = ({ jobs = [], onHandleJobDetail }) => {
                 <Text variant="pl-17-2">Location: </Text>
                 <Text variant="pl-16-1">&nbsp;{city}</Text>
               </div>
-              <Button
-                variant="1-2"
-                className="jobs__apply u-opacity-80"
-                content="Apply"
-              />
+              {saveJobId || applyJobId ? (
+                <Button
+                  variant="6"
+                  content="Delete"
+                  className="u-margin-top-50 u-margin-auto"
+                  onButtonClick={onHandleButtonDelete.bind(this, {
+                    saveId: saveJobId,
+                    applyId: applyJobId,
+                  })}
+                  icon="Delete"
+                />
+              ) : ApplyId ? null : (
+                <Button
+                  variant="1-2"
+                  className="jobs__apply u-opacity-80"
+                  content="Apply"
+                  onButtonClick={onHandleButtonApply.bind(this, jobId)}
+                />
+              )}
             </div>
           </div>
         )

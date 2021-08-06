@@ -56,7 +56,10 @@ export const applyJob =
       const { status } = await apiService().post(`/jobs/${type}`, {
         jobId: id,
       });
-      if (status == 200) await dispatch(getJob({ id }));
+      if (status == 200) {
+        await dispatch(getJob({ id }));
+        return true;
+      }
     } catch (e) {
       throw e;
     }
@@ -178,7 +181,6 @@ export const getSavedJobs =
   ({ pageNumber, itemsPerPage, jobTitle, location }) =>
   async (dispatch) => {
     try {
-      dispatch(clearSavedJobs());
       const jobs = await dispatch(
         getJobs({
           pageNumber,
@@ -188,6 +190,7 @@ export const getSavedJobs =
           type: "saved",
         })
       );
+      dispatch(clearSavedJobs());
       if (jobs.length) dispatch(setSavedJobs({ jobs }));
       return true;
     } catch (e) {
@@ -211,3 +214,17 @@ export const setRecommendedJobs = () => {};
 export const clearRecommendedJobs = () => ({
   type: CLEAR_RECOMMENDED_JOBS,
 });
+
+export const deleteJob =
+  ({ id, type = "save" }) =>
+  async (dispatch) => {
+    try {
+      const { status } = await apiService().post(`/jobs/${type}/delete`, {
+        ...(type == "save" && { saveJobId: id }),
+        ...(type == "apply" && { applyJobId: id }),
+      });
+      if (status == 200) return true;
+    } catch (e) {
+      throw e;
+    }
+  };

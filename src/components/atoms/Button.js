@@ -22,6 +22,11 @@ const Button = ({
         </span>
       )}
       {content && <span>{content}</span>}
+      {[6].includes(+variant) && (
+        <span className="btn__icon">
+          <Icon name={icon} />
+        </span>
+      )}
     </button>
   );
 };

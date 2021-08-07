@@ -40,7 +40,7 @@ export const adminLogin =
       if (status == 200) {
         const { accessToken, refreshToken } = data["data"];
         dispatch(setAccessToken({ accessToken, refreshToken }));
-        history.push("/");
+        window.location.href = "/"; //history.push("/");
       }
     } catch (e) {
       throw e;

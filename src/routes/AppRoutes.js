@@ -30,6 +30,7 @@ import AdminRoute from "./AdminRoute";
 import UserRoute from "./UserRoute";
 import RecruiterHeader from "../components/organisms/RecruiterHeader";
 import RecruiterNavbar from "../components/organisms/RecruiterNavbar";
+import { RecruiterChildView } from "./childRoutes/Recruiter";
 
 const AppRoutes = ({ tokenData }) => {
   const { type } = tokenData;
@@ -67,6 +68,7 @@ const AppRoutes = ({ tokenData }) => {
                     <Route path="/create-jobs" component={CreateJobs} />
                     <Route path="/home" component={HomeView} />
                     <Route path="/about" component={AboutUsView} />
+                    <Route path="/recruite" component={RecruiterChildView} />
                     <UserRoute path="/jobs" component={JobsChildView} />
                     <UserRoute path="/companies" component={CompaniesView} />
                     <UserRoute path="/profile" component={ProfileView} />

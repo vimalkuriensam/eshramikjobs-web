@@ -102,6 +102,10 @@
     }
   }
 
+  &__loginInputError2 {
+    border: 2px solid #ce0606!important;
+  }
+
   &__loginError {
     position: absolute;
     top: 5.4rem;

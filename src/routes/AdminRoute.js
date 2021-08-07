@@ -1,4 +1,5 @@
 import React from "react";
+import { Fragment } from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 import { userType, USER_TYPES } from "../utils/data";
@@ -11,6 +12,11 @@ const AdminRoute = ({
   ...rest
 }) => {
   const { type } = userType(token);
+
+  const getRedirection = () => {
+    window.location.href = "/register/admin";
+    return <Fragment>Redirecting</Fragment>;
+  };
   return (
     <Route
       {...rest}
@@ -18,7 +24,8 @@ const AdminRoute = ({
         isAuthenticated && type == USER_TYPES.ADMIN ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/register/admin" />
+          getRedirection()
+          //<Redirect to="/register/admin" />
         )
       }
     ></Route>

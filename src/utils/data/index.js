@@ -536,19 +536,19 @@ export const NAVBAR_NAVS = [
 export const RECRUITER_NAVBAR_NAVS = [
   {
     text: "Post New Job",
-    to: "/create-jobs",
+    to: "/recruite/create-jobs",
   },
   {
     text: "Profile details",
-    to: "/sales",
+    to: "/recruite/plans",
   },
   {
     text: "View applications",
-    to: "/companies",
+    to: "/recruite/applications",
   },
   {
     text: "Application status",
-    to: "/resumes",
+    to: "/recruite/resumes",
   },
 ];
 
@@ -586,7 +586,7 @@ export const USER_ROUTE_TYPES = {
     "/create",
     "/companies",
   ],
-  recruiter: ["/create-jobs"],
+  recruiter: ["/create-jobs", "/plans", "/applications"],
   admin: [
     "/dashboard",
     "/active-subscription",

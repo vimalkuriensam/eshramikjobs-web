@@ -16,6 +16,7 @@ export {
   Detail,
 } from "./Jobs";
 export { default as Profile } from "./Profile";
+export { Applications, Plans } from "./Recruiter";
 export { default as Resumes } from "./Resumes";
 export {
   default as Signup,

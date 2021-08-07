@@ -1,7 +1,8 @@
 import React from "react";
 import { Fragment } from "react";
 import { connect } from "react-redux";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
+import Logout from "../components/organisms/Logout";
 
 const UserRoute = ({
   dispatch,
@@ -9,11 +10,17 @@ const UserRoute = ({
   component: Component,
   ...rest
 }) => {
+  const getRedirection = () => {
+    setTimeout(() => {
+      window.location.href = "/";
+    }, [1000]);
+    return <Logout />;
+  };
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/" />
+        isAuthenticated ? <Component {...props} /> : getRedirection()
       }
     ></Route>
   );

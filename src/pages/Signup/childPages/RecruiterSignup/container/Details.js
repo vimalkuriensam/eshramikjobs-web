@@ -9,6 +9,8 @@ import Title from "../../../../../components/atoms/Title";
 import { connect } from "react-redux";
 import { funcMap } from "../../../../../utils/data";
 import Text from "../../../../../components/atoms/Text";
+import { recruiterRegister } from "../../../../../redux/actions/authentication.action";
+import history from "../../../../../utils/history";
 
 const Details = ({ dispatch }) => {
   const [registerProps, setRegisterProps] = useState({
@@ -41,7 +43,7 @@ const Details = ({ dispatch }) => {
     return true;
   };
 
-  const onHandleSubmit = (e) => {
+  const onHandleSubmit = async (e) => {
     e.preventDefault();
     if (!validator.isEmail(registerProps.email))
       setError((prevState) => ({ ...prevState, email: true }));
@@ -55,8 +57,9 @@ const Details = ({ dispatch }) => {
       registerProps.password == registerProps.confirmPassword
     ) {
       const info = { ...registerProps };
-      // dispatch(adminLogin({ info }));
-      console.log(info);
+      delete info.confirmPassword;
+      const response = await dispatch(recruiterRegister(info));
+      if (response) history.push("/register/signup/profile");
     }
   };
 

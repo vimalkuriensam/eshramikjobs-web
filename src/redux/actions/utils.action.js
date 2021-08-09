@@ -1,3 +1,5 @@
+import apiService from "../../authInterceptor/authAxios";
+
 export const SET_LOGIN_STATE = "SET_LOGIN_STATE";
 export const SET_LOADER_STATE = "SET_LOADER_STATE";
 
@@ -10,3 +12,19 @@ export const setLoader = ({ state }) => ({
   type: SET_LOADER_STATE,
   value: state,
 });
+
+export const fileUpload =
+  ({ file }) =>
+  async (dispatch) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const { status, data } = await apiService().post(
+        "/common/upload",
+        formData
+      );
+      if (status == 200) return data.data;
+    } catch (e) {
+      throw e;
+    }
+  };

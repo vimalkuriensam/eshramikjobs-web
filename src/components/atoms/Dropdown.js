@@ -11,6 +11,7 @@ const Dropdown = ({
   placeholder = "Select",
   onHandleDropdownValue,
   className,
+  filter = true,
 }) => {
   useEffect(() => {
     const handler = (event) => {
@@ -61,12 +62,14 @@ const Dropdown = ({
       </div>
       {active && (
         <div className="form__dropdown-1--list">
-          <Input
-            onHandleText={onSetContentFilter}
-            placeholder="Filter"
-            className="form__dropdown-1--input"
-            autoFocus
-          />
+          {filter && (
+            <Input
+              onHandleText={onSetContentFilter}
+              placeholder="Filter"
+              className="form__dropdown-1--input"
+              autoFocus
+            />
+          )}
           <ul>
             {contents &&
               updatedContents.map((content, index) => (

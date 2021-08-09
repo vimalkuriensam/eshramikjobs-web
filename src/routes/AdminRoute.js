@@ -1,7 +1,8 @@
 import React from "react";
-import { Fragment } from "react";
 import { connect } from "react-redux";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
+
+import Logout from "../components/organisms/Logout";
 import { userType, USER_TYPES } from "../utils/data";
 
 const AdminRoute = ({
@@ -15,7 +16,7 @@ const AdminRoute = ({
 
   const getRedirection = () => {
     window.location.href = "/register/admin";
-    return <Fragment>Redirecting</Fragment>;
+    return <Logout />;
   };
   return (
     <Route

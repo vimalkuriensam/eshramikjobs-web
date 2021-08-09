@@ -103,13 +103,20 @@
   }
 
   &__loginInputError2 {
-    border: 2px solid #ce0606!important;
+    border: 2px solid #ce0606 !important;
   }
 
   &__loginError {
     position: absolute;
     top: 5.4rem;
     left: 0;
+  }
+
+  &__loginError2 {
+    position: absolute;
+    top: 6.4rem;
+    left: 0.3rem;
+    font-size: 1.2rem;
   }
 
   &__profileContainer {

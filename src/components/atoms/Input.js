@@ -19,7 +19,6 @@ const Input = ({
     let value;
     if (val > 0) value = +ref.current.value + 1;
     else value = +ref.current.value - 1;
-    console.log(value);
     onHandleText({ target: { value } });
   };
   if (type == "file") {

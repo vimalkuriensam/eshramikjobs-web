@@ -57,7 +57,15 @@ const AppRoutes = ({ tokenData }) => {
                 >
                   <Switch location={location}>
                     <Route path="/" exact>
-                      <Redirect to={type == 3 ? "/dashboard" : "/home"} />
+                      <Redirect
+                        to={
+                          type == USER_TYPES.ADMIN
+                            ? "/dashboard"
+                            : type == USER_TYPES.RECRUITER
+                            ? "/recruite/create-jobs"
+                            : "/home"
+                        }
+                      />
                     </Route>
                     <Route path="/register" component={RegisterChildView} />
                     <AdminRoute

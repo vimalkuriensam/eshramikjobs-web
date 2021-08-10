@@ -48,12 +48,14 @@
 @import "./components/jobs";
 @import "./components/popup";
 @import "./components/profile";
+@import "./components/recruit";
 @import "./components/table";
 
 @import "./layout/footer";
 @import "./layout/header";
 @import "./layout/grid";
 @import "./layout/loader";
+@import "./layout/logout";
 @import "./layout/navbar";
 
 @import "./pages/authentication";
@@ -61,6 +63,7 @@
 @import "./pages/home";
 @import "./pages/jobs";
 @import "./pages/profile";
+@import "./pages/recruit";
 
 @import "./vendors/calendar";
 @import "./vendors/page-transition";

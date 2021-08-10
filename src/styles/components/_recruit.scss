@@ -1,0 +1,15 @@
+.recruit {
+  &__planContainer {
+    background: $color-white;
+    display: inline-block;
+    min-width: 51.7rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 1px 2rem rgba($color-black, 0.06);
+    text-align: center;
+    padding: 2rem 3.7rem 16rem 3.7rem;
+
+    &--image {
+      height: 8.7rem;
+    }
+  }
+}

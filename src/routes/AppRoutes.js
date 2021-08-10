@@ -28,6 +28,10 @@ import { userType, USER_TYPES } from "../utils/data";
 import AdminHeader from "../components/organisms/AdminHeader";
 import AdminRoute from "./AdminRoute";
 import UserRoute from "./UserRoute";
+import RecruiterHeader from "../components/organisms/RecruiterHeader";
+import RecruiterNavbar from "../components/organisms/RecruiterNavbar";
+import { RecruiterChildView } from "./childRoutes/Recruiter";
+import RecruiterRoute from "./RecruiterRoute";
 
 const AppRoutes = ({ tokenData }) => {
   const { type } = tokenData;
@@ -35,11 +39,13 @@ const AppRoutes = ({ tokenData }) => {
     <Router history={history}>
       <ScrollTop />
       <AdminHeader />
+      <RecruiterHeader />
       <Header />
       <Login />
       <Loader />
       <div className="u-display-flex u-overflow-hidden u-width-100">
         <NavBar />
+        <RecruiterNavbar />
         <div style={{ width: "100%" }}>
           {/*//className="navbar__outer">*/}
           <Route
@@ -52,7 +58,15 @@ const AppRoutes = ({ tokenData }) => {
                 >
                   <Switch location={location}>
                     <Route path="/" exact>
-                      <Redirect to={type == 3 ? "/dashboard" : "/home"} />
+                      <Redirect
+                        to={
+                          type == USER_TYPES.ADMIN
+                            ? "/dashboard"
+                            : type == USER_TYPES.RECRUITER
+                            ? "/recruite/create-jobs"
+                            : "/home"
+                        }
+                      />
                     </Route>
                     <Route path="/register" component={RegisterChildView} />
                     <AdminRoute
@@ -60,8 +74,10 @@ const AppRoutes = ({ tokenData }) => {
                       component={DashboardChildView}
                     />
                     <AdminRoute path="/resumes" component={ResumesChild} />
+                    <Route path="/create-jobs" component={CreateJobs} />
                     <Route path="/home" component={HomeView} />
                     <Route path="/about" component={AboutUsView} />
+                    <RecruiterRoute path="/recruite" component={RecruiterChildView} />
                     <UserRoute path="/jobs" component={JobsChildView} />
                     <UserRoute path="/companies" component={CompaniesView} />
                     <UserRoute path="/profile" component={ProfileView} />

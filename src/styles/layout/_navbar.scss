@@ -20,3 +20,23 @@
     }
   }
 }
+
+.recruiterNavbar {
+  width: 27.3rem;
+  background: $color-primary;
+  padding-top: 1.75rem;
+  &__nav {
+    display: block;
+    padding: 1.75rem 4.7rem;
+    text-decoration: none;
+    color: $color-white;
+    font-size: 1.6rem;
+    font-family: "poppins-regular";
+    opacity: 0.8;
+    width: 27.3rem;
+
+    &--active {
+      opacity: 1;
+    }
+  }
+}

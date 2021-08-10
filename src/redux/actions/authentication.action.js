@@ -1,12 +1,49 @@
 import apiService from "../../authInterceptor/authAxios";
 import history from "../../utils/history";
 import { getState } from "./profile.actions";
-import { loginState } from "./utils.action";
+import { fileUpload, loginState } from "./utils.action";
 
 export const SET_LOGIN = "SET_LOGIN";
 export const SET_LOGOUT = "SET_LOGOUT";
 export const SET_ACCESS_TOKEN = "SET_ACCESS_TOKEN";
 export const SET_EMAIL = "SET_EMAIL";
+
+export const recruiterRegister = (info) => async (dispatch) => {
+  try {
+    const { data, status } = await apiService().post(
+      "/auth/register_recruiter",
+      info
+    );
+    if (status == 200) {
+      const { accessToken, refreshToken } = data.data;
+      dispatch(setAccessToken({ accessToken, refreshToken }));
+      const response = await dispatch(getState());
+      if (response) return true;
+    }
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const setCompanyDetails = (info) => async (dispatch) => {
+  try {
+    const file = info.logoFile;
+    let fileURL = null;
+    if (file) fileURL = await dispatch(fileUpload({ file }));
+    const updatedInfo = {
+      ...info,
+      ...(file && { logo: fileURL.url }),
+    };
+    delete updatedInfo.logoFile;
+    const { status } = await apiService().post(
+      "/auth/company_details",
+      updatedInfo
+    );
+    if (status == 200) return true;
+  } catch (e) {
+    throw e;
+  }
+};
 
 export const setSignup =
   ({ mobile, email, name }) =>
@@ -40,7 +77,7 @@ export const adminLogin =
       if (status == 200) {
         const { accessToken, refreshToken } = data["data"];
         dispatch(setAccessToken({ accessToken, refreshToken }));
-        history.push("/");
+        window.location.href = "/"; //history.push("/");
       }
     } catch (e) {
       throw e;
@@ -77,7 +114,6 @@ export const setOTP =
   ({ otp, mobile = undefined, email = undefined, login = false }) =>
   async (dispatch) => {
     try {
-      console.log(mobile, email);
       const { data, status } = await apiService().post("/auth/verify", {
         ...(mobile && { mobile: `+91${mobile}` }),
         ...(email && { email }),

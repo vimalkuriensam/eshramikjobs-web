@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import validator from "validator";
+
 import Button from "../../../../../components/atoms/Button";
 import Image from "../../../../../components/atoms/Image";
 import Input from "../../../../../components/atoms/Input";
@@ -15,7 +17,10 @@ const Details = ({ dispatch }) => {
     password: "",
   });
 
+  const [emailError, setEmailError] = useState(false);
+
   const onHandleLogin = (type, { target }) => {
+    setEmailError(false);
     const { value } = target;
     setLoginProps((prevState) => ({
       ...prevState,
@@ -31,9 +36,11 @@ const Details = ({ dispatch }) => {
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted");
-    const info = { ...loginProps };
-    dispatch(adminLogin({ info }));
+    if (!validator.isEmail(loginProps.un)) setEmailError(true);
+    else {
+      const info = { ...loginProps };
+      dispatch(adminLogin({ info }));
+    }
   };
 
   const onSetRoute = (route) => funcMap[route]();
@@ -42,7 +49,11 @@ const Details = ({ dispatch }) => {
     <div className="authentication__adminDetails">
       <Image name="hexagon" className="authentication__hexagon1" />
       <Image name="hexagon" className="authentication__hexagon2" />
-      <Image name="Logo" onIconClick={onSetRoute.bind(this, 'home')} className="authentication__adminLogo" />
+      <Image
+        name="Logo"
+        onIconClick={onSetRoute.bind(this, "home")}
+        className="authentication__adminLogo"
+      />
       <div className="authentication__adminLoginBox">
         <Title className="u-margin-top-10" variant="pr-25-1">
           Login
@@ -50,7 +61,9 @@ const Details = ({ dispatch }) => {
         <form onSubmit={onHandleSubmit} className="authentication__adminInput">
           <Input
             variant="1"
-            className="u-margin-top-2"
+            className={`u-margin-top-2 ${
+              emailError ? "authentication__loginInputError2" : null
+            }`}
             value={loginProps.un}
             onHandleText={onHandleLogin.bind(this, "un")}
             placeholder="Email Id"
@@ -67,7 +80,7 @@ const Details = ({ dispatch }) => {
             <span>
               <Text variant="pr-14-2">forgot password</Text>
             </span>
-            <span onClick={onSetRoute.bind(this, 'recruiterSignup')}>
+            <span onClick={onSetRoute.bind(this, "recruiterSignup")}>
               <Text variant="pr-14-2">Sign up</Text>
             </span>
           </div>

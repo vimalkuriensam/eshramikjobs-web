@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
+
+import Logout from "../components/organisms/Logout";
 import { userType, USER_TYPES } from "../utils/data";
 
 const AdminRoute = ({
@@ -11,6 +13,11 @@ const AdminRoute = ({
   ...rest
 }) => {
   const { type } = userType(token);
+
+  const getRedirection = () => {
+    window.location.href = "/register/admin";
+    return <Logout />;
+  };
   return (
     <Route
       {...rest}
@@ -18,7 +25,8 @@ const AdminRoute = ({
         isAuthenticated && type == USER_TYPES.ADMIN ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/register/admin" />
+          getRedirection()
+          //<Redirect to="/register/admin" />
         )
       }
     ></Route>

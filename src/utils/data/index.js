@@ -533,6 +533,25 @@ export const NAVBAR_NAVS = [
   },
 ];
 
+export const RECRUITER_NAVBAR_NAVS = [
+  {
+    text: "Post New Job",
+    to: "/recruite/create-jobs",
+  },
+  {
+    text: "Profile details",
+    to: "/recruite/plans",
+  },
+  {
+    text: "View applications",
+    to: "/recruite/applications",
+  },
+  {
+    text: "Application status",
+    to: "/recruite/resumes",
+  },
+];
+
 export const userType = (token) => {
   if (token) {
     const { type, exp } = jwtDecode(token);
@@ -567,7 +586,7 @@ export const USER_ROUTE_TYPES = {
     "/create",
     "/companies",
   ],
-  recruiter: ["/profile"],
+  recruiter: ["/create-jobs", "/plans", "/applications"],
   admin: [
     "/dashboard",
     "/active-subscription",
@@ -575,5 +594,5 @@ export const USER_ROUTE_TYPES = {
     "/trial-subscription",
     "/resumes",
   ],
-  default: ["/admin", "/signup"],
+  default: ["/admin", "/signup", "/profile"],
 };

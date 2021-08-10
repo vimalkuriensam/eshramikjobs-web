@@ -32,4 +32,10 @@
     margin-bottom: 6.4rem;
     margin-left: 6rem;
   }
+
+  &__planRegion {
+    background: $color-white;
+    box-shadow: 0 0 0.6rem rgba($color-black, 0.16);
+    border-radius: 0.8rem;
+  }
 }

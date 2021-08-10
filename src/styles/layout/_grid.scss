@@ -125,6 +125,12 @@
     );
   }
 
+  .col-7-of-10 {
+    width: calc(
+      7 * ((100% - 9 *#{$gutter-horizontal}) / 10) + 6 * #{$gutter-horizontal}
+    );
+  }
+
   .col-35-of-10 {
     width: calc(
       3.5 * ((100% - 9 *#{$gutter-horizontal}) / 10) + 2.5 * #{$gutter-horizontal}

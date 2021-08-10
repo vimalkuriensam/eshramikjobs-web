@@ -566,6 +566,12 @@ export const USER_TYPES = {
   ADMIN: 3,
 };
 
+export const RECRUITER_STATUS = {
+  COMPANY_UNVERIFIED: 0,
+  PAYMENT: 1,
+  VERIFIED: 2,
+};
+
 export const USER_ROUTE_TYPES = {
   user: [
     "/register",

@@ -7,6 +7,7 @@ import {
 const authenticationReducerDefaultState = {
   accessToken: null,
   refreshToken: null,
+  verified: null,
   isProfileCreated: false,
   profileSection: 1,
   email: "",
@@ -23,6 +24,9 @@ const authenticationReducer = (
         accessToken: tokens.accessToken,
         ...(tokens?.refreshToken && {
           refreshToken: tokens.refreshToken,
+        }),
+        ...(tokens?.verified && {
+          verified: tokens.verified,
         }),
       };
     case SET_LOGOUT:

@@ -14,6 +14,7 @@ import {
   Home as HomeView,
   AboutUs as AboutUsView,
   Companies as CompaniesView,
+  BuyPlans as BuyPlansView,
   Profile as ProfileView,
   Resumes as ResumesChild,
   Create as CreateJobs,
@@ -63,7 +64,7 @@ const AppRoutes = ({ tokenData }) => {
                           type == USER_TYPES.ADMIN
                             ? "/dashboard"
                             : type == USER_TYPES.RECRUITER
-                            ? "/recruite/create-jobs"
+                            ? "/recruite"
                             : "/home"
                         }
                       />
@@ -77,7 +78,11 @@ const AppRoutes = ({ tokenData }) => {
                     <Route path="/create-jobs" component={CreateJobs} />
                     <Route path="/home" component={HomeView} />
                     <Route path="/about" component={AboutUsView} />
-                    <RecruiterRoute path="/recruite" component={RecruiterChildView} />
+                    <Route path="/plans" component={BuyPlansView} />
+                    <RecruiterRoute
+                      path="/recruite"
+                      component={RecruiterChildView}
+                    />
                     <UserRoute path="/jobs" component={JobsChildView} />
                     <UserRoute path="/companies" component={CompaniesView} />
                     <UserRoute path="/profile" component={ProfileView} />

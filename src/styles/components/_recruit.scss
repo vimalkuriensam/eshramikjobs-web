@@ -12,4 +12,24 @@
       height: 8.7rem;
     }
   }
+
+  &__planHero {
+    background: $color-white;
+    border-radius: 0.8rem;
+    box-shadow: 0 0 0.6rem rgba($color-black, 0.16);
+    min-height: 18.5rem;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &__planBanner {
+    min-width: 30.8rem;
+    display: inline-block;
+  }
+
+  &__planTitle {
+    margin-bottom: 6.4rem;
+    margin-left: 6rem;
+  }
 }

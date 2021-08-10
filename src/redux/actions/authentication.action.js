@@ -75,9 +75,9 @@ export const adminLogin =
         info
       );
       if (status == 200) {
-        const { accessToken, refreshToken } = data["data"];
-        dispatch(setAccessToken({ accessToken, refreshToken }));
-        window.location.href = "/"; //history.push("/");
+        const { accessToken, refreshToken, verified = null } = data["data"];
+        dispatch(setAccessToken({ accessToken, refreshToken, verified }));
+        window.location.href = "/";
       }
     } catch (e) {
       throw e;
@@ -157,7 +157,6 @@ export const getAccessToken =
         refreshToken,
         un: email,
       });
-      console.log(data, status);
       if (status == 200) {
         dispatch(setAccessToken(data));
         return true;

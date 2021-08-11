@@ -28,7 +28,6 @@ const PlanContainer = ({
       return;
     }
     const { id, currency, amount } = await dispatch(buyPlan());
-    console.log(id);
     const options = {
       key: process.env.RAZORPAY_ID,
       amount,
@@ -38,7 +37,6 @@ const PlanContainer = ({
       image: RAZORPAY_LOGO,
       order_id: id,
       handler: async function (response) {
-        console.log(response);
         const paymentResp = await dispatch(
           confirmOrder({ razorpay_payment_id: response?.razorpay_payment_id })
         );

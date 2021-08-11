@@ -7,6 +7,7 @@ import {
   Plans as PlansView,
   BuyPlans as BuyPlansView,
 } from "../../pages";
+import RecruiterRoute from "../RecruiterRoute";
 
 export const RecruiterChildView = () => {
   const { path } = useRouteMatch();
@@ -16,10 +17,10 @@ export const RecruiterChildView = () => {
         <Route exact path={path}>
           <Redirect to={`${path}/create-jobs`} />
         </Route>
-        <Route path={`${path}/create-jobs`} component={CreateView} />
-        <Route path={`${path}/plans`} component={PlansView} />
-        <Route path={`${path}/applications`} component={ApplicationsView} />
-        <Route path={`${path}/buy-plans`} component={BuyPlansView} />
+        <RecruiterRoute path={`${path}/create-jobs`} component={CreateView} />
+        <RecruiterRoute path={`${path}/plans`} component={PlansView} />
+        <RecruiterRoute path={`${path}/applications`} component={ApplicationsView} />        
+        <RecruiterRoute path={`${path}/buy-plans`} component={BuyPlansView} />
       </Switch>
     </Fragment>
   );

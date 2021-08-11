@@ -41,6 +41,11 @@ body {
     color: $color-primary;
   }
 
+  &--pr-15-3 {
+    font-size: 1.5rem;
+    color: $color-tertiary;
+  }
+
   &--pr-16-1 {
     font-size: 1.6rem;
   }
@@ -80,6 +85,11 @@ body {
 
   &--pr-20-2 {
     font-size: 2rem;
+  }
+
+  &--pr-21-1 {
+    font-size: 2.1rem;
+    color: $color-white;
   }
 
   &--pr-24-1 {
@@ -205,6 +215,11 @@ body {
     font-family: "poppins-light";
     font-size: 1.8rem;
     color: $color-primary;
+  }
+
+  &--pl-18-2 {
+    font-family: "poppins-light";
+    font-size: 1.8rem;
   }
 
   &--error {

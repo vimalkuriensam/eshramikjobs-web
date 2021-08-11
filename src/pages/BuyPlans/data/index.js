@@ -36,6 +36,27 @@ export const DISTRICT_PLAN = [
   },
 ];
 
+export const DISTRICT_CONTENTS = {
+  column1: "District/ UT(single login)",
+  column2:
+    "Plan (Resume DB Download / All India job postings - all resumes to be provided)",
+  column3: "Prize + GST",
+};
+
+export const STATE_CONTENTS = {
+  column1: "State (2 Logins)",
+  column2:
+    "Plan (Resume DB Download / All India job postings - all resumes to be provided)",
+  column3: "Prize + GST",
+};
+
+export const NATIONAL_CONTENTS = {
+  column1: "National (4 logins)",
+  column2:
+    "Plan (Resume DB Download / All India job postings - all resumes to be provided)",
+  column3: "Prize + GST",
+};
+
 export const STATE_PLAN = [
   {
     time: "15days",

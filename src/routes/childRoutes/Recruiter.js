@@ -5,6 +5,7 @@ import {
   Create as CreateView,
   Applications as ApplicationsView,
   Plans as PlansView,
+  BuyPlans as BuyPlansView,
 } from "../../pages";
 
 export const RecruiterChildView = () => {
@@ -18,6 +19,7 @@ export const RecruiterChildView = () => {
         <Route path={`${path}/create-jobs`} component={CreateView} />
         <Route path={`${path}/plans`} component={PlansView} />
         <Route path={`${path}/applications`} component={ApplicationsView} />
+        <Route path={`${path}/buy-plans`} component={BuyPlansView} />
       </Switch>
     </Fragment>
   );

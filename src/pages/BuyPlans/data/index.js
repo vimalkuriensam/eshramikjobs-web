@@ -1,3 +1,7 @@
+export const RAZORPAY_CDN = "https://checkout.razorpay.com/v1/checkout.js";
+export const RAZORPAY_LOGO =
+  "https://apppointto-bucket.s3.amazonaws.com/d3fb001d-033f-4702-8708-967bf98631a9.png";
+
 export const DISTRICT_PLAN = [
   {
     time: "15days",
@@ -59,7 +63,7 @@ export const NATIONAL_CONTENTS = {
 
 export const STATE_PLAN = [
   {
-    time: "15days",
+    time: "15 days",
     resumes: "500",
     price: "Free",
   },

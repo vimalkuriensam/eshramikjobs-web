@@ -1,13 +1,67 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
+import { buyPlan, confirmOrder } from "../../../redux/actions/recruit.action";
+import { RAZORPAY_CDN, RAZORPAY_LOGO } from "../data";
 
 const PlanContainer = ({
   variant = "primary",
   headerContents,
   contents = [],
+  dispatch,
 }) => {
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+  const displayRazorPay = async () => {
+    const res = await loadScript(RAZORPAY_CDN);
+    if (!res) {
+      alert("Razorpay integration failed");
+      return;
+    }
+    const { id, currency, amount } = await dispatch(buyPlan());
+    console.log(id);
+    const options = {
+      key: process.env.RAZORPAY_ID,
+      amount,
+      currency,
+      name: "Eshramik",
+      description: "15 day plan",
+      image: RAZORPAY_LOGO,
+      order_id: id,
+      handler: async function (response) {
+        console.log(response);
+        const paymentResp = await dispatch(
+          confirmOrder({ razorpay_payment_id: response?.razorpay_payment_id })
+        );
+        console.log(paymentResp);
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature);
+      },
+      prefill: {
+        name: "Gaurav Kumar",
+        email: "gaurav.kumar@example.com",
+        contact: "9999999999",
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#1785a9",
+      },
+    };
+    const razorPaymentObj = new window.Razorpay(options);
+    razorPaymentObj.open();
+  };
   return (
     <div className="u-margin-top-50 recruit__planRegion">
       <div className={`recruit__planHeader recruit__planHeader--${variant}`}>
@@ -41,7 +95,7 @@ const PlanContainer = ({
                 <Text variant="pl-18-2">{content.price}</Text>
               </div>
               <div className="col-a-1-of-4">
-                <span className="u-cursor-pointer">
+                <span className="u-cursor-pointer" onClick={displayRazorPay}>
                   <Title variant="pr-15-3">Buy Now</Title>
                 </span>
               </div>
@@ -53,4 +107,4 @@ const PlanContainer = ({
   );
 };
 
-export default PlanContainer;
+export default connect()(PlanContainer);

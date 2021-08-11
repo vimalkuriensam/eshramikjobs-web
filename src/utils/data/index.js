@@ -546,10 +546,6 @@ export const RECRUITER_NAVBAR_NAVS = [
     text: "View applications",
     to: "/recruite/applications",
   },
-  {
-    text: "Application status",
-    to: "/recruite/resumes",
-  },
 ];
 
 export const userType = (token) => {
@@ -592,7 +588,7 @@ export const USER_ROUTE_TYPES = {
     "/create",
     "/companies",
   ],
-  recruiter: ["/create-jobs", "/plans", "/applications"],
+  recruiter: ["/create-jobs", "/plans", "/applications", "buy-plans"],
   admin: [
     "/dashboard",
     "/active-subscription",

@@ -14,7 +14,6 @@ import {
   Home as HomeView,
   AboutUs as AboutUsView,
   Companies as CompaniesView,
-  BuyPlans as BuyPlansView,
   Profile as ProfileView,
   Resumes as ResumesChild,
   Create as CreateJobs,
@@ -78,7 +77,6 @@ const AppRoutes = ({ tokenData }) => {
                     <Route path="/create-jobs" component={CreateJobs} />
                     <Route path="/home" component={HomeView} />
                     <Route path="/about" component={AboutUsView} />
-                    <Route path="/plans" component={BuyPlansView} />
                     <RecruiterRoute
                       path="/recruite"
                       component={RecruiterChildView}

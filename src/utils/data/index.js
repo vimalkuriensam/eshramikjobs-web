@@ -19,7 +19,7 @@ import {
 } from "../../redux/actions/profile.actions";
 import history from "../history";
 
-export const BASE_URL = "https://eshramik-api.herokuapp.com";
+export const BASE_URL = "https://eshramik-server.herokuapp.com";//"https://eshramik-api.herokuapp.com";
 
 export const FEEDBACKS = [
   {
@@ -546,10 +546,6 @@ export const RECRUITER_NAVBAR_NAVS = [
     text: "View applications",
     to: "/recruite/applications",
   },
-  {
-    text: "Application status",
-    to: "/recruite/resumes",
-  },
 ];
 
 export const userType = (token) => {
@@ -564,6 +560,12 @@ export const USER_TYPES = {
   USER: 1,
   RECRUITER: 2,
   ADMIN: 3,
+};
+
+export const RECRUITER_STATUS = {
+  COMPANY_UNVERIFIED: 0,
+  PAYMENT: 1,
+  VERIFIED: 2,
 };
 
 export const USER_ROUTE_TYPES = {
@@ -586,7 +588,7 @@ export const USER_ROUTE_TYPES = {
     "/create",
     "/companies",
   ],
-  recruiter: ["/create-jobs", "/plans", "/applications"],
+  recruiter: ["/create-jobs", "/plans", "/applications", "buy-plans"],
   admin: [
     "/dashboard",
     "/active-subscription",

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import BlacklistComponent from "../../hoc/BlacklistComponent";
 import { setLogout } from "../../redux/actions/authentication.action";
+import { setNotification } from "../../redux/actions/utils.action";
 import { funcMap, USER_ROUTE_TYPES } from "../../utils/data";
 import Icon from "../atoms/Icon";
 import Image from "../atoms/Image";
@@ -9,11 +10,17 @@ import Text from "../atoms/Text";
 import Title from "../atoms/Title";
 import Search from "../molecules/Search";
 
-const RecruiterHeader = ({ dispatch }) => {
+const RecruiterHeader = ({
+  dispatch,
+  companyName,
+  companyLogo = null,
+  notificationCount,
+}) => {
   const onSetHome = () => funcMap["home"]();
   const recruiterPopupRef = useRef();
   const handler = (event) => {
-    if (!recruiterPopupRef.current?.contains(event.target)) setProfileState(false);
+    if (!recruiterPopupRef.current?.contains(event.target))
+      setProfileState(false);
   };
   useEffect(() => {
     document.addEventListener("mousedown", handler);
@@ -32,6 +39,7 @@ const RecruiterHeader = ({ dispatch }) => {
       </div>
     );
   };
+  
   return (
     <div className="recruiterHeader">
       <Image
@@ -41,14 +49,31 @@ const RecruiterHeader = ({ dispatch }) => {
       />
       <div className="adminHeader__contentMain--right">
         <Search variant="5" placeholder="" />
-        <Icon name="Bell" />
-        <Title variant="pr-16-1">Company Name</Title>
+        <span className="u-position-relative">
+          <Icon name="Bell" />
+          {notificationCount > 0 && (
+            <div className="adminHeader__notificationCount">
+              {notificationCount}
+            </div>
+          )}
+        </span>
+        <Title variant="pr-16-1">{companyName}</Title>
         <div className="adminHeader__userBox">
-          <Icon
-            name="User"
-            onIconClick={onHandleIconClick}
-            className="adminHeader__userIcon"
-          />
+          {companyLogo ? (
+            <span onClick={onHandleIconClick}>
+              <Image
+                type="binary"
+                name={companyLogo}
+                className="recruiterHeader__userLogo"
+              />
+            </span>
+          ) : (
+            <Icon
+              name="User"
+              onIconClick={onHandleIconClick}
+              className="adminHeader__userIcon"
+            />
+          )}
         </div>
       </div>
       {profileState && profilePopup()}
@@ -56,8 +81,16 @@ const RecruiterHeader = ({ dispatch }) => {
   );
 };
 
-export default connect()(BlacklistComponent(RecruiterHeader)([
-  ...USER_ROUTE_TYPES.admin,
-  ...USER_ROUTE_TYPES.user,
-  ...USER_ROUTE_TYPES.default,
-]));
+const mapStateToProps = (state) => ({
+  companyName: state.recruiter.name,
+  companyLogo: state.recruiter.logo,
+  notificationCount: state.utils.notification,
+});
+
+export default connect(mapStateToProps)(
+  BlacklistComponent(RecruiterHeader)([
+    ...USER_ROUTE_TYPES.admin,
+    ...USER_ROUTE_TYPES.user,
+    ...USER_ROUTE_TYPES.default,
+  ])
+);

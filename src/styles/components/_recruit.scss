@@ -12,4 +12,59 @@
       height: 8.7rem;
     }
   }
+
+  &__planHero {
+    background: $color-white;
+    border-radius: 0.8rem;
+    box-shadow: 0 0 0.6rem rgba($color-black, 0.16);
+    min-height: 18.5rem;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &__planBanner {
+    min-width: 30.8rem;
+    display: inline-block;
+  }
+
+  &__planTitle {
+    margin-bottom: 6.4rem;
+    margin-left: 6rem;
+  }
+
+  &__planRegion {
+    background: $color-white;
+    box-shadow: 0 0 0.6rem rgba($color-black, 0.16);
+    border-radius: 0.8rem;
+    overflow: hidden;
+  }
+
+  &__planHeader {
+    min-height: 12.6rem;
+    padding: 5rem 4.5rem 4.5rem 4.5rem;
+    &--primary {
+      background: linear-gradient(to right bottom, #ecb84b, #dba127);
+    }
+    &--secondary {
+      background: linear-gradient(to right bottom, #00afe8, #1785a9);
+    }
+
+    &--tertiary {
+      background: linear-gradient(to right bottom, #1e806c, #126353);
+    }
+  }
+
+  &__planContentLeft {
+    background: #f2f2f2;
+    padding: 6.4rem;
+    min-height: 43.9rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__planContents {
+    text-align: center;
+    padding: 1.6rem;
+  }
 }

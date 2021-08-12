@@ -6,12 +6,11 @@ import {
 import { setLoader } from "../redux/actions/utils.action";
 
 import { store } from "../redux/stores/configureStore";
-import { BASE_URL } from "../utils/data";
 import history from "../utils/history";
 
 const apiService = () => {
   const api = Axios.create({
-    baseURL: BASE_URL,
+    baseURL: process.env.BASE_URL,
   });
   let currentEndpoint = "";
   api.interceptors.request.use(async (config) => {

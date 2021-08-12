@@ -11,6 +11,7 @@ import Login from "../components/organisms/Login";
 import Loader from "../components/organisms/Loader";
 import Footer from "../components/organisms/Footer";
 import {
+  BuyPlans as BuyPlansView,
   Home as HomeView,
   AboutUs as AboutUsView,
   Companies as CompaniesView,
@@ -63,7 +64,7 @@ const AppRoutes = ({ tokenData }) => {
                           type == USER_TYPES.ADMIN
                             ? "/dashboard"
                             : type == USER_TYPES.RECRUITER
-                            ? "/recruite/create-jobs"
+                            ? "/recruite"
                             : "/home"
                         }
                       />
@@ -77,7 +78,7 @@ const AppRoutes = ({ tokenData }) => {
                     <Route path="/create-jobs" component={CreateJobs} />
                     <Route path="/home" component={HomeView} />
                     <Route path="/about" component={AboutUsView} />
-                    <RecruiterRoute path="/recruite" component={RecruiterChildView} />
+                    <Route path="/recruite" component={RecruiterChildView} />
                     <UserRoute path="/jobs" component={JobsChildView} />
                     <UserRoute path="/companies" component={CompaniesView} />
                     <UserRoute path="/profile" component={ProfileView} />

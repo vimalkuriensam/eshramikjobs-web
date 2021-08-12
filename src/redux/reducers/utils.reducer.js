@@ -1,7 +1,12 @@
-import { FEEDBACKS } from "../../utils/data";
-import { SET_LOADER_STATE, SET_LOGIN_STATE } from "../actions/utils.action";
+import {
+  CLEAR_NOTIFICATION,
+  SET_LOADER_STATE,
+  SET_LOGIN_STATE,
+  SET_NOTIFICATION,
+} from "../actions/utils.action";
 
 const utilsReducerDefaultState = {
+  notification: 0,
   loginState: false,
   loaderState: false,
   feedbacks: [
@@ -50,6 +55,10 @@ const utilsReducer = (state = utilsReducerDefaultState, { type, value }) => {
       return { ...state, loginState: value };
     case SET_LOADER_STATE:
       return { ...state, loaderState: value };
+    case SET_NOTIFICATION:
+      return { ...state, notification: state.notification + 1 };
+    case CLEAR_NOTIFICATION:
+      return { ...state, notification: 0 };
     default:
       return state;
   }

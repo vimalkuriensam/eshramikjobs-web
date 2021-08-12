@@ -1,40 +1,62 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 
 import Logout from "../components/organisms/Logout";
-import { userType, USER_TYPES } from "../utils/data";
+import { RECRUITER_STATUS, userType, USER_TYPES } from "../utils/data";
 
 const AdminRoute = ({
   dispatch,
   isAuthenticated,
   token,
+  verified,
   component: Component,
   ...rest
 }) => {
   const { type } = userType(token);
 
   const getRedirection = () => {
-    window.location.href = "/";
-    return <Logout />;
+    setTimeout(() => {
+      window.location.href = "/";
+    }, [1000]);
+    return <Route component={Logout} />;
   };
+
+  const { path } = rest;
+
+  if (path == "/recruite/buy-plans") {
+    return (
+      <Route
+        {...rest}
+        render={(props) =>
+          isAuthenticated && type == USER_TYPES.RECRUITER ? (
+            <Component {...props} />
+          ) : (
+            getRedirection()
+          )
+        }
+      ></Route>
+    );
+  }
+
   return (
     <Route
       {...rest}
-      render={(props) =>
-        isAuthenticated && type == USER_TYPES.RECRUITER ? (
-          <Component {...props} />
-        ) : (
-          getRedirection()
-          //<Redirect to="/register/admin" />
-        )
-      }
+      render={(props) => {
+        if (isAuthenticated && type == USER_TYPES.RECRUITER) {
+          if (verified == RECRUITER_STATUS.VERIFIED)
+            return <Component {...props} />;
+          else if (verified == RECRUITER_STATUS.PAYMENT)
+            return <Redirect to="/recruite/buy-plans" />;
+        } else return <Route render={() => getRedirection()}></Route>;
+      }}
     ></Route>
   );
 };
 
 const mapStateToProps = (state) => ({
   isAuthenticated: !!state.auth.accessToken,
+  verified: state.auth.verified,
   token: state.auth.accessToken,
 });
 

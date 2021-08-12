@@ -59,4 +59,4 @@ typings/
 
 # dotenv environment variables file
 .env
-src/environment
+src/environment/.env.development

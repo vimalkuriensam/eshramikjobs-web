@@ -1,1 +1,1 @@
-export { Applications, Plans } from "./child-pages";
+export { Applications, Plans, Resume } from "./child-pages";

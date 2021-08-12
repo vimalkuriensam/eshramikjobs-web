@@ -1,17 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
 import Image from "../../../../../components/atoms/Image";
 import Text from "../../../../../components/atoms/Text";
 import Title from "../../../../../components/atoms/Title";
 
-const PlanDetails = () => {
+const PlanDetails = ({ companyName, companyLogo }) => {
   return (
     <div className="recruit__planContainer">
       <Image
-        name="companies-enrolled/pic3"
+        name={companyLogo}
+        type="binary"
         className="recruit__planContainer--image"
       />
       <div className="row">
-        <Text variant="pl-17-1">Nyati constructions</Text>
+        <Text variant="pl-17-1">{companyName}</Text>
       </div>
       <div className="row">
         <div className="col-1-of-2">
@@ -57,4 +59,9 @@ const PlanDetails = () => {
   );
 };
 
-export default PlanDetails;
+const mapStateToProps = (state) => ({
+  companyName: state.recruiter.name,
+  companyLogo: state.recruiter.logo,
+});
+
+export default connect(mapStateToProps)(PlanDetails);

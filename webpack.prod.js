@@ -10,7 +10,7 @@ module.exports = (env) => {
     path: path.join(__dirname, `/src/environment/.env.${env}`),
   }).parsed;
   const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(dotenv.config().parsed);
+    prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
     return prev;
   }, {});
   console.log(envKeys);
@@ -20,4 +20,3 @@ module.exports = (env) => {
     plugins: [new webpack.DefinePlugin(envKeys)],
   });
 };
-

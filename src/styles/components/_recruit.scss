@@ -67,4 +67,18 @@
     text-align: center;
     padding: 1.6rem;
   }
+
+  &__resumeContainer {
+    background: $color-white;
+    border-radius: 1.5rem;
+    padding: 6.1rem 4.8rem 5.5rem 4.8rem;
+    margin-top: 3rem;
+  }
+
+  &__skills {
+    max-width: 51.6rem;
+    > * {
+      margin-left: 0;
+    }
+  }
 }

@@ -19,7 +19,7 @@ import {
 } from "../../redux/actions/profile.actions";
 import history from "../history";
 
-export const BASE_URL = "https://eshramik-server.herokuapp.com";//"https://eshramik-api.herokuapp.com";
+export const BASE_URL = "https://eshramik-server.herokuapp.com"; //"https://eshramik-api.herokuapp.com";
 
 export const FEEDBACKS = [
   {
@@ -588,7 +588,7 @@ export const USER_ROUTE_TYPES = {
     "/create",
     "/companies",
   ],
-  recruiter: ["/create-jobs", "/plans", "/applications", "buy-plans"],
+  recruiter: ["/create-jobs", "/plans", "/applications", "buy-plans", "view"],
   admin: [
     "/dashboard",
     "/active-subscription",

@@ -1,6 +1,8 @@
 import apiService from "../../authInterceptor/authAxios";
+import { userType, USER_TYPES } from "../../utils/data";
 import history from "../../utils/history";
 import { getState } from "./profile.actions";
+import { getCompanyInfo } from "./recruit.action";
 import { fileUpload, loginState } from "./utils.action";
 
 export const SET_LOGIN = "SET_LOGIN";
@@ -77,7 +79,11 @@ export const adminLogin =
       if (status == 200) {
         const { accessToken, refreshToken, verified = null } = data["data"];
         dispatch(setAccessToken({ accessToken, refreshToken, verified }));
-        window.location.href = "/";
+        const { type } = userType(accessToken);
+        if (type == USER_TYPES.RECRUITER) {
+          const resp = await dispatch(getCompanyInfo());
+          if (resp) window.location.href = "/";
+        } else window.location.href = "/";
       }
     } catch (e) {
       throw e;

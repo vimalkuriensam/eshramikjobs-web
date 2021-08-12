@@ -9,11 +9,12 @@ import Text from "../atoms/Text";
 import Title from "../atoms/Title";
 import Search from "../molecules/Search";
 
-const RecruiterHeader = ({ dispatch }) => {
+const RecruiterHeader = ({ dispatch, companyName, companyLogo = null }) => {
   const onSetHome = () => funcMap["home"]();
   const recruiterPopupRef = useRef();
   const handler = (event) => {
-    if (!recruiterPopupRef.current?.contains(event.target)) setProfileState(false);
+    if (!recruiterPopupRef.current?.contains(event.target))
+      setProfileState(false);
   };
   useEffect(() => {
     document.addEventListener("mousedown", handler);
@@ -42,13 +43,23 @@ const RecruiterHeader = ({ dispatch }) => {
       <div className="adminHeader__contentMain--right">
         <Search variant="5" placeholder="" />
         <Icon name="Bell" />
-        <Title variant="pr-16-1">Company Name</Title>
+        <Title variant="pr-16-1">{companyName}</Title>
         <div className="adminHeader__userBox">
-          <Icon
-            name="User"
-            onIconClick={onHandleIconClick}
-            className="adminHeader__userIcon"
-          />
+          {companyLogo ? (
+            <span onClick={onHandleIconClick}>
+              <Image
+                type="binary"
+                name={companyLogo}
+                className="recruiterHeader__userLogo"
+              />
+            </span>
+          ) : (
+            <Icon
+              name="User"
+              onIconClick={onHandleIconClick}
+              className="adminHeader__userIcon"
+            />
+          )}
         </div>
       </div>
       {profileState && profilePopup()}
@@ -56,8 +67,15 @@ const RecruiterHeader = ({ dispatch }) => {
   );
 };
 
-export default connect()(BlacklistComponent(RecruiterHeader)([
-  ...USER_ROUTE_TYPES.admin,
-  ...USER_ROUTE_TYPES.user,
-  ...USER_ROUTE_TYPES.default,
-]));
+const mapStateToProps = (state) => ({
+  companyName: state.recruiter.name,
+  companyLogo: state.recruiter.logo,
+});
+
+export default connect(mapStateToProps)(
+  BlacklistComponent(RecruiterHeader)([
+    ...USER_ROUTE_TYPES.admin,
+    ...USER_ROUTE_TYPES.user,
+    ...USER_ROUTE_TYPES.default,
+  ])
+);

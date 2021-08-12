@@ -167,4 +167,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &__userLogo {
+    height: 4.2rem;
+    width: 4.2rem;
+  }
 }

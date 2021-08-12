@@ -10,6 +10,8 @@ import { store, persistor } from "./redux/stores/configureStore";
 
 import "./styles/main.scss";
 
+console.log(process.env.BASE_URL);
+
 AOS.init();
 
 const connectedComponents = (

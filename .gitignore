@@ -60,3 +60,4 @@ typings/
 # dotenv environment variables file
 .env
 src/environment/.env.development
+src/environment/.env.production

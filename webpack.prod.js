@@ -15,8 +15,8 @@ module.exports = (env) => {
   // }, {});
   const envKeys = {
     "process.env": {
-      BASE_URL: process.env.BASE_URL,
-      RAZORPAY_ID: process.env.RAZORPAY_ID,
+      BASE_URL: JSON.stringify(process.env.BASE_URL),
+      RAZORPAY_ID: JSON.stringify(process.env.RAZORPAY_ID),
     },
   };
   console.log(envKeys);

@@ -19,7 +19,7 @@ import {
 } from "../../redux/actions/profile.actions";
 import history from "../history";
 
-export const BASE_URL = "https://eshramik-api.herokuapp.com";
+export const BASE_URL = "https://eshramik-server.herokuapp.com";//"https://eshramik-api.herokuapp.com";
 
 export const FEEDBACKS = [
   {

@@ -48,7 +48,7 @@ const AdminRoute = ({
             return <Component {...props} />;
           else if (verified == RECRUITER_STATUS.PAYMENT)
             return <Redirect to="/recruite/buy-plans" />;
-        } else getRedirection();
+        } else return <Route render={() => getRedirection()}></Route>;
       }}
     ></Route>
   );

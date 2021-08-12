@@ -13,6 +13,7 @@ module.exports = (env) => {
     prev[`process.env.${next}`] = `process.env.${next}`;
     return prev;
   }, {});
+  console.log(envKeys);
   return merge(common, {
     mode: "production",
     devtool: "source-map",

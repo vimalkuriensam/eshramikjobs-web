@@ -2,6 +2,8 @@ import apiService from "../../authInterceptor/authAxios";
 
 export const SET_LOGIN_STATE = "SET_LOGIN_STATE";
 export const SET_LOADER_STATE = "SET_LOADER_STATE";
+export const SET_NOTIFICATION = "SET_NOTIFICATION";
+export const CLEAR_NOTIFICATION = "CLEAR_NOTIFICATION";
 
 export const loginState = ({ state }) => ({
   type: SET_LOGIN_STATE,
@@ -11,6 +13,14 @@ export const loginState = ({ state }) => ({
 export const setLoader = ({ state }) => ({
   type: SET_LOADER_STATE,
   value: state,
+});
+
+export const setNotification = () => ({
+  type: SET_NOTIFICATION,
+});
+
+export const clearNotification = () => ({
+  type: CLEAR_NOTIFICATION,
 });
 
 export const fileUpload =

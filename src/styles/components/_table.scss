@@ -79,4 +79,29 @@
       }
     }
   }
+
+  &__rowHeader {
+    padding: 3.5rem 3rem;
+  }
+
+  &__rowContent {
+    padding: 3rem;
+    transition: 0.3s;
+    cursor: pointer;
+    &--dark {
+      background: #fbfbfb;
+      &:hover {
+        background: darken(#fbfbfb, 4%);
+        border-radius: 1rem;
+      }
+    }
+
+    &--light {
+      background: $color-white;
+      &:hover {
+        background: darken($color-white, 4%);
+        border-radius: 1rem;
+      }
+    }
+  }
 }

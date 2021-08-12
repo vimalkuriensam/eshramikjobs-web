@@ -173,3 +173,10 @@
 .u-margin-top-10 {
   margin-top: 1rem !important;
 }
+
+.u-text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 95%;
+}

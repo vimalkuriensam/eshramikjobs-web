@@ -10,7 +10,7 @@ module.exports = (env) => {
     path: path.join(__dirname, `/src/environment/.env.${env}`),
   }).parsed;
   const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
+    prev[`process.env.${next}`] = JSON.stringify(process.env[next]);
     return prev;
   }, {});
   console.log(envKeys);

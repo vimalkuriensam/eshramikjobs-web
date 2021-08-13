@@ -32,7 +32,6 @@ import UserRoute from "./UserRoute";
 import RecruiterHeader from "../components/organisms/RecruiterHeader";
 import RecruiterNavbar from "../components/organisms/RecruiterNavbar";
 import { RecruiterChildView } from "./childRoutes/Recruiter";
-import RecruiterRoute from "./RecruiterRoute";
 
 const AppRoutes = ({ tokenData }) => {
   const { type } = tokenData;
@@ -81,7 +80,7 @@ const AppRoutes = ({ tokenData }) => {
                     <Route path="/recruite" component={RecruiterChildView} />
                     <UserRoute path="/jobs" component={JobsChildView} />
                     <UserRoute path="/companies" component={CompaniesView} />
-                    <UserRoute path="/profile" component={ProfileView} />
+                    <UserRoute path="/user-profile" component={ProfileView} />
                   </Switch>
                 </CSSTransition>
               </TransitionGroup>

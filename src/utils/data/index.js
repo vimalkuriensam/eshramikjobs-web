@@ -169,7 +169,7 @@ export const PROFILE_CONTENTS = {
         {
           text: "Edit Profile",
           type: "link",
-          to: "/profile",
+          to: "/user-profile",
         },
         {
           text: "Saved jobs",
@@ -587,6 +587,7 @@ export const USER_ROUTE_TYPES = {
     "/detail",
     "/create",
     "/companies",
+    "/user-profile",
   ],
   recruiter: ["/create-jobs", "/plans", "/applications", "buy-plans", "view"],
   admin: [

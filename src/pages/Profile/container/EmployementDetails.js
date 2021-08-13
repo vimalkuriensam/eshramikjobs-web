@@ -1,7 +1,12 @@
-import React, { Fragment } from "react";
+import React, { forwardRef, Fragment, useImperativeHandle } from "react";
 import Text from "../../../components/atoms/Text";
 
-const EmployementDetails = () => {
+const EmployementDetails = forwardRef((props, ref) => {
+  useImperativeHandle(ref, () => ({
+    onHandleEdit() {
+      alert("Child function called emp details");
+    },
+  }));
   return (
     <Fragment>
       <Text variant="pl-16-1" className="u-margin-top-20 u-display-block">
@@ -18,6 +23,6 @@ const EmployementDetails = () => {
       </Text>
     </Fragment>
   );
-};
+});
 
 export default EmployementDetails;

@@ -1,8 +1,13 @@
-import React, { Fragment } from "react";
+import React, { forwardRef, Fragment, useImperativeHandle } from "react";
 
 import Text from "../../../components/atoms/Text";
 
-const Qualification = () => {
+const Qualification = forwardRef((props, ref) => {
+  useImperativeHandle(ref, () => ({
+    onHandleEdit() {
+      alert("Child function called qualification");
+    },
+  }));
   return (
     <Fragment>
       <Text variant="pl-18-2" className="u-margin-top-30 u-display-block">
@@ -25,6 +30,6 @@ const Qualification = () => {
       </Text>
     </Fragment>
   );
-};
+});
 
 export default Qualification;

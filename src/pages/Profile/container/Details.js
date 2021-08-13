@@ -1,6 +1,5 @@
-import React, { forwardRef, useRef } from "react";
-import Text from "../../../components/atoms/Text";
-import Title from "../../../components/atoms/Title";
+import React, { forwardRef } from "react";
+
 import DetailsContainer from "./DetailsContainer";
 import EmployementDetails from "./EmployementDetails";
 import Headline from "./Headline";

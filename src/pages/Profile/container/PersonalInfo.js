@@ -1,7 +1,12 @@
-import React from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import Text from "../../../components/atoms/Text";
 
-const PersonalInfo = () => {
+const PersonalInfo = forwardRef((props, ref) => {
+  useImperativeHandle(ref, () => ({
+    onHandleEdit() {
+      alert("Child function called personalInfo");
+    },
+  }));
   return (
     <div className="row u-margin-top-30">
       <div className="col-1-of-2">
@@ -38,6 +43,6 @@ const PersonalInfo = () => {
       </div>
     </div>
   );
-};
+});
 
 export default PersonalInfo;

@@ -116,6 +116,8 @@
   &__popupContainer {
     padding: 2.7rem 6.8rem 3rem 7rem;
     min-width: 85rem;
+    overflow-y: scroll;
+    max-height: 90vh;
     > .popup__close {
       position: absolute;
       > div > svg {

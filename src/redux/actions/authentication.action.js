@@ -9,6 +9,7 @@ export const SET_LOGIN = "SET_LOGIN";
 export const SET_LOGOUT = "SET_LOGOUT";
 export const SET_ACCESS_TOKEN = "SET_ACCESS_TOKEN";
 export const SET_EMAIL = "SET_EMAIL";
+export const SET_VERIFICATION = "SET_VERIFICATION";
 
 export const recruiterRegister = (info) => async (dispatch) => {
   try {
@@ -180,4 +181,9 @@ export const setAccessToken = (tokens) => ({
 export const setEmail = ({ email }) => ({
   type: SET_EMAIL,
   email,
+});
+
+export const setVerification = ({ id }) => ({
+  type: SET_VERIFICATION,
+  id,
 });

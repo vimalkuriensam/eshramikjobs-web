@@ -1,9 +1,9 @@
 .message {
   position: fixed;
-  top: 3rem;
-  right: 5rem;
+  bottom: 3rem;
+  left: 5rem;
   width: 40rem;
-  z-index: 1000;
+  z-index: 10000;
   > * {
     &:not(:first-child) {
       margin-top: 2rem;
@@ -15,7 +15,7 @@
     background: #f5f5f7;
     height: 10rem;
     border-radius: 1rem;
-    animation: moveMessageLeft 0.5s ease 0.3s backwards;
+    animation: moveMessageTop 0.5s ease 0.3s backwards;
     box-shadow: 0 6px 0.6rem rgba($color-black, 0.13);
     border: 1px solid $color-grey-dark;
   }
@@ -91,14 +91,14 @@
   }
 }
 
-@keyframes moveMessageLeft {
+@keyframes moveMessageTop {
   0% {
-    transform: translateX(60rem);
+    transform: translateY(15rem);
     opacity: 0;
   }
 
   100% {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }

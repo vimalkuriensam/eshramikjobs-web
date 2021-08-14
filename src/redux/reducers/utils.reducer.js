@@ -11,24 +11,7 @@ const utilsReducerDefaultState = {
   notification: 0,
   loginState: false,
   loaderState: false,
-  messages: [
-    {
-      type: "success",
-      content: "Success Info",
-    },
-    {
-      type: "error",
-      content: "Error Message",
-    },
-    {
-      type: "alert",
-      content: "Alert Message",
-    },
-    {
-      type: "info",
-      content: "Info Message",
-    },
-  ],
+  messages: [],
   feedbacks: [
     {
       text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
@@ -69,7 +52,7 @@ const utilsReducerDefaultState = {
   ],
 };
 
-const utilsReducer = (state = utilsReducerDefaultState, { type, value }) => {
+const utilsReducer = (state = utilsReducerDefaultState, { type, value, info }) => {
   switch (type) {
     case SET_LOGIN_STATE:
       return { ...state, loginState: value };

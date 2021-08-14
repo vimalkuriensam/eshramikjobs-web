@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
 
 import CompanyListings from "../../../components/organisms/CompanyListings";
 import WorkListings from "../../../components/organisms/JobListings";
-import { getJobs, getRecentJobs } from "../../../redux/actions/jobs.action";
+import { getRecentJobs } from "../../../redux/actions/jobs.action";
 import { loginState } from "../../../redux/actions/utils.action";
 import { funcMap } from "../../../utils/data";
 import history from "../../../utils/history";
@@ -33,7 +34,7 @@ const Samples = ({ jobs, companies, isLogged, isAuthenticated, dispatch }) => {
   const onHandleApplyJob = async (id, e) => {
     e.stopPropagation();
     await funcMap["applyJobLists"](dispatch, id);
-  }
+  };
   return (
     <section className="section-home-samples">
       <div className="home__sampleContainer">
@@ -41,7 +42,17 @@ const Samples = ({ jobs, companies, isLogged, isAuthenticated, dispatch }) => {
           <Title className="u-margin-bottom-50" variant="pr-30-1">
             Recent jobs
           </Title>
-          <WorkListings jobs={jobs} onHandleJobDetail={onHandleJobDetail} onHandleButtonApply={onHandleApplyJob} />
+          {jobs.length ? (
+            <WorkListings
+              jobs={jobs}
+              onHandleJobDetail={onHandleJobDetail}
+              onHandleButtonApply={onHandleApplyJob}
+            />
+          ) : (
+            <Text variant="pl-18-2" className="u-display-block u-text-center">
+              No jobs posted yet!
+            </Text>
+          )}
         </div>
         <div className="home__sampleCompany">
           {isLogged && (

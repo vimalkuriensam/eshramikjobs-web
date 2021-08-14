@@ -14,9 +14,25 @@
   }
 
   &__cta {
-      margin-top: 3.2rem;
-      opacity: 1;
-      padding: .8rem 4.5rem;
-      width: 100%;
+    margin-top: 3.2rem;
+    opacity: 1;
+    padding: 0.8rem 4.5rem;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 65rem) {
+  .footer {
+    > .row {
+      > * {
+        &:not(:first-child) {
+          margin-top: 3rem;
+        }
+      }
+      > div {
+        display: block;
+        width: 100%;
+      }
+    }
   }
 }

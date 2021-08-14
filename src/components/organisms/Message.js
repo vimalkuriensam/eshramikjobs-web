@@ -7,13 +7,13 @@ import Icon from "../atoms/Icon";
 import Text from "../atoms/Text";
 
 const Message = ({ messages, dispatch }) => {
-  useEffect(() => {
-    if (messages.length) {
-      setTimeout(() => {
-        dispatch(removeMessage());
-      }, 2000);
-    }
-  }, [messages]);
+//   useEffect(() => {
+//     if (messages.length) {
+//       setTimeout(() => {
+//         dispatch(removeMessage());
+//       }, 2000);
+//     }
+//   }, [messages]);
 
   const getIcon = (type = null) => {
     switch (type) {

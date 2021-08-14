@@ -36,7 +36,6 @@ const JobListings = ({
             key={index}
             onClick={onHandleJobDetail.bind(this, jobId)}
           >
-            {console.log(saveId, ApplyId, saveJobId, applyJobId)}
             <div className="col-25-of-10 u-text-center">
               <Image
                 className={`jobs__imageContainer ${

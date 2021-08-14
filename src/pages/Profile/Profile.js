@@ -32,7 +32,7 @@ const Profile = () => {
     <div>
       <section className="section-profile">
         <Main />
-        <div className="row u-margin-top-30">
+        <div className="row u-margin-top-30 profile__mainWrapper">
           <div className="col-1-of-3">
             <Navbar ref={refs} executeScroll={executeScroll} />
           </div>

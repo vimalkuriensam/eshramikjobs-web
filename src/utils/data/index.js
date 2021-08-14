@@ -550,8 +550,8 @@ export const RECRUITER_NAVBAR_NAVS = [
 
 export const userType = (token) => {
   if (token) {
-    const { type, exp } = jwtDecode(token);
-    return { type, exp };
+    const { type, exp, user, email } = jwtDecode(token);
+    return { type, exp, user, email };
   }
   return { type: null, exp: null };
 };

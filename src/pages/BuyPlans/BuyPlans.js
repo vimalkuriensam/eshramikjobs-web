@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import PlanContainer from "./container/PlanContainer";
 import Hero from "./container/Hero";
@@ -10,28 +10,56 @@ import {
   STATE_CONTENTS,
   STATE_PLAN,
 } from "./data";
+import { connect } from "react-redux";
+import { getPlans } from "../../redux/actions/recruit.action";
+import { Fragment } from "react";
+import Title from "../../components/atoms/Title";
 
-const BuyPlans = () => {
+const BuyPlans = ({ dispatch }) => {
+  const loadPlans = async () => {
+    const plans = await dispatch(getPlans());
+    setDistrictPlan(plans.filter((plan) => plan.name === "DISTRICT_PLAN"));
+    setStatePlan(plans.filter((plan) => plan.name.trim() === "STATE_PLAN"));
+    setNationalPlan(plans.filter((plan) => plan.name.trim() === "NATIONAL_PLAN"));
+    setPlanStatus(true);
+    console.log(plans);
+  };
+  useEffect(() => {
+    loadPlans();
+  }, []);
+
+  const [planStatus, setPlanStatus] = useState(false);
+  const [districtPlan, setDistrictPlan] = useState([]);
+  const [statePlan, setStatePlan] = useState([]);
+  const [nationalPlan, setNationalPlan] = useState([]);
   return (
     <section className="section-recruit">
       <Hero />
-      <PlanContainer
-        variant="primary"
-        headerContents={DISTRICT_CONTENTS}
-        contents={DISTRICT_PLAN}
-      />
-      <PlanContainer
-        variant="secondary"
-        headerContents={STATE_CONTENTS}
-        contents={STATE_PLAN}
-      />
-      <PlanContainer
-        variant="tertiary"
-        headerContents={NATIONAL_CONTENTS}
-        contents={NATIONAL_PLAN}
-      />
+      {planStatus ? (
+        <Fragment>
+          <PlanContainer
+            variant="primary"
+            headerContents={DISTRICT_CONTENTS}
+            contents={districtPlan}
+          />
+          <PlanContainer
+            variant="secondary"
+            headerContents={STATE_CONTENTS}
+            contents={statePlan}
+          />
+          <PlanContainer
+            variant="tertiary"
+            headerContents={NATIONAL_CONTENTS}
+            contents={nationalPlan}
+          />
+        </Fragment>
+      ) : (
+        <div className="u-display-block u-text-center u-margin-top-40">
+          <Title variant="pr-15-1">Loading Plan...</Title>
+        </div>
+      )}
     </section>
   );
 };
 
-export default BuyPlans;
+export default connect()(BuyPlans);

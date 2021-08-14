@@ -2,6 +2,7 @@ import {
   SET_ACCESS_TOKEN,
   SET_EMAIL,
   SET_LOGOUT,
+  SET_VERIFICATION,
 } from "../actions/authentication.action";
 
 const authenticationReducerDefaultState = {
@@ -15,7 +16,7 @@ const authenticationReducerDefaultState = {
 
 const authenticationReducer = (
   state = authenticationReducerDefaultState,
-  { type, payload, email, tokens }
+  { type, email, tokens, id }
 ) => {
   switch (type) {
     case SET_ACCESS_TOKEN:
@@ -33,6 +34,8 @@ const authenticationReducer = (
       return { ...authenticationReducerDefaultState };
     case SET_EMAIL:
       return { ...state, email };
+    case SET_VERIFICATION:
+      return { ...state, verified: id };
     default:
       return state;
   }

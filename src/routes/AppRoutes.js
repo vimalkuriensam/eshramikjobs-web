@@ -32,6 +32,7 @@ import UserRoute from "./UserRoute";
 import RecruiterHeader from "../components/organisms/RecruiterHeader";
 import RecruiterNavbar from "../components/organisms/RecruiterNavbar";
 import { RecruiterChildView } from "./childRoutes/Recruiter";
+import Message from "../components/organisms/Message";
 
 const AppRoutes = ({ tokenData }) => {
   const { type } = tokenData;
@@ -41,6 +42,7 @@ const AppRoutes = ({ tokenData }) => {
       <AdminHeader />
       <RecruiterHeader />
       <Header />
+      <Message />
       <Login />
       <Loader />
       <div className="u-display-flex u-overflow-hidden u-width-100">

@@ -17,3 +17,9 @@
     padding: 1.6rem 5.2rem 10.8rem 5.2rem;
   }
 }
+
+@media only screen and (max-width: 40rem) {
+  .section-home-categories {
+    padding: 5.2rem 1rem;
+  }
+}

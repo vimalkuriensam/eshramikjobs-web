@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Text from "../atoms/Text";
 import Title from "../atoms/Title";
@@ -11,19 +11,27 @@ import Button from "../atoms/Button";
 import Icon from "../atoms/Icon";
 import BlacklistComponent from "../../hoc/BlacklistComponent";
 import { withRouter } from "react-router-dom";
+import useWindowSize from "../../hooks/WindowSize";
 
 const Footer = () => {
+  const { width } = useWindowSize();
+  const [columns, setColumns] = useState(3);
+  useEffect(() => {
+    if (width < 530) setColumns(1);
+    else if (width < 950) setColumns(2);
+    else setColumns(3);
+  }, [width]);
   const onHandleFooterAction = (val) => funcMap[val]();
   return (
     <div className="footer">
       <div className="row">
         <div className="col-3-of-4">
           {FOOTER_MAIN_CONTENTS.rows.map((rows, index) => (
-            <div className="row" key={index}>
+            <div className={`${columns > 1 ? "row" : null}`} key={index}>
               {rows.columns.map((column, idx) => (
                 <div
                   key={idx}
-                  className={`col-1-of-${rows.columns.length} u-text-center`}
+                  className={`col-1-of-${columns} ${columns == 1 ? 'u-margin-top-20': null} u-text-center`}
                   onClick={onHandleFooterAction.bind(this, column.to)}
                 >
                   <Text variant="pr-18-1 footer__linkContent">

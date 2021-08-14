@@ -1,9 +1,13 @@
+import moment from "moment";
 import React from "react";
 import { connect } from "react-redux";
 
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
+import { setVerification } from "../../../redux/actions/authentication.action";
 import { buyPlan, confirmOrder } from "../../../redux/actions/recruit.action";
+import { userType } from "../../../utils/data";
+import history from "../../../utils/history";
 import { RAZORPAY_CDN, RAZORPAY_LOGO } from "../data";
 
 const PlanContainer = ({
@@ -11,6 +15,7 @@ const PlanContainer = ({
   headerContents,
   contents = [],
   dispatch,
+  token,
 }) => {
   const loadScript = (src) => {
     return new Promise((resolve) => {
@@ -21,44 +26,47 @@ const PlanContainer = ({
       document.body.appendChild(script);
     });
   };
-  const displayRazorPay = async () => {
-    const res = await loadScript(RAZORPAY_CDN);
-    if (!res) {
-      alert("Razorpay integration failed");
-      return;
+  const displayRazorPay = async (planId) => {
+    const { id, currency, amount } = await dispatch(buyPlan({ planId }));
+    console.log(id, currency, amount);
+    if (id !== -1) {
+      const res = await loadScript(RAZORPAY_CDN);
+      if (!res) {
+        alert("Razorpay integration failed");
+        return;
+      }
+      const options = {
+        key: process.env.RAZORPAY_ID,
+        amount,
+        currency,
+        name: "Eshramik",
+        description: "15 day plan",
+        image: RAZORPAY_LOGO,
+        order_id: id,
+        handler: async function (response) {
+          const paymentResp = await dispatch(confirmOrder(response));
+          if (paymentResp) {
+            console.log(paymentResp);
+            dispatch(setVerification({ id: 2 }));
+            history.push("/");
+          }
+        },
+        prefill: {
+          name: "",
+          email: userType(token)?.email || "",
+          contact: userType(token)?.user || "",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#1785a9",
+        },
+      };
+      const razorPaymentObj = new window.Razorpay(options);
+      razorPaymentObj.open();
+      razorPaymentObj.on("payment.failed", function (response) {});
     }
-    const { id, currency, amount } = await dispatch(buyPlan());
-    const options = {
-      key: process.env.RAZORPAY_ID,
-      amount,
-      currency,
-      name: "Eshramik",
-      description: "15 day plan",
-      image: RAZORPAY_LOGO,
-      order_id: id,
-      handler: async function (response) {
-        const paymentResp = await dispatch(
-          confirmOrder({ razorpay_payment_id: response?.razorpay_payment_id })
-        );
-        console.log(paymentResp);
-        // alert(response.razorpay_payment_id);
-        // alert(response.razorpay_order_id);
-        // alert(response.razorpay_signature);
-      },
-      prefill: {
-        name: "Gaurav Kumar",
-        email: "gaurav.kumar@example.com",
-        contact: "9999999999",
-      },
-      notes: {
-        address: "Razorpay Corporate Office",
-      },
-      theme: {
-        color: "#1785a9",
-      },
-    };
-    const razorPaymentObj = new window.Razorpay(options);
-    razorPaymentObj.open();
   };
   return (
     <div className="u-margin-top-50 recruit__planRegion">
@@ -84,16 +92,26 @@ const PlanContainer = ({
           {contents.map((content, index) => (
             <div className="a-row recruit__planContents" key={index}>
               <div className="col-a-1-of-4">
-                <Text variant="pl-18-2">{content.time}</Text>
+                <Text variant="pl-18-2">
+                  {moment(moment().valueOf() + +content.time * 1000)
+                    .fromNow()
+                    .replace("in a", "1 ")
+                    .replace("in", "")}
+                </Text>
               </div>
               <div className="col-a-1-of-4">
                 <Text variant="pl-18-2">{content.resumes}</Text>
               </div>
               <div className="col-a-1-of-4">
-                <Text variant="pl-18-2">{content.price}</Text>
+                <Text variant="pl-18-2">
+                  {content.price == +0 ? "Free" : content.price}
+                </Text>
               </div>
               <div className="col-a-1-of-4">
-                <span className="u-cursor-pointer" onClick={displayRazorPay}>
+                <span
+                  className="u-cursor-pointer"
+                  onClick={displayRazorPay.bind(this, content.id)}
+                >
                   <Title variant="pr-15-3">Buy Now</Title>
                 </span>
               </div>
@@ -105,4 +123,8 @@ const PlanContainer = ({
   );
 };
 
-export default connect()(PlanContainer);
+const mapStateToProps = (state) => ({
+  token: state.auth.accessToken,
+});
+
+export default connect(mapStateToProps)(PlanContainer);

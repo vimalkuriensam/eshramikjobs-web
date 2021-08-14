@@ -159,3 +159,29 @@
     }
   }
 }
+
+@media only screen and (max-width: 70rem) {
+  .profile {
+    &__mainWrapper {
+      > * {
+        display: block;
+        width: 100% !important;
+        &:not(:first-child) {
+          margin-top: 3rem;
+        }
+      }
+    }
+
+    &__main {
+      > * {
+        margin: 2rem 3rem;
+        display: block;
+        width: 100%;
+      }
+    }
+
+    &__progress {
+      width: 91%;
+    }
+  }
+}

@@ -7,7 +7,7 @@ import Title from "../../../components/atoms/Title";
 import history from "../../../utils/history";
 
 const Profile = () => {
-  const onHandleUpdateProfile = () => history.push("/profile");
+  const onHandleUpdateProfile = () => history.push("/user-profile");
   return (
     <div className="home__profileContainer">
       <div className="home__imageContainer">

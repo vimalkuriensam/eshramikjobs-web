@@ -41,8 +41,8 @@ const AppRoutes = ({ tokenData }) => {
       <ScrollTop />
       <AdminHeader />
       <RecruiterHeader />
-      <Message />
       <Header />
+      <Message />
       <Login />
       <Loader />
       <div className="u-display-flex u-overflow-hidden u-width-100">

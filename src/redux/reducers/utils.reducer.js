@@ -52,7 +52,10 @@ const utilsReducerDefaultState = {
   ],
 };
 
-const utilsReducer = (state = utilsReducerDefaultState, { type, value, info }) => {
+const utilsReducer = (
+  state = utilsReducerDefaultState,
+  { type, value, info }
+) => {
   switch (type) {
     case SET_LOGIN_STATE:
       return { ...state, loginState: value };
@@ -62,7 +65,7 @@ const utilsReducer = (state = utilsReducerDefaultState, { type, value, info }) =
       return { ...state, notification: state.notification + 1 };
     case CLEAR_NOTIFICATION:
       return { ...state, notification: 0 };
-      case ADD_MESSAGE:
+    case ADD_MESSAGE:
       return { ...state, messages: [...state.messages, info] };
     case REMOVE_MESSAGE:
       let messages = state.messages.slice();

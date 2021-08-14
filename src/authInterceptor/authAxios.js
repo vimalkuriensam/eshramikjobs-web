@@ -3,7 +3,7 @@ import {
   getAccessToken,
   setLogout,
 } from "../redux/actions/authentication.action";
-import { setLoader } from "../redux/actions/utils.action";
+import { addMessage, setLoader } from "../redux/actions/utils.action";
 
 import { store } from "../redux/stores/configureStore";
 import history from "../utils/history";
@@ -31,23 +31,24 @@ const apiService = () => {
       store.dispatch(setLoader({ state: false }));
       return response;
     },
-    (error) => {
+    async (error) => {
       store.dispatch(setLoader({ state: false }));
-      //   store.dispatch(
-      //     addMessage({
-      //       text: error.response.data.message,
-      //       status: INFO_STATUS.ERROR,
-      //     })
-      //   );
       if (error.response.status === 403) {
+        store.dispatch(
+          addMessage({
+            type: "info",
+            content: "Token Expired!Relogging",
+          })
+        );
         const email = store.getState().auth?.email;
         const refreshToken = store.getState().auth?.refreshToken;
         if (email && refreshToken) {
-          const resp = store.dispatch(getAccessToken({ refreshToken, email }));
+          const resp = await store.dispatch(
+            getAccessToken({ refreshToken, email })
+          );
           if (resp) return api.request(error.config);
           else history.push("/");
-        }
-        else {
+        } else {
           store.dispatch(setLogout());
           history.push("/register");
         }

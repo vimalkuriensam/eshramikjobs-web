@@ -2,14 +2,20 @@ import apiService from "../../authInterceptor/authAxios";
 
 export const SET_COMPANY_INFO = "SET_COMPANY_INFO";
 
-export const buyPlan = () => async (dispatch) => {
-  try {
-    const { status, data } = await apiService().post("/payment/purchase_plan");
-    if (status == 200) return data;
-  } catch (e) {
-    throw e;
-  }
-};
+export const buyPlan =
+  ({ planId }) =>
+  async (dispatch) => {
+    try {
+      const { status, data } = await apiService().post(
+        "/payment/purchase_plan",
+        { planId }
+      );
+      console.log(status, data, 'actions')
+      if (status == 200) return data.data;
+    } catch (e) {
+      throw e;
+    }
+  };
 
 export const confirmOrder =
   ({ razorpay_payment_id }) =>
@@ -45,3 +51,12 @@ export const setCompanyInfo = ({ name, logo }) => ({
   name,
   logo,
 });
+
+export const getPlans = () => async (dispatch) => {
+  try {
+    const { status, data } = await apiService().get("/plans/get");
+    if (status == 200) return data.data;
+  } catch (e) {
+    throw e;
+  }
+};

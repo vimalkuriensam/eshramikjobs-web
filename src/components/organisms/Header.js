@@ -10,6 +10,7 @@ import history from "../../utils/history";
 import { Fragment } from "react";
 import { funcMap, PROFILE_CONTENTS, USER_ROUTE_TYPES } from "../../utils/data";
 import BlacklistComponent from "../../hoc/BlacklistComponent";
+import Drawer from "./Drawer";
 
 const Header = ({ dispatch, isLogged }) => {
   const handler = (event) => {
@@ -62,77 +63,79 @@ const Header = ({ dispatch, isLogged }) => {
       <div className="header__logo-box">
         <Image onIconClick={onSetHome} className="header__logo" name="Logo" />
       </div>
-      <div className="header__actions">
-        <NavLink
-          className="header__link"
-          activeClassName="header__link--active"
-          to="/home"
-        >
-          Home
-        </NavLink>
-        <NavLink
-          className="header__link"
-          activeClassName="header__link--active"
-          to="/about"
-        >
-          About us
-        </NavLink>
-        {isLogged && (
-          <Fragment>
-            <NavLink
-              className="header__link"
-              activeClassName="header__link--active"
-              to="/jobs"
-            >
-              Jobs
-            </NavLink>
-            <NavLink
-              className="header__link"
-              activeClassName="header__link--active"
-              to="/companies"
-            >
-              Companies
-            </NavLink>
-            <NavLink
-              className="header__link"
-              activeClassName="header__link--active"
-              to="/about"
-            >
-              Notification
-            </NavLink>
-            <span className="u-position-relative">
-              <span onClick={onHandleProfileState}>
-                <Text variant="pr-18-1" className="u-cursor-pointer">
-                  Profile
-                </Text>
+      <Drawer>
+        <Fragment>
+          <NavLink
+            className="header__link"
+            activeClassName="header__link--active"
+            to="/home"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className="header__link"
+            activeClassName="header__link--active"
+            to="/about"
+          >
+            About us
+          </NavLink>
+          {isLogged && (
+            <Fragment>
+              <NavLink
+                className="header__link"
+                activeClassName="header__link--active"
+                to="/jobs"
+              >
+                Jobs
+              </NavLink>
+              <NavLink
+                className="header__link"
+                activeClassName="header__link--active"
+                to="/companies"
+              >
+                Companies
+              </NavLink>
+              <NavLink
+                className="header__link"
+                activeClassName="header__link--active"
+                to="/about"
+              >
+                Notification
+              </NavLink>
+              <span className="u-position-relative">
+                <span onClick={onHandleProfileState}>
+                  <Text variant="pr-18-1" className="u-cursor-pointer">
+                    Profile
+                  </Text>
+                </span>
+                {profileState && <span>{profilePopup()}</span>}
               </span>
-              {profileState && <span>{profilePopup()}</span>}
-            </span>
-          </Fragment>
-        )}
-        {!isLogged && (
-          <Fragment>
-            <Button
-              variant="1-1"
-              content="Recruiter Login"
-              onButtonClick={onHandleProfileAction.bind(this, {
-                type: "link",
-                to: "/register/admin",
-              })}
-            />
-            <Button
-              variant="1-1"
-              onButtonClick={onSetLogin}
-              content="User Login"
-            />
-            <Button
-              variant="1-1"
-              content="Signup"
-              onButtonClick={onSetSignup}
-            />
-          </Fragment>
-        )}
-      </div>
+            </Fragment>
+          )}
+          {!isLogged && (
+            <Fragment>
+              <Button
+                variant="1-1"
+                content="Recruiter Login"
+                onButtonClick={onHandleProfileAction.bind(this, {
+                  type: "link",
+                  to: "/register/admin",
+                })}
+              />
+              <Button
+                variant="1-1"
+                onButtonClick={onSetLogin}
+                content="User Login"
+              />
+              <Button
+                variant="1-1"
+                content="Signup"
+                onButtonClick={onSetSignup}
+              />
+            </Fragment>
+          )}
+        </Fragment>
+      </Drawer>
     </div>
   );
 };

@@ -33,6 +33,7 @@ import RecruiterHeader from "../components/organisms/RecruiterHeader";
 import RecruiterNavbar from "../components/organisms/RecruiterNavbar";
 import { RecruiterChildView } from "./childRoutes/Recruiter";
 import Message from "../components/organisms/Message";
+import EventCaptureTut from "./EventCaptureTut";
 
 const AppRoutes = ({ tokenData }) => {
   const { type } = tokenData;
@@ -42,6 +43,7 @@ const AppRoutes = ({ tokenData }) => {
       <AdminHeader />
       <RecruiterHeader />
       <Header />
+      {type == 2 && <EventCaptureTut />}
       <Message />
       <Login />
       <Loader />

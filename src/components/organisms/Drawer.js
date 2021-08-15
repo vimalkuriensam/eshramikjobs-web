@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Fragment } from "react";
 
 import useWindowSize from "../../hooks/WindowSize";
@@ -9,9 +9,19 @@ const Drawer = ({ children }) => {
   const [isDrawerActive, setIsDrawerActive] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const ref = useRef(null);
+
   const onHandleDrawerState = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     setIsDrawerOpen((prevState) => !prevState);
+  };
+
+  const onHandleClose = (e) => {
+    e.stopPropagation();
+    ref.current.className += ` header__menuDrawer--close`;
+    setTimeout(() => {
+      onHandleDrawerState();
+    }, 200);
   };
   useEffect(() => {
     if (width < 895) setIsDrawerActive(true);
@@ -22,9 +32,13 @@ const Drawer = ({ children }) => {
       {isDrawerActive ? (
         <div className="header__menuContainer" onClick={onHandleDrawerState}>
           <Icon name="Menu" className="header__menu" />
-          {isDrawerOpen && <div className="header__menuDrawer">{children}</div>}
           {isDrawerOpen && (
-            <div onClick={onHandleDrawerState} className="header__menuWrapper">
+            <div className="header__menuDrawer" ref={ref}>
+              {children}
+            </div>
+          )}
+          {isDrawerOpen && (
+            <div onClick={onHandleClose} className="header__menuWrapper">
               &nbsp;
             </div>
           )}

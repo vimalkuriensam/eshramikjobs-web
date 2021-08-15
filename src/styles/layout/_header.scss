@@ -7,6 +7,60 @@
   padding: 1rem 14rem;
   justify-content: space-between;
 
+  &__menuContainer {
+    position: relative;
+    padding: 1rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      border: 1px solid #727272;
+      background: darken($color-grey-light-3, 3%);
+    }
+  }
+
+  &__menuDrawer {
+    position: fixed;
+    padding: 1rem;
+    height: 100vh;
+    width: 20rem;
+    z-index: 1005;
+    background: $color-grey-light-3;
+    top: 0;
+    right: 0;
+    animation: moveInLeft 0.3s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &--close {
+      animation: moveInRight 0.3s forwards;
+    }
+    > * {
+      margin: 1rem 0.5rem;
+    }
+    > button {
+      width: 100%;
+    }
+  }
+
+  &__menuWrapper {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.5;
+    z-index: 1000;
+  }
+
+  &__menu {
+    height: 4rem;
+    > g > path {
+      fill: #727272;
+    }
+  }
+
   &__logo-box {
     cursor: pointer;
   }
@@ -186,5 +240,61 @@
   &__userLogo {
     height: 4.2rem;
     width: 4.2rem;
+  }
+}
+
+@media only screen and (max-width: 70rem) {
+  .header {
+    &__actions {
+      > a {
+        font-size: 1.4rem;
+      }
+      > button {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 60rem) {
+  .header {
+    &__actions {
+      > a {
+        font-size: 1.2rem;
+      }
+      > button {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 55rem) {
+  .header {
+    padding: 1rem 4rem;
+  }
+}
+
+@keyframes moveInLeft {
+  0% {
+    transform: translate(20rem, 0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    transform: translate(0rem, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(20rem, 0);
+    opacity: 0;
   }
 }

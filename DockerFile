@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 4300
+EXPOSE 4200
 
-CMD ["npm", "run", "dev"]
+CMD [ "npx", "webpack-dev-server", "--hot", "--host=0.0.0.0", "--public=localhost:4200", "--env", "development", "--config", "webpack.dev.js" ]

@@ -283,3 +283,11 @@
     }
   }
 }
+
+@media only screen and (max-width: 70rem) {
+  .authentication {
+    &__adminDetails {
+      padding: 8rem 0 12.3rem 0;
+    }
+  }
+}

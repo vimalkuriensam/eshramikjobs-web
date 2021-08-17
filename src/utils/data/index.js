@@ -17,6 +17,7 @@ import {
   getState,
   getTechnicalCourses,
 } from "../../redux/actions/profile.actions";
+import { candidatesApplication } from "../../redux/actions/recruit.action";
 import history from "../history";
 
 export const BASE_URL = "https://eshramik-server.herokuapp.com"; //"https://eshramik-api.herokuapp.com";
@@ -255,6 +256,10 @@ export const funcMap = {
       history.push("/jobs/applied");
       return true;
     }
+  },
+  candidates: async (dispatch) => {
+    const response = await dispatch(candidatesApplication());
+    if (response) history.push("/recruite/applications")
   },
   recommendedJobs: async (dispatch) => {},
   getJob: async (dispatch, id) => await dispatch(getJob({ id })),
@@ -536,14 +541,18 @@ export const NAVBAR_NAVS = [
 export const RECRUITER_NAVBAR_NAVS = [
   {
     text: "Post New Job",
-    to: "/recruite/create-jobs",
+    type: "link",
+    link: "/recruite/create-jobs",
   },
   {
     text: "Profile details",
-    to: "/recruite/plans",
+    type: "link",
+    link: "/recruite/plans",
   },
   {
     text: "View applications",
+    type: "process",
+    link: "candidates",
     to: "/recruite/applications",
   },
 ];

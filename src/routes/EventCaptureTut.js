@@ -20,7 +20,7 @@ const EventCaptureTut = ({ token }) => {
   //   console.log(e);
   // };
   // es.onerror = (e) => console.log(e);
-  return <Fragment>&nbsp;</Fragment>;
+  return <Fragment></Fragment>;
 };
 
 const mapStateToProps = (state) => ({

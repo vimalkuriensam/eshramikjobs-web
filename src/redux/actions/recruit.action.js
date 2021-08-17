@@ -1,6 +1,8 @@
 import apiService from "../../authInterceptor/authAxios";
 
 export const SET_COMPANY_INFO = "SET_COMPANY_INFO";
+export const SET_CANDIDATES = "SET_CANDIDATES";
+export const CLEAR_CANDIDATES = "CLEAR_CANDIDATES";
 
 export const buyPlan =
   ({ planId }) =>
@@ -57,4 +59,29 @@ export const getPlans = () => async (dispatch) => {
   }
 };
 
+export const candidatesApplication = () => async (dispatch) => {
+  try {
+    const { status, data } = await apiService().post("/jobs/candidates/apply", {
+      pagination: {
+        page: 0,
+        count: 20,
+      },
+    });
+    if (status == 200) {
+      dispatch(clearCandidates());
+      dispatch(setCandidates({ candidates: [...data.data] }));
+      return true;
+    }
+  } catch (e) {
+    throw e;
+  }
+};
 
+export const setCandidates = ({ candidates }) => ({
+  type: SET_CANDIDATES,
+  candidates,
+});
+
+export const clearCandidates = () => ({
+  type: CLEAR_CANDIDATES,
+});

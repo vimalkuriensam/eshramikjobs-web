@@ -47,7 +47,7 @@ const AppRoutes = ({ tokenData }) => {
       <Message />
       <Login />
       <Loader />
-      <div className="u-display-flex u-overflow-hidden u-width-100">
+      <div className="recruiterNavbarContainer">
         <NavBar />
         <RecruiterNavbar />
         <div style={{ width: "100%" }}>

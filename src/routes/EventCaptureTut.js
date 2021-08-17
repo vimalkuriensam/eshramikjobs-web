@@ -7,19 +7,19 @@ const EventCaptureTut = ({ token }) => {
   //   constructor(props) {
   // }
   //   const es = new EventSource(`${process.env.BASE_URL}/notifications/get`);
-  const es = new EventSourcePolyfill(
-    `${process.env.BASE_URL}/notification/get`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  es.onmessage = (e) => {
-    console.log("data stream");
-    console.log(e);
-  };
-  es.onerror = (e) => console.log(e);
+  // const es = new EventSourcePolyfill(
+  //   `${process.env.BASE_URL}/notification/get`,
+  //   {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   }
+  // );
+  // es.onmessage = (e) => {
+  //   console.log("data stream");
+  //   console.log(e);
+  // };
+  // es.onerror = (e) => console.log(e);
   return <Fragment>&nbsp;</Fragment>;
 };
 

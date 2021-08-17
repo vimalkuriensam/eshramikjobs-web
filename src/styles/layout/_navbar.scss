@@ -21,6 +21,12 @@
   }
 }
 
+.recruiterNavbarContainer {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
 .recruiterNavbar {
   width: 27.3rem;
   background: $color-primary;
@@ -38,5 +44,16 @@
     &--active {
       opacity: 1;
     }
+  }
+}
+
+@media only screen and (max-width: 60rem) {
+  .recruiterNavbar {
+    width: 100%;
+    display: flex;
+  }
+
+  .recruiterNavbarContainer {
+    display: block;
   }
 }

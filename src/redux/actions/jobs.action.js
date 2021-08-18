@@ -1,4 +1,5 @@
 import apiService from "../../authInterceptor/authAxios";
+import { addMessage } from "./utils.action";
 
 export const SET_RECENT_JOBS = "SET_RECENT_JOBS";
 export const SET_SAVED_JOBS = "SET_SAVED_JOBS";
@@ -10,6 +11,8 @@ export const CLEAR_SAVED_JOBS = "CLEAR_SAVED_JOBS";
 export const CLEAR_APPLIED_JOBS = "CLEAR_APPLIED_JOBS";
 export const CLEAR_RECOMMENDED_JOBS = "CLEAR_RECOMMENDED_JOBS";
 export const CLEAR_JOB_DETAIL = "CLEAR_JOB_DETAIL";
+export const SET_NOTIFICATION_JOBS = "SET_NOTIFICATION_JOBS";
+export const CLEAR_NOTIFICATION_JOBS = "CLEAR_NOTIFICATION_JOBS";
 
 export const createJobs =
   ({ job }) =>
@@ -224,6 +227,51 @@ export const deleteJob =
         ...(type == "apply" && { applyJobId: id }),
       });
       if (status == 200) return true;
+    } catch (e) {
+      throw e;
+    }
+  };
+
+export const getNotificationJobPostings =
+  ({ page = 0, count = 12 }) =>
+  async (dispatch) => {
+    try {
+      const { status, data } = await apiService().post("/jobs/admin/get_jobs", {
+        pagination: {
+          page,
+          count,
+        },
+      });
+      if (status == 200) {
+        dispatch(clearNotificationJobs());
+        dispatch(setNotificationJobs({ jobs: data.data }));
+        return true;
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
+export const setNotificationJobs = ({ jobs }) => ({
+  type: SET_NOTIFICATION_JOBS,
+  jobs,
+});
+
+export const clearNotificationJobs = () => ({
+  type: CLEAR_NOTIFICATION_JOBS,
+});
+
+export const handleJobNotificationStatus =
+  ({ id, type = "approve" }) =>
+  async (dispatch) => {
+    try {
+      const { status, data } = await apiService().post(`/jobs/admin/${type}`, {
+        jobId: id,
+      });
+      if (status == 200) {
+        dispatch(getNotificationJobPostings({ page: 0, count: 12 }));
+        dispatch(addMessage({ type: 'info', content: `Job status ${data.message}`}))
+      }
     } catch (e) {
       throw e;
     }

@@ -2,11 +2,13 @@ import moment from "moment";
 import {
   CLEAR_APPLIED_JOBS,
   CLEAR_JOB_DETAIL,
+  CLEAR_NOTIFICATION_JOBS,
   CLEAR_RECENT_JOBS,
   CLEAR_RECOMMENDED_JOBS,
   CLEAR_SAVED_JOBS,
   SET_APPLIED_JOBS,
   SET_JOB_DETAIL,
+  SET_NOTIFICATION_JOBS,
   SET_RECENT_JOBS,
   SET_SAVED_JOBS,
 } from "../actions/jobs.action";
@@ -17,6 +19,7 @@ const jobsReducerDefaultState = {
   applied: [],
   saved: [],
   detail: {},
+  notificationJobs: [],
   // recent: [
   //   {
   //     image: "tata-motors",
@@ -254,6 +257,10 @@ const jobsReducer = (
       return { ...state, saved: jobs };
     case CLEAR_SAVED_JOBS:
       return { ...state, saved: [] };
+    case SET_NOTIFICATION_JOBS:
+      return { ...state, notificationJobs: jobs };
+    case CLEAR_NOTIFICATION_JOBS:
+      return { ...state, notificationJobs: [] };
     default:
       return state;
   }

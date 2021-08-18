@@ -48,7 +48,7 @@ const JobListings = ({
               <Title className="u-margin-vertical-15" variant="pr-19-1">
                 {company_name}
               </Title>
-              <Text variant="pl-17-1">{title}</Text>
+              <Text variant="pl-17-1" className="u-display-block">{title}</Text>
               <Text variant="pl-17-1" className="jobs__descriptionSmall">
                 {job_data?.description}
               </Text>

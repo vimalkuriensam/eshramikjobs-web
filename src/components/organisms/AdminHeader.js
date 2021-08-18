@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import BlacklistComponent from "../../hoc/BlacklistComponent";
 import { setLogout } from "../../redux/actions/authentication.action";
-import { USER_ROUTE_TYPES } from "../../utils/data";
+import { funcMap, USER_ROUTE_TYPES } from "../../utils/data";
 import history from "../../utils/history";
 import Icon from "../atoms/Icon";
 import Image from "../atoms/Image";
@@ -23,7 +23,7 @@ const AdminHeader = ({ dispatch }) => {
 
   const onHandleIconClick = () => setProfileState((prevState) => !prevState);
 
-  const onHandleNotification = () => history.push("/notification/job-postings");
+  const onHandleNotification = () => funcMap["adminNotification"](dispatch);
 
   const profilePopup = () => {
     return (

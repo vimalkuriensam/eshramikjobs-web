@@ -6,6 +6,7 @@ import {
   deleteJob,
   getAppliedJobs,
   getJob,
+  getNotificationJobPostings,
   getRecentJobs,
   getSavedJobs,
 } from "../../redux/actions/jobs.action";
@@ -267,6 +268,12 @@ export const funcMap = {
   activePlan: async (dispatch) => {
     const response = await dispatch(getCurrentPlan());
     if (response) history.push("/recruite/plans");
+  },
+  adminNotification: async (dispatch) => {
+    const response = await dispatch(
+      getNotificationJobPostings({ page: 0, count: 12 })
+    );
+    if (response) history.push("/notification/job-postings");
   },
   recommendedJobs: async (dispatch) => {},
   getJob: async (dispatch, id) => await dispatch(getJob({ id })),
@@ -614,7 +621,7 @@ export const USER_ROUTE_TYPES = {
     "/expired-subscription",
     "/trial-subscription",
     "/resumes",
-    "/job-postings"
+    "/job-postings",
   ],
   default: ["/admin", "/signup", "/profile"],
 };

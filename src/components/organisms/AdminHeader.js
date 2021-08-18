@@ -23,6 +23,8 @@ const AdminHeader = ({ dispatch }) => {
 
   const onHandleIconClick = () => setProfileState((prevState) => !prevState);
 
+  const onHandleNotification = () => history.push("/notification/job-postings");
+
   const profilePopup = () => {
     return (
       <div className="adminHeader__dropdown" ref={adminPopupRef}>
@@ -45,7 +47,11 @@ const AdminHeader = ({ dispatch }) => {
         <Text variant="pr-18-1">Dashboard</Text>
         <div className="adminHeader__contentMain--right">
           <Search variant="5" placeholder="" />
-          <Icon name="Bell" />
+          <Icon
+            name="Bell"
+            className="adminHeader__notificationIcon"
+            onIconClick={onHandleNotification}
+          />
           <div className="adminHeader__userBox">
             <Icon
               name="User"
@@ -63,7 +69,7 @@ const AdminHeader = ({ dispatch }) => {
 export default connect()(
   BlacklistComponent(AdminHeader)([
     ...USER_ROUTE_TYPES.user,
-    ...USER_ROUTE_TYPES.recruiter, 
+    ...USER_ROUTE_TYPES.recruiter,
     ...USER_ROUTE_TYPES.default,
   ])
 );

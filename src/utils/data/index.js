@@ -614,6 +614,7 @@ export const USER_ROUTE_TYPES = {
     "/expired-subscription",
     "/trial-subscription",
     "/resumes",
+    "/job-postings"
   ],
   default: ["/admin", "/signup", "/profile"],
 };

@@ -49,10 +49,6 @@ const Aplications = ({ dispatch, candidates = [] }) => {
               key={index}
               onClick={onHandleApplication}
             >
-              {console.log(
-                moment().diff(),
-                moment().diff(content.dob, "years", false)
-              )}
               <div className="col-a-1-of-7 u-text-center">
                 <Image
                   className="recruit__candidatesImage"

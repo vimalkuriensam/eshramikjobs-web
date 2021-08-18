@@ -4,10 +4,17 @@ import * as d3 from "d3";
 import Text from "../atoms/Text";
 import Title from "../atoms/Title";
 
-const SubscriptionBox = ({ title, value, variant, id, onHandleView }) => {
+const SubscriptionBox = ({
+  title,
+  value,
+  variant,
+  id,
+  onHandleView,
+  type = null,
+}) => {
   const PIE_VAL = {
-    height: 88,
-    width: 88,
+    height: !type ? 88 : 150,
+    width: !type ? 88 : 150,
   };
 
   const PIE_COLORS = {
@@ -44,7 +51,7 @@ const SubscriptionBox = ({ title, value, variant, id, onHandleView }) => {
 
     const arc = d3
       .arc()
-      .innerRadius(radius - 10)
+      .innerRadius(`${!type ? radius - 10 : radius - 15}`)
       .outerRadius(radius);
     const arcs = g
       .selectAll("arc")
@@ -62,10 +69,12 @@ const SubscriptionBox = ({ title, value, variant, id, onHandleView }) => {
       <div className="a-row">
         <div className="col-a-35-of-50">
           <div>
-            <Title variant="pr-17-3">{title}</Title>
+            <Title variant={`${!type ? "pr-17-3" : "pr-30-1"}`}>{title}</Title>
           </div>
           <div>
-            <Title variant="psm-18-1">{value}</Title>
+            <Title variant={`${!type ? "psm-18-1" : "psm-30-1"}`}>
+              {value}
+            </Title>
           </div>
         </div>
         <div className="col-a-15-of-50 u-text-center">
@@ -73,7 +82,7 @@ const SubscriptionBox = ({ title, value, variant, id, onHandleView }) => {
             {id && (
               <div className="u-position-relative" id={id}>
                 <Title
-                  variant="psm-18-1"
+                  variant={`${!type ? "psm-18-1" : "psm-30-1"}`}
                   className="dashboard__subscriptionValue"
                   style={{ color: PIE_COLORS[variant]["light"] }}
                 >
@@ -81,9 +90,11 @@ const SubscriptionBox = ({ title, value, variant, id, onHandleView }) => {
                 </Title>
               </div>
             )}
-            <span onClick={onHandleView} className="u-cursor-pointer">
-              <Text variant="pr-14-2 u-margin-top-20">View all</Text>
-            </span>
+            {!type && (
+              <span onClick={onHandleView} className="u-cursor-pointer">
+                <Text variant="pr-14-2 u-margin-top-20">View all</Text>
+              </span>
+            )}
           </span>
         </div>
       </div>

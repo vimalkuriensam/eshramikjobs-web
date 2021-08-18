@@ -7,6 +7,7 @@ const ExpiredSubscription = () => {
   return (
     <section className="section-dashboard">
       <SubscriptionBox
+        type="large"
         title="Expired Subscription"
         value={25}
         variant="secondary"

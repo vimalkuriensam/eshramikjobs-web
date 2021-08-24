@@ -6,7 +6,7 @@ import Hero from "./container/Hero";
 const Signup = () => {
   return (
     <div className="page">
-      <div className="row">
+      <div className="row authentication__signupMain">
         <div className="col-1-of-2">
           <Hero />
         </div>

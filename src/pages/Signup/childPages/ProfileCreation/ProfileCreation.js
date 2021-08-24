@@ -59,6 +59,7 @@ const ProfileCreation = ({ match, dispatch }) => {
     },
     4: {
       skill: "",
+      skillList: [],
       experience: {
         year: "",
         month: "",

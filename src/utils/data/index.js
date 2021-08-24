@@ -11,6 +11,7 @@ import {
   getSavedJobs,
 } from "../../redux/actions/jobs.action";
 import {
+  getAllProfileInfo,
   getColleges,
   getDegrees,
   getInstitutions,
@@ -173,8 +174,8 @@ export const PROFILE_CONTENTS = {
       columns: [
         {
           text: "Edit Profile",
-          type: "link",
-          to: "/user-profile",
+          type: "process",
+          to: "getProfileInfo",
         },
         {
           text: "Saved jobs",
@@ -258,6 +259,13 @@ export const funcMap = {
     );
     if (response) {
       history.push("/jobs/applied");
+      return true;
+    }
+  },
+  getProfileInfo: async (dispatch) => {
+    const response = await dispatch(getAllProfileInfo());
+    if (response) {
+      history.push("/user-profile");
       return true;
     }
   },
@@ -595,7 +603,6 @@ export const RECRUITER_STATUS = {
 
 export const USER_ROUTE_TYPES = {
   user: [
-    "/register",
     "/otp",
     "/1",
     "/2",
@@ -613,6 +620,7 @@ export const USER_ROUTE_TYPES = {
     "/create",
     "/companies",
     "/user-profile",
+    "/register",
   ],
   recruiter: ["/create-jobs", "/plans", "/applications", "buy-plans", "view"],
   admin: [

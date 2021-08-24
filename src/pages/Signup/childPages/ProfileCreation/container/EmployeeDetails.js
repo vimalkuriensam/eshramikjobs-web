@@ -30,7 +30,7 @@ const EmployeeDetails = ({
     <div>
       <Title variant="pr-24-1">5. Employeement details</Title>
       {info.map((val, index) => (
-        <div className="row" key={index}>
+        <div className="row profile__detailsContainer" key={index}>
           {index > 0 && (
             <div>
               <Divider />
@@ -140,6 +140,7 @@ const EmployeeDetails = ({
                 )}
                 type="textarea"
                 title="Job description"
+                listings={false}
               />
             </div>
           </div>

@@ -19,8 +19,8 @@ const Profession = ({
   );
   return (
     <div style={{ paddingBottom: "8rem" }}>
-      <div className="row">
-        <div className="col-1-of-2">
+      <div className="row profile__detailsContainer">
+        <div className="col-1-of-2 profile__imageContainer">
           <Image name="profile-banner" />
         </div>
         <div className="col-1-of-2">

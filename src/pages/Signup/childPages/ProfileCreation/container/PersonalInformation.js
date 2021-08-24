@@ -63,7 +63,7 @@ const PersonalInformation = ({
   return (
     <div style={{ paddingBottom: "13rem" }}>
       <Title variant="pr-24-1">1. Personal Information</Title>
-      <div className="row">
+      <div className="row profile__detailsContainer">
         <div className="col-1-of-2">
           <div className="row">
             <FormInput

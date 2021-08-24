@@ -110,3 +110,12 @@ export const setCandidates = ({ candidates }) => ({
 export const clearCandidates = () => ({
   type: CLEAR_CANDIDATES,
 });
+
+export const getActiveStatus = () => async (dispatch) => {
+  try {
+    const { status, data } = await apiService().get("/admin/active_user_stat");
+    console.log(status, data);
+  } catch (e) {
+    throw e;
+  }
+};

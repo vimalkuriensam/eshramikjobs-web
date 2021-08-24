@@ -289,5 +289,19 @@
     &__adminDetails {
       padding: 8rem 0 12.3rem 0;
     }
+
+    &__signupInputContainer {
+      padding: 5rem 4rem 0 4rem;
+    }
+
+    &__signupMain {
+      > * {
+        &:first-child {
+          display: none;
+        }
+        display: block;
+        width: 100%!important;
+      }
+    }
   }
 }

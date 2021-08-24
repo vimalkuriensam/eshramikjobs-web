@@ -179,3 +179,32 @@ export const getColleges = () => async (dispatch) => {
     throw e;
   }
 };
+
+export const getBasicProfile = () => async (dispatch) => {
+  try {
+    const { status, data } = await apiService().get("/profile/get_basic");
+    if (status == 200) {
+      console.log(data.data);
+      return true;
+    }
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const getAllProfileInfo = () => async (dispatch) => {
+  try {
+    const responses = [1, 2, 3, 4, 5];
+    const result = await Promise.all(
+      responses.map((response) =>
+        apiService()
+          .get(`/profile/get/${response}`)
+          .then(({ data }) => data.data)
+      )
+    );
+    console.log(result);
+    return true;
+  } catch (e) {
+    throw e;
+  }
+};

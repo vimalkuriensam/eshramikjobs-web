@@ -27,9 +27,13 @@ const SubscriptionBox = ({
   };
 
   const VAL_ENUM = { 0: "dark", 1: "light" };
-  useEffect(() => {
-    const pie = d3.pie().value((d) => d.value);
-
+  // useEffect(() => {
+    const data = [
+      { value, name: "completed" },
+      { value: 100 - value, name: "incomplete" },
+    ];
+    const subscriptionPie = d3.pie().value((d) => d.value);
+    const slices = subscriptionPie(data);
     const svg = d3
       .select(`#${id}`)
       .append("svg")
@@ -44,25 +48,18 @@ const SubscriptionBox = ({
         "transform",
         `translate(${PIE_VAL.width / 2},${PIE_VAL.height / 2})`
       );
-    const data = [
-      { value: value, name: "completed" },
-      { value: 100 - value, name: "incomplete" },
-    ];
 
     const arc = d3
       .arc()
       .innerRadius(`${!type ? radius - 10 : radius - 15}`)
       .outerRadius(radius);
     const arcs = g
-      .selectAll("arc")
-      .data(pie(data))
-      .enter()
-      .append("g")
-      .attr("class", "arc")
-      .append("path")
-      .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]])
-      .attr("d", arc);
-  }, []);
+      .selectAll("path")
+      .data(slices)
+      .join("path")
+      .attr("d", arc)
+      .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]]);
+  // }, []);
 
   return (
     <div className="dashboard__subscriptionBox">

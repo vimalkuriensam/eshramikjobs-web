@@ -40,11 +40,10 @@ const apiService = () => {
             content: "Token Expired!Relogging",
           })
         );
-        const email = store.getState().auth?.email;
         const refreshToken = store.getState().auth?.refreshToken;
-        if (email && refreshToken) {
+        if (refreshToken) {
           const resp = await store.dispatch(
-            getAccessToken({ refreshToken, email })
+            getAccessToken({ refreshToken })
           );
           if (resp) return api.request(error.config);
           else history.push("/");

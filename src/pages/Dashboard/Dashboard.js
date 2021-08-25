@@ -1,15 +1,10 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { getActiveStatus } from "../../redux/actions/recruit.action";
+import React from "react";
 import Enrollment from "./container/Enrollment";
 import ResumeLists from "./container/ResumeLists";
 import Sales from "./container/Sales";
 import Subscriptions from "./container/Subscriptions";
 
-const Dashboard = ({ dispatch }) => {
-  useEffect(()=>{
-    dispatch(getActiveStatus());
-  }, [])
+const Dashboard = () => {
   return (
     <section className="section-dashboard">
       <Subscriptions />
@@ -26,4 +21,4 @@ const Dashboard = ({ dispatch }) => {
   );
 };
 
-export default connect()(Dashboard);
+export default Dashboard;

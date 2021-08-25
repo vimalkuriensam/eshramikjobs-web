@@ -161,12 +161,11 @@ export const resendOTP =
   };
 
 export const getAccessToken =
-  ({ refreshToken, email }) =>
+  ({ refreshToken }) =>
   async (dispatch) => {
     try {
       const { data, status } = await apiService().post("/auth/getAccessToken", {
         refreshToken,
-        un: email,
       });
       if (status == 200) {
         dispatch(setAccessToken(data));

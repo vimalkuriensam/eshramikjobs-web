@@ -131,7 +131,6 @@ export const setOTP =
       if (status == 200) {
         dispatch(setAccessToken(data["data"]));
         if (mobile) {
-          console.log(mobile);
           const response = await dispatch(getState());
           if (response) history.push("/register/profile/1");
         } else {

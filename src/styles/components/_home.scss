@@ -19,6 +19,19 @@
     }
   }
 
+  &__userIconContainer {
+    background: $color-grey-light-1;
+  }
+
+  &__userIcon {
+    height: 10.4rem;
+    width: 10rem;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    fill: $color-grey-dark;
+  }
+
   &__feedback {
     min-height: 66.5rem;
     background: $color-secondary;

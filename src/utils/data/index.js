@@ -216,7 +216,11 @@ export const PROFILE_CONTENTS = {
 };
 
 export const funcMap = {
-  home: () => history.push("/"),
+  home: async (props) => {
+    // const response = Promise.all()
+    console.log('props', props);
+    history.push("/");
+  },
   recruiterSignup: () => history.push("/register/signup"),
   logout: (dispatch) => dispatch(setLogout()),
   searchJobs: () => window.scroll({ top: 0, left: 0, behavior: "smooth" }),

@@ -1,7 +1,8 @@
 import apiService from "../../authInterceptor/authAxios";
 import { userType, USER_TYPES } from "../../utils/data";
 import history from "../../utils/history";
-import { getBasicProfile, getState } from "./profile.actions";
+import { getState } from "./profile.actions";
+import { getBasicProfile } from "./user.actions";
 import { getCompanyInfo } from "./recruit.action";
 import { fileUpload, loginState } from "./utils.action";
 

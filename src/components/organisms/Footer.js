@@ -31,7 +31,9 @@ const Footer = () => {
               {rows.columns.map((column, idx) => (
                 <div
                   key={idx}
-                  className={`col-1-of-${columns} ${columns == 1 ? 'u-margin-top-20': null} u-text-center`}
+                  className={`col-1-of-${columns} ${
+                    columns == 1 ? "u-margin-top-20" : null
+                  } u-text-center`}
                   onClick={onHandleFooterAction.bind(this, column.to)}
                 >
                   <Text variant="pr-18-1 footer__linkContent">
@@ -67,9 +69,8 @@ const Footer = () => {
 export default withRouter(
   BlacklistComponent(Footer)([
     ...USER_ROUTE_TYPES.admin,
-    "/create",
-    "/signup",
-    "/profile",
     ...USER_ROUTE_TYPES.recruiter,
+    ...USER_ROUTE_TYPES.default,
+    "/create",
   ])
 );

@@ -9,6 +9,7 @@ import authenticationReducer from "../reducers/authentication.reducer";
 import profileReducer from "../reducers/profile.reducer";
 import jobsReducer from "../reducers/jobs.reducer";
 import recruiterReducer from "../reducers/recruiter.reducer";
+import userReducer from "../reducers/user.reducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -33,6 +34,7 @@ const store = createStore(
       auth: authenticationReducer,
       profile: profileReducer,
       jobs: jobsReducer,
+      user: userReducer,
       recruiter: recruiterReducer,
       utils: utilsReducer,
     })

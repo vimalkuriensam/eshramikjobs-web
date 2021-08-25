@@ -210,6 +210,13 @@
     }
   }
 
+  &__notificationIcon {
+    cursor: pointer;
+    &:hover {
+      animation: shake 0.3s ease;
+    }
+  }
+
   &__notificationCount {
     min-width: 1.8rem;
     min-height: 1.8rem;
@@ -296,5 +303,26 @@
   100% {
     transform: translate(20rem, 0);
     opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(12deg);
+  }
+
+  25% {
+    transform: rotate(-12deg);
+  }
+
+  50% {
+    transform: rotate(12deg);
+  }
+
+  90% {
+    transform: rotate(-12deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }

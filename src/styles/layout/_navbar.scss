@@ -21,6 +21,12 @@
   }
 }
 
+.recruiterNavbarContainer {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
 .recruiterNavbar {
   width: 27.3rem;
   background: $color-primary;
@@ -34,9 +40,20 @@
     font-family: "poppins-regular";
     opacity: 0.8;
     width: 27.3rem;
-
+    cursor: pointer;
     &--active {
       opacity: 1;
     }
+  }
+}
+
+@media only screen and (max-width: 60rem) {
+  .recruiterNavbar {
+    width: 100%;
+    display: flex;
+  }
+
+  .recruiterNavbarContainer {
+    display: block;
   }
 }

@@ -39,7 +39,7 @@ const RecruiterHeader = ({
       </div>
     );
   };
-  
+
   return (
     <div className="recruiterHeader">
       <Image
@@ -50,7 +50,7 @@ const RecruiterHeader = ({
       <div className="adminHeader__contentMain--right">
         <Search variant="5" placeholder="" />
         <span className="u-position-relative">
-          <Icon name="Bell" />
+          <Icon name="Bell" className="adminHeader__notificationIcon" />
           {notificationCount > 0 && (
             <div className="adminHeader__notificationCount">
               {notificationCount}

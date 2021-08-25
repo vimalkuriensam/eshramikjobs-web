@@ -6,10 +6,12 @@ import {
   deleteJob,
   getAppliedJobs,
   getJob,
+  getNotificationJobPostings,
   getRecentJobs,
   getSavedJobs,
 } from "../../redux/actions/jobs.action";
 import {
+  getAllProfileInfo,
   getColleges,
   getDegrees,
   getInstitutions,
@@ -17,6 +19,10 @@ import {
   getState,
   getTechnicalCourses,
 } from "../../redux/actions/profile.actions";
+import {
+  candidatesApplication,
+  getCurrentPlan,
+} from "../../redux/actions/recruit.action";
 import history from "../history";
 
 export const BASE_URL = "https://eshramik-server.herokuapp.com"; //"https://eshramik-api.herokuapp.com";
@@ -168,8 +174,8 @@ export const PROFILE_CONTENTS = {
       columns: [
         {
           text: "Edit Profile",
-          type: "link",
-          to: "/user-profile",
+          type: "process",
+          to: "getProfileInfo",
         },
         {
           text: "Saved jobs",
@@ -210,7 +216,11 @@ export const PROFILE_CONTENTS = {
 };
 
 export const funcMap = {
-  home: () => history.push("/"),
+  home: async (props) => {
+    // const response = Promise.all()
+    console.log('props', props);
+    history.push("/");
+  },
   recruiterSignup: () => history.push("/register/signup"),
   logout: (dispatch) => dispatch(setLogout()),
   searchJobs: () => window.scroll({ top: 0, left: 0, behavior: "smooth" }),
@@ -255,6 +265,27 @@ export const funcMap = {
       history.push("/jobs/applied");
       return true;
     }
+  },
+  getProfileInfo: async (dispatch) => {
+    const response = await dispatch(getAllProfileInfo());
+    if (response) {
+      history.push("/user-profile");
+      return true;
+    }
+  },
+  candidates: async (dispatch) => {
+    const response = await dispatch(candidatesApplication());
+    if (response) history.push("/recruite/applications");
+  },
+  activePlan: async (dispatch) => {
+    const response = await dispatch(getCurrentPlan());
+    if (response) history.push("/recruite/plans");
+  },
+  adminNotification: async (dispatch) => {
+    const response = await dispatch(
+      getNotificationJobPostings({ page: 0, count: 12 })
+    );
+    if (response) history.push("/notification/job-postings");
   },
   recommendedJobs: async (dispatch) => {},
   getJob: async (dispatch, id) => await dispatch(getJob({ id })),
@@ -536,14 +567,20 @@ export const NAVBAR_NAVS = [
 export const RECRUITER_NAVBAR_NAVS = [
   {
     text: "Post New Job",
+    type: "link",
+    link: "/recruite/create-jobs",
     to: "/recruite/create-jobs",
   },
   {
     text: "Profile details",
+    type: "process",
+    link: "activePlan",
     to: "/recruite/plans",
   },
   {
     text: "View applications",
+    type: "process",
+    link: "candidates",
     to: "/recruite/applications",
   },
 ];
@@ -570,7 +607,6 @@ export const RECRUITER_STATUS = {
 
 export const USER_ROUTE_TYPES = {
   user: [
-    "/register",
     "/otp",
     "/1",
     "/2",
@@ -588,6 +624,7 @@ export const USER_ROUTE_TYPES = {
     "/create",
     "/companies",
     "/user-profile",
+    "/register",
   ],
   recruiter: ["/create-jobs", "/plans", "/applications", "buy-plans", "view"],
   admin: [
@@ -596,6 +633,7 @@ export const USER_ROUTE_TYPES = {
     "/expired-subscription",
     "/trial-subscription",
     "/resumes",
+    "/job-postings",
   ],
   default: ["/admin", "/signup", "/profile"],
 };

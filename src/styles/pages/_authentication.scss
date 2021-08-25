@@ -13,3 +13,15 @@
   padding: 5rem 33.8rem 9.3rem 39rem;
   position: relative;
 }
+
+@media only screen and (max-width: 70rem) {
+  .section-profile-creaton {
+    padding: 2.5rem 14rem 10rem 14rem;
+  }
+}
+
+@media only screen and (max-width: 60rem) {
+  .section-profile-creaton {
+    padding: 2.5rem 4rem 10rem 4rem;
+  }
+}

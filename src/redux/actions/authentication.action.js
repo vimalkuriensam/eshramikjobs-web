@@ -2,6 +2,7 @@ import apiService from "../../authInterceptor/authAxios";
 import { userType, USER_TYPES } from "../../utils/data";
 import history from "../../utils/history";
 import { getState } from "./profile.actions";
+import { getBasicProfile } from "./user.actions";
 import { getCompanyInfo } from "./recruit.action";
 import { fileUpload, loginState } from "./utils.action";
 
@@ -132,7 +133,10 @@ export const setOTP =
         if (mobile) {
           const response = await dispatch(getState());
           if (response) history.push("/register/profile/1");
-        } else history.push("/");
+        } else {
+          const response = await dispatch(getBasicProfile());
+          if (response) history.push("/");
+        }
       }
     } catch (e) {
       throw e;

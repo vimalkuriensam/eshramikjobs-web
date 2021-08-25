@@ -8,6 +8,7 @@ const ActiveSubscription = () => {
   return (
     <section className="section-dashboard">
       <SubscriptionBox
+        type="large"
         title="Active Subscription"
         value={50}
         variant="primary"

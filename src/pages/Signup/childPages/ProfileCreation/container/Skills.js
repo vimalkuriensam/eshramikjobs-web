@@ -7,6 +7,7 @@ import RadioGroup from "../../../../../components/molecules/RadioGroup";
 import { SKILLS_CONTENT } from "../data";
 import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import Text from "../../../../../components/atoms/Text";
+import FormInput from "../../../../../components/molecules/FormInput";
 
 const Skills = ({
   info,
@@ -16,8 +17,8 @@ const Skills = ({
 }) => {
   return (
     <div style={{ paddingBottom: "12rem" }}>
-      <div className="row">
-        <div className="col-1-of-2">
+      <div className="row profile__detailsContainer">
+        <div className="col-1-of-2 profile__imageContainer">
           <Image name="profile-banner" />
         </div>
         <div className="col-1-of-2">
@@ -30,6 +31,24 @@ const Skills = ({
               column={2}
               contents={SKILLS_CONTENT.radioContent}
               onHandleRadioClick={onHandleSkillInfo.bind(this, "skill")}
+            />
+          </div>
+          <div className="row u-margin-top-40 u-margin-bottom-0">
+            <Title variant="pr-24-1">Total experience</Title>
+            <FormInput
+              type="textarea"
+              variant="2"
+              value={info.skillList.join(" ")}
+              className="profile__detailSkills"
+              onHandleText={({ target }) => {
+                const { value } = target;
+                const updatedValue = value
+                  .split(/[\s,]+/)
+                  .filter((val) => !!val);
+                onHandleSkillInfo("skillList", {
+                  target: { value: updatedValue },
+                });
+              }}
             />
           </div>
           <div className="authentication__experienceContainer">

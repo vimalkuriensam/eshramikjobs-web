@@ -15,6 +15,7 @@ import {
   Home as HomeView,
   AboutUs as AboutUsView,
   Companies as CompaniesView,
+  RecruiterNotification as RecruiterNotificationView,
   Profile as ProfileView,
   Resumes as ResumesChild,
   Create as CreateJobs,
@@ -47,7 +48,7 @@ const AppRoutes = ({ tokenData }) => {
       <Message />
       <Login />
       <Loader />
-      <div className="u-display-flex u-overflow-hidden u-width-100">
+      <div className="recruiterNavbarContainer">
         <NavBar />
         <RecruiterNavbar />
         <div style={{ width: "100%" }}>
@@ -78,6 +79,10 @@ const AppRoutes = ({ tokenData }) => {
                       component={DashboardChildView}
                     />
                     <AdminRoute path="/resumes" component={ResumesChild} />
+                    <AdminRoute
+                      path="/notification/job-postings"
+                      component={RecruiterNotificationView}
+                    />
                     <Route path="/create-jobs" component={CreateJobs} />
                     <Route path="/home" component={HomeView} />
                     <Route path="/about" component={AboutUsView} />

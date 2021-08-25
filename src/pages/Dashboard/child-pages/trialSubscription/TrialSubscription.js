@@ -7,6 +7,7 @@ const TrialSubscription = () => {
   return (
     <section className="section-dashboard">
       <SubscriptionBox
+        type="large"
         title="Trial Subscription"
         value={5}
         variant="tertiary"

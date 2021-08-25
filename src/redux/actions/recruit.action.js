@@ -1,6 +1,11 @@
 import apiService from "../../authInterceptor/authAxios";
+import { addMessage } from "./utils.action";
 
 export const SET_COMPANY_INFO = "SET_COMPANY_INFO";
+export const SET_CANDIDATES = "SET_CANDIDATES";
+export const CLEAR_CANDIDATES = "CLEAR_CANDIDATES";
+export const SET_CURRENT_PLAN = "SET_CURRENT_PLAN";
+export const CLEAR_CURRENT_PLAN = "CLEAR_CURRENT_PLAN";
 
 export const buyPlan =
   ({ planId }) =>
@@ -57,4 +62,60 @@ export const getPlans = () => async (dispatch) => {
   }
 };
 
+export const candidatesApplication = () => async (dispatch) => {
+  try {
+    const { status, data } = await apiService().post("/jobs/candidates/apply", {
+      pagination: {
+        page: 0,
+        count: 20,
+      },
+    });
+    if (status == 200) {
+      dispatch(clearCandidates());
+      dispatch(setCandidates({ candidates: [...data.data] }));
+      return true;
+    }
+  } catch (e) {
+    throw e;
+  }
+};
 
+export const getCurrentPlan = () => async (dispatch) => {
+  try {
+    const { status, data } = await apiService().get("/plans/active_plan");
+    if (status == 200) {
+      dispatch(setCurrentPlan({ plan: data.data[0] }));
+      return true;
+    } else throw { message: "Unable to load plans" };
+  } catch (e) {
+    dispatch(addMessage({ type: "error", content: e.message }));
+    // throw e;
+  }
+};
+
+export const setCurrentPlan = ({ plan }) => ({
+  type: SET_CURRENT_PLAN,
+  plan,
+});
+
+export const clearCurrentPlan = () => ({
+  type: CLEAR_CURRENT_PLAN,
+});
+
+export const setCandidates = ({ candidates }) => ({
+  type: SET_CANDIDATES,
+  candidates,
+});
+
+export const clearCandidates = () => ({
+  type: CLEAR_CANDIDATES,
+});
+
+export const getActiveStatus = () => async (dispatch) => {
+  try {
+    const { status, data } = await apiService().get("/admin/active_user_stat");
+    console.log(status, data);
+  } catch (e) {
+    throw e;
+  }
+};

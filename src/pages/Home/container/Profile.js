@@ -1,30 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import Button from "../../../components/atoms/Button";
+import Icon from "../../../components/atoms/Icon";
 import Image from "../../../components/atoms/Image";
 import Progress from "../../../components/atoms/Progress";
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
 import history from "../../../utils/history";
 
-const Profile = () => {
+const Profile = ({ details }) => {
+  const { full_name, progress = 0, title, url } = details;
   const onHandleUpdateProfile = () => history.push("/user-profile");
+
+  useEffect(()=>{}, [])
   return (
     <div className="home__profileContainer">
       <div className="home__imageContainer">
         <div className="octo">
           <div className="octo1">
-            <Image className="home__image" name="user-image" />
+            {url ? (
+              <Image className="home__image" name={url} type="binary" />
+            ) : (
+              <div className="home__userIconContainer">
+                <Icon className="home__userIcon" name="User" />
+              </div>
+            )}
           </div>
         </div>
       </div>
-      <div>
-        <Title variant="pr-17-1">Jhon dohe</Title>
-      </div>
-      <div>
-        <Text variant="pl-14-1">Construction supervisor</Text>
-      </div>
+      {full_name && (
+        <div>
+          <Title variant="pr-17-1">{full_name}</Title>
+        </div>
+      )}
+      {title && (
+        <div>
+          <Text variant="pl-14-1">{title}</Text>
+        </div>
+      )}
       <div className="home__progress">
-        <Progress value="92" />
+        <Progress value={progress} />
       </div>
       <div className="home__lists">
         <div className="home__listContainer u-margin-right-5">
@@ -44,4 +59,8 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+const mapStateToProps = (state) => ({
+  details: state.user.basic,
+});
+
+export default connect(mapStateToProps)(Profile);

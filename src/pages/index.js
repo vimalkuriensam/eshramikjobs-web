@@ -16,6 +16,7 @@ export {
   Detail,
 } from "./Jobs";
 export { default as BuyPlans } from "./BuyPlans";
+export { Recruiter as RecruiterNotification } from "./Notifications";
 export { default as Profile } from "./Profile";
 export { Applications, Plans, Resume } from "./Recruiter";
 export { default as Resumes } from "./Resumes";

@@ -18,6 +18,11 @@ body {
     font-family: "poppins-medium";
   }
 
+  &--psm-30-1 {
+    font-family: "poppins-semi-bold";
+    font-size: 3rem;
+  }
+
   &--psm-23-1 {
     font-family: "poppins-semi-bold";
     font-size: 2.3rem;
@@ -231,6 +236,11 @@ body {
   &--pl-18-2 {
     font-family: "poppins-light";
     font-size: 1.8rem;
+  }
+
+  &--pm-16-1 {
+    font-size: 1.6rem;
+    font-family: "poppins-medium";
   }
 
   &--error {

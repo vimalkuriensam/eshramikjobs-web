@@ -1,0 +1,33 @@
+.notification {
+  &__container {
+    background: $color-white;
+    border-radius: 1.5rem;
+    box-shadow: 0 1px 2rem rgba($color-black, 0.06);
+  }
+
+  &__rows {
+    padding: 1.1rem 0 1.3rem 0;
+    cursor: pointer;
+    border-radius: 0.8rem;
+    text-align: center;
+    transition: 0.3s;
+    &--dark {
+      background: #fbfbfb;
+    }
+    &--light {
+      background: $color-white;
+    }
+    &--content {
+      padding: 2.5rem 0;
+    }
+    &:hover {
+      background: darken($color-white, 5%);
+    }
+  }
+
+  &__logo {
+    height: 8rem;
+    width: 7.6rem;
+    border-radius: 1rem;
+  }
+}

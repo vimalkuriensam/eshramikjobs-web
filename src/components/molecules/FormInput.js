@@ -4,7 +4,13 @@ import Title from "../atoms/Title";
 import Input from "../atoms/Input";
 import TextArea from "../atoms/TextArea";
 
-const FormInput = ({ title, variant = "2", type = "input", ...rest }) => {
+const FormInput = ({
+  title,
+  variant = "2",
+  type = "input",
+  listings = true,
+  ...rest
+}) => {
   return (
     <div className="form__inputGroup">
       <Title
@@ -14,7 +20,7 @@ const FormInput = ({ title, variant = "2", type = "input", ...rest }) => {
         {title}
       </Title>
       {type == "textarea" ? (
-        <TextArea variant={variant} {...rest} />
+        <TextArea variant={variant} listings={listings} {...rest} />
       ) : (
         <Input variant={variant} type={type} {...rest} />
       )}

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import * as d3 from "d3";
 
 import Text from "../atoms/Text";
@@ -27,39 +27,53 @@ const SubscriptionBox = ({
   };
 
   const VAL_ENUM = { 0: "dark", 1: "light" };
+  const data = [
+    { value, name: "completed" },
+    { value: 100 - value, name: "incomplete" },
+  ];
+  const subscriptionPie = d3.pie().value((d) => d.value);
+  const radius = Math.min(PIE_VAL.width, PIE_VAL.height) / 2;
+
+  let svg, g, arc;
+
+  svg = d3
+    .select(`#${id}`)
+    .append("svg")
+    .attr("width", PIE_VAL.width)
+    .attr("height", PIE_VAL.height);
   // useEffect(() => {
-    const data = [
-      { value, name: "completed" },
-      { value: 100 - value, name: "incomplete" },
-    ];
-    const subscriptionPie = d3.pie().value((d) => d.value);
+
+  g = svg
+    .append("g")
+    .attr("class", `chart-group-${id}`)
+    .attr(
+      "transform",
+      `translate(${PIE_VAL.width / 2},${PIE_VAL.height / 2})`
+    );
     const slices = subscriptionPie(data);
-    const svg = d3
-      .select(`#${id}`)
-      .append("svg")
-      .attr("width", PIE_VAL.width)
-      .attr("height", PIE_VAL.height);
-    const radius = Math.min(PIE_VAL.width, PIE_VAL.height) / 2;
-
-    const g = svg
-      .append("g")
-      .attr("class", `chart-group-${id}`)
-      .attr(
-        "transform",
-        `translate(${PIE_VAL.width / 2},${PIE_VAL.height / 2})`
-      );
-
-    const arc = d3
+    arc = d3
       .arc()
       .innerRadius(`${!type ? radius - 10 : radius - 15}`)
       .outerRadius(radius);
-    const arcs = g
-      .selectAll("path")
+    g.selectAll("path")
       .data(slices)
       .join("path")
+      .transition()
       .attr("d", arc)
       .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]]);
-  // }, []);
+  useEffect(() => {
+    const slices = subscriptionPie(data);
+    arc = d3
+      .arc()
+      .innerRadius(`${!type ? radius - 10 : radius - 15}`)
+      .outerRadius(radius);
+    g.selectAll("path")
+      .data(slices)
+      .join("path")
+      .transition()
+      .attr("d", arc)
+      .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]]);
+  }, []);
 
   return (
     <div className="dashboard__subscriptionBox">

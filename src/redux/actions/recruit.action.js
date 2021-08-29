@@ -120,3 +120,12 @@ export const getActiveStatus = () => async (dispatch) => {
     throw e;
   }
 };
+
+export const getRevenueDetails = () => async (dispatch) => {
+  try {
+    const { status, data } = await apiService().get("/admin/revenue_details");
+    console.log('revenue', status, data);
+  } catch (e) {
+    throw e;
+  }
+};

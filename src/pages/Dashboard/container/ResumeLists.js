@@ -9,7 +9,10 @@ import { RESUME_LIST_CONTENTS, RESUME_LIST_HEADER } from "../data";
 
 const ResumeLists = () => {
   return (
-    <TableContainer title="Resumes recieved">
+    <TableContainer
+      title="Resumes recieved"
+      contentCheck={{ sort: true, type: false, action: true }}
+    >
       <div className="a-row u-margin-top-40">
         {RESUME_LIST_HEADER.map((list, index) => (
           <div
@@ -21,7 +24,12 @@ const ResumeLists = () => {
         ))}
       </div>
       {RESUME_LIST_CONTENTS.map((list, index) => (
-        <div className="a-row dashboard__tableList" key={index}>
+        <div
+          className={`a-row table__rowContent table__rowContent--${
+            index % 2 == 0 ? "dark" : "light"
+          }`}
+          key={index}
+        >
           <div
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
@@ -31,7 +39,7 @@ const ResumeLists = () => {
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
             <ToolTip>
-              <Text variant="pl-16-1" className="dashboard__tableText">
+              <Text variant="pl-16-1" className="dashboard__tableText u-margin-top-10">
                 {list.name}
               </Text>
             </ToolTip>
@@ -40,7 +48,7 @@ const ResumeLists = () => {
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
             <ToolTip>
-              <Text variant="pl-16-1" className="dashboard__tableText">
+              <Text variant="pl-16-1" className="dashboard__tableText u-margin-top-10">
                 {list.designation}
               </Text>
             </ToolTip>
@@ -49,7 +57,7 @@ const ResumeLists = () => {
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
             <ToolTip>
-              <Text variant="pl-16-1" className="dashboard__tableText">
+              <Text variant="pl-16-1" className="dashboard__tableText u-margin-top-10">
                 {list.skill}
               </Text>
             </ToolTip>
@@ -58,7 +66,7 @@ const ResumeLists = () => {
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
             <ToolTip>
-              <Text variant="pl-16-1" className="dashboard__tableText">
+              <Text variant="pl-16-1" className="dashboard__tableText u-margin-top-10">
                 {list.education}
               </Text>
             </ToolTip>
@@ -67,7 +75,7 @@ const ResumeLists = () => {
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
             <ToolTip>
-              <Text variant="pl-16-1" className="dashboard__tableText">
+              <Text variant="pl-16-1" className="dashboard__tableText u-margin-top-10">
                 {list.gender}
               </Text>
             </ToolTip>
@@ -76,7 +84,7 @@ const ResumeLists = () => {
             className={`col-a-1-of-${Object.keys(list).length} u-text-center`}
           >
             <ToolTip>
-              <Text variant="pl-16-1" className="dashboard__tableText">
+              <Text variant="pl-16-1" className="dashboard__tableText u-margin-top-10">
                 {list.age}
               </Text>
             </ToolTip>

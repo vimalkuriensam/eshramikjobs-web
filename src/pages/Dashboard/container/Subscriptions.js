@@ -15,7 +15,6 @@ const Subscriptions = ({ dispatch }) => {
   const onHandleSubscription = (value) => history.push(value);
   const loadStatus = async () => {
     const result = await dispatch(getActiveStatus());
-    console.log(result);
     if (result)
       setSubscriptionValues({
         active: result.activePerc,

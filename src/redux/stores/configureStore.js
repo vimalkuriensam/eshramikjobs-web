@@ -39,7 +39,7 @@ const store = createStore(
       utils: utilsReducer,
     })
   ),
-  composeEnhancers(applyMiddleware(thunk, logger))
+  composeEnhancers(applyMiddleware(thunk))//, logger))
 );
 
 const persistor = persistStore(store);

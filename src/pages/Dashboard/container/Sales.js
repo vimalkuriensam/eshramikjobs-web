@@ -4,7 +4,6 @@ import * as d3 from "d3";
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
 import { connect } from "react-redux";
-import { getRevenueDetails } from "../../../redux/actions/recruit.action";
 import moment from "moment";
 
 let dimensions = {
@@ -70,24 +69,24 @@ const updatedDataBin = Object.keys(updatedData).map((val) => ({
   date: val,
   price: updatedData[val],
 }));
+//from here
 
-const xAccessor = (d) => new Date(d.date);
+const chartInit = (sales) => {
+  const xAccessor = (d) => new Date(d.date);
 
-const xScale = d3
-  .scaleTime()
-  .domain(d3.extent(updatedDataBin, xAccessor))
-  .range([0, dimensions.ctrWidth])
-  .nice();
+  const xScale = d3
+    .scaleTime()
+    .domain(d3.extent(sales, xAccessor))
+    .range([0, dimensions.ctrWidth])
+    .nice();
 
-const yAccessor = (d) => d.price;
+  const yAccessor = (d) => d.price;
 
-const yScale = d3
-  .scaleLinear()
-  .domain([0, d3.max(updatedDataBin, yAccessor)])
-  .range([dimensions.ctrHeight, 0])
-  .nice();
-
-const chartInit = () => {
+  const yScale = d3
+    .scaleLinear()
+    .domain([0, d3.max(sales, yAccessor)])
+    .range([dimensions.ctrHeight, 0])
+    .nice();
   const svg = d3
     .select("#sales-graph")
     .append("svg")
@@ -102,9 +101,9 @@ const chartInit = () => {
     );
   ctr
     .selectAll("rect")
-    .data(updatedDataBin)
+    .data(sales)
     .join("rect")
-    .attr("width", (d) => dimensions.ctrWidth / updatedDataBin.length - 10)
+    .attr("width", (d) => dimensions.ctrWidth / sales.length - 10)
     .attr("height", (d) => dimensions.ctrHeight - yScale(yAccessor(d)))
     .attr("x", (d) => xScale(xAccessor(d)))
     .attr("y", (d) => yScale(yAccessor(d)))
@@ -145,7 +144,7 @@ const chartInit = () => {
     .classed("dashboard__salesLabels", true)
     .attr("text-anchor", "middle")
     .selectAll("g")
-    .data(updatedDataBin)
+    .data(sales)
     .join("g");
 
   tooltip
@@ -162,7 +161,7 @@ const chartInit = () => {
       (d) =>
         (xScale(xAccessor(d)) +
           (xScale(xAccessor(d)) +
-            dimensions.ctrWidth / updatedDataBin.length -
+            dimensions.ctrWidth / sales.length -
             10)) /
           2 -
         15
@@ -176,7 +175,7 @@ const chartInit = () => {
       (d) =>
         (xScale(xAccessor(d)) +
           (xScale(xAccessor(d)) +
-            dimensions.ctrWidth / updatedDataBin.length -
+            dimensions.ctrWidth / sales.length -
             10)) /
         2
     )
@@ -204,9 +203,9 @@ const chartInit = () => {
   yAxisGroup.call(yAxis);
 };
 
-const Sales = ({ dispatch }) => {
+const Sales = ({ dispatch, sales = [] }) => {
   useEffect(() => {
-    chartInit();
+    chartInit(sales);
     // dispatch(getRevenueDetails());
   }, []);
 

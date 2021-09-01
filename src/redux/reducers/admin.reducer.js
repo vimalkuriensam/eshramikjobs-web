@@ -24,6 +24,7 @@ const adminReducer = (
 ) => {
   switch (type) {
     case SET_REVENUE:
+      console.log('redux', sales);
       return { ...state, sales };
     case SET_APPLICATION_DETAILS:
       return { ...state, resumes: applications };

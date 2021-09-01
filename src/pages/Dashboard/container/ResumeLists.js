@@ -17,7 +17,7 @@ const ResumeLists = ({ resumes = [] }) => {
       title="Resumes recieved"
       contentCheck={{ sort: true, type: false, action: true }}
     >
-      <div className="a-row u-margin-top-40">
+      <div className="a-row u-margin-top-40 table__rowContent">
         {RESUME_LIST_HEADER.map((list, index) => (
           <div
             className={`col-a-1-of-${RESUME_LIST_HEADER.length} u-text-center`}

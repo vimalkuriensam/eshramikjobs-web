@@ -4,50 +4,42 @@ import * as d3 from "d3";
 import Text from "../atoms/Text";
 import Title from "../atoms/Title";
 
-const SubscriptionBox = ({
-  title,
-  value,
-  variant,
-  id,
-  onHandleView,
-  type = null,
-}) => {
+const PIE_COLORS = {
+  primary: {
+    light: "#19b6e9",
+    dark: "#0088b5",
+  },
+  secondary: { light: "#fcc143", dark: "#dba127" },
+  tertiary: { light: "#17b495", dark: "#126353" },
+};
+
+const VAL_ENUM = { 0: "dark", 1: "light" };
+
+const chartInit = (id, value, type, variant) => {
   const PIE_VAL = {
     height: !type ? 88 : 150,
     width: !type ? 88 : 150,
   };
-
-  const PIE_COLORS = {
-    primary: {
-      light: "#19b6e9",
-      dark: "#0088b5",
-    },
-    secondary: { light: "#fcc143", dark: "#dba127" },
-    tertiary: { light: "#17b495", dark: "#126353" },
-  };
-
-  const VAL_ENUM = { 0: "dark", 1: "light" };
   const data = [
     { value, name: "completed" },
     { value: 100 - value, name: "incomplete" },
   ];
+
   const subscriptionPie = d3.pie().value((d) => d.value);
   const radius = Math.min(PIE_VAL.width, PIE_VAL.height) / 2;
 
   let svg, g, arc;
-  // d3.select(`#${id}`).remove();
   svg = d3
     .select(`#${id}`)
     .append("svg")
     .attr("width", PIE_VAL.width)
     .attr("height", PIE_VAL.height);
-  // useEffect(() => {
 
   g = svg
     .append("g")
     .attr("class", `chart-group-${id}`)
     .attr("transform", `translate(${PIE_VAL.width / 2},${PIE_VAL.height / 2})`);
-  const slices = subscriptionPie(data);
+  let slices = subscriptionPie(data);
   arc = d3
     .arc()
     .innerRadius(`${!type ? radius - 10 : radius - 15}`)
@@ -58,18 +50,29 @@ const SubscriptionBox = ({
     .transition()
     .attr("d", arc)
     .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]]);
+
+  arc = d3
+    .arc()
+    .innerRadius(`${!type ? radius - 10 : radius - 15}`)
+    .outerRadius(radius);
+  g.selectAll("path")
+    .data(slices)
+    .join("path")
+    .transition()
+    .attr("d", arc)
+    .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]]);
+};
+
+const SubscriptionBox = ({
+  title,
+  value,
+  variant,
+  id,
+  onHandleView,
+  type = null,
+}) => {
   useEffect(() => {
-    const slices = subscriptionPie(data);
-    arc = d3
-      .arc()
-      .innerRadius(`${!type ? radius - 10 : radius - 15}`)
-      .outerRadius(radius);
-    g.selectAll("path")
-      .data(slices)
-      .join("path")
-      .transition()
-      .attr("d", arc)
-      .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]]);
+    chartInit(id, value, type, variant);
   }, []);
 
   return (

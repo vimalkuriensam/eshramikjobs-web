@@ -1,5 +1,10 @@
 import jwtDecode from "jwt-decode";
 import moment from "moment";
+import {
+  dashboardHero,
+  getApplicationDetails,
+  getRevenueDetails,
+} from "../../redux/actions/admin.action";
 import { setLogout } from "../../redux/actions/authentication.action";
 import {
   applyJob,
@@ -218,8 +223,12 @@ export const PROFILE_CONTENTS = {
 export const funcMap = {
   home: async (props) => {
     // const response = Promise.all()
-    console.log('props', props);
+    console.log("props", props);
     history.push("/");
+  },
+  adminDashboard: async (dispatch) => {
+    const response = await dispatch(dashboardHero());
+    if (response) history.push("/dashboard");
   },
   recruiterSignup: () => history.push("/register/signup"),
   logout: (dispatch) => dispatch(setLogout()),
@@ -544,23 +553,28 @@ export const APPLIED_JOBS_SAMPLES = [
 export const NAVBAR_NAVS = [
   {
     text: "Dashboard",
-    to: "/dashboard",
+    link: "adminDashboard",
+    type: "process",
   },
   {
     text: "Sales",
-    to: "/sales",
+    link: "/sales",
+    type: "link",
   },
   {
     text: "Enrolled Companies",
-    to: "/companies",
+    link: "/companies",
+    type: "link",
   },
   {
     text: "Resumes Recieved",
-    to: "/resumes",
+    link: "/resumes",
+    type: "link",
   },
   {
     text: "Create Jobs",
-    to: "/jobs/create",
+    link: "/dashboard/post-jobs",
+    type: "link",
   },
 ];
 
@@ -634,6 +648,7 @@ export const USER_ROUTE_TYPES = {
     "/trial-subscription",
     "/resumes",
     "/job-postings",
+    "/post-jobs",
   ],
   default: ["/admin", "/signup", "/profile"],
 };

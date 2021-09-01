@@ -35,7 +35,7 @@ const SubscriptionBox = ({
   const radius = Math.min(PIE_VAL.width, PIE_VAL.height) / 2;
 
   let svg, g, arc;
-
+  // d3.select(`#${id}`).remove();
   svg = d3
     .select(`#${id}`)
     .append("svg")
@@ -46,21 +46,18 @@ const SubscriptionBox = ({
   g = svg
     .append("g")
     .attr("class", `chart-group-${id}`)
-    .attr(
-      "transform",
-      `translate(${PIE_VAL.width / 2},${PIE_VAL.height / 2})`
-    );
-    const slices = subscriptionPie(data);
-    arc = d3
-      .arc()
-      .innerRadius(`${!type ? radius - 10 : radius - 15}`)
-      .outerRadius(radius);
-    g.selectAll("path")
-      .data(slices)
-      .join("path")
-      .transition()
-      .attr("d", arc)
-      .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]]);
+    .attr("transform", `translate(${PIE_VAL.width / 2},${PIE_VAL.height / 2})`);
+  const slices = subscriptionPie(data);
+  arc = d3
+    .arc()
+    .innerRadius(`${!type ? radius - 10 : radius - 15}`)
+    .outerRadius(radius);
+  g.selectAll("path")
+    .data(slices)
+    .join("path")
+    .transition()
+    .attr("d", arc)
+    .attr("fill", (d, i) => PIE_COLORS[variant][VAL_ENUM[i]]);
   useEffect(() => {
     const slices = subscriptionPie(data);
     arc = d3

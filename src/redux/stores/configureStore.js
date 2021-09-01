@@ -10,6 +10,7 @@ import profileReducer from "../reducers/profile.reducer";
 import jobsReducer from "../reducers/jobs.reducer";
 import recruiterReducer from "../reducers/recruiter.reducer";
 import userReducer from "../reducers/user.reducer";
+import adminReducer from "../reducers/admin.reducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -31,6 +32,7 @@ const store = createStore(
   persistReducer(
     persistConfig,
     combineReducers({
+      admin: adminReducer,
       auth: authenticationReducer,
       profile: profileReducer,
       jobs: jobsReducer,
@@ -39,7 +41,7 @@ const store = createStore(
       utils: utilsReducer,
     })
   ),
-  composeEnhancers(applyMiddleware(thunk))//, logger))
+  composeEnhancers(applyMiddleware(thunk, logger))
 );
 
 const persistor = persistStore(store);

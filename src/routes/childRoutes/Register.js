@@ -9,6 +9,7 @@ import {
   OTP as OTPView,
   RecruiterSignup as RecruiterSignupView,
 } from "../../pages";
+import RecruiterRoute from "../RecruiterRoute";
 
 export const RegisterChildView = () => {
   const { path, url } = useRouteMatch();
@@ -19,7 +20,7 @@ export const RegisterChildView = () => {
         <Route path={`${path}/otp`} component={OTPView} />
         <Route path={`${path}/admin`} component={AdminLoginView} />
         <Route path={`${path}/signup`} exact component={RecruiterSignupView} />
-        <Route path={`${path}/signup/profile`} component={CompanyProfileView} />
+        <RecruiterRoute path={`${path}/signup/profile`} component={CompanyProfileView} />
         <Route path={`${path}/profile/:step`} component={ProfileCreationView} />
       </Switch>
     </Fragment>

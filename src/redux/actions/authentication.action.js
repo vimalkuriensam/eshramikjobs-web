@@ -5,6 +5,7 @@ import { getState } from "./profile.actions";
 import { getBasicProfile } from "./user.actions";
 import { getCompanyInfo } from "./recruit.action";
 import { fileUpload, loginState } from "./utils.action";
+import { dashboardHero } from "./admin.action";
 
 export const SET_LOGIN = "SET_LOGIN";
 export const SET_LOGOUT = "SET_LOGOUT";
@@ -85,7 +86,10 @@ export const adminLogin =
         if (type == USER_TYPES.RECRUITER) {
           const resp = await dispatch(getCompanyInfo());
           if (resp) window.location.href = "/";
-        } else window.location.href = "/";
+        } else {
+          const response = await dispatch(dashboardHero());
+          if (response) window.location.href = "/";
+        }
       }
     } catch (e) {
       throw e;
@@ -168,7 +172,7 @@ export const getAccessToken =
         refreshToken,
       });
       if (status == 200) {
-        dispatch(setAccessToken(data));
+        dispatch(setAccessToken(data.data));
         return true;
       }
     } catch (e) {

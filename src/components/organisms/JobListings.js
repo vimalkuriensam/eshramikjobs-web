@@ -11,6 +11,7 @@ const JobListings = ({
   onHandleButtonDelete,
   onHandleButtonApply,
 }) => {
+  console.log('jobs', jobs)
   return (
     <div>
       {jobs.map(

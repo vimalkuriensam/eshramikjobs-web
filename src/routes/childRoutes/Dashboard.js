@@ -6,6 +6,7 @@ import {
   ActiveSubscription as ActiveSubscriptionView,
   ExpiredSubscription as ExpiredSubscriptionView,
   TrialSubscription as TrialSubscriptionView,
+  Create as CreateView,
 } from "../../pages";
 
 export const DashboardChildView = () => {
@@ -26,6 +27,7 @@ export const DashboardChildView = () => {
           path={`${path}/trial-subscription`}
           component={TrialSubscriptionView}
         />
+        <Route path={`${path}/post-jobs`} component={CreateView} />
       </Switch>
     </Fragment>
   );

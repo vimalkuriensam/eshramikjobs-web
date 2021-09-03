@@ -37,9 +37,12 @@ export const confirmOrder = (info) => async (dispatch) => {
 export const getCompanyInfo = () => async (dispatch) => {
   try {
     const { status, data } = await apiService().get("/jobs/recruiter/company");
+    console.log(data, status);
     if (status == 200) {
-      const { name, logo } = data.data[0];
-      dispatch(setCompanyInfo({ name, logo }));
+      if (data.data.length) {
+        const { name, logo } = data.data[0];
+        dispatch(setCompanyInfo({ name, logo }));
+      }
       return true;
     }
   } catch (e) {
@@ -62,23 +65,42 @@ export const getPlans = () => async (dispatch) => {
   }
 };
 
-export const candidatesApplication = () => async (dispatch) => {
-  try {
-    const { status, data } = await apiService().post("/jobs/candidates/apply", {
-      pagination: {
-        page: 0,
-        count: 20,
-      },
-    });
-    if (status == 200) {
-      dispatch(clearCandidates());
-      dispatch(setCandidates({ candidates: [...data.data] }));
-      return true;
+export const candidatesApplication =
+  ({ page = 0, count = 20 } = {}) =>
+  async (dispatch) => {
+    try {
+      const response = await dispatch(getCandiatesApplication({ page, count }));
+      if (response) {
+        dispatch(clearCandidates());
+        dispatch(setCandidates({ candidates: [...response] }));
+        return true;
+      }
+    } catch (e) {
+      throw e;
     }
-  } catch (e) {
-    throw e;
-  }
-};
+  };
+
+export const getCandiatesApplication =
+  ({ page, count }) =>
+  async (dispatch) => {
+    try {
+      const {
+        status,
+        data
+      } = await apiService().post("/jobs/candidates/apply", {
+        pagination: {
+          page,
+          count,
+        },
+      });
+      if (status == 200) {
+        if (data?.total) return { length: data.total, data: data.data };
+        return data.data;
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
 
 export const getCurrentPlan = () => async (dispatch) => {
   try {
@@ -110,22 +132,3 @@ export const setCandidates = ({ candidates }) => ({
 export const clearCandidates = () => ({
   type: CLEAR_CANDIDATES,
 });
-
-export const getActiveStatus = () => async (dispatch) => {
-  try {
-    const { status, data } = await apiService().get("/admin/active_user_stat");
-    console.log(status, data);
-    if (status == 200) return data.data;
-  } catch (e) {
-    throw e;
-  }
-};
-
-export const getRevenueDetails = () => async (dispatch) => {
-  try {
-    const { status, data } = await apiService().get("/admin/revenue_details");
-    console.log('revenue', status, data);
-  } catch (e) {
-    throw e;
-  }
-};

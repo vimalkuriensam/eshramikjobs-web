@@ -2,8 +2,8 @@ export const RESUME_LIST_HEADER = [
   null,
   "Name",
   "Designation",
-  "Skill",
-  "Education",
+  "Company",
+  "Job",
   "Gender",
   "Age",
 ];

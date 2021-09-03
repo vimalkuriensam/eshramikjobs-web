@@ -4,8 +4,9 @@ import { Redirect, Route } from "react-router-dom";
 
 import Logout from "../components/organisms/Logout";
 import { RECRUITER_STATUS, userType, USER_TYPES } from "../utils/data";
+import history from "../utils/history";
 
-const AdminRoute = ({
+const RecruiterRoute = ({
   dispatch,
   isAuthenticated,
   token,
@@ -14,7 +15,6 @@ const AdminRoute = ({
   ...rest
 }) => {
   const { type } = userType(token);
-
   const getRedirection = () => {
     setTimeout(() => {
       window.location.href = "/";
@@ -23,7 +23,6 @@ const AdminRoute = ({
   };
 
   const { path } = rest;
-
   if (path == "/recruite/buy-plans") {
     return (
       <Route
@@ -39,6 +38,9 @@ const AdminRoute = ({
     );
   }
 
+  const getCompanyProfileRedirection = () => {
+    window.location.href = "/register/signup/profile";
+  };
   return (
     <Route
       {...rest}
@@ -46,9 +48,17 @@ const AdminRoute = ({
         if (isAuthenticated && type == USER_TYPES.RECRUITER) {
           if (verified == RECRUITER_STATUS.VERIFIED)
             return <Component {...props} />;
-          else if (verified == RECRUITER_STATUS.PAYMENT)
+          else if (verified == RECRUITER_STATUS.COMPANY_UNVERIFIED) {
+            if (path !== "/register/signup/profile")
+              return (
+                <Route render={() => getCompanyProfileRedirection()}></Route>
+              );
+            else return <Component {...props} />;
+          } else if (verified == RECRUITER_STATUS.PAYMENT)
             return <Redirect to="/recruite/buy-plans" />;
-        } else return <Route render={() => getRedirection()}></Route>;
+        } else {
+          return <Route render={() => getRedirection()}></Route>;
+        }
       }}
     ></Route>
   );
@@ -60,4 +70,4 @@ const mapStateToProps = (state) => ({
   token: state.auth.accessToken,
 });
 
-export default connect(mapStateToProps)(AdminRoute);
+export default connect(mapStateToProps)(RecruiterRoute);

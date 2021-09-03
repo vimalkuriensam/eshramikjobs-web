@@ -42,9 +42,7 @@ const apiService = () => {
         );
         const refreshToken = store.getState().auth?.refreshToken;
         if (refreshToken) {
-          const resp = await store.dispatch(
-            getAccessToken({ refreshToken })
-          );
+          const resp = await store.dispatch(getAccessToken({ refreshToken }));
           if (resp) return api.request(error.config);
           else history.push("/");
         } else {
@@ -54,7 +52,9 @@ const apiService = () => {
       } else if (error.response.status === 401) {
         store.dispatch(setLogout());
         history.push("/register");
-      } else return error;
+      } else {
+        return error;
+      }
     }
   );
 

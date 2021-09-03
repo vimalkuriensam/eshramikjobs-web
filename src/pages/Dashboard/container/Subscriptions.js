@@ -1,32 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
 
 import SubscriptionBox from "../../../components/organisms/SubscriptionBox";
-import { getActiveStatus } from "../../../redux/actions/recruit.action";
 import history from "../../../utils/history";
 import { SUBSCRIPTION_GROUP } from "../data";
 
-const Subscriptions = ({ dispatch }) => {
+const Subscriptions = ({ active = 0, expired = 0, trial = 0 }) => {
   const [subscriptionValues, setSubscriptionValues] = useState({
-    active: 0,
-    expired: 0,
-    trial: 0,
+    active,
+    expired,
+    trial,
   });
   const onHandleSubscription = (value) => history.push(value);
-  const loadStatus = async () => {
-    const result = await dispatch(getActiveStatus());
-    if (result)
-      setSubscriptionValues({
-        active: result.activePerc,
-        expired: result.expiredPerc,
-        trial: result.trailPerc,
-      });
-  };
+
   const getStatusValue = (type) => subscriptionValues[type];
 
-  useEffect(() => {
-    loadStatus();
-  }, []);
   return (
     <div>
       <div className="row">
@@ -49,4 +36,4 @@ const Subscriptions = ({ dispatch }) => {
   );
 };
 
-export default connect()(Subscriptions);
+export default Subscriptions;

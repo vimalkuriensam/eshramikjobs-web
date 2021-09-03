@@ -26,8 +26,8 @@ const authenticationReducer = (
         ...(tokens?.refreshToken && {
           refreshToken: tokens.refreshToken,
         }),
-        ...(tokens?.verified && {
-          verified: tokens.verified,
+        ...(tokens?.verified !== null && {
+          verified: tokens?.verified,
         }),
       };
     case SET_LOGOUT:

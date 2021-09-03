@@ -230,6 +230,10 @@ export const funcMap = {
     const response = await dispatch(dashboardHero());
     if (response) history.push("/dashboard");
   },
+  resumesRecieved: async dispatch => {
+    const response = await dispatch(getApplicationDetails({ page: 0, count: 8 }));
+    if (response) history.push("/resumes");
+  },
   recruiterSignup: () => history.push("/register/signup"),
   logout: (dispatch) => dispatch(setLogout()),
   searchJobs: () => window.scroll({ top: 0, left: 0, behavior: "smooth" }),
@@ -568,8 +572,8 @@ export const NAVBAR_NAVS = [
   },
   {
     text: "Resumes Recieved",
-    link: "/resumes",
-    type: "link",
+    link: "resumesRecieved",
+    type: "process",
   },
   {
     text: "Create Jobs",

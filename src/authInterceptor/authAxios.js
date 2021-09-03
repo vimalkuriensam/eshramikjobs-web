@@ -32,7 +32,6 @@ const apiService = () => {
       return response;
     },
     async (error) => {
-      console.log(error);
       store.dispatch(setLoader({ state: false }));
       if (error.response.status === 403) {
         store.dispatch(

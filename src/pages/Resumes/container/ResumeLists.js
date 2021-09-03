@@ -3,6 +3,7 @@ import Image from "../../../components/atoms/Image";
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
 import ToolTip from "../../../components/molecules/ToolTip";
+import Pagination from "../../../components/organisms/Pagination";
 
 import TableContainer from "../../../components/organisms/TableContainer";
 import { RESUME_LIST_CONTENTS, RESUME_LIST_HEADER } from "../data";
@@ -83,6 +84,7 @@ const ResumeLists = () => {
           </div>
         </div>
       ))}
+      <Pagination />
     </TableContainer>
   );
 };

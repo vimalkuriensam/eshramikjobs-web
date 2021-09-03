@@ -4,6 +4,7 @@ import {
   SET_ACTIVE_STATUS,
   SET_APPLICATION_DETAILS,
   SET_ENROLLED_COMPANIES,
+  SET_RESUME_LENGTH,
   SET_REVENUE,
 } from "../actions/admin.action";
 
@@ -16,15 +17,18 @@ const adminReducerDefaultState = {
   sales: [],
   companies: [],
   resumes: [],
+  pages: {
+    resumePage: 0,
+    resumeTotal: 0,
+  },
 };
 
 const adminReducer = (
   state = adminReducerDefaultState,
-  { type, sales, applications, companies, subscriptions }
+  { type, sales, applications, companies, subscriptions, length }
 ) => {
   switch (type) {
     case SET_REVENUE:
-      console.log('redux', sales);
       return { ...state, sales };
     case SET_APPLICATION_DETAILS:
       return { ...state, resumes: applications };
@@ -35,7 +39,9 @@ const adminReducer = (
     case CLEAR_ENROLLED_COMPANIES:
       return { ...state, companies: [] };
     case SET_ACTIVE_STATUS:
-      return { ...state, subscriptions }
+      return { ...state, subscriptions };
+    case SET_RESUME_LENGTH:
+      return { ...state, pages: { ...state.pages, resumeTotal: length } };
     default:
       return state;
   }

@@ -8,11 +8,12 @@ export const CLEAR_APPLICATION_DETAILS = "CLEAR_APPLICATION_DETAILS";
 export const SET_ENROLLED_COMPANIES = "SET_ENROLLED_COMPANIES";
 export const CLEAR_ENROLLED_COMPANIES = "CLEAR_ENROLLED_COMPANIES";
 export const SET_ACTIVE_STATUS = "SET_ACTIVE_STATUS";
+export const SET_RESUME_LENGTH = "SET_RESUME_LENGTH";
 
 export const dashboardHero = () => async (dispatch) => {
   try {
     const response = await Promise.all([
-      dispatch(getApplicationDetails()),
+      dispatch(getApplicationDetails({ page: 0, count: 5 })),
       dispatch(getRevenueDetails()),
       dispatch(getEnrolledCompanies()),
       dispatch(getActiveStatus()),
@@ -152,4 +153,9 @@ export const setApplicationDetails = ({ applications }) => ({
 
 export const clearApplicationDetails = () => ({
   type: CLEAR_APPLICATION_DETAILS,
+});
+
+export const setResumeLength = ({ length = 5 } = {}) => ({
+  type: SET_RESUME_LENGTH,
+  length,
 });

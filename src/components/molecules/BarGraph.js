@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import * as d3 from "d3";
 
 import Text from "../atoms/Text";
+import moment from "moment";
 
 let dimensions = {
   width: 600,
@@ -28,11 +29,10 @@ const chartInit = (sales, id) => {
     .range([dimensions.ctrHeight, 0])
     .nice();
   const svg = d3
-    .select(id)
+    .select(`#${id}`)
     .append("svg")
     .attr("width", dimensions.width)
     .attr("height", dimensions.height);
-
   const ctr = svg
     .append("g")
     .attr(
@@ -139,7 +139,7 @@ const chartInit = (sales, id) => {
   yAxisGroup.call(yAxis);
 };
 
-const BarGraph = ({ id, data }) => {
+const BarGraph = ({ id, data = [] }) => {
   useEffect(() => {
     if (id) chartInit(data, id);
   }, []);

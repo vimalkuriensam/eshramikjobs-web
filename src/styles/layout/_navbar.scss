@@ -14,9 +14,14 @@
     font-family: "poppins-regular";
     opacity: 0.8;
     width: 27.3rem;
-
+    cursor: pointer;
+    &:hover {
+      background: darken($color-primary, 3%);
+      transition: 0.3s;
+    }
     &--active {
       opacity: 1;
+      background: darken($color-primary, 3%);
     }
   }
 }

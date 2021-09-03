@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 import * as d3 from "d3";
 
-import Text from "../../../components/atoms/Text";
-import Title from "../../../components/atoms/Title";
-import { connect } from "react-redux";
-import moment from "moment";
-import BarGraph from "../../../components/molecules/BarGraph";
+import Text from "../atoms/Text";
 
 let dimensions = {
   width: 600,
@@ -15,7 +11,7 @@ let dimensions = {
 dimensions.ctrWidth = dimensions.width - dimensions.margins * 2;
 dimensions.ctrHeight = dimensions.height - dimensions.margins * 2;
 
-const chartInit = (sales) => {
+const chartInit = (sales, id) => {
   const xAccessor = (d) => new Date(d.date);
 
   const xScale = d3
@@ -32,7 +28,7 @@ const chartInit = (sales) => {
     .range([dimensions.ctrHeight, 0])
     .nice();
   const svg = d3
-    .select("#sales-graph")
+    .select(id)
     .append("svg")
     .attr("width", dimensions.width)
     .attr("height", dimensions.height);
@@ -143,28 +139,15 @@ const chartInit = (sales) => {
   yAxisGroup.call(yAxis);
 };
 
-const Sales = ({ dispatch, sales = [] }) => {
+const BarGraph = ({ id, data }) => {
   useEffect(() => {
-    chartInit(sales);
-    // dispatch(getRevenueDetails());
+    if (id) chartInit(data, id);
   }, []);
-
-  return (
-    <div className="dashboard__tableContainer">
-      <div className="dashboard__salesHeader">
-        <div className="dashboard__salesTitle">
-          <Title variant="pm-17-1">Sales</Title>
-          <Title variant="pr-17-5">Revenue 48k</Title>
-        </div>
-        <div className="dashboard__salesCTA">
-          <Text variant="pr-14-2">3 days</Text>
-          <Text variant="pr-14-2">7 days</Text>
-        </div>
-      </div>
-      {/*<div id="sales-graph"></div>*/}
-      <BarGraph id="sales-graph" data={sales} />
-    </div>
+  return id ? (
+    <div id={id}></div>
+  ) : (
+    <Text>Chart renderer needs a unique id to proceed.</Text>
   );
 };
 
-export default connect()(Sales);
+export default BarGraph;

@@ -11,14 +11,15 @@ import Login from "../components/organisms/Login";
 import Loader from "../components/organisms/Loader";
 import Footer from "../components/organisms/Footer";
 import {
-  BuyPlans as BuyPlansView,
-  Home as HomeView,
   AboutUs as AboutUsView,
+  BuyPlans as BuyPlansView,
   Companies as CompaniesView,
-  RecruiterNotification as RecruiterNotificationView,
-  Profile as ProfileView,
-  Resumes as ResumesChild,
   Create as CreateJobs,
+  Home as HomeView,
+  Profile as ProfileView,
+  RecruiterNotification as RecruiterNotificationView,
+  Resumes as ResumesChild,
+  Sales as SalesView,
 } from "../pages";
 
 import { DashboardChildView } from "./childRoutes/Dashboard";
@@ -83,6 +84,7 @@ const AppRoutes = ({ tokenData }) => {
                       path="/notification/job-postings"
                       component={RecruiterNotificationView}
                     />
+                    <AdminRoute path="/sales" component={SalesView} />
                     <Route path="/create-jobs" component={CreateJobs} />
                     <Route path="/home" component={HomeView} />
                     <Route path="/about" component={AboutUsView} />

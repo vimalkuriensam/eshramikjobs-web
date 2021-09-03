@@ -655,6 +655,7 @@ export const USER_ROUTE_TYPES = {
     "/resumes",
     "/job-postings",
     "/post-jobs",
+    "/sales",
   ],
   default: ["/admin", "/signup", "/profile"],
 };

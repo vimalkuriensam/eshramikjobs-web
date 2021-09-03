@@ -84,16 +84,19 @@ export const getCandiatesApplication =
   ({ page, count }) =>
   async (dispatch) => {
     try {
-      const { status, data } = await apiService().post(
-        "/jobs/candidates/apply",
-        {
-          pagination: {
-            page,
-            count,
-          },
-        }
-      );
-      if (status == 200) return data.data;
+      const {
+        status,
+        data
+      } = await apiService().post("/jobs/candidates/apply", {
+        pagination: {
+          page,
+          count,
+        },
+      });
+      if (status == 200) {
+        if (data?.total) return { length: data.total, data: data.data };
+        return data.data;
+      }
     } catch (e) {
       throw e;
     }

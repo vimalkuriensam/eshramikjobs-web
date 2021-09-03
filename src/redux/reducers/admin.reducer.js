@@ -5,6 +5,7 @@ import {
   SET_APPLICATION_DETAILS,
   SET_ENROLLED_COMPANIES,
   SET_RESUME_LENGTH,
+  SET_RESUME_PAGE,
   SET_REVENUE,
 } from "../actions/admin.action";
 
@@ -25,7 +26,7 @@ const adminReducerDefaultState = {
 
 const adminReducer = (
   state = adminReducerDefaultState,
-  { type, sales, applications, companies, subscriptions, length }
+  { type, sales, applications, companies, subscriptions, length, page }
 ) => {
   switch (type) {
     case SET_REVENUE:
@@ -42,6 +43,8 @@ const adminReducer = (
       return { ...state, subscriptions };
     case SET_RESUME_LENGTH:
       return { ...state, pages: { ...state.pages, resumeTotal: length } };
+    case SET_RESUME_PAGE:
+      return { ...state, pages: { ...state.pages, resumePage: page } };
     default:
       return state;
   }

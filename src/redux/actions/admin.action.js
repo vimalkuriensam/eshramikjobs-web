@@ -9,6 +9,7 @@ export const SET_ENROLLED_COMPANIES = "SET_ENROLLED_COMPANIES";
 export const CLEAR_ENROLLED_COMPANIES = "CLEAR_ENROLLED_COMPANIES";
 export const SET_ACTIVE_STATUS = "SET_ACTIVE_STATUS";
 export const SET_RESUME_LENGTH = "SET_RESUME_LENGTH";
+export const SET_RESUME_PAGE = "SET_RESUME_PAGE";
 
 export const dashboardHero = () => async (dispatch) => {
   try {
@@ -130,15 +131,17 @@ export const getDetails = () => async (dispatch) => {
 };
 
 export const getApplicationDetails =
-  ({ page = 0, count = 20 } = {}) =>
-  async (dispatch) => {
+  ({ count = 20 } = {}) =>
+  async (dispatch, getState) => {
     try {
-      const applications = await dispatch(
+      const page = getState().admin.pages.resumePage;
+      const { data, length } = await dispatch(
         getCandiatesApplication({ page, count })
       );
-      if (applications) {
+      if (data) {
+        if (length) dispatch(setResumeLength({ length }));
         dispatch(clearApplicationDetails());
-        dispatch(setApplicationDetails({ applications }));
+        dispatch(setApplicationDetails({ applications: data }));
         return true;
       }
     } catch (e) {
@@ -158,4 +161,9 @@ export const clearApplicationDetails = () => ({
 export const setResumeLength = ({ length = 5 } = {}) => ({
   type: SET_RESUME_LENGTH,
   length,
+});
+
+export const setResumePage = ({ page = 0 }) => ({
+  type: SET_RESUME_PAGE,
+  page,
 });

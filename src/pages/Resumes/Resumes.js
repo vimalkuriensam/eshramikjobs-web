@@ -1,6 +1,5 @@
 import React from "react";
 import Title from "../../components/atoms/Title";
-import TableContainer from "../../components/organisms/TableContainer";
 import ResumeLists from "./container/ResumeLists";
 
 const Resumes = () => {

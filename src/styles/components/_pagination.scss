@@ -5,18 +5,32 @@
   &__pages {
     width: 4rem;
     height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border: 1px solid $color-tertiary;
     margin: 0.5rem;
     list-style: none;
     cursor: pointer;
     color: $color-tertiary;
     border-radius: 0.5rem;
+    &--link {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      padding: 0.5rem;
+    }
     &--active {
       color: $color-white;
       background: $color-tertiary;
+    }
+    &--disabled {
+      background: $color-grey-light-2;
+      border: 1px solid transparent !important;
+      cursor: no-drop!important;
+      color: $color-grey-dark!important;
+      &:hover {
+        color: $color-grey-dark!important;
+        background: $color-grey-light-2!important;
+      }
     }
     &--action {
       list-style: none;

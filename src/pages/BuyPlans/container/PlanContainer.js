@@ -71,6 +71,9 @@ const PlanContainer = ({
       const razorPaymentObj = new window.Razorpay(options);
       razorPaymentObj.open();
       razorPaymentObj.on("payment.failed", function (response) {});
+    } else {
+      dispatch(setVerification({ id: 2 }));
+      history.push("/");
     }
   };
 
@@ -89,18 +92,36 @@ const PlanContainer = ({
       {planPopup && (
         <Popup transition={{ horizontal: "top" }} onClosePopup={onSetPlanPopup}>
           <div className="recruit__popupContainer">
-            <Text variant="pr-18-1" className="u-text-justify">
-              You have selected{" "}
-              <Text variant="pl-18-1">{selectedPlan.name}</Text> and can view{" "}
-              <Text variant="pl-18-1">{selectedPlan.resumes}</Text> resumes
-              until{" "}
-              <Text variant="pl-18-1">
-                {moment(moment().valueOf() + +selectedPlan.time * 1000).format(
-                  "DD-MM-YYYY"
-                )}
+            {+selectedPlan.price ? (
+              <Text variant="pr-18-1" className="u-text-justify">
+                You have selected{" "}
+                <Text variant="pl-18-1">{selectedPlan.name}</Text> region plan
+                worth <Text variant="pl-18-1">Rs {selectedPlan.price}</Text> and
+                can view <Text variant="pl-18-1">{selectedPlan.resumes}</Text>{" "}
+                resumes until{" "}
+                <Text variant="pl-18-1">
+                  {moment(
+                    moment().valueOf() + +selectedPlan.time * 1000
+                  ).format("DD-MM-YYYY")}
+                </Text>
+                . Click proceed to continue with payment.
               </Text>
-              . Click proceed to continue with payment.
-            </Text>
+            ) : (
+              <Text variant="pr-18-1" className="u-text-justify">
+                This is a free plan and can only be selected once. This plan
+                enables the the user to opt for{" "}
+                <Text variant="pl-18-1">{selectedPlan.name}</Text> region plan
+                and can view{" "}
+                <Text variant="pl-18-1">{selectedPlan.resumes}</Text> resumes{" "}
+                until{" "}
+                <Text variant="pl-18-1">
+                  {moment(
+                    moment().valueOf() + +selectedPlan.time * 1000
+                  ).format("DD-MM-YYYY")}
+                </Text>
+                . Click proceed to select this plan.
+              </Text>
+            )}
             <div className="recruit__popupCTA">
               <Button
                 content="Cancel"
@@ -118,7 +139,11 @@ const PlanContainer = ({
       )}
       {planError && (
         <Popup transition={{ horizontal: "top" }} onClosePopup={onSetPlanPopup}>
-          This plan doesn't exist. Choose another plan.
+          <div className="recruit__popupContainer">
+            <Text variant="pr-18-1" className="u-text-justify">
+              This plan doesn't exist. Choose another plan.
+            </Text>
+          </div>
         </Popup>
       )}
       <div className={`recruit__planHeader recruit__planHeader--${variant}`}>

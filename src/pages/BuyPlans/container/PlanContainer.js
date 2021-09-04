@@ -1,6 +1,6 @@
-import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
@@ -9,6 +9,8 @@ import { buyPlan, confirmOrder } from "../../../redux/actions/recruit.action";
 import { userType } from "../../../utils/data";
 import history from "../../../utils/history";
 import { RAZORPAY_CDN, RAZORPAY_LOGO } from "../data";
+import Popup from "../../../components/molecules/Popup";
+import Button from "../../../components/atoms/Button";
 
 const PlanContainer = ({
   variant = "primary",
@@ -17,6 +19,10 @@ const PlanContainer = ({
   dispatch,
   token,
 }) => {
+  const [planPopup, setPlanPopup] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [planError, setPlanError] = useState(false);
+
   const loadScript = (src) => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -28,7 +34,6 @@ const PlanContainer = ({
   };
   const displayRazorPay = async (planId) => {
     const { id, currency, amount } = await dispatch(buyPlan({ planId }));
-    console.log(id, currency, amount);
     if (id !== -1) {
       const res = await loadScript(RAZORPAY_CDN);
       if (!res) {
@@ -66,10 +71,81 @@ const PlanContainer = ({
       const razorPaymentObj = new window.Razorpay(options);
       razorPaymentObj.open();
       razorPaymentObj.on("payment.failed", function (response) {});
+    } else {
+      dispatch(setVerification({ id: 2 }));
+      history.push("/");
     }
+  };
+
+  const onSetPlanPopup = ({ id = null } = {}) => {
+    setPlanError(false);
+    if (id) {
+      const plan = contents.find((content) => content.id === id);
+      if (plan) {
+        setSelectedPlan(plan);
+        setPlanPopup((prevState) => !prevState);
+      } else setPlanError(true);
+    } else setPlanPopup((prevState) => !prevState);
   };
   return (
     <div className="u-margin-top-50 recruit__planRegion">
+      {planPopup && (
+        <Popup transition={{ horizontal: "top" }} onClosePopup={onSetPlanPopup}>
+          <div className="recruit__popupContainer">
+            {+selectedPlan.price ? (
+              <Text variant="pr-18-1" className="u-text-justify">
+                You have selected{" "}
+                <Text variant="pl-18-1">{selectedPlan.name}</Text> region plan
+                worth <Text variant="pl-18-1">Rs {selectedPlan.price}</Text> and
+                can view <Text variant="pl-18-1">{selectedPlan.resumes}</Text>{" "}
+                resumes until{" "}
+                <Text variant="pl-18-1">
+                  {moment(
+                    moment().valueOf() + +selectedPlan.time * 1000
+                  ).format("DD-MM-YYYY")}
+                </Text>
+                . Click proceed to continue with payment.
+              </Text>
+            ) : (
+              <Text variant="pr-18-1" className="u-text-justify">
+                This is a free plan and can only be selected once. This plan
+                enables the the user to opt for{" "}
+                <Text variant="pl-18-1">{selectedPlan.name}</Text> region plan
+                and can view{" "}
+                <Text variant="pl-18-1">{selectedPlan.resumes}</Text> resumes{" "}
+                until{" "}
+                <Text variant="pl-18-1">
+                  {moment(
+                    moment().valueOf() + +selectedPlan.time * 1000
+                  ).format("DD-MM-YYYY")}
+                </Text>
+                . Click proceed to select this plan.
+              </Text>
+            )}
+            <div className="recruit__popupCTA">
+              <Button
+                content="Cancel"
+                variant="1-5"
+                onButtonClick={onSetPlanPopup}
+              />
+              <Button
+                content="Proceed"
+                variant="1-2"
+                onButtonClick={displayRazorPay.bind(this, selectedPlan.id)}
+              />
+            </div>
+          </div>
+        </Popup>
+      )}
+      {planError && (
+        <Popup transition={{ horizontal: "top" }} onClosePopup={onSetPlanPopup}>
+          <div className="recruit__popupContainer">
+            <Text variant="pr-18-1" className="u-text-justify">
+              This plan doesn't exist. Choose another plan.
+            </Text>
+          </div>
+        </Popup>
+      )}
       <div className={`recruit__planHeader recruit__planHeader--${variant}`}>
         <div className="row">
           <div className="col-1-of-3">
@@ -110,8 +186,9 @@ const PlanContainer = ({
               <div className="col-a-1-of-4">
                 <span
                   className="u-cursor-pointer"
-                  onClick={displayRazorPay.bind(this, content.id)}
+                  onClick={onSetPlanPopup.bind(this, { id: content.id })}
                 >
+                  {/*onClick={displayRazorPay.bind(this, content.id)}*/}
                   <Title variant="pr-15-3">Buy Now</Title>
                 </span>
               </div>

@@ -13,6 +13,23 @@
     }
   }
 
+  &__popupContainer {
+    margin-top: 3rem;
+    padding: 2rem;
+  }
+
+  &__popupCTA {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    >* {
+      &:not(:first-child) {
+        margin-left: 1rem;
+      }
+    }
+  }
+
   &__candidatesImage {
     height: 6.1rem;
     width: 6.1rem;

@@ -1,21 +1,10 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React from "react";
 
 import Title from "../../../../components/atoms/Title";
 import SubscriptionBox from "../../../../components/organisms/SubscriptionBox";
-import { getCompanyList } from "../../../../redux/actions/admin.action";
-import { SUBSCRIPTION_TYPES } from "../../../../utils/data";
 import SubscriptionList from "./container/SubscriptionList";
 
-const ActiveSubscription = ({ dispatch }) => {
-  useEffect(() => {
-    dispatch(
-      getCompanyList({
-        type: SUBSCRIPTION_TYPES.active,
-        pagination: { page: 0, count: 6 },
-      })
-    );
-  }, []);
+const ActiveSubscription = () => {
   return (
     <section className="section-dashboard">
       <SubscriptionBox
@@ -33,4 +22,4 @@ const ActiveSubscription = ({ dispatch }) => {
   );
 };
 
-export default connect()(ActiveSubscription);
+export default ActiveSubscription;

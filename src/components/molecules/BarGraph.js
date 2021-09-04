@@ -21,7 +21,7 @@ const chartInit = (sales, id) => {
     .range([0, dimensions.ctrWidth])
     .nice();
 
-  const yAccessor = (d) => d.price;
+  const yAccessor = (d) => +d.price;
 
   const yScale = d3
     .scaleLinear()

@@ -1,16 +1,21 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
 import SubscriptionBox from "../../../components/organisms/SubscriptionBox";
+import { funcMap } from "../../../utils/data";
 import history from "../../../utils/history";
 import { SUBSCRIPTION_GROUP } from "../data";
 
-const Subscriptions = ({ active = 0, expired = 0, trial = 0 }) => {
+const Subscriptions = ({ dispatch, active = 0, expired = 0, trial = 0 }) => {
   const [subscriptionValues, setSubscriptionValues] = useState({
     active,
     expired,
     trial,
   });
-  const onHandleSubscription = (value) => history.push(value);
+  const onHandleSubscription = (value) => funcMap[value](dispatch) //{
+  //   console.log(value);
+  //   history.push(value);
+  // };
 
   const getStatusValue = (type) => subscriptionValues[type];
 
@@ -36,4 +41,4 @@ const Subscriptions = ({ active = 0, expired = 0, trial = 0 }) => {
   );
 };
 
-export default Subscriptions;
+export default connect()(Subscriptions);

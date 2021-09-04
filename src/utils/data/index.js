@@ -3,6 +3,7 @@ import moment from "moment";
 import {
   dashboardHero,
   getApplicationDetails,
+  getCompanyList,
   getRevenueDetails,
 } from "../../redux/actions/admin.action";
 import { setLogout } from "../../redux/actions/authentication.action";
@@ -251,7 +252,7 @@ export const funcMap = {
   },
 
   activeSubscription: async (dispatch, page = 0, redirect = true) => {
-    const response = dispatch(
+    const response = await dispatch(
       getCompanyList({
         type: SUBSCRIPTION_TYPES.active,
         pagination: { page, count: 6 },
@@ -262,8 +263,8 @@ export const funcMap = {
       else return true;
     }
   },
-  expiredSubscription: async (dispatch, page = 0) => {
-    const response = dispatch(
+  expiredSubscription: async (dispatch, page = 0, redirect = true) => {
+    const response = await dispatch(
       getCompanyList({
         type: SUBSCRIPTION_TYPES.expire,
         pagination: { page, count: 6 },
@@ -274,8 +275,8 @@ export const funcMap = {
       else return true;
     }
   },
-  trialSubscription: async (dispatch, page = 0) => {
-    const response = dispatch(
+  trialSubscription: async (dispatch, page = 0, redirect = true) => {
+    const response = await dispatch(
       getCompanyList({
         type: SUBSCRIPTION_TYPES.trial,
         pagination: { page, count: 6 },
@@ -286,8 +287,8 @@ export const funcMap = {
       else return true;
     }
   },
-  allSubscription: async (dispatch, page = 0) => {
-    const response = dispatch(
+  allSubscription: async (dispatch, page = 0, redirect = true) => {
+    const response = await dispatch(
       getCompanyList({
         type: SUBSCRIPTION_TYPES.all,
         pagination: { page, count: 6 },

@@ -18,11 +18,15 @@ import Title from "../../components/atoms/Title";
 const BuyPlans = ({ dispatch }) => {
   const loadPlans = async () => {
     const plans = await dispatch(getPlans());
-    setDistrictPlan(plans.filter((plan) => plan.name === "DISTRICT_PLAN"));
-    setStatePlan(plans.filter((plan) => plan.name.trim() === "STATE_PLAN"));
-    setNationalPlan(plans.filter((plan) => plan.name.trim() === "NATIONAL_PLAN"));
-    setPlanStatus(true);
     console.log(plans);
+    if (plans) {
+      setDistrictPlan(plans.filter((plan) => plan.name === "District/UT (single login)"));
+      setStatePlan(plans.filter((plan) => plan.name.trim() === "State (2 Logins)"));
+      setNationalPlan(
+        plans.filter((plan) => plan.name.trim() === "National (4 logins)")
+      );
+      setPlanStatus(true);
+    }
   };
   useEffect(() => {
     loadPlans();

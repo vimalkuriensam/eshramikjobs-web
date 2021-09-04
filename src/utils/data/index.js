@@ -249,6 +249,55 @@ export const funcMap = {
       return true;
     }
   },
+
+  activeSubscription: async (dispatch, page = 0, redirect = true) => {
+    const response = dispatch(
+      getCompanyList({
+        type: SUBSCRIPTION_TYPES.active,
+        pagination: { page, count: 6 },
+      })
+    );
+    if (response) {
+      if (redirect) history.push("/dashboard/active-subscription");
+      else return true;
+    }
+  },
+  expiredSubscription: async (dispatch, page = 0) => {
+    const response = dispatch(
+      getCompanyList({
+        type: SUBSCRIPTION_TYPES.expire,
+        pagination: { page, count: 6 },
+      })
+    );
+    if (response) {
+      if (redirect) history.push("/dashboard/expired-subscription");
+      else return true;
+    }
+  },
+  trialSubscription: async (dispatch, page = 0) => {
+    const response = dispatch(
+      getCompanyList({
+        type: SUBSCRIPTION_TYPES.trial,
+        pagination: { page, count: 6 },
+      })
+    );
+    if (response) {
+      if (redirect) history.push("/dashboard/trial-subscription");
+      else return true;
+    }
+  },
+  allSubscription: async (dispatch, page = 0) => {
+    const response = dispatch(
+      getCompanyList({
+        type: SUBSCRIPTION_TYPES.all,
+        pagination: { page, count: 6 },
+      })
+    );
+    if (response) {
+      if (redirect) history.push("/dashboard/active-subscription");
+      else return true;
+    }
+  },
   applyJobLists: async (dispatch, id) => {
     const response = await dispatch(applyJob({ id, type: "apply" }));
     if (response)
@@ -578,9 +627,9 @@ export const NAVBAR_NAVS = [
   },
   {
     text: "Create Jobs",
-    link: "/dashboard/post-jobs",
+    link: "/post-jobs",
     type: "link",
-    to: "/dashboard/post-jobs",
+    to: "/post-jobs",
   },
 ];
 
@@ -623,6 +672,13 @@ export const RECRUITER_STATUS = {
   COMPANY_UNVERIFIED: 0,
   PAYMENT: 1,
   VERIFIED: 2,
+};
+
+export const SUBSCRIPTION_TYPES = {
+  active: 1,
+  trial: 2,
+  expire: 3,
+  all: 4,
 };
 
 export const USER_ROUTE_TYPES = {

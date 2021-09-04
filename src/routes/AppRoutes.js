@@ -53,7 +53,6 @@ const AppRoutes = ({ tokenData }) => {
         <NavBar />
         <RecruiterNavbar />
         <div style={{ width: "100%" }}>
-          {/*//className="navbar__outer">*/}
           <Route
             render={({ location }) => (
               <TransitionGroup>
@@ -85,6 +84,7 @@ const AppRoutes = ({ tokenData }) => {
                       component={RecruiterNotificationView}
                     />
                     <AdminRoute path="/sales" component={SalesView} />
+                    <AdminRoute path="/post-jobs" component={CreateJobs} />
                     <Route path="/create-jobs" component={CreateJobs} />
                     <Route path="/home" component={HomeView} />
                     <Route path="/about" component={AboutUsView} />

@@ -1,5 +1,6 @@
 import moment from "moment";
 import apiService from "../../authInterceptor/authAxios";
+import { SUBSCRIPTION_TYPES } from "../../utils/data";
 import { getCandiatesApplication } from "./recruit.action";
 
 export const SET_REVENUE = "SET_REVENUE";
@@ -10,6 +11,8 @@ export const CLEAR_ENROLLED_COMPANIES = "CLEAR_ENROLLED_COMPANIES";
 export const SET_ACTIVE_STATUS = "SET_ACTIVE_STATUS";
 export const SET_RESUME_LENGTH = "SET_RESUME_LENGTH";
 export const SET_RESUME_PAGE = "SET_RESUME_PAGE";
+export const SET_SUBSCRIPTIONS = "SET_SUBSCRIPTIONS";
+export const SET_SUBSCRIPTIONS_LENGTH = "SET_SUBSCRIPTIONS_LENGTH";
 
 export const dashboardHero = () => async (dispatch) => {
   try {
@@ -69,6 +72,48 @@ export const getActiveStatus = () => async (dispatch) => {
   }
 };
 
+export const getCompanyList =
+  ({
+    type = SUBSCRIPTION_TYPES.active,
+    sort = "date",
+    pagination = { page: 0, count: 6 },
+  }) =>
+  async (dispatch) => {
+    try {
+      const {
+        status,
+        data: { data, total },
+      } = await apiService().post("/admin/get_companies_list", {
+        pagination,
+        type,
+        sort,
+      });
+      if (status == 200) {
+        dispatch(setSubscriptions({ subscriptions: data, category: type }));
+        dispatch(setSubscriptionLength({ total, category: type }));
+        return true;
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
+export const setSubscriptions = ({ subscriptions, category }) => ({
+  type: SET_SUBSCRIPTIONS,
+  payload: {
+    category,
+    subscriptions,
+  },
+});
+
+export const setSubscriptionLength = ({ total = 0, category }) => ({
+  type: SET_SUBSCRIPTIONS_LENGTH,
+  payload: {
+    category,
+    total,
+  },
+});
+
 export const setActiveStatus = ({
   active = 0,
   expired = 0,
@@ -89,11 +134,11 @@ export const getRevenueDetails = () => async (dispatch) => {
       let updatedData = {};
       for (let i = 0; i < 7; i++)
         updatedData[moment().subtract(i, "days").format("MM-DD-YYYY")] = 0;
-      data.data.forEach(
-        (val) =>
-          (updatedData[moment(+val.paymentDate).format("MM-DD-YYYY")] +=
-            +val.price)
-      );
+      data.data.forEach((val) => {
+        console.log("val", val);
+        updatedData[moment(+val.paymentDate).format("MM-DD-YYYY")] +=
+          +val.price;
+      });
 
       const updatedDataBin = Object.keys(updatedData).map((val) => ({
         date: val,

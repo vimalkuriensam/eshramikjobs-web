@@ -26,7 +26,9 @@ const NavBar = ({ dispatch }) => {
           key={index}
           onClick={onHandleNavs.bind(this, nav.type, nav.link)}
           className={`navbar__nav ${
-            pathname == nav.to ? "navbar__nav--active" : null
+            pathname.split("/").some((val) => `/${val}` == nav.to)
+              ? "navbar__nav--active"
+              : null
           }`}
         >
           {nav.text}

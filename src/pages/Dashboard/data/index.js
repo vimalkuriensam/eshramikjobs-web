@@ -88,20 +88,20 @@ export const SUBSCRIPTION_GROUP = [
     value: 50,
     variant: "primary",
     id: "active",
-    action: "/dashboard/active-subscription",
+    action: "activeSubscription",
   },
   {
     title: "Expired Subscription",
     value: 25,
     variant: "secondary",
     id: "expired",
-    action: "/dashboard/expired-subscription",
+    action: "expiredSubscription",
   },
   {
     title: "Free Trial",
     value: 5,
     variant: "tertiary",
     id: "trial",
-    action: "/dashboard/trial-subscription",
+    action: "trialSubscription",
   },
 ];

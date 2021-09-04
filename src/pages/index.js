@@ -1,4 +1,5 @@
 export { default as AboutUs } from "./AboutUs";
+export { default as BuyPlans } from "./BuyPlans";
 export { default as Companies } from "./Companies";
 export {
   default as Dashboard,
@@ -15,11 +16,11 @@ export {
   Create,
   Detail,
 } from "./Jobs";
-export { default as BuyPlans } from "./BuyPlans";
 export { Recruiter as RecruiterNotification } from "./Notifications";
 export { default as Profile } from "./Profile";
 export { Applications, Plans, Resume } from "./Recruiter";
 export { default as Resumes } from "./Resumes";
+export { default as Sales } from "./Sales";
 export {
   default as Signup,
   AdminLogin,

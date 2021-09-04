@@ -1,3 +1,4 @@
+import { SUBSCRIPTION_TYPES } from "../../utils/data";
 import {
   CLEAR_APPLICATION_DETAILS,
   CLEAR_ENROLLED_COMPANIES,
@@ -7,6 +8,8 @@ import {
   SET_RESUME_LENGTH,
   SET_RESUME_PAGE,
   SET_REVENUE,
+  SET_SUBSCRIPTIONS,
+  SET_SUBSCRIPTIONS_LENGTH,
 } from "../actions/admin.action";
 
 const adminReducerDefaultState = {
@@ -15,18 +18,36 @@ const adminReducerDefaultState = {
     expired: 0,
     trial: 0,
   },
+  subscriptionValue: {
+    [SUBSCRIPTION_TYPES.active]: [],
+    [SUBSCRIPTION_TYPES.expire]: [],
+    [SUBSCRIPTION_TYPES.trial]: [],
+    [SUBSCRIPTION_TYPES.all]: [],
+  },
   sales: [],
   companies: [],
   resumes: [],
   pages: {
     resumePage: 0,
     resumeTotal: 0,
+    subscriptionTotal: {
+      [SUBSCRIPTION_TYPES.active]: 0,
+      [SUBSCRIPTION_TYPES.expire]: 0,
+      [SUBSCRIPTION_TYPES.trial]: 0,
+      [SUBSCRIPTION_TYPES.all]: 0,
+    },
+    subscriptionPage: {
+      [SUBSCRIPTION_TYPES.active]: 0,
+      [SUBSCRIPTION_TYPES.expire]: 0,
+      [SUBSCRIPTION_TYPES.trial]: 0,
+      [SUBSCRIPTION_TYPES.all]: 0,
+    },
   },
 };
 
 const adminReducer = (
   state = adminReducerDefaultState,
-  { type, sales, applications, companies, subscriptions, length, page }
+  { type, sales, applications, companies, subscriptions, length, page, payload }
 ) => {
   switch (type) {
     case SET_REVENUE:
@@ -45,6 +66,25 @@ const adminReducer = (
       return { ...state, pages: { ...state.pages, resumeTotal: length } };
     case SET_RESUME_PAGE:
       return { ...state, pages: { ...state.pages, resumePage: page } };
+    case SET_SUBSCRIPTIONS:
+      return {
+        ...state,
+        subscriptionValue: {
+          ...state.subscriptionValue,
+          [payload.category]: payload.subscriptions,
+        },
+      };
+    case SET_SUBSCRIPTIONS_LENGTH:
+      return {
+        ...state,
+        pages: {
+          ...state.pages,
+          subscriptionTotal: {
+            ...state.pages.subscriptionTotal,
+            [payload.category]: payload.total,
+          },
+        },
+      };
     default:
       return state;
   }

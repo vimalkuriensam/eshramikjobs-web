@@ -1,14 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
-
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
 import BarGraph from "../../../components/molecules/BarGraph";
 
-const Sales = ({ dispatch, sales = [] }) => {
+const SalesTable = ({ sales = [] }) => {
+  console.log("sales", sales);
   const revenue = sales.reduce((a, b) => a + +b.price, 0);
   return (
-    <div className="dashboard__tableContainer">
+    <div className="dashboard__tableContainer" style={{ width: "70%" }}>
       <div className="dashboard__salesHeader">
         <div className="dashboard__salesTitle">
           <Title variant="pm-17-1">Sales</Title>
@@ -19,9 +18,9 @@ const Sales = ({ dispatch, sales = [] }) => {
           <Text variant="pr-14-2">7 days</Text>
         </div>
       </div>
-      <BarGraph id="sales-graph" data={sales} />
+      {sales && <BarGraph id="sales-bar-graph" data={sales} />}
     </div>
   );
 };
 
-export default connect()(Sales);
+export default SalesTable;

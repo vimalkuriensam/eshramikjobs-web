@@ -3,6 +3,7 @@ import moment from "moment";
 import {
   dashboardHero,
   getApplicationDetails,
+  getCompanyList,
   getRevenueDetails,
 } from "../../redux/actions/admin.action";
 import { setLogout } from "../../redux/actions/authentication.action";
@@ -247,6 +248,55 @@ export const funcMap = {
     if (response) {
       history.push("/jobs/saved");
       return true;
+    }
+  },
+
+  activeSubscription: async (dispatch, page = 0, redirect = true) => {
+    const response = await dispatch(
+      getCompanyList({
+        type: SUBSCRIPTION_TYPES.active,
+        pagination: { page, count: 6 },
+      })
+    );
+    if (response) {
+      if (redirect) history.push("/dashboard/active-subscription");
+      else return true;
+    }
+  },
+  expiredSubscription: async (dispatch, page = 0, redirect = true) => {
+    const response = await dispatch(
+      getCompanyList({
+        type: SUBSCRIPTION_TYPES.expire,
+        pagination: { page, count: 6 },
+      })
+    );
+    if (response) {
+      if (redirect) history.push("/dashboard/expired-subscription");
+      else return true;
+    }
+  },
+  trialSubscription: async (dispatch, page = 0, redirect = true) => {
+    const response = await dispatch(
+      getCompanyList({
+        type: SUBSCRIPTION_TYPES.trial,
+        pagination: { page, count: 6 },
+      })
+    );
+    if (response) {
+      if (redirect) history.push("/dashboard/trial-subscription");
+      else return true;
+    }
+  },
+  allSubscription: async (dispatch, page = 0, redirect = true) => {
+    const response = await dispatch(
+      getCompanyList({
+        type: SUBSCRIPTION_TYPES.all,
+        pagination: { page, count: 6 },
+      })
+    );
+    if (response) {
+      if (redirect) history.push("/dashboard/active-subscription");
+      else return true;
     }
   },
   applyJobLists: async (dispatch, id) => {
@@ -578,9 +628,9 @@ export const NAVBAR_NAVS = [
   },
   {
     text: "Create Jobs",
-    link: "/dashboard/post-jobs",
+    link: "/post-jobs",
     type: "link",
-    to: "/dashboard/post-jobs",
+    to: "/post-jobs",
   },
 ];
 
@@ -625,6 +675,13 @@ export const RECRUITER_STATUS = {
   VERIFIED: 2,
 };
 
+export const SUBSCRIPTION_TYPES = {
+  active: 1,
+  trial: 2,
+  expire: 3,
+  all: 4,
+};
+
 export const USER_ROUTE_TYPES = {
   user: [
     "/otp",
@@ -655,6 +712,7 @@ export const USER_ROUTE_TYPES = {
     "/resumes",
     "/job-postings",
     "/post-jobs",
+    "/sales",
   ],
   default: ["/admin", "/signup", "/profile"],
 };

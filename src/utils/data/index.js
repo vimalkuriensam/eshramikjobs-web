@@ -2,6 +2,7 @@ import jwtDecode from "jwt-decode";
 import moment from "moment";
 import {
   dashboardHero,
+  getActiveStatus,
   getApplicationDetails,
   getCompanyList,
   getRevenueDetails,
@@ -252,36 +253,72 @@ export const funcMap = {
   },
 
   activeSubscription: async (dispatch, page = 0, redirect = true) => {
-    const response = await dispatch(
-      getCompanyList({
-        type: SUBSCRIPTION_TYPES.active,
-        pagination: { page, count: 6 },
-      })
-    );
+    let response;
+    if (redirect)
+      response = await Promise.all([
+        dispatch(getActiveStatus()),
+        dispatch(
+          getCompanyList({
+            type: SUBSCRIPTION_TYPES.active,
+            pagination: { page, count: 7 },
+          })
+        ),
+      ]);
+    else
+      response = await dispatch(
+        getCompanyList({
+          type: SUBSCRIPTION_TYPES.active,
+          pagination: { page, count: 7 },
+        })
+      );
     if (response) {
       if (redirect) history.push("/dashboard/active-subscription");
       else return true;
     }
   },
   expiredSubscription: async (dispatch, page = 0, redirect = true) => {
-    const response = await dispatch(
-      getCompanyList({
-        type: SUBSCRIPTION_TYPES.expire,
-        pagination: { page, count: 6 },
-      })
-    );
+    let response;
+    if (redirect)
+      response = await Promise.all([
+        dispatch(getActiveStatus()),
+        dispatch(
+          getCompanyList({
+            type: SUBSCRIPTION_TYPES.expire,
+            pagination: { page, count: 7 },
+          })
+        ),
+      ]);
+    else
+      response = await dispatch(
+        getCompanyList({
+          type: SUBSCRIPTION_TYPES.expire,
+          pagination: { page, count: 7 },
+        })
+      );
     if (response) {
       if (redirect) history.push("/dashboard/expired-subscription");
       else return true;
     }
   },
   trialSubscription: async (dispatch, page = 0, redirect = true) => {
-    const response = await dispatch(
-      getCompanyList({
-        type: SUBSCRIPTION_TYPES.trial,
-        pagination: { page, count: 6 },
-      })
-    );
+    let response;
+    if (redirect)
+      response = await Promise.all([
+        dispatch(getActiveStatus()),
+        dispatch(
+          getCompanyList({
+            type: SUBSCRIPTION_TYPES.trial,
+            pagination: { page, count: 7 },
+          })
+        ),
+      ]);
+    else
+      response = await dispatch(
+        getCompanyList({
+          type: SUBSCRIPTION_TYPES.trial,
+          pagination: { page, count: 7 },
+        })
+      );
     if (response) {
       if (redirect) history.push("/dashboard/trial-subscription");
       else return true;

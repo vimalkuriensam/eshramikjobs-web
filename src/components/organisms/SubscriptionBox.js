@@ -65,7 +65,7 @@ const chartInit = (id, value, type, variant) => {
 
 const SubscriptionBox = ({
   title,
-  value,
+  value = 0,
   variant,
   id,
   onHandleView,

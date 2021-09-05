@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import Image from "../../../../../components/atoms/Image";
 import Text from "../../../../../components/atoms/Text";
@@ -6,7 +7,7 @@ import ToolTip from "../../../../../components/molecules/ToolTip";
 import TableContainer from "../../../../../components/organisms/TableContainer";
 import { ACTIVE_SUBSCRIPTION_LIST } from "../data";
 
-const SubscriptionList = () => {
+const SubscriptionList = ({ lists = [] }) => {
   return (
     <TableContainer contentCheck={{ sort: false, action: false, type: false }}>
       <div className="a-row">
@@ -18,7 +19,7 @@ const SubscriptionList = () => {
           <Title variant="pr-20-1">Plan</Title>
         </div>
         <div className="col-a-1-of-6 u-text-center">
-          <Title variant="pr-20-1">Days</Title>
+          <Title variant="pr-20-1">Time Left</Title>
         </div>
         <div className="col-a-1-of-6 u-text-center">
           <Title variant="pr-20-1">DB download</Title>
@@ -27,42 +28,64 @@ const SubscriptionList = () => {
           <Title variant="pr-20-1">Prize/GST</Title>
         </div>
       </div>
-      {ACTIVE_SUBSCRIPTION_LIST.map((subscription, index) => (
+      {lists.map((subscription, index) => (
         <div className="a-row dashboard__rows1" key={index}>
           <div className="col-a-1-of-6 u-text-center">
-            <Image name={subscription.image} />
+            <Image
+              className="dashboard__logo-2"
+              name={subscription.companyLogo}
+              type="binary"
+            />
           </div>
           <div className="col-a-1-of-6 u-text-center">
             <ToolTip>
-              <Text variant="pl-17-1" className="dashboard__tableText">
-                {subscription.name}
+              <Text
+                variant="pl-17-1"
+                className="dashboard__tableText u-margin-top-10"
+              >
+                {subscription.companyName}
               </Text>
             </ToolTip>
           </div>
           <div className="col-a-1-of-6 u-text-center">
             <ToolTip>
-              <Text variant="pl-17-1" className="dashboard__tableText">
-                {subscription.plan}
+              <Text
+                variant="pl-17-1"
+                className="dashboard__tableText u-margin-top-10"
+              >
+                {subscription.planName}
               </Text>
             </ToolTip>
           </div>
           <div className="col-a-1-of-6 u-text-center">
             <ToolTip>
-              <Text variant="pl-17-1" className="dashboard__tableText">
-                {subscription.days}
+              <Text
+                variant="pl-17-1"
+                className="dashboard__tableText u-margin-top-10"
+              >
+                {moment(moment().valueOf() + +subscription.planValidity * 1000)
+                  .fromNow()
+                  .replace("in a", "1 ")
+                  .replace("in", "")}
               </Text>
             </ToolTip>
           </div>
           <div className="col-a-1-of-6 u-text-center">
             <ToolTip>
-              <Text variant="pl-17-1" className="dashboard__tableText">
-                {subscription.dbDownload}
+              <Text
+                variant="pl-17-1"
+                className="dashboard__tableText u-margin-top-10"
+              >
+                {subscription.totalResumes}
               </Text>
             </ToolTip>
           </div>
           <div className="col-a-1-of-6 u-text-center">
             <ToolTip>
-              <Text variant="pl-17-1" className="dashboard__tableText">
+              <Text
+                variant="pl-17-1"
+                className="dashboard__tableText u-margin-top-10"
+              >
                 {subscription.price}
               </Text>
             </ToolTip>

@@ -84,7 +84,7 @@ const SubscriptionBox = ({
           </div>
           <div>
             <Title variant={`${!type ? "psm-18-1" : "psm-30-1"}`}>
-              {value}
+              {value.toFixed(2)}
             </Title>
           </div>
         </div>
@@ -97,7 +97,7 @@ const SubscriptionBox = ({
                   className="dashboard__subscriptionValue"
                   style={{ color: PIE_COLORS[variant]["light"] }}
                 >
-                  {value}%
+                  {value.toFixed(2)}%
                 </Title>
               </div>
             )}

@@ -22,7 +22,7 @@ const Enrollment = ({ companies = [] }) => {
                 className="dashboard__logo"
               />
             </div>
-            <div className="col-a-1-of-2 u-margin-top-10">
+            <div className="col-a-1-of-2 u-margin-top-5">
               <ToolTip>
                 <Text variant="pl-16-1" className="dashboard__tableText">
                   {company.name}

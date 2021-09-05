@@ -7,6 +7,7 @@ export {
   ExpiredSubscription,
   TrialSubscription,
 } from "./Dashboard";
+export { default as Enrolled } from "./Enrolled";
 export { default as Home } from "./Home";
 export {
   default as Jobs,

@@ -28,7 +28,14 @@ const ResumeLists = ({ resumes = [], currentPage, totalResumes, dispatch }) => {
     onPageHandle();
   }, [currentPage]);
   return (
-    <TableContainer title=" ">
+    <TableContainer
+      title=" "
+      contentCheck={{
+        sort: true,
+        type: false,
+        action: false,
+      }}
+    >
       <div className="a-row u-margin-top-40">
         {RESUME_LIST_HEADER.map((list, index) => (
           <div

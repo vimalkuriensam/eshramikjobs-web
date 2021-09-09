@@ -1,7 +1,7 @@
-import moment from "moment";
 import React from "react";
-import Icon from "../../../components/atoms/Icon";
+import moment from "moment";
 
+import Icon from "../../../components/atoms/Icon";
 import Image from "../../../components/atoms/Image";
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";

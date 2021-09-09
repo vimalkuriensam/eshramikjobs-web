@@ -389,9 +389,12 @@ export const funcMap = {
       return true;
     }
   },
-  candidates: async (dispatch) => {
-    const response = await dispatch(candidatesApplication());
-    if (response) history.push("/recruite/applications");
+  candidates: async (dispatch, page = 0, redirect = true) => {
+    const response = await dispatch(candidatesApplication({ page, count: 4 }));
+    if (response) {
+      if (redirect) history.push("/recruite/applications");
+      else return true;
+    }
   },
   activePlan: async (dispatch) => {
     const response = await dispatch(getCurrentPlan());

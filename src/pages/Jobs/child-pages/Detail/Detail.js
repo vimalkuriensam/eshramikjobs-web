@@ -35,7 +35,7 @@ const Detail = ({ detail, dispatch }) => {
                 </div>
               </div>
               <div className="jobs__detailsCTA">
-                {!detail?.ApplyId && (
+                {!detail?.applyJobId && (
                   <Button
                     variant="1-3"
                     content="Apply"

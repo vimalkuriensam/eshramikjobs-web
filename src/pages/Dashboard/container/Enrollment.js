@@ -1,16 +1,20 @@
 import React from "react";
+import { connect } from "react-redux";
 import Image from "../../../components/atoms/Image";
 import Text from "../../../components/atoms/Text";
 import ToolTip from "../../../components/molecules/ToolTip";
 
 import TableContainer from "../../../components/organisms/TableContainer";
+import { funcMap } from "../../../utils/data";
 
-const Enrollment = ({ companies = [] }) => {
+const Enrollment = ({ companies = [], dispatch }) => {
+  const onViewAllCompanies = () => funcMap["enrolled"](dispatch);
   return (
     <TableContainer
       className="dashboard__tableContainer dashboard__companiesContainer"
       title="Companies Enrolled"
       contentCheck={{ sort: false, type: false, action: true }}
+      onActionClick={onViewAllCompanies}
     >
       <div className="u-margin-top-2">
         {companies.map((company, index) => (
@@ -36,4 +40,4 @@ const Enrollment = ({ companies = [] }) => {
   );
 };
 
-export default Enrollment;
+export default connect()(Enrollment);

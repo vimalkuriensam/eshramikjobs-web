@@ -10,6 +10,7 @@ import {
   SET_REVENUE,
   SET_SUBSCRIPTIONS,
   SET_SUBSCRIPTIONS_LENGTH,
+  SET_SUBSCRIPTION_PAGE,
 } from "../actions/admin.action";
 
 const adminReducerDefaultState = {
@@ -82,6 +83,17 @@ const adminReducer = (
           subscriptionTotal: {
             ...state.pages.subscriptionTotal,
             [payload.category]: payload.total,
+          },
+        },
+      };
+    case SET_SUBSCRIPTION_PAGE:
+      return {
+        ...state,
+        pages: {
+          ...state.pages,
+          subscriptionPage: {
+            ...state.pages.subscriptionPage,
+            [payload.category]: payload.page,
           },
         },
       };

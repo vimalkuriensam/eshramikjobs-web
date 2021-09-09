@@ -15,6 +15,7 @@ import {
   BuyPlans as BuyPlansView,
   Companies as CompaniesView,
   Create as CreateJobs,
+  Enrolled as EnrolledView,
   Home as HomeView,
   Profile as ProfileView,
   RecruiterNotification as RecruiterNotificationView,
@@ -84,6 +85,7 @@ const AppRoutes = ({ tokenData }) => {
                       component={RecruiterNotificationView}
                     />
                     <AdminRoute path="/sales" component={SalesView} />
+                    <AdminRoute path="/enrolled" component={EnrolledView} />
                     <AdminRoute path="/post-jobs" component={CreateJobs} />
                     <Route path="/create-jobs" component={CreateJobs} />
                     <Route path="/home" component={HomeView} />

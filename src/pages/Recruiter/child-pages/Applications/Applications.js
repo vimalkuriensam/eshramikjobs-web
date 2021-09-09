@@ -1,23 +1,39 @@
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import Image from "../../../../components/atoms/Image";
 import Title from "../../../../components/atoms/Title";
 import ToolTip from "../../../../components/molecules/ToolTip";
+import Pagination from "../../../../components/organisms/Pagination";
 import TableContainer from "../../../../components/organisms/TableContainer";
+import { funcMap } from "../../../../utils/data";
 import history from "../../../../utils/history";
-import { APPLICATION_DEFAULT_VALUES } from "./data";
 
-const Aplications = ({ dispatch, candidates = [] }) => {
+const Applications = ({
+  dispatch,
+  candidates = [],
+  total = 0,
+  current = 0,
+}) => {
+  const [loader, setLoader] = useState(false);
   const onHandleApplication = () => history.push("/recruite/applications/view");
-  console.log(candidates);
+  const onPageChange = async ({ selected }) => {
+    setLoader(true);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+    const response = await funcMap["candidates"](dispatch, selected, false);
+    if (response) setLoader(false);
+  };
   return (
     <section className="section-recruit">
       <Title variant="pr-24-2">View applications</Title>
       <TableContainer
         className="u-margin-top-30"
         title={" "}
-        contentCheck={{ sort: true, action: true, type: false }}
+        contentCheck={{ sort: true, action: false, type: false }}
       >
         <div className="a-row u-margin-top-40 table__rowHeader">
           <div className="col-a-1-of-7 u-text-center">&nbsp;</div>
@@ -25,10 +41,10 @@ const Aplications = ({ dispatch, candidates = [] }) => {
             <Title variant="pr-20-1">Name</Title>{" "}
           </div>
           <div className="col-a-1-of-7 u-text-center">
-            <Title variant="pr-20-1">Designation</Title>
+            <Title variant="pr-20-1">Job Title</Title>
           </div>
           <div className="col-a-1-of-7 u-text-center">
-            <Title variant="pr-20-1">Skills</Title>
+            <Title variant="pr-20-1">Designation</Title>
           </div>
           <div className="col-a-1-of-7 u-text-center">
             <Title variant="pr-20-1">Education</Title>
@@ -40,8 +56,10 @@ const Aplications = ({ dispatch, candidates = [] }) => {
             <Title variant="pr-20-1">Age</Title>
           </div>
         </div>
-        {[...candidates, ...APPLICATION_DEFAULT_VALUES].map(
-          (content, index) => (
+        {loader ? (
+          <div className="dashboard__loaderMessage">Loading...</div>
+        ) : (
+          candidates.map((content, index) => (
             <div
               className={`a-row table__rowContent table__rowContent--${
                 index % 2 == 0 ? "dark" : "light"
@@ -76,22 +94,34 @@ const Aplications = ({ dispatch, candidates = [] }) => {
                 </ToolTip>
               </div>
               <div className="col-a-1-of-7 u-text-center">
-                <ToolTip title={content.skills}>
+                <ToolTip title={content.designation}>
                   <Title
                     variant="pl-16-1"
                     className="u-text-ellipsis u-margin-top-10"
                   >
-                    {content.skills}
+                    {content.designation}
                   </Title>
                 </ToolTip>
               </div>
               <div className="col-a-1-of-7 u-text-center">
-                <ToolTip name={content.education}>
+                <ToolTip
+                  name={
+                    content.degree
+                      ? content.degree
+                      : content.school
+                      ? content.school
+                      : "Not available"
+                  }
+                >
                   <Title
                     variant="pl-16-1"
                     className="u-text-ellipsis u-margin-top-10"
                   >
-                    {content.education}
+                    {content.degree
+                      ? content.degree
+                      : content.school
+                      ? content.school
+                      : "Not available"}
                   </Title>
                 </ToolTip>
               </div>
@@ -116,8 +146,14 @@ const Aplications = ({ dispatch, candidates = [] }) => {
                 </ToolTip>
               </div>
             </div>
-          )
+          ))
         )}
+        <Pagination
+          total={total}
+          currentPage={current}
+          pagePerView={4}
+          onHandlePageChange={onPageChange}
+        />
       </TableContainer>
     </section>
   );
@@ -125,6 +161,8 @@ const Aplications = ({ dispatch, candidates = [] }) => {
 
 const mapStateToProps = (state) => ({
   candidates: state.recruiter.candidates,
+  total: state.recruiter.pages.applicationTotal,
+  current: state.recruiter.pages.applicationPage,
 });
 
-export default connect(mapStateToProps)(Aplications);
+export default connect(mapStateToProps)(Applications);

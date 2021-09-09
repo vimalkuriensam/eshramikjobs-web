@@ -2,9 +2,11 @@ import jwtDecode from "jwt-decode";
 import moment from "moment";
 import {
   dashboardHero,
+  getActiveStatus,
   getApplicationDetails,
   getCompanyList,
   getRevenueDetails,
+  setSubscriptionCurrentPage,
 } from "../../redux/actions/admin.action";
 import { setLogout } from "../../redux/actions/authentication.action";
 import {
@@ -252,39 +254,92 @@ export const funcMap = {
   },
 
   activeSubscription: async (dispatch, page = 0, redirect = true) => {
-    const response = await dispatch(
-      getCompanyList({
-        type: SUBSCRIPTION_TYPES.active,
-        pagination: { page, count: 6 },
-      })
-    );
+    let response;
+    if (redirect)
+      response = await Promise.all([
+        dispatch(getActiveStatus()),
+        dispatch(
+          getCompanyList({
+            type: SUBSCRIPTION_TYPES.active,
+            pagination: { page, count: 7 },
+          })
+        ),
+      ]);
+    else
+      response = await dispatch(
+        getCompanyList({
+          type: SUBSCRIPTION_TYPES.active,
+          pagination: { page, count: 7 },
+        })
+      );
     if (response) {
       if (redirect) history.push("/dashboard/active-subscription");
       else return true;
     }
   },
   expiredSubscription: async (dispatch, page = 0, redirect = true) => {
-    const response = await dispatch(
-      getCompanyList({
-        type: SUBSCRIPTION_TYPES.expire,
-        pagination: { page, count: 6 },
-      })
-    );
+    let response;
+    if (redirect)
+      response = await Promise.all([
+        dispatch(getActiveStatus()),
+        dispatch(
+          getCompanyList({
+            type: SUBSCRIPTION_TYPES.expire,
+            pagination: { page, count: 7 },
+          })
+        ),
+      ]);
+    else
+      response = await dispatch(
+        getCompanyList({
+          type: SUBSCRIPTION_TYPES.expire,
+          pagination: { page, count: 7 },
+        })
+      );
     if (response) {
       if (redirect) history.push("/dashboard/expired-subscription");
       else return true;
     }
   },
   trialSubscription: async (dispatch, page = 0, redirect = true) => {
-    const response = await dispatch(
-      getCompanyList({
-        type: SUBSCRIPTION_TYPES.trial,
-        pagination: { page, count: 6 },
-      })
-    );
+    let response;
+    if (redirect)
+      response = await Promise.all([
+        dispatch(getActiveStatus()),
+        dispatch(
+          getCompanyList({
+            type: SUBSCRIPTION_TYPES.trial,
+            pagination: { page, count: 7 },
+          })
+        ),
+      ]);
+    else
+      response = await dispatch(
+        getCompanyList({
+          type: SUBSCRIPTION_TYPES.trial,
+          pagination: { page, count: 7 },
+        })
+      );
     if (response) {
       if (redirect) history.push("/dashboard/trial-subscription");
       else return true;
+    }
+  },
+  enrolled: async (dispatch, page = 0, redirect = true) => {
+    const response = await dispatch(
+      getCompanyList({
+        type: SUBSCRIPTION_TYPES.all,
+        pagination: { page, count: 7 },
+      })
+    );
+    if (response) {
+      if (redirect) history.push("/enrolled");
+      else {
+        dispatch(
+          setSubscriptionCurrentPage({ page, category: SUBSCRIPTION_TYPES.all })
+        );
+        return true;
+      }
     }
   },
   allSubscription: async (dispatch, page = 0, redirect = true) => {
@@ -334,9 +389,12 @@ export const funcMap = {
       return true;
     }
   },
-  candidates: async (dispatch) => {
-    const response = await dispatch(candidatesApplication());
-    if (response) history.push("/recruite/applications");
+  candidates: async (dispatch, page = 0, redirect = true) => {
+    const response = await dispatch(candidatesApplication({ page, count: 4 }));
+    if (response) {
+      if (redirect) history.push("/recruite/applications");
+      else return true;
+    }
   },
   activePlan: async (dispatch) => {
     const response = await dispatch(getCurrentPlan());
@@ -617,8 +675,9 @@ export const NAVBAR_NAVS = [
   },
   {
     text: "Enrolled Companies",
-    link: "/companies",
-    type: "link",
+    link: "enrolled",
+    type: "process",
+    to: "/enrolled",
   },
   {
     text: "Resumes Recieved",
@@ -713,6 +772,7 @@ export const USER_ROUTE_TYPES = {
     "/job-postings",
     "/post-jobs",
     "/sales",
+    "/enrolled",
   ],
   default: ["/admin", "/signup", "/profile"],
 };

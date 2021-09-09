@@ -13,6 +13,7 @@ export const SET_RESUME_LENGTH = "SET_RESUME_LENGTH";
 export const SET_RESUME_PAGE = "SET_RESUME_PAGE";
 export const SET_SUBSCRIPTIONS = "SET_SUBSCRIPTIONS";
 export const SET_SUBSCRIPTIONS_LENGTH = "SET_SUBSCRIPTIONS_LENGTH";
+export const SET_SUBSCRIPTION_PAGE = "SET_SUBSCRIPTION_PAGE";
 
 export const dashboardHero = () => async (dispatch) => {
   try {
@@ -211,4 +212,12 @@ export const setResumeLength = ({ length = 5 } = {}) => ({
 export const setResumePage = ({ page = 0 }) => ({
   type: SET_RESUME_PAGE,
   page,
+});
+
+export const setSubscriptionCurrentPage = ({ page = 0, category }) => ({
+  type: SET_SUBSCRIPTION_PAGE,
+  payload: {
+    page,
+    category,
+  },
 });

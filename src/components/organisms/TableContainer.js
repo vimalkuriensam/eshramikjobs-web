@@ -12,6 +12,7 @@ const TableContainer = ({
     type: true,
     action: true,
   },
+  onActionClick,
 }) => {
   return (
     <div className={`table__container ${className}`}>
@@ -39,7 +40,7 @@ const TableContainer = ({
               </div>
             )}
             {contentCheck.action && (
-              <span className="u-cursor-pointer">
+              <span className="u-cursor-pointer" onClick={onActionClick}>
                 <Title variant="pr-15-2">View all</Title>
               </span>
             )}

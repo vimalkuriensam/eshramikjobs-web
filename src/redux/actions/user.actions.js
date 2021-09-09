@@ -6,7 +6,7 @@ export const getBasicProfile = () => async (dispatch) => {
   try {
     const { status, data } = await apiService().get("/profile/get_basic");
     if (status == 200) {
-      dispatch(setBasicProfile({ profile: data.data }));
+      dispatch(setBasicProfile({ profile: data.data.recent }));
       return true;
     }
   } catch (e) {

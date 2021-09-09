@@ -33,7 +33,8 @@ const Samples = ({ jobs, companies, isLogged, isAuthenticated, dispatch }) => {
 
   const onHandleApplyJob = async (id, e) => {
     e.stopPropagation();
-    await funcMap["applyJobLists"](dispatch, id);
+    if (!isAuthenticated) dispatch(loginState({ state: true }));
+    else await funcMap["applyJobLists"](dispatch, id);
   };
   return (
     <section className="section-home-samples">

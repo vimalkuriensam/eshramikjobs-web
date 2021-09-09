@@ -6,6 +6,8 @@ export const SET_CANDIDATES = "SET_CANDIDATES";
 export const CLEAR_CANDIDATES = "CLEAR_CANDIDATES";
 export const SET_CURRENT_PLAN = "SET_CURRENT_PLAN";
 export const CLEAR_CURRENT_PLAN = "CLEAR_CURRENT_PLAN";
+export const SET_APPLICATION_LENGTH = "SET_APPLICATION_LENGTH";
+export const SET_APPLICATION_PAGE = "SET_APPLICATION_PAGE";
 
 export const buyPlan =
   ({ planId }) =>
@@ -72,7 +74,8 @@ export const candidatesApplication =
       const response = await dispatch(getCandiatesApplication({ page, count }));
       if (response) {
         dispatch(clearCandidates());
-        dispatch(setCandidates({ candidates: [...response] }));
+        dispatch(setCandidates({ candidates: [...response.data] }));
+        dispatch(setApplicationLength({ total: response.length }));
         return true;
       }
     } catch (e) {
@@ -84,15 +87,15 @@ export const getCandiatesApplication =
   ({ page, count }) =>
   async (dispatch) => {
     try {
-      const {
-        status,
-        data
-      } = await apiService().post("/jobs/candidates/apply", {
-        pagination: {
-          page,
-          count,
-        },
-      });
+      const { status, data } = await apiService().post(
+        "/jobs/candidates/apply",
+        {
+          pagination: {
+            page,
+            count,
+          },
+        }
+      );
       if (status == 200) {
         if (data?.total) return { length: data.total, data: data.data };
         return data.data;
@@ -131,4 +134,14 @@ export const setCandidates = ({ candidates }) => ({
 
 export const clearCandidates = () => ({
   type: CLEAR_CANDIDATES,
+});
+
+export const setApplicationLength = ({ total = 0 } = {}) => ({
+  type: SET_APPLICATION_LENGTH,
+  total,
+});
+
+export const setApplicationPage = ({ page = 0 } = {}) => ({
+  type: SET_APPLICATION_PAGE,
+  page,
 });

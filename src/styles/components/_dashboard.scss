@@ -27,12 +27,18 @@
   }
 
   &__companies {
-    padding: 1rem 0;
+    padding: 0.8rem 0;
   }
 
   &__logo {
-    width: 4rem;
-    height: 4rem;
+    width: 3.7rem;
+    height: 3.7rem;
+    border-radius: 0.8rem;
+  }
+
+  &__logo-2 {
+    width: 6rem;
+    height: 6rem;
     border-radius: 0.8rem;
   }
 
@@ -102,6 +108,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     width: 90%;
+  }
+
+  &__loaderMessage {
+    display: flex;
+    margin-top: 4rem;
+    justify-content: center;
+    min-height: 96.6rem;
   }
 
   &__rows1 {

@@ -1,6 +1,8 @@
 import apiService from "../../authInterceptor/authAxios";
 import { addMessage } from "./utils.action";
 
+export const SET_ALL_JOBS = "SET_ALL_JOBS";
+export const CLEAR_ALL_JOBS = "CLEAR_ALL_JOBS";
 export const SET_RECENT_JOBS = "SET_RECENT_JOBS";
 export const SET_SAVED_JOBS = "SET_SAVED_JOBS";
 export const SET_APPLIED_JOBS = "SET_APPLIED_JOBS";
@@ -13,6 +15,9 @@ export const CLEAR_RECOMMENDED_JOBS = "CLEAR_RECOMMENDED_JOBS";
 export const CLEAR_JOB_DETAIL = "CLEAR_JOB_DETAIL";
 export const SET_NOTIFICATION_JOBS = "SET_NOTIFICATION_JOBS";
 export const CLEAR_NOTIFICATION_JOBS = "CLEAR_NOTIFICATION_JOBS";
+export const SET_ALL_JOBS_PAGE = "SET_ALL_JOBS_PAGE";
+export const SET_ALL_JOBS_COUNT = "SET_ALL_JOBS_COUNT";
+export const SET_ALL_JOBS_SKILL_MATCH = "SET_ALL_JOBS_SKILL_MATCH";
 
 export const createJobs =
   ({ job }) =>
@@ -77,6 +82,53 @@ export const clearJobDetail = () => ({
   type: CLEAR_JOB_DETAIL,
 });
 
+export const getJobList =
+  ({
+    pageNumber,
+    itemsPerPage,
+    skills = [],
+    title = "",
+    location = "",
+    sort = "date",
+    text = "",
+  }) =>
+  async (dispatch) => {
+    const { data, status } = await apiService().post("/jobs/get", {
+      info: {
+        skills,
+        title,
+        location,
+      },
+      filter: {
+        sort,
+        text,
+      },
+      pagination: {
+        page: pageNumber,
+        count: itemsPerPage,
+      },
+    });
+    if (status == 200) {
+      return { jobs: data.data, total: data.total, match: data.message.match };
+    }
+  };
+
+export const getSkilledJobs =
+  ({ pageNumber = 0, itemsPerPage = 10, skills = [] }) =>
+  async (dispatch) => {
+    const { jobs, total, match } = await dispatch(
+      getJobList({ pageNumber, itemsPerPage, skills })
+    );
+    if (jobs) {
+      dispatch(clearAllJobs());
+      dispatch(setAllJobs({ jobs }));
+      dispatch(setAllJobsCount({ count: total }));
+      dispatch(setAllJobsPage({ page: pageNumber }));
+      dispatch(setAllJobsSkillMatch({ count: match }));
+      return true;
+    }
+  };
+
 export const getJobs =
   ({
     pageNumber = null,
@@ -140,6 +192,15 @@ export const getRecentJobs =
       throw e;
     }
   };
+
+export const setAllJobs = ({ jobs }) => ({
+  type: SET_ALL_JOBS,
+  jobs,
+});
+
+export const clearAllJobs = () => ({
+  type: CLEAR_ALL_JOBS,
+});
 
 export const setRecentJobs = ({ jobs }) => ({
   type: SET_RECENT_JOBS,
@@ -210,6 +271,15 @@ export const clearSavedJobs = () => ({
   type: CLEAR_SAVED_JOBS,
 });
 
+export const getSkills = () => async (dispatch) => {
+  try {
+    const { data, status } = await apiService().get("/profile/get/4");
+    if (status == 200) return data.data[data.data.length - 1].skill_list;
+  } catch (e) {
+    throw e;
+  }
+};
+
 export const getRecommendedJobs = () => {};
 
 export const setRecommendedJobs = () => {};
@@ -270,9 +340,26 @@ export const handleJobNotificationStatus =
       });
       if (status == 200) {
         dispatch(getNotificationJobPostings({ page: 0, count: 12 }));
-        dispatch(addMessage({ type: 'info', content: `Job status ${data.message}`}))
+        dispatch(
+          addMessage({ type: "info", content: `Job status ${data.message}` })
+        );
       }
     } catch (e) {
       throw e;
     }
   };
+
+export const setAllJobsPage = ({ page = 0 }) => ({
+  type: SET_ALL_JOBS_PAGE,
+  page,
+});
+
+export const setAllJobsCount = ({ count }) => ({
+  type: SET_ALL_JOBS_COUNT,
+  count,
+});
+
+export const setAllJobsSkillMatch = ({ count }) => ({
+  type: SET_ALL_JOBS_SKILL_MATCH,
+  count,
+});

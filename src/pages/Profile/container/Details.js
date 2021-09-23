@@ -13,7 +13,7 @@ const Details = forwardRef((props, ref) => {
   return (
     <div className="profile__detailsMain">
       <DetailsContainer title="Resume headline" ref={ref1}>
-        <Headline />
+        <Headline info={props.headline} updateInfo={props.updateDetails} />
       </DetailsContainer>
 
       <DetailsContainer title="Qualification" ref={ref2}>
@@ -21,11 +21,11 @@ const Details = forwardRef((props, ref) => {
       </DetailsContainer>
 
       <DetailsContainer title="Skills" ref={ref3}>
-        <Skills />
+        <Skills info={props.skills} />
       </DetailsContainer>
 
       <DetailsContainer title="Employeement Details" ref={ref4}>
-        <EmployementDetails />
+        <EmployementDetails info={props.employments} />
       </DetailsContainer>
 
       <DetailsContainer title="Overseas opportunity" ref={ref5}>
@@ -33,7 +33,7 @@ const Details = forwardRef((props, ref) => {
       </DetailsContainer>
 
       <DetailsContainer title="Personal Information" ref={ref6}>
-        <PersonalInfo />
+        <PersonalInfo info={props.info} />
       </DetailsContainer>
     </div>
   );

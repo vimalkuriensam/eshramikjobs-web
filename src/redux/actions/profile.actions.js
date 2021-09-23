@@ -18,11 +18,19 @@ export const SET_NON_TECHNICAL_COURSE = "SET_NON_TECHNICAL_COURSE";
 
 export const createProfile = (info, step) => async (dispatch) => {
   try {
+    console.log(info);
+    let resume = true;
     if (step == 1 && info.sameAsAddress) delete info.permanentAddress;
+    if (step == 7) {
+      resume = info.isResume;
+      delete info.isResume;
+    }
     const { status } = await apiService().post(`/profile/create/${step}`, info);
     if (status == 200) {
       const response = await funcMap[step](dispatch);
-      if (response) history.push(`/register/profile/${+step + 1}`);
+      console.log(response, resume);
+      if (response && resume) history.push(`/register/profile/${+step + 1}`);
+      else if (response && !resume) history.push("/");
     }
   } catch (e) {
     throw e;
@@ -180,19 +188,52 @@ export const getColleges = () => async (dispatch) => {
   }
 };
 
-export const getAllProfileInfo = () => async (dispatch) => {
-  try {
-    const responses = [1, 2, 3, 4, 5];
-    const result = await Promise.all(
-      responses.map((response) =>
-        apiService()
-          .get(`/profile/get/${response}`)
-          .then(({ data }) => data.data)
-      )
-    );
-    console.log(result);
-    return true;
-  } catch (e) {
-    throw e;
-  }
-};
+export const onHandleResumeSend =
+  ({ email, mobile }) =>
+  async (dispatch) => {
+    try {
+      const response = await Promise.all([
+        !!email ? dispatch(sendMail({ email })) : Promise.resolve(),
+        !!mobile ? dispatch(sendWhatsapp({ mobile })) : Promise.resolve(),
+      ]);
+      console.log(response);
+      // if (response) history.push('/')
+    } catch (e) {
+      throw e;
+    }
+  };
+
+const sendWhatsapp =
+  ({ mobile }) =>
+  async (dispatch) => {
+    try {
+      const { status, data } = await apiService().post(
+        "/profile/send-whatsapp",
+        {
+          mobile: `+91${mobile}`,
+        }
+      );
+      if (status == 200) {
+        console.log(data);
+        return true;
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
+const sendMail =
+  ({ email }) =>
+  async (dispatch) => {
+    try {
+      const { status, data } = await apiService().post("/profile/send-mail", {
+        mail: email,
+      });
+      if (status == 200) {
+        console.log(data);
+        return true;
+      }
+    } catch (e) {
+      throw e;
+    }
+  };

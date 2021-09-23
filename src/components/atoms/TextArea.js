@@ -16,13 +16,14 @@ const TextArea = ({
     setTexts(updatedArray);
     onHandleText({ target: { value } });
   };
+  
   if (variant == 2)
     return (
       <div className={`form__textarea--groupings ${className}`}>
         <textarea
           {...rest}
           onChange={onHandleTextarea}
-          // value={value}
+          value={value}
           className={`form__textarea form__textarea--2`}
         />
         {listings &&

@@ -15,7 +15,8 @@ import Upload from "./container/Upload";
 import Resume from "./container/Resume";
 import { EMPLOYEE_DETAILS_DEFAULT_VALUE } from "../../data";
 import { connect } from "react-redux";
-import { createProfile } from "../../../../redux/actions/profile.actions";
+import { createProfile, onHandleResumeSend } from "../../../../redux/actions/profile.actions";
+import { fileUpload } from "../../../../redux/actions/utils.action";
 
 const ProfileCreation = ({ match, dispatch }) => {
   const step = match.params.step;
@@ -74,6 +75,7 @@ const ProfileCreation = ({ match, dispatch }) => {
     },
     7: {
       file: null,
+      fileURL: null,
     },
   });
 
@@ -126,7 +128,8 @@ const ProfileCreation = ({ match, dispatch }) => {
           ...prevState,
           [step]: {
             ...prevState[step],
-            file: e.target.result,
+            fileURL: e.target.result,
+            file,
           },
         }));
       };
@@ -158,6 +161,29 @@ const ProfileCreation = ({ match, dispatch }) => {
   };
 
   const onHandleSave = () => dispatch(createProfile(profileProps[step], step));
+
+  const onHandleUploadImage = async (isResume) => {
+    if (profileProps[step]?.file) {
+      const { url } = await dispatch(
+        fileUpload({ file: profileProps[step]?.file })
+      );
+      console.log(url);
+      if (url) {
+        dispatch(
+          createProfile(
+            {
+              photo: url,
+              isResume: isResume == "true",
+            },
+            step
+          )
+        );
+      }
+    }
+  };
+
+  const onSendResume = ({ email, mobile }) =>
+    dispatch(onHandleResumeSend({ email, mobile }));
 
   const getComponent = () => {
     switch (step) {
@@ -219,11 +245,11 @@ const ProfileCreation = ({ match, dispatch }) => {
             info={profileProps[step]}
             onHandleImage={onHandleImage}
             onHandleUploadInfo={onHandleInfo}
-            onHandleSave={onHandleSave}
+            onHandleSave={onHandleUploadImage}
           />
         );
       case "8":
-        return <Resume info={profileProps[step]} />;
+        return <Resume info={profileProps[step]} onSendResume={onSendResume} />;
       default:
         return (
           <PersonalInformation

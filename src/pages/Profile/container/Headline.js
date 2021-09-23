@@ -14,7 +14,15 @@ const Headline = forwardRef((props, ref) => {
     },
   }));
 
+  const [info, setInfo] = useState(props.info);
+  const [editInfo, setEditInfo] = useState(props.info);
   const onClosePopup = () => setPopup(false);
+
+  const onHandleEditInfo = (type, { target }) => {
+    const { value } = target;
+    setEditInfo((prevState) => ({ ...prevState, [type]: value }));
+  };
+
   return (
     <Fragment>
       {popup && (
@@ -24,14 +32,23 @@ const Headline = forwardRef((props, ref) => {
           transition={{ horizontal: "top", vertical: null }}
         >
           <Title variant="psm-23-1">Resume headline</Title>
-          <TextArea className="u-margin-top-30" />
+          <TextArea
+            className="u-margin-top-30"
+            value={editInfo.title}
+            focused="true"
+            onHandleText={onHandleEditInfo.bind(this, "title")}
+          />
           <div className="profile__popupCTA">
             <Button content="Cancel" onButtonClick={onClosePopup} variant="6" />
-            <Button content="Save" variant="1-4" />
+            <Button
+              content="Save"
+              onButtonClick={props.updateInfo.bind(this, 5, editInfo)}
+              variant="1-4"
+            />
           </div>
         </Popup>
       )}
-      <Text variant="pl-14-1">Construction supervisor</Text>
+      <Text variant="pl-14-1">{info?.title}</Text>
     </Fragment>
   );
 });

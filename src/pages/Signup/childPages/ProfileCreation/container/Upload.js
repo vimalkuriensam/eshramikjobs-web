@@ -35,7 +35,7 @@ const Upload = ({ info, onHandleImage, onHandleSave }) => {
             <div className="authentication__profileContainer">
               <Image
                 className="authentication__profileImage"
-                name={info.file}
+                name={info.fileURL}
                 type="binary"
               />
             </div>
@@ -49,7 +49,11 @@ const Upload = ({ info, onHandleImage, onHandleSave }) => {
             />
           </div>
           <div className="row">
-            <Button onButtonClick={onHandleSave} content="next" variant="1-3" />
+            <Button
+              onButtonClick={onHandleSave.bind(this, resumeCopy)}
+              content="next"
+              variant="1-3"
+            />
           </div>
         </div>
       </div>

@@ -15,12 +15,14 @@ import {
   BuyPlans as BuyPlansView,
   Companies as CompaniesView,
   Create as CreateJobs,
+  Download as DownloadView,
   Enrolled as EnrolledView,
   Home as HomeView,
   Profile as ProfileView,
   RecruiterNotification as RecruiterNotificationView,
   Resumes as ResumesChild,
   Sales as SalesView,
+  Jobs as JobsView,
 } from "../pages";
 
 import { DashboardChildView } from "./childRoutes/Dashboard";
@@ -43,16 +45,16 @@ const AppRoutes = ({ tokenData }) => {
   return (
     <Router history={history}>
       <ScrollTop />
-      <AdminHeader />
-      <RecruiterHeader />
+      {type == USER_TYPES.ADMIN && <AdminHeader />}
+      {type == USER_TYPES.RECRUITER && <RecruiterHeader />}
       <Header />
       {type == 2 && <EventCaptureTut />}
       <Message />
       <Login />
       <Loader />
       <div className="recruiterNavbarContainer">
-        <NavBar />
-        <RecruiterNavbar />
+        {type == USER_TYPES.USER && <NavBar />}
+        {type == USER_TYPES.RECRUITER && <RecruiterNavbar />}
         <div style={{ width: "100%" }}>
           <Route
             render={({ location }) => (
@@ -75,6 +77,7 @@ const AppRoutes = ({ tokenData }) => {
                       />
                     </Route>
                     <Route path="/register" component={RegisterChildView} />
+                    <Route path="/resume/download/:id" component={DownloadView} />
                     <AdminRoute
                       path="/dashboard"
                       component={DashboardChildView}

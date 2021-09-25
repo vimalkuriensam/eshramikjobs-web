@@ -1,5 +1,7 @@
-import moment from "moment";
 import React from "react";
+
+import moment from "moment";
+
 import Button from "../atoms/Button";
 import Image from "../atoms/Image";
 import Text from "../atoms/Text";
@@ -11,7 +13,6 @@ const JobListings = ({
   onHandleButtonDelete,
   onHandleButtonApply,
 }) => {
-  console.log('jobs', jobs)
   return (
     <div>
       {jobs.map(
@@ -32,7 +33,7 @@ const JobListings = ({
           index
         ) => (
           <div
-            data-aos="fade-right"
+            // data-aos="fade-right"
             className="row jobs"
             key={index}
             onClick={onHandleJobDetail.bind(this, jobId)}

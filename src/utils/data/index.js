@@ -34,6 +34,7 @@ import {
   getCurrentPlan,
 } from "../../redux/actions/recruit.action";
 import { getAllProfileInfo } from "../../redux/actions/user.actions";
+import { addMessage } from "../../redux/actions/utils.action";
 import history from "../history";
 
 export const BASE_URL = "https://eshramik-server.herokuapp.com"; //"https://eshramik-api.herokuapp.com";
@@ -409,6 +410,19 @@ export const funcMap = {
           location: null,
         })
       );
+  },
+  applyAllJobLists: async (dispatch, id, page = 0) => {
+    const response = await dispatch(applyJob({ id, type: "apply" }));
+    if (response) {
+      const resp = await funcMap["getAllJobs"](dispatch, page, false);
+      if (resp)
+        dispatch(
+          addMessage({
+            type: "success",
+            content: "Job Applied",
+          })
+        );
+    }
   },
   jobDelete: async (dispatch, id, type) =>
     await dispatch(deleteJob({ id, type })),

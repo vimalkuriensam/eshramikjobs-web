@@ -20,6 +20,11 @@ module.exports = (env) => {
     devServer: {
       contentBase: path.join(__dirname, "public"),
       publicPath: "/dist/",
+      // http2:true,
+      // https: {
+      //   cert: "",
+      //   key: "",
+      // },
       compress: true,
       port: 4200,
       historyApiFallback: true,

@@ -47,7 +47,6 @@ export const getJob =
           ...value,
           ...(hasValue && { job_data: jobData }),
         };
-        console.log(updatedValue);
         dispatch(clearJobDetail());
         dispatch(setJobDetail({ detail: updatedValue }));
         return true;
@@ -90,6 +89,7 @@ export const getJobList =
     title = "",
     location = "",
     sort = "date",
+    all = true,
     text = "",
   }) =>
   async (dispatch) => {
@@ -102,6 +102,7 @@ export const getJobList =
       filter: {
         sort,
         text,
+        all,
       },
       pagination: {
         page: pageNumber,

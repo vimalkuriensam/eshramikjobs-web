@@ -1,4 +1,9 @@
-import React, { forwardRef, useImperativeHandle, useState } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import { Fragment } from "react";
 import Button from "../../../components/atoms/Button";
 import Text from "../../../components/atoms/Text";
@@ -13,15 +18,21 @@ const Headline = forwardRef((props, ref) => {
       setPopup(true);
     },
   }));
-
   const [info, setInfo] = useState(props.info);
   const [editInfo, setEditInfo] = useState(props.info);
   const onClosePopup = () => setPopup(false);
-
+  
   const onHandleEditInfo = (type, { target }) => {
     const { value } = target;
     setEditInfo((prevState) => ({ ...prevState, [type]: value }));
   };
+
+  useEffect(() => {
+    if (info != props.info) {
+      setInfo(props.info);
+      onClosePopup();
+    }
+  }, [props.info]);
 
   return (
     <Fragment>
@@ -34,7 +45,7 @@ const Headline = forwardRef((props, ref) => {
           <Title variant="psm-23-1">Resume headline</Title>
           <TextArea
             className="u-margin-top-30"
-            value={editInfo.title}
+            value={editInfo?.title || ""}
             focused="true"
             onHandleText={onHandleEditInfo.bind(this, "title")}
           />

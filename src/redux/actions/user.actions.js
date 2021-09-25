@@ -6,6 +6,7 @@ export const SET_PROFILE_EDUCATION = "SET_PROFILE_EDUCATION";
 export const SET_PROFILE_PROFESSION = "SET_PROFILE_PROFESSION";
 export const SET_PROFILE_SKILLS = "SET_PROFILE_SKILLS";
 export const SET_PROFILE_EMPLOYMENT = "SET_PROFILE_EMPLOYMENT";
+export const SET_PROFILE_OVERSEAS = "SET_PROFILE_OVERSEAS";
 export const CLEAR_PROFILE = "CLEAR_PROFILE";
 export const ADD_RESUME = "ADD_RESUME";
 export const CLEAR_RESUME = "CLEAR_RESUME";
@@ -29,7 +30,7 @@ export const setBasicProfile = ({ profile }) => ({
 
 export const getAllProfileInfo = () => async (dispatch) => {
   try {
-    const responses = [1, 2, 3, 4, 5];
+    const responses = [1, 2, 3, 4, 5, 6];
     const result = await Promise.all(
       responses.map((response) =>
         apiService()
@@ -45,6 +46,7 @@ export const getAllProfileInfo = () => async (dispatch) => {
       dispatch(setProfileProfession(result[2]));
       dispatch(setProfileSkills(result[3]));
       dispatch(setProfileEmployment(result[4]));
+      dispatch(setProfileOverseas(result[5]));
       return true;
     }
   } catch (e) {
@@ -81,13 +83,20 @@ export const setProfileEmployment = (profile) => ({
   profile,
 });
 
+export const setProfileOverseas = (profile) => ({
+  type: SET_PROFILE_OVERSEAS,
+  profile,
+});
+
 export const updateProfile = (section, info) => async (dispatch) => {
   try {
-    const response = await apiService().post(
+    const { status, data } = await apiService().post(
       `/profile/update/${section}`,
       info
     );
-    console.log(response);
+    if (status == 200) {
+      return data.message;
+    }
   } catch (e) {
     throw e;
   }
@@ -124,4 +133,3 @@ export const addResume = ({ resume }) => ({
 export const clearResume = () => ({
   type: CLEAR_RESUME,
 });
-

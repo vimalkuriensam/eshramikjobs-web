@@ -10,7 +10,12 @@ import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
 import FormDropdown from "../../../components/molecules/FormDropdown";
 import FormRadioGroup from "../../../components/molecules/FormRadioGroup";
-import RadioGroup from "../../../components/molecules/RadioGroup";
+
+import {
+  QUALIFICATION_SCHOOL,
+  QUALIFICATION_SPECIALIZATION,
+} from "../../Signup/childPages/ProfileCreation/data";
+import { connect } from "react-redux";
 
 const Qualification = forwardRef((props, ref) => {
   const [popup, setPopup] = useState(false);
@@ -20,7 +25,21 @@ const Qualification = forwardRef((props, ref) => {
     },
   }));
 
+  const [info, setInfo] = useState({ ...props.info });
+  const [editInfo, setEditInfo] = useState({ ...props.info });
+  const collegesList = props.colleges?.map((college) => college.name);
+  const institutionList = props.institutions?.map(
+    (institution) => institution.name
+  );
+  const degreeList = props.degrees?.map((degree) => degree.name);
+
   const onClosePopup = () => setPopup(false);
+
+  const onEdit = ({ target }, type) => {
+    const { value } = target;
+    setEditInfo((prevState) => ({ ...prevState, [type]: value }));
+  };
+  
   return (
     <Fragment>
       {popup && (
@@ -29,62 +48,82 @@ const Qualification = forwardRef((props, ref) => {
           className="profile__popupContainer"
           transition={{ horizontal: "top", vertical: null }}
         >
-          <Title variant="psm-23-1">Add Qualification</Title>
-          <div className="row">
-            <FormRadioGroup
-              title="School"
-              column="5"
-              contents={[
-                { id: "na", title: "NA", name: "school" },
-                { id: "5thgrade", title: "5th grade", name: "school" },
-                { id: "8thgrade", title: "8th grade", name: "school" },
-                { id: "high", title: "High school", name: "school" },
-                { id: "senior", title: "Senior secondary", name: "school" },
-              ]}
-            />
+          <Title variant="psm-23-1" className="profile__popupVerticalPadding">
+            Add Qualification
+          </Title>
+          <div className="profile__popupMainContent">
+            <div className="row">
+              <FormRadioGroup
+                title={QUALIFICATION_SCHOOL.title}
+                column="5"
+                value={editInfo.school}
+                contents={QUALIFICATION_SCHOOL.contents}
+                onHandleRadioClick={(e) => onEdit(e, "school")}
+              />
+            </div>
+            <div className="row">
+              <FormDropdown
+                title="Board name"
+                contents={props.boards}
+                value={editInfo.board_name}
+                onHandleDropdownValue={(e) => onEdit(e, "board_name")}
+              />
+            </div>
+            <div className="row">
+              <FormRadioGroup
+                title={QUALIFICATION_SPECIALIZATION.title}
+                value={editInfo.specialization}
+                column="5"
+                contents={QUALIFICATION_SPECIALIZATION.contents}
+                onHandleRadioClick={(e) => onEdit(e, "specialization")}
+              />
+            </div>
+            <div className="row">
+              <FormDropdown
+                title="College/University"
+                contents={collegesList}
+                value={info.college}
+                onHandleDropdownValue={(e) => onEdit(e, "college")}
+              />
+            </div>
+            <div className="row">
+              <FormDropdown
+                title="Degree"
+                contents={degreeList}
+                value={info.degree}
+                onHandleDropdownValue={(e) => onEdit(e, "degree")}
+              />
+            </div>
+            <div className="row">
+              <FormDropdown
+                title="Institution name"
+                contents={institutionList}
+                value={info.institution_name}
+                onHandleDropdownValue={(e) => onEdit(e, "institution_name")}
+              />
+            </div>
+            {/*<div className="row">
+              <RadioGroup
+                column="5"
+                contents={[
+                  { id: "partime", title: "Part time", name: "timing" },
+                  { id: "fulltime", title: "Full time", name: "timing" },
+                  {
+                    id: "distance",
+                    title: "Distance learning",
+                    name: "timing",
+                  },
+                ]}
+              />
+              </div>*/}
           </div>
-          <div className="row">
-            <FormDropdown title="Board name" />
-          </div>
-          <div className="row">
-            <FormRadioGroup
-              title="Specialization/field of study"
-              column="5"
-              contents={[
-                { id: "iti", title: "ITI", name: "specialization" },
-                {
-                  id: "certification",
-                  title: "Certification",
-                  name: "specialization",
-                },
-                { id: "technical", title: "Technical", name: "specialization" },
-                { id: "diploma", title: "Diploma", name: "specialization" },
-                { id: "others", title: "Others", name: "specialization" },
-              ]}
-            />
-          </div>
-          <div className="row">
-            <FormDropdown title="College/University" />
-          </div>
-          <div className="row">
-            <FormDropdown title="Degree" />
-          </div>
-          <div className="row">
-            <FormDropdown title="Institution name" />
-          </div>
-          <div className="row">
-            <RadioGroup
-              column="5"
-              contents={[
-                { id: "partime", title: "Part time", name: "timing" },
-                { id: "fulltime", title: "Full time", name: "timing" },
-                { id: "distance", title: "Distance learning", name: "timing" },
-              ]}
-            />
-          </div>
-          <div className="profile__popupCTA">
+          <div className="profile__popupCTA profile__popupVerticalPadding">
             <Button content="Cancel" onButtonClick={onClosePopup} variant="6" />
-            <Button content="Save" variant="1-4" />
+            <Button
+              content="Save"
+              variant="1-4"
+              onButtonClick={props.updateInfo.bind(this, 2, editInfo)}
+            />
           </div>
         </Popup>
       )}
@@ -92,22 +131,29 @@ const Qualification = forwardRef((props, ref) => {
         Board
       </Text>
       <Text variant="pl-14-1" className="u-display-block">
-        Maharashtra
+        {info.board_name}
       </Text>
       <Text variant="pl-14-1" className="u-display-block">
-        2009
+        {info.school}
       </Text>
       <Text variant="pl-14-1" className="u-margin-top-30 u-display-block">
-        Pune University
+        {info.institution_name}
       </Text>
       <Text variant="pl-14-1" className="u-display-block">
-        Diploma in civil engineering
+        {info.specialization}
       </Text>
       <Text variant="pl-14-1" className="u-display-block">
-        MIT college of engineering
+        {info.college}
       </Text>
     </Fragment>
   );
 });
+
+// const mapStateToProps = (state) => ({
+//   colleges: state.profile.colleges,
+//   degrees: state.profile.degrees,
+//   institutions: state.profile.institutionName,
+//   boards: state.profile.boardName,
+// });
 
 export default Qualification;

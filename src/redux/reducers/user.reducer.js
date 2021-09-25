@@ -6,6 +6,7 @@ import {
   SET_PROFILE_EDUCATION,
   SET_PROFILE_EMPLOYMENT,
   SET_PROFILE_INFO,
+  SET_PROFILE_OVERSEAS,
   SET_PROFILE_PROFESSION,
   SET_PROFILE_SKILLS,
 } from "../actions/user.actions";
@@ -18,6 +19,7 @@ const userReducerDefaultState = {
     profession: [],
     skills: [],
     employment: [],
+    overseas: [],
   },
   resume: {},
 };
@@ -42,6 +44,8 @@ const userReducer = (
       return { ...state, profile: { ...state.profile, skills: profile[0] } };
     case SET_PROFILE_EMPLOYMENT:
       return { ...state, profile: { ...state.profile, employment: profile } };
+    case SET_PROFILE_OVERSEAS:
+      return { ...state, profile: { ...state.profile, overseas: profile } };
     case CLEAR_PROFILE:
       return {
         ...state,

@@ -10,6 +10,7 @@ import Skills from "./Skills";
 
 const Details = forwardRef((props, ref) => {
   const { 0: ref1, 1: ref2, 2: ref3, 3: ref4, 4: ref5, 5: ref6 } = ref;
+
   return (
     <div className="profile__detailsMain">
       <DetailsContainer title="Resume headline" ref={ref1}>
@@ -17,11 +18,18 @@ const Details = forwardRef((props, ref) => {
       </DetailsContainer>
 
       <DetailsContainer title="Qualification" ref={ref2}>
-        <Qualification />
+        <Qualification
+          info={props.education}
+          updateInfo={props.updateDetails}
+          colleges={props.colleges}
+          degrees={props.degrees}
+          institutions={props.institutions}
+          boards={props.boards}
+        />
       </DetailsContainer>
 
       <DetailsContainer title="Skills" ref={ref3}>
-        <Skills info={props.skills} />
+        <Skills info={props.skills} updateInfo={props.updateDetails} />
       </DetailsContainer>
 
       <DetailsContainer title="Employeement Details" ref={ref4}>
@@ -29,7 +37,7 @@ const Details = forwardRef((props, ref) => {
       </DetailsContainer>
 
       <DetailsContainer title="Overseas opportunity" ref={ref5}>
-        <Overseas />
+        <Overseas info={props.overseas} updateInfo={props.updateDetails} />
       </DetailsContainer>
 
       <DetailsContainer title="Personal Information" ref={ref6}>

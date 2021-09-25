@@ -440,12 +440,12 @@ export const funcMap = {
       return true;
     }
   },
-  getProfileInfo: async (dispatch) => {
+  getProfileInfo: async (dispatch, redirect = true) => {
     const response = await dispatch(getAllProfileInfo());
-    if (response) {
+    if (response && redirect) {
       history.push("/user-profile");
       return true;
-    }
+    } else if (response) return true;
   },
   candidates: async (dispatch, page = 0, redirect = true) => {
     const response = await dispatch(candidatesApplication({ page, count: 4 }));

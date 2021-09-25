@@ -119,10 +119,20 @@
     transform: translateX(15%);
   }
 
-  &__popupContainer {
-    padding: 2.7rem 6.8rem 3rem 7rem;
-    min-width: 85rem;
+  &__popupVerticalPadding {
+    padding: 0 5rem;
+  }
+
+  &__popupMainContent {
+    padding: 0 5rem;
     overflow-y: scroll;
+    max-height: 60vh;
+  }
+
+  &__popupContainer {
+    // padding: 2.7rem 6.8rem 3rem 7rem;
+    padding: 2.7rem 0 3rem 0;
+    min-width: 85rem;
     max-height: 90vh;
     > .popup__close {
       position: absolute;

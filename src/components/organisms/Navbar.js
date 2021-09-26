@@ -7,9 +7,8 @@ import BlacklistComponent from "../../hoc/BlacklistComponent";
 import { funcMap, NAVBAR_NAVS, USER_ROUTE_TYPES } from "../../utils/data";
 import history from "../../utils/history";
 
-const NavBar = ({ dispatch }) => {
+const NavBar = ({ dispatch,  location}) => {
   const { pathname } = location;
-
   const onHandleNavs = (type, link) => {
     switch (type) {
       case "link":
@@ -19,6 +18,7 @@ const NavBar = ({ dispatch }) => {
         return funcMap[link](dispatch);
     }
   };
+  if (location.pathname.split('/').includes('resume')) return null;
   return (
     <div className="navbar">
       {NAVBAR_NAVS.map((nav, index) => (

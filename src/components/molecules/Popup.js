@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { Children, cloneElement, useRef } from "react";
 
 import Icon from "../atoms/Icon";
 import Title from "../atoms/Title";
@@ -19,8 +19,14 @@ const Popup = ({
       onClosePopup();
     }, 200);
   };
+
+  const child = Children.map(children, (child, index) =>
+    cloneElement(child, {
+      onHandleClose: onHandleClose,
+    })
+  );
   return (
-    <div className="popup" onClick={onClosePopup}>
+    <div className="popup" onClick={onHandleClose}>
       <div
         ref={ref}
         className={`popup__wrapper ${className} popup__wrapper--${transition.horizontal} popup__wrapper--${transition.vertical}`}
@@ -37,7 +43,7 @@ const Popup = ({
         <div className="popup__close" onClick={onHandleClose}>
           <Icon name="Close" />
         </div>
-        <div className="popup__container">{children}</div>
+        <div className="popup__container">{child}</div>
       </div>
     </div>
   );

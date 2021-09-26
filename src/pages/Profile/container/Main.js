@@ -4,13 +4,17 @@ import Progress from "../../../components/atoms/Progress";
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
 
-const Main = () => {
+const Main = ({ info, basic }) => {
   return (
     <div className="profile__main">
       <div className="profile__main--left">
         <div className="profile__octo">
           <div className="profile__octo1">
-            <Image className="profile__image" name="user-image" />
+            <Image
+              className="profile__image"
+              type={basic.url ? "binary" : "png"}
+              name={basic.url ? basic.url: "no-image-placeholder"}
+            />
           </div>
         </div>
       </div>
@@ -18,14 +22,17 @@ const Main = () => {
         <div className="row">
           <div className="col-1-of-2">
             <div>
-              <Title variant="pr-17-2">Jhon dohe</Title>
+              <Title variant="pr-17-2">{info.full_name}</Title>
             </div>
             <div>
-              <Text variant="pl-14-2">Construction supervisor</Text>
+              <Text variant="pl-14-2">{basic.title}</Text>
             </div>
             <div>
               <Title variant="pr-17-2" className="u-margin-top-20">
-                Pune, Maharashtra India
+                {info.per_district
+                  ? info.per_district + ", " + info.per_state
+                  : info.district + " " + info.state}{" "}
+                India
               </Title>
             </div>
             <div>
@@ -41,24 +48,36 @@ const Main = () => {
           </div>
           <div className="col-1-of-2">
             <div>
-              <Title variant="pr-17-2">House no. 21, Magarpatta road</Title>
+              <Title variant="pr-17-2">
+                {info.per_house_no
+                  ? info.per_house_no +
+                    ", " +
+                    info.per_street_locality +
+                    ", " +
+                    info.per_region
+                  : info.house_no +
+                    ", " +
+                    info.street_locality +
+                    ", " +
+                    info.region}
+              </Title>
             </div>
             <div>
-              <Title variant="pr-17-2">112054</Title>
+              <Title variant="pr-17-2">{info.per_pin || info.pin}</Title>
             </div>
             <div>
               <Title variant="pr-17-2" className="u-margin-top-65">
-                8755475757
+                {info.mobile || "Phone not available"}
               </Title>
             </div>
             <div>
               <Title variant="pr-17-2" className="u-margin-top-20">
-                Jhondohe52@gmail.com
+                {info.email}
               </Title>
             </div>
           </div>
         </div>
-        <Progress value="92" className="profile__progress" />
+        <Progress value={basic.progress} className="profile__progress" />
       </div>
     </div>
   );

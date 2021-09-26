@@ -34,11 +34,12 @@ const Skills = ({
             />
           </div>
           <div className="row u-margin-top-40 u-margin-bottom-0">
-            <Title variant="pr-24-1">Total experience</Title>
+            <Title variant="pr-24-1">Add Other Skills</Title>
+            {console.log(info.skillList.join(", "))}
             <FormInput
               type="textarea"
               variant="2"
-              value={info.skillList.join(" ")}
+              // value={info.skillList.join(", ")}
               className="profile__detailSkills"
               onHandleText={({ target }) => {
                 const { value } = target;

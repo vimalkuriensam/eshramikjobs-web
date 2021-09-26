@@ -14,12 +14,14 @@ import {
   deleteJob,
   getAppliedJobs,
   getJob,
+  getJobList,
   getNotificationJobPostings,
   getRecentJobs,
   getSavedJobs,
+  getSkilledJobs,
+  getSkills,
 } from "../../redux/actions/jobs.action";
 import {
-  getAllProfileInfo,
   getColleges,
   getDegrees,
   getInstitutions,
@@ -31,6 +33,8 @@ import {
   candidatesApplication,
   getCurrentPlan,
 } from "../../redux/actions/recruit.action";
+import { getAllProfileInfo } from "../../redux/actions/user.actions";
+import { addMessage } from "../../redux/actions/utils.action";
 import history from "../history";
 
 export const BASE_URL = "https://eshramik-server.herokuapp.com"; //"https://eshramik-api.herokuapp.com";
@@ -223,6 +227,33 @@ export const PROFILE_CONTENTS = {
   ],
 };
 
+export const HEADER_CONTENTS = [
+  {
+    text: "Jobs",
+    type: "process",
+    className: "header__link",
+    activeClassName: "header__link--active",
+    to: "getAllJobs",
+    link: "/jobs",
+  },
+  {
+    text: "Companies",
+    className: "header__link",
+    activeClassName: "header__link--active",
+    type: "link",
+    to: "/companies",
+    link: "/companies",
+  },
+  {
+    text: "Notification",
+    className: "header__link",
+    activeClassName: "header__link--active",
+    type: "link",
+    to: "/about",
+    link: "/about",
+  },
+];
+
 export const funcMap = {
   home: async (props) => history.push("/"),
   adminDashboard: async (dispatch) => {
@@ -236,6 +267,20 @@ export const funcMap = {
     if (response) history.push("/resumes");
   },
   recruiterSignup: () => history.push("/register/signup"),
+  getAllJobs: async (dispatch, page = 0, redirect = true) => {
+    const skillResponse = await dispatch(getSkills());
+    if (skillResponse) {
+      const response = await dispatch(
+        getSkilledJobs({
+          pageNumber: page,
+          itemsPerPage: 10,
+          skills: skillResponse,
+        })
+      );
+      if (redirect && response) return history.push("/jobs");
+      else if (response) return true;
+    }
+  },
   logout: (dispatch) => dispatch(setLogout()),
   searchJobs: () => window.scroll({ top: 0, left: 0, behavior: "smooth" }),
   savedJobs: async (dispatch) => {
@@ -366,6 +411,19 @@ export const funcMap = {
         })
       );
   },
+  applyAllJobLists: async (dispatch, id, page = 0) => {
+    const response = await dispatch(applyJob({ id, type: "apply" }));
+    if (response) {
+      const resp = await funcMap["getAllJobs"](dispatch, page, false);
+      if (resp)
+        dispatch(
+          addMessage({
+            type: "success",
+            content: "Job Applied",
+          })
+        );
+    }
+  },
   jobDelete: async (dispatch, id, type) =>
     await dispatch(deleteJob({ id, type })),
   appliedJobs: async (dispatch) => {
@@ -382,12 +440,12 @@ export const funcMap = {
       return true;
     }
   },
-  getProfileInfo: async (dispatch) => {
+  getProfileInfo: async (dispatch, redirect = true) => {
     const response = await dispatch(getAllProfileInfo());
-    if (response) {
+    if (response && redirect) {
       history.push("/user-profile");
       return true;
-    }
+    } else if (response) return true;
   },
   candidates: async (dispatch, page = 0, redirect = true) => {
     const response = await dispatch(candidatesApplication({ page, count: 4 }));
@@ -751,7 +809,9 @@ export const USER_ROUTE_TYPES = {
     "/5",
     "/6",
     "/7",
+    "/8",
     "/home",
+    "/view",
     "/about",
     "/applied",
     "/recommended",
@@ -774,5 +834,5 @@ export const USER_ROUTE_TYPES = {
     "/sales",
     "/enrolled",
   ],
-  default: ["/admin", "/signup", "/profile"],
+  default: ["/admin", "/signup", "/profile", "/resume"],
 };

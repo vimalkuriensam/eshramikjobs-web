@@ -29,123 +29,139 @@ const EmployeeDetails = ({
   return (
     <div>
       <Title variant="pr-24-1">5. Employeement details</Title>
-      {info.map((val, index) => (
-        <div className="row profile__detailsContainer" key={index}>
-          {index > 0 && (
-            <div>
-              <Divider />
-              <div className="row">
-                <div className="col-1-of-2">&nbsp;</div>
-                <div className="col-1-of-2 authentication__deleteContainer">
-                  <Icon
-                    name="Delete"
-                    className="authentication__delete"
-                    onIconClick={onDeleteExperience.bind(this, index)}
-                  />
+      {info.map((val, index) => {
+        const description = val.description;
+        const parsedDescription = description ? JSON.parse(description) : "";
+        return (
+          <div className="row profile__detailsContainer" key={index}>
+            {index > 0 && (
+              <div>
+                <Divider />
+                <div className="row">
+                  <div className="col-1-of-2">&nbsp;</div>
+                  <div className="col-1-of-2 authentication__deleteContainer">
+                    <Icon
+                      name="Delete"
+                      className="authentication__delete"
+                      onIconClick={onDeleteExperience.bind(this, index)}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <div className="col-1-of-2">
-            <div className="row">
-              <FormInput
-                onHandleText={onHandleEmployeeDetails.bind(this, "name", index)}
-                title="Name of Organization/Company"
-                placeholder=""
-                variant="1"
-              />
+            <div className="col-1-of-2">
+              <div className="row">
+                <FormInput
+                  onHandleText={onHandleEmployeeDetails.bind(
+                    this,
+                    "name",
+                    index
+                  )}
+                  title="Name of Organization/Company"
+                  placeholder=""
+                  variant="1"
+                />
+              </div>
+              <div className="row">
+                <FormCalendar
+                  value={moment(info[index].startDate).valueOf()}
+                  onHandleDate={({ target }) => {
+                    const date = moment(target.value).format("yyyy-MM-DD");
+                    onHandleEmployeeDetails("startDate", index, {
+                      target: { value: date },
+                    });
+                  }}
+                  title="Start Date"
+                />
+              </div>
+              <div className="row">
+                <FormCalendar
+                  value={moment(info[index].endDate).valueOf()}
+                  onHandleDate={({ target }) => {
+                    const date = moment(target.value).format("yyyy-MM-DD");
+                    onHandleEmployeeDetails("endDate", index, {
+                      target: { value: date },
+                    });
+                  }}
+                  title="End Date"
+                />
+              </div>
+              <div className="row">
+                <FormDropdown
+                  value={info[index].title}
+                  onHandleDropdownValue={onHandleEmployeeDetails.bind(
+                    this,
+                    "title",
+                    index
+                  )}
+                  title="Job title"
+                  contents={jobList}
+                />
+              </div>
             </div>
-            <div className="row">
-              <FormCalendar
-                value={moment(info[index].startDate).valueOf()}
-                onHandleDate={({ target }) => {
-                  const date = moment(target.value).format("yyyy-MM-DD");
-                  onHandleEmployeeDetails("startDate", index, {
-                    target: { value: date },
-                  });
-                }}
-                title="Start Date"
-              />
-            </div>
-            <div className="row">
-              <FormCalendar
-                value={moment(info[index].endDate).valueOf()}
-                onHandleDate={({ target }) => {
-                  const date = moment(target.value).format("yyyy-MM-DD");
-                  onHandleEmployeeDetails("endDate", index, {
-                    target: { value: date },
-                  });
-                }}
-                title="End Date"
-              />
-            </div>
-            <div className="row">
-              <FormDropdown
-                value={info[index].title}
-                onHandleDropdownValue={onHandleEmployeeDetails.bind(
-                  this,
-                  "title",
-                  index
-                )}
-                title="Job title"
-                contents={jobList}
-              />
+
+            <div className="col-1-of-2">
+              <div className="row">
+                <FormDropdown
+                  value={info[index].state}
+                  onHandleDropdownValue={(event) => {
+                    dispatch(getDistrict({ state: event.target.value }));
+                    onHandleEmployeeDetails("state", index, event);
+                  }}
+                  title="Job location"
+                  contents={statesList}
+                />
+              </div>
+              <div className="row">
+                <Dropdown
+                  value={info[index].city}
+                  onHandleDropdownValue={onHandleEmployeeDetails.bind(
+                    this,
+                    "city",
+                    index
+                  )}
+                  contents={districtList}
+                />
+              </div>
+              <div className="row">
+                <FormInput
+                  value={info[index].salary}
+                  onHandleText={onHandleEmployeeDetails.bind(
+                    this,
+                    "salary",
+                    index
+                  )}
+                  title="Last drawn salary"
+                  variant="1"
+                  placeholder=""
+                />
+              </div>
+              <div className="row">
+                <FormInput
+                  // value={info[index].description}
+                  // onHandleText={onHandleEmployeeDetails.bind(
+                  //   this,
+                  //   "description",
+                  //   index
+                  // )}
+                  value={parsedDescription}
+                  onHandleText={({ target }) => {
+                    const { value } = target;
+                    const stringifiedVal = JSON.stringify(value);
+                    onHandleEmployeeDetails("description", index, {
+                      target: { value: stringifiedVal },
+                    });
+                  }}
+                  type="textarea"
+                  title="Job description"
+                  listings={false}
+                />
+              </div>
             </div>
           </div>
-
-          <div className="col-1-of-2">
-            <div className="row">
-              <FormDropdown
-                value={info[index].state}
-                onHandleDropdownValue={(event) => {
-                  dispatch(getDistrict({ state: event.target.value }));
-                  onHandleEmployeeDetails("state", index, event);
-                }}
-                title="Job location"
-                contents={statesList}
-              />
-            </div>
-            <div className="row">
-              <Dropdown
-                value={info[index].city}
-                onHandleDropdownValue={onHandleEmployeeDetails.bind(
-                  this,
-                  "city",
-                  index
-                )}
-                contents={districtList}
-              />
-            </div>
-            <div className="row">
-              <FormInput
-                value={info[index].salary}
-                onHandleText={onHandleEmployeeDetails.bind(
-                  this,
-                  "salary",
-                  index
-                )}
-                title="Last drawn salary"
-                variant="1"
-                placeholder=""
-              />
-            </div>
-            <div className="row">
-              <FormInput
-                value={info[index].description}
-                onHandleText={onHandleEmployeeDetails.bind(
-                  this,
-                  "description",
-                  index
-                )}
-                type="textarea"
-                title="Job description"
-                listings={false}
-              />
-            </div>
-          </div>
-        </div>
-      ))}
+        );
+      })}
       <div className="row">
         <div className="col-1-of-2">&nbsp;</div>
         <div className="col-1-of-2">

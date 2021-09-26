@@ -36,7 +36,11 @@ const ResumeLists = ({ resumes = [], pagination = false }) => {
         >
           <div className={`col-a-1-of-7 u-text-center`}>
             {list.photo ? (
-              <Image name={list.photo} type="binary" />
+              <Image
+                name={list.photo}
+                type="binary"
+                className="recruit__candidatesImage"
+              />
             ) : (
               <div className="dashboard__userIconContainer">
                 <Icon name="User" className="dashboard__userIcon" />

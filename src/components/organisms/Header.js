@@ -8,11 +8,17 @@ import { connect } from "react-redux";
 import { loginState } from "../../redux/actions/utils.action";
 import history from "../../utils/history";
 import { Fragment } from "react";
-import { funcMap, PROFILE_CONTENTS, USER_ROUTE_TYPES } from "../../utils/data";
+import {
+  funcMap,
+  HEADER_CONTENTS,
+  PROFILE_CONTENTS,
+  USER_ROUTE_TYPES,
+} from "../../utils/data";
 import BlacklistComponent from "../../hoc/BlacklistComponent";
 import Drawer from "./Drawer";
 
 const Header = ({ dispatch, isLogged }) => {
+  const { pathname } = location;
   const handler = (event) => {
     if (!popupRef.current?.contains(event.target)) setProfileState(false);
   };
@@ -37,6 +43,17 @@ const Header = ({ dispatch, isLogged }) => {
       default:
         setProfileState(false);
         history.push(content.to);
+    }
+  };
+
+  const onHandleHeaderNav = (type, to) => {
+    switch (type) {
+      case "link":
+        return history.push(to);
+      case "process":
+        return funcMap[to](dispatch, 0, true);
+      default:
+        return history.push(to);
     }
   };
 
@@ -81,7 +98,23 @@ const Header = ({ dispatch, isLogged }) => {
           </NavLink>
           {isLogged && (
             <Fragment>
-              <NavLink
+              {HEADER_CONTENTS.map((content, index) => (
+                <span
+                  key={index}
+                  onClick={onHandleHeaderNav.bind(
+                    this,
+                    content.type,
+                    content.to
+                  )}
+                  className={`${content.className} ${
+                    pathname == content.link ? content.activeClassName : null
+                  }`}
+                >
+                  {content.text}
+                </span>
+              ))}
+
+              {/*<NavLink
                 className="header__link"
                 activeClassName="header__link--active"
                 to="/jobs"
@@ -101,7 +134,7 @@ const Header = ({ dispatch, isLogged }) => {
                 to="/about"
               >
                 Notification
-              </NavLink>
+              </NavLink>*/}
               <span className="u-position-relative">
                 <span onClick={onHandleProfileState}>
                   <Text variant="pr-18-1" className="u-cursor-pointer">
@@ -144,12 +177,15 @@ const mapStateToProps = (state) => ({
   isLogged: !!state.auth.accessToken,
 });
 
-export default connect(mapStateToProps)(
-  withRouter(
-    BlacklistComponent(Header)([
-      ...USER_ROUTE_TYPES.admin,
-      ...USER_ROUTE_TYPES.recruiter,
-      ...USER_ROUTE_TYPES.default,
-    ])
+export default withRouter(
+  connect(mapStateToProps)(
+    Header
+    // withRouter(
+    //   BlacklistComponent(Header)([
+    //     ...USER_ROUTE_TYPES.admin,
+    //     ...USER_ROUTE_TYPES.recruiter,
+    //     ...USER_ROUTE_TYPES.default,
+    //   ])
+    // )
   )
 );

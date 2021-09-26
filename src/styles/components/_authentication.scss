@@ -213,6 +213,16 @@
     }
   }
 
+  &__contact {
+    display: flex;
+    align-items: center;
+    > * {
+      &:not(:first-child) {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
   &__adminDetails {
     min-height: 100%;
     min-width: 100%;
@@ -300,7 +310,7 @@
           display: none;
         }
         display: block;
-        width: 100%!important;
+        width: 100% !important;
       }
     }
   }

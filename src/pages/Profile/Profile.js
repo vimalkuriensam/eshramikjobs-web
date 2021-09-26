@@ -1,11 +1,40 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import moment from "moment";
+import { updateProfile } from "../../redux/actions/user.actions";
+import {
+  getColleges,
+  getDegrees,
+  getInstitutions,
+} from "../../redux/actions/profile.actions";
+import { addMessage } from "../../redux/actions/utils.action";
+import { funcMap } from "../../utils/data";
 import Advertisement from "../Home/container/Advertisement";
 import Feedback from "../Home/container/Feedback";
 import Details from "./container/Details";
 import Main from "./container/Main";
 import Navbar from "./container/Navbar";
 
-const Profile = () => {
+const Profile = ({
+  basic,
+  info,
+  education,
+  profession,
+  skills,
+  employment,
+  colleges,
+  degrees,
+  institutions,
+  boards,
+  overseas,
+  dispatch,
+}) => {
+  useEffect(() => {
+    dispatch(getColleges());
+    dispatch(getDegrees());
+    dispatch(getInstitutions());
+  }, []);
+
   const ref1 = useRef(null),
     ref2 = useRef(null),
     ref3 = useRef(null),
@@ -28,16 +57,55 @@ const Profile = () => {
       left: 0,
       behavior: "smooth",
     });
+
+  const employments = employment
+    .map((val) => ({
+      ...val,
+      start_date: moment(val.start_date).format("YYYY-MM-DD"),
+      end_date: moment(val.end_date).format("YYYY-MM-DD"),
+    }))
+    .sort(
+      (a, b) => moment(b.start_date).valueOf() - moment(a.start_date).valueOf()
+    );
+
+  const updateDetails = async (section, info) => {
+    const message = await dispatch(updateProfile(section, info));
+    if (message) {
+      const response = await funcMap["getProfileInfo"](dispatch, false);
+      if (response)
+        dispatch(
+          addMessage({
+            type: "info",
+            content: message,
+          })
+        );
+        return true;
+    }
+  };
+
   return (
     <div>
       <section className="section-profile">
-        <Main />
+        <Main info={info} basic={basic} />
         <div className="row u-margin-top-30 profile__mainWrapper">
           <div className="col-1-of-3">
             <Navbar ref={refs} executeScroll={executeScroll} />
           </div>
           <div className="col-2-of-3">
-            <Details ref={refs} />
+            <Details
+              headline={employments[0]}
+              education={education}
+              ref={refs}
+              updateDetails={updateDetails}
+              info={info}
+              skills={skills}
+              employments={employments}
+              colleges={colleges}
+              degrees={degrees}
+              institutions={institutions}
+              boards={boards}
+              overseas={overseas}
+            />
           </div>
         </div>
       </section>
@@ -47,4 +115,18 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+const mapStateToProps = (state) => ({
+  basic: state.user.basic,
+  info: state.user.profile.info,
+  education: state.user.profile.education,
+  profession: state.user.profile.profession,
+  skills: state.user.profile.skills,
+  employment: state.user.profile.employment,
+  overseas: state.user.profile.overseas,
+  colleges: state.profile.colleges,
+  degrees: state.profile.degrees,
+  institutions: state.profile.institutionName,
+  boards: state.profile.boardName,
+});
+
+export default connect(mapStateToProps)(Profile);

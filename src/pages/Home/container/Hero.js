@@ -9,7 +9,7 @@ const Hero = () => {
     <div className="home__hero">
       <div className="home__heroContainer">
         <div>
-          <Title variant="pr-35-1">Find Job</Title>
+          <Title variant="pr-35-1">Find Job!!</Title>
         </div>
         <div className="row u-margin-top-2">
           <div className="col-3-of-7 home__heroInputContainer">

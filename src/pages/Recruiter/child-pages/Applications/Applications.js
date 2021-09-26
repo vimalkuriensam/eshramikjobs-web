@@ -70,6 +70,7 @@ const Applications = ({
               <div className="col-a-1-of-7 u-text-center">
                 <Image
                   className="recruit__candidatesImage"
+                  type={content.photo ? "binary" : "png"}
                   name={content.photo || "no-image-placeholder"}
                 />
               </div>

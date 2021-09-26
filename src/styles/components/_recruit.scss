@@ -13,6 +13,35 @@
     }
   }
 
+  &__download {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    > * {
+      &:not(:first-child) {
+        margin-left: 2rem;
+      }
+    }
+  }
+
+  &__statusContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__personalInfo {
+    min-width: 80rem;
+  }
+
+  &__employments {
+    > * {
+      &:not(:first-child) {
+        margin-top: 2rem;
+      }
+    }
+  }
+
   &__popupContainer {
     margin-top: 3rem;
     padding: 2rem;
@@ -23,7 +52,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    >* {
+    > * {
       &:not(:first-child) {
         margin-left: 1rem;
       }

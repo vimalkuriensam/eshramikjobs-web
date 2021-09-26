@@ -47,13 +47,13 @@ const AppRoutes = ({ tokenData }) => {
       <ScrollTop />
       {type == USER_TYPES.ADMIN && <AdminHeader />}
       {type == USER_TYPES.RECRUITER && <RecruiterHeader />}
-      <Header />
+      {type !== USER_TYPES.ADMIN && type !== USER_TYPES.RECRUITER && <Header />}
       {type == 2 && <EventCaptureTut />}
       <Message />
       <Login />
       <Loader />
       <div className="recruiterNavbarContainer">
-        {type == USER_TYPES.USER && <NavBar />}
+        {type == USER_TYPES.ADMIN && <NavBar />}
         {type == USER_TYPES.RECRUITER && <RecruiterNavbar />}
         <div style={{ width: "100%" }}>
           <Route

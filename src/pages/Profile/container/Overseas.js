@@ -1,6 +1,7 @@
 import React, {
   forwardRef,
   Fragment,
+  useEffect,
   useImperativeHandle,
   useState,
 } from "react";
@@ -30,6 +31,15 @@ const Overseas = forwardRef((props, ref) => {
     }));
   };
 
+  useEffect(() => {
+    if (props.info[0]) setInfo(props.info[0]);
+  }, [props.info[0]]);
+
+  // useEffect(()=>{
+  //   console.log(props.info);
+  //   setInfo(props.info[0])
+  // }, [props.info])
+
   return (
     <Fragment>
       {popup && (
@@ -45,10 +55,8 @@ const Overseas = forwardRef((props, ref) => {
             <div className="u-margin-top-20">
               <FormRadioGroup
                 title="Are you interested in overseas opportunity"
-                value={editInfo.int_overseas_opp ? "yes" : "no"}
-                onHandleRadioClick={(e) =>
-                  onEditOverseas(e, "int_overseas_opp")
-                }
+                value={editInfo.overseas ? "yes" : "no"}
+                onHandleRadioClick={(e) => onEditOverseas(e, "overseas")}
                 contents={[
                   { id: "yes", title: "Yes", name: "opportunity" },
                   { id: "no", title: "No", name: "opportunity" },
@@ -58,8 +66,8 @@ const Overseas = forwardRef((props, ref) => {
             <div className="u-margin-top-30">
               <FormRadioGroup
                 title="Do you have a valid Indian passport"
-                value={editInfo.valid_passport ? "yes" : "no"}
-                onHandleRadioClick={(e) => onEditOverseas(e, "valid_passport")}
+                value={editInfo.validPassport ? "yes" : "no"}
+                onHandleRadioClick={(e) => onEditOverseas(e, "validPassport")}
                 contents={[
                   { id: "yes", title: "Yes", name: "passport" },
                   { id: "no", title: "No", name: "passport" },
@@ -78,7 +86,7 @@ const Overseas = forwardRef((props, ref) => {
         </Popup>
       )}
       <Text variant="pl-16-1" className="u-margin-top-10 u-display-block">
-        {info.int_overseas_opp ? "Yes" : "No"}
+        {info.overseas ? "Yes" : "No"}
       </Text>
     </Fragment>
   );

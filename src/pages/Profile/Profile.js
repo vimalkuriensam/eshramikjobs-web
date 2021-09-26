@@ -79,6 +79,7 @@ const Profile = ({
             content: message,
           })
         );
+        return true;
     }
   };
 

@@ -10,7 +10,11 @@ const Main = ({ info, basic }) => {
       <div className="profile__main--left">
         <div className="profile__octo">
           <div className="profile__octo1">
-            <Image className="profile__image" name="user-image" />
+            <Image
+              className="profile__image"
+              type={basic.url ? "binary" : "png"}
+              name={basic.url ? basic.url: "no-image-placeholder"}
+            />
           </div>
         </div>
       </div>

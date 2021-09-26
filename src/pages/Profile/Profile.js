@@ -76,7 +76,7 @@ const Profile = ({
         dispatch(
           addMessage({
             type: "info",
-            content: message,
+            content: message+"!!!",
           })
         );
         return true;

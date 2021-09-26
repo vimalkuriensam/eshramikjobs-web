@@ -35,9 +35,7 @@ function HeadlineContents({ onHandleClose, info, updateInfo }) {
           content="Save"
           onButtonClick={async () => {
             const resp = await updateInfo(5, { empDetails: [editInfo] });
-            if (resp) {
-              onHandleClose();
-            }
+            if (resp) onHandleClose();
           }}
           variant="1-4"
         />

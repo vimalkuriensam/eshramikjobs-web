@@ -200,8 +200,8 @@ export const PROFILE_CONTENTS = {
       columns: [
         {
           text: "Recommended jobs",
-          type: "link",
-          to: "/jobs/recommended",
+          type: "process",
+          to: "getRecommendedJobs",
         },
         {
           text: "Settings",
@@ -267,19 +267,49 @@ export const funcMap = {
     if (response) history.push("/resumes");
   },
   recruiterSignup: () => history.push("/register/signup"),
-  getAllJobs: async (dispatch, page = 0, redirect = true) => {
-    const skillResponse = await dispatch(getSkills());
-    if (skillResponse) {
+  getRecommendedJobs: (dispatch, page = 0) =>
+    funcMap["getAllJobs"](
+      dispatch,
+      page,
+      true,
+      {},
+      { all: false, sort: "date_desc" }
+    ),
+  getAllJobs: async (
+    dispatch,
+    page = 0,
+    skills = true,
+    data = {},
+    filter = {
+      all: true,
+      sort: "date_desc",
+    },
+    redirect = true
+  ) => {
+    if (skills) {
+      const skillResponse = await dispatch(getSkills());
       const response = await dispatch(
         getSkilledJobs({
           pageNumber: page,
           itemsPerPage: 10,
           skills: skillResponse,
+          filter,
         })
       );
       if (redirect && response) return history.push("/jobs");
       else if (response) return true;
-    }
+    } else if (Object.keys(data).length) {
+      const response = await dispatch(
+        getSkilledJobs({
+          pageNumber: page,
+          itemsPerPage: 10,
+          filter,
+          data,
+        })
+      );
+      if (redirect && response) return history.push("/jobs");
+      else if (response) return true;
+    } else return true;
   },
   logout: (dispatch) => dispatch(setLogout()),
   searchJobs: () => window.scroll({ top: 0, left: 0, behavior: "smooth" }),

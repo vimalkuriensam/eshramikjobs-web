@@ -32,14 +32,26 @@ app.listen(port, () => console.log(`Server is listening on ${port}`));
 //   )
 //   .listen(port, () => console.log(`Server is listening on port ${port}`));
 
-// const options = {
-//   key: fs.readFileSync(`${certPath}/key.pem`),
-//   cert: fs.readFileSync(`${certPath}/cert.pem`),
-//   passphrase: "Kickassyou12",
-// };
-
-// const httpsServer = https.createServer(options, app);
-
-// httpsServer.listen(port, () =>
-//   console.log(`Server is listening on port ${port}`)
+// const sslServer = https.createServer(
+//   {
+//     key: fs.readFileSync(`${certPath}/key.pem`),
+//     cert: fs.readFileSync(`${certPath}/cert.pem`),
+//   },
+//   app
 // );
+
+// sslServer.listen(port, () =>
+//   console.log(`Server is listenting on port ${port}`)
+// );
+
+// // const options = {
+// //   key: fs.readFileSync(`${certPath}/key.pem`),
+// //   cert: fs.readFileSync(`${certPath}/cert.pem`),
+// //   passphrase: "Kickassyou12",
+// // };
+
+// // const httpsServer = https.createServer(options, app);
+
+// // httpsServer.listen(port, () =>
+// //   console.log(`Server is listening on port ${port}`)
+// // );

@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "webpack-dev-server --open --env development --config webpack.dev.js",
-    "build": "webpack --env production --config webpack.prod.js",
+    "dev": "webpack-dev-server --open --env development --config config/webpack.dev.js",
+    "build": "webpack --env production --config config/webpack.prod.js",
     "test": "jest --config=jest.config.json",
     "heroku-postbuild": "npm run build"
   },

@@ -8,7 +8,7 @@ import Title from "../../components/atoms/Title";
 import JobListings from "../../components/organisms/JobListings";
 import { funcMap } from "../../utils/data";
 
-const Jobs = ({ dispatch, jobs = [] }) => {
+const Jobs = ({ dispatch, jobs = [], match }) => {
   const onHandleJobDetail = async (id) => {
     const response = await funcMap["getJob"](dispatch, id);
     if (response) history.push("/jobs/detail");
@@ -25,7 +25,7 @@ const Jobs = ({ dispatch, jobs = [] }) => {
       </Title>
       {jobs.length && (
         <Text variant="pl-14-1" className="u-display-block">
-          Found xx jobs that matches your preference
+          Found {match} jobs that matches your preference
         </Text>
       )}
       <div className="u-margin-top-2">
@@ -43,6 +43,7 @@ const Jobs = ({ dispatch, jobs = [] }) => {
 
 const mapStateToProps = (state) => ({
   jobs: state.jobs.allJobs,
+  match: state.jobs.page.allJobsMatch,
 });
 
 export default connect(mapStateToProps)(Jobs);

@@ -45,6 +45,7 @@ function HeadlineContents({ onHandleClose, info, updateInfo }) {
 }
 
 const Headline = forwardRef((props, ref) => {
+  console.log(props);
   const [popup, setPopup] = useState(false);
   useImperativeHandle(ref, () => ({
     onHandleEdit() {

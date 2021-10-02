@@ -8,7 +8,7 @@ const common = require("./webpack.common.js");
 
 module.exports = (env) => {
   const fileEnv = dotenv.config({
-    path: path.join(__dirname, `/src/environment/.env.${env}`),
+    path: path.join(__dirname, "..", `/src/environment/.env.${env}`),
   }).parsed;
   const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
@@ -18,7 +18,7 @@ module.exports = (env) => {
     mode: "development",
     devtool: "inline-cheap-source-map",
     devServer: {
-      contentBase: path.join(__dirname, "public"),
+      contentBase: path.join(__dirname, "..", "public"),
       publicPath: "/dist/",
       // http2:true,
       // https: {

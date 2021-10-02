@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   entry: ["babel-polyfill", "./src/app.js"],
   output: {
-    path: path.join(__dirname, "public", "dist"),
+    path: path.join(__dirname, "..", "public", "dist"),
     filename: "bundle.js",
   },
   module: {
@@ -32,7 +32,7 @@ module.exports = {
       cache: false,
       publicPath: "/dist",
       filename: "../index.html",
-      template: "./template.html",
+      template: "./config/template.html",
     }),
     new MiniCssExtractPlugin({
       filename: "style.css",

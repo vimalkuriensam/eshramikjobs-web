@@ -7,7 +7,7 @@ const common = require("./webpack.common.js");
 
 module.exports = (env) => {
   const fileEnv = dotenv.config({
-    path: path.join(__dirname, `/src/environment/.env.${env}`),
+    path: path.join(__dirname, "..", `/src/environment/.env.${env}`),
   }).parsed;
   const envKeys = {
     "process.env": Object.keys(fileEnv).reduce((key, value) => {

@@ -115,10 +115,10 @@ export const getJobList =
   };
 
 export const getSkilledJobs =
-  ({ pageNumber = 0, itemsPerPage = 10, skills = [] }) =>
+  ({ pageNumber = 0, itemsPerPage = 10, skills = [], data = {}, filter }) =>
   async (dispatch) => {
     const { jobs, total, match } = await dispatch(
-      getJobList({ pageNumber, itemsPerPage, skills })
+      getJobList({ pageNumber, itemsPerPage, skills, ...data, ...filter })
     );
     if (jobs) {
       dispatch(clearAllJobs());

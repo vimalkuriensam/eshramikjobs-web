@@ -42,7 +42,6 @@ const EmployementDetails = forwardRef((props, ref) => {
           <Title variant="psm-23-1">Employment Details</Title>
           {editInfo.map((val, idx) => (
             <div key={idx}>
-              {console.log(val)}
               <FormInput
                 title="Name of Organization/Company"
                 variant="1"

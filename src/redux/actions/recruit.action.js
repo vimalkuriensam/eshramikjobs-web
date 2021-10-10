@@ -17,7 +17,6 @@ export const buyPlan =
         "/payment/purchase_plan",
         { planId }
       );
-      console.log(status, data, "actions");
       if (status == 200) return data.data;
     } catch (e) {
       throw e;
@@ -39,7 +38,6 @@ export const confirmOrder = (info) => async (dispatch) => {
 export const getCompanyInfo = () => async (dispatch) => {
   try {
     const { status, data } = await apiService().get("/jobs/recruiter/company");
-    console.log(data, status);
     if (status == 200) {
       if (data.data.length) {
         const { name, logo } = data.data[0];

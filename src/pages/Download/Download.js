@@ -11,7 +11,6 @@ import { getResume } from "../../redux/actions/user.actions";
 
 const Download = ({ resume, match, dispatch }) => {
   const [resumeLoader, setResumeLoader] = useState(false);
-  console.log(resume);
   useEffect(() => {
     handleResume();
     // html2canvas(document.getElementById("docs")).then((canvas) => {

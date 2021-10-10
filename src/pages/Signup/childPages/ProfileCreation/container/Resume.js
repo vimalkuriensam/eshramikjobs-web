@@ -33,7 +33,6 @@ const Resume = ({ onSendResume }) => {
     if (email && !validator.isEmail(email)) {
       isValidEmail = false;
     }
-    console.log(isValidEmail, isValidMobile)
     if (isValidMobile && isValidEmail) onSendResume({ mobile, email });
   };
 

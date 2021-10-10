@@ -18,7 +18,6 @@ import Title from "../../components/atoms/Title";
 const BuyPlans = ({ dispatch }) => {
   const loadPlans = async () => {
     const plans = await dispatch(getPlans());
-    console.log(plans);
     if (plans) {
       setDistrictPlan(plans.filter((plan) => plan.name === "District/UT (single login)"));
       setStatePlan(plans.filter((plan) => plan.name.trim() === "State (2 Logins)"));

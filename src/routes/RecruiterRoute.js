@@ -45,6 +45,7 @@ const RecruiterRoute = ({
     <Route
       {...rest}
       render={(props) => {
+        console.log(isAuthenticated, type, verified)
         if (isAuthenticated && type == USER_TYPES.RECRUITER) {
           if (verified == RECRUITER_STATUS.VERIFIED)
             return <Component {...props} />;

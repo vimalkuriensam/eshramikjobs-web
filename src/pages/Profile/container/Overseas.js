@@ -74,7 +74,6 @@ const Overseas = forwardRef((props, ref) => {
       setPopup(true);
     },
   }));
-
   const onClosePopup = () => setPopup(false);
   // const [info, setInfo] = useState(props.info[0]);
 

@@ -10,8 +10,15 @@ import Pagination from "../../../components/organisms/Pagination";
 
 import TableContainer from "../../../components/organisms/TableContainer";
 import { RESUME_LIST_CONTENTS, RESUME_LIST_HEADER } from "../data";
+import history from "../../../utils/history";
+import { connect } from "react-redux";
+import { getCandidateInfo } from "../../../redux/actions/recruit.action";
 
-const ResumeLists = ({ resumes = [], pagination = false }) => {
+const ResumeLists = ({ resumes = [], pagination = false, dispatch }) => {
+  const onHandleResume = async (id) => {
+    const resp = await dispatch(getCandidateInfo({ profileId: id }));
+    if (resp) history.push(`/resumes/${id}`);
+  };
   return (
     <TableContainer
       title="Resumes recieved"
@@ -32,6 +39,7 @@ const ResumeLists = ({ resumes = [], pagination = false }) => {
           className={`a-row table__rowContent table__rowContent--${
             index % 2 == 0 ? "dark" : "light"
           }`}
+          onClick={onHandleResume.bind(this, list.profile_id)}
           key={index}
         >
           <div className={`col-a-1-of-7 u-text-center`}>
@@ -114,4 +122,4 @@ const ResumeLists = ({ resumes = [], pagination = false }) => {
   );
 };
 
-export default ResumeLists;
+export default connect()(ResumeLists);

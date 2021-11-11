@@ -67,7 +67,7 @@ const Details = ({
           Skills
         </Title>
         <div className="recruit__skills">
-          {skills.skill_list.map((skill, index) => (
+          {skills.skill_list.split(",").map((skill, index) => (
             <span key={index} className="form__textarea--textgroup">
               <Title variant="pr-19-3">{skill}</Title>
             </span>
@@ -112,7 +112,7 @@ const Details = ({
               Personal information
             </Title>
             <div className="row">
-              <div className="col-1-of-4">
+              <div className="col-1-of-2">
                 <Text
                   variant="pl-14-3"
                   className="u-display-block u-margin-top-30"
@@ -159,7 +159,7 @@ const Details = ({
                   Single
                 </Text>
               </div>
-              <div className="col-1-of-4">
+              <div className="col-1-of-2">
                 <Text
                   variant="pl-14-3"
                   className="u-display-block u-margin-top-30"

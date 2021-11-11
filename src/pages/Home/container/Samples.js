@@ -1,28 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
 
 import CompanyListings from "../../../components/organisms/CompanyListings";
 import WorkListings from "../../../components/organisms/JobListings";
-import { getRecentJobs } from "../../../redux/actions/jobs.action";
 import { loginState } from "../../../redux/actions/utils.action";
 import { funcMap } from "../../../utils/data";
 import history from "../../../utils/history";
 import Profile from "./Profile";
 
 const Samples = ({ jobs, companies, isLogged, isAuthenticated, dispatch }) => {
-  useEffect(() => {
-    dispatch(
-      getRecentJobs({
-        pageNumber: 0,
-        itemsPerPage: 4,
-        jobTitle: null,
-        location: null,
-      })
-    );
-  }, []);
-
   const onHandleJobDetail = async (id) => {
     if (!isAuthenticated) dispatch(loginState({ state: true }));
     else {
@@ -74,7 +62,7 @@ const Samples = ({ jobs, companies, isLogged, isAuthenticated, dispatch }) => {
 const mapStateToProps = (state) => ({
   isLogged: !!state.auth.accessToken,
   jobs: state.jobs.recent,
-  companies: state.jobs.companies,
+  companies: state.admin.companies.map((val) => val.logo),
   isAuthenticated: !!state.auth.accessToken,
 });
 

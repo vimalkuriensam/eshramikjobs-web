@@ -20,8 +20,13 @@ const ResumeLists = ({ resumes = [], currentPage, totalResumes, dispatch }) => {
     dispatch(setResumePage({ page: selected }));
   };
 
-  const onPageHandle = useCallback(() => {
-    dispatch(getApplicationDetails({ count: 8 }));
+  const onPageHandle = useCallback(async () => {
+    const response = await dispatch(getApplicationDetails({ count: 8 }));
+    if (response)
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
   }, [currentPage]);
 
   useEffect(() => {
@@ -50,7 +55,11 @@ const ResumeLists = ({ resumes = [], currentPage, totalResumes, dispatch }) => {
         <div className="a-row dashboard__tableList" key={index}>
           <div className={`col-a-1-of-7 u-text-center`}>
             {list.photo ? (
-              <Image name={list.photo} type="binary" />
+              <Image
+                name={list.photo}
+                type="binary"
+                className="dashboard__userIcon u-margin-top-none"
+              />
             ) : (
               <div className="dashboard__userIconContainer">
                 <Icon name="User" className="dashboard__userIcon" />

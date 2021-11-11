@@ -188,7 +188,10 @@ export const getRecentJobs =
           type: "recent",
         })
       );
-      if (jobs.length) dispatch(setRecentJobs({ jobs }));
+      if (jobs.length) {
+        dispatch(setRecentJobs({ jobs }));
+        return true;
+      } else if (!jobs.length) return true;
     } catch (e) {
       throw e;
     }

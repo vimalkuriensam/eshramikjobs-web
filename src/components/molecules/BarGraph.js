@@ -22,10 +22,11 @@ const chartInit = (sales, id) => {
     .nice();
 
   const yAccessor = (d) => +d.price;
-
+  const maxYScale =
+    d3.max(sales, yAccessor) == 0 ? 1000 : d3.max(sales, yAccessor);
   const yScale = d3
     .scaleLinear()
-    .domain([0, d3.max(sales, yAccessor)])
+    .domain([0, maxYScale])
     .range([dimensions.ctrHeight, 0])
     .nice();
   const svg = d3

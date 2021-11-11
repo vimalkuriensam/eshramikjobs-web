@@ -8,13 +8,8 @@ import { connect } from "react-redux";
 import { loginState } from "../../redux/actions/utils.action";
 import history from "../../utils/history";
 import { Fragment } from "react";
-import {
-  funcMap,
-  HEADER_CONTENTS,
-  PROFILE_CONTENTS,
-  USER_ROUTE_TYPES,
-} from "../../utils/data";
-import BlacklistComponent from "../../hoc/BlacklistComponent";
+import { funcMap, HEADER_CONTENTS, PROFILE_CONTENTS } from "../../utils/data";
+
 import Drawer from "./Drawer";
 
 const Header = ({ dispatch, isLogged }) => {
@@ -113,28 +108,6 @@ const Header = ({ dispatch, isLogged }) => {
                   {content.text}
                 </span>
               ))}
-
-              {/*<NavLink
-                className="header__link"
-                activeClassName="header__link--active"
-                to="/jobs"
-              >
-                Jobs
-              </NavLink>
-              <NavLink
-                className="header__link"
-                activeClassName="header__link--active"
-                to="/companies"
-              >
-                Companies
-              </NavLink>
-              <NavLink
-                className="header__link"
-                activeClassName="header__link--active"
-                to="/about"
-              >
-                Notification
-              </NavLink>*/}
               <span className="u-position-relative">
                 <span onClick={onHandleProfileState}>
                   <Text variant="pr-18-1" className="u-cursor-pointer">
@@ -177,15 +150,4 @@ const mapStateToProps = (state) => ({
   isLogged: !!state.auth.accessToken,
 });
 
-export default withRouter(
-  connect(mapStateToProps)(
-    Header
-    // withRouter(
-    //   BlacklistComponent(Header)([
-    //     ...USER_ROUTE_TYPES.admin,
-    //     ...USER_ROUTE_TYPES.recruiter,
-    //     ...USER_ROUTE_TYPES.default,
-    //   ])
-    // )
-  )
-);
+export default withRouter(connect(mapStateToProps)(Header));

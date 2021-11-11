@@ -10,7 +10,7 @@ const CompanyListings = ({ companies = [] }) => {
     <div className="row" key={index}>
       {row.map((image, idx) => (
         <div className="col-1-of-2" key={`${index}-${idx}`}>
-          <Image className="jobs__companyLogo" name={image} />
+          <Image className="jobs__companyLogo" name={image} type="binary" />
         </div>
       ))}
     </div>

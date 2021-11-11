@@ -23,6 +23,8 @@ import {
   Resumes as ResumesChild,
   Sales as SalesView,
   Jobs as JobsView,
+  Detail as DetailView,
+  Resume as ResumeView,
 } from "../pages";
 
 import { DashboardChildView } from "./childRoutes/Dashboard";
@@ -82,7 +84,8 @@ const AppRoutes = ({ tokenData }) => {
                       path="/dashboard"
                       component={DashboardChildView}
                     />
-                    <AdminRoute path="/resumes" component={ResumesChild} />
+                    <AdminRoute path="/resumes" exact component={ResumesChild} />
+                    <AdminRoute path="/resumes/:id" component={DownloadView} />
                     <AdminRoute
                       path="/notification/job-postings"
                       component={RecruiterNotificationView}

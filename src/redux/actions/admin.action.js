@@ -62,8 +62,8 @@ export const getActiveStatus = () => async (dispatch) => {
     if (status == 200) {
       const {
         activePerc: active,
-        trialPerc: expired,
-        expiredPerc: trial,
+        trialPerc: trial,
+        expiredPerc: expired,
       } = data.data;
       dispatch(setActiveStatus({ active, expired, trial }));
       return true;

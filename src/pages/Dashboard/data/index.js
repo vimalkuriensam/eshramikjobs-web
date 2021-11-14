@@ -8,6 +8,8 @@ export const RESUME_LIST_HEADER = [
   "Age",
 ];
 
+export const DAY_SETTINGS = [3, 7];
+
 export const RESUME_LIST_CONTENTS = [
   {
     image: "resume-table/pic1",

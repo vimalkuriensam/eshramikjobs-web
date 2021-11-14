@@ -29,6 +29,9 @@ const chartInit = (sales, id) => {
     .domain([0, maxYScale])
     .range([dimensions.ctrHeight, 0])
     .nice();
+
+  d3.selectAll(`#${id}`).selectAll("svg").remove();
+
   const svg = d3
     .select(`#${id}`)
     .append("svg")
@@ -143,7 +146,8 @@ const chartInit = (sales, id) => {
 const BarGraph = ({ id, data = [] }) => {
   useEffect(() => {
     if (id) chartInit(data, id);
-  }, []);
+  }, [data]);
+
   return id ? (
     <div id={id}></div>
   ) : (

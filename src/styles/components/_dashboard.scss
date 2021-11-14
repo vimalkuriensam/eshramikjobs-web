@@ -94,6 +94,16 @@
   }
 
   &__salesCTA {
+    &--activeDay {
+      border-bottom: 2px solid $color-primary;
+    }
+
+    &--inactiveDay {
+      cursor: pointer;
+      color: $color-grey-dark;
+      border-bottom: 2px solid transparent;
+    }
+
     > * {
       &:not(:first-child) {
         margin-left: 1.2rem;

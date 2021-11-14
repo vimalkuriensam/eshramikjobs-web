@@ -1,13 +1,99 @@
 import moment from "moment";
-import React, { forwardRef, Fragment, useImperativeHandle } from "react";
+import React, {
+  forwardRef,
+  Fragment,
+  useImperativeHandle,
+  useState,
+} from "react";
+import Button from "../../../components/atoms/Button";
 import Text from "../../../components/atoms/Text";
+import Title from "../../../components/atoms/Title";
+import FormCalendar from "../../../components/molecules/FormCalendar";
+import FormDropdown from "../../../components/molecules/FormDropdown";
+import FormInput from "../../../components/molecules/FormInput";
+import FormRadioGroup from "../../../components/molecules/FormRadioGroup";
+import Popup from "../../../components/molecules/Popup";
+
+const PersonalEditInfo = function ({ onHandleClose }) {
+  return (
+    <Fragment>
+      <Title variant="psm-23-1" className="profile__popupVerticalPadding">
+        Personal Info
+      </Title>
+      <div className="profile__popupMainContent">
+        <div className="row u-margin-top-30">
+          <FormInput variant="1" placeholder="" title="Full Name" />
+        </div>
+        <div className="row u-margin-top-30">
+          <div className="col-1-of-2">
+            <FormCalendar title="Date of Birth" />
+          </div>
+          <div className="col-1-of-2">
+            <FormRadioGroup
+              className="profile__radioGroup"
+              title="Gender"
+              contents={[
+                { id: "male", title: "Male", name: "gender-personal" },
+                { id: "female", title: "Female", name: "gender-personal" },
+              ]}
+            />
+          </div>
+        </div>
+        <div className="row u-margin-top-30">
+          <div className="col-1-of-2">
+            <FormRadioGroup
+              className="profile__radioGroup"
+              title="Marital Status"
+              contents={[
+                { id: "married", title: "Married", name: "marital-personal" },
+                {
+                  id: "unmarried",
+                  title: "Unmarried",
+                  name: "marital-personal",
+                },
+              ]}
+            />
+          </div>
+        </div>
+        <div className="row u-margin-top-30">
+          <FormInput variant="1" placeholder="" title="House Number" />
+        </div>
+        <div className="row u-margin-top-30">
+          <FormInput variant="1" placeholder="" title="Street Locality" />
+        </div>
+        <div className="row u-margin-top-30">
+          <FormInput variant="1" placeholder="" title="Pin code" />
+        </div>
+        <div className="row u-margin-top-30">
+          <FormInput variant="1" placeholder="" title="House Number" />
+        </div>
+        <div className="row u-margin-top-30">
+          <FormDropdown title="State" placeholder="" />
+        </div>
+        <div className="row u-margin-top-30">
+          <FormDropdown title="City" placeholder="" />
+        </div>
+        <div className="row u-margin-top-30">
+          <FormDropdown title="Region" placeholder="" />
+        </div>
+      </div>
+      <div className="profile__popupCTA  profile__popupVerticalPadding">
+        <Button content="Cancel" onButtonClick={onHandleClose} variant="6" />
+        <Button content="Save" variant="1-4" />
+      </div>
+    </Fragment>
+  );
+};
 
 const PersonalInfo = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
     onHandleEdit() {
-      alert("Child function called personalInfo");
+      setPopup(true);
     },
   }));
+
+  const [popup, setPopup] = useState(false);
+  const onClosePopup = () => setPopup(false);
 
   const {
     full_name,
@@ -23,6 +109,15 @@ const PersonalInfo = forwardRef((props, ref) => {
   } = props.info;
   return (
     <Fragment>
+      {popup && (
+        <Popup
+          onClosePopup={onClosePopup}
+          className="profile__popupContainer"
+          transition={{ horizontal: "top", vertical: null }}
+        >
+          <PersonalEditInfo />
+        </Popup>
+      )}
       <div className="row u-margin-top-30">
         <div className="col-1-of-2">
           <Text variant="pl-14-1 u-display-block">Full name</Text>

@@ -123,3 +123,31 @@
     padding: 3.5rem 0;
   }
 }
+
+@media only screen and (max-width: 60rem) {
+  .dashboard {
+    &__subscriptionColumn > div {
+      > div {
+        width: 100% !important;
+      }
+      > * {
+        &:not(:first-child) {
+          margin-top: 2rem;
+        }
+      }
+    }
+
+    &__tableContainer {
+      width: 100%;
+    }
+
+    &__lists {
+      > * {
+        width: 100% !important;
+        &:not(:first-child) {
+          margin-top: 2rem;
+        }
+      }
+    }
+  }
+}

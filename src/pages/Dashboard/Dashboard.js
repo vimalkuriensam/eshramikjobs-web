@@ -10,7 +10,7 @@ const Dashboard = ({ companies, subscriptions, resumes = [], sales = [] }) => {
   return (
     <section className="section-dashboard">
       <Subscriptions {...subscriptions} />
-      <div className="row u-margin-top-30">
+      <div className="row u-margin-top-30 dashboard__lists">
         <div className="col-2-of-3">
           <Sales sales={sales} />
         </div>

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
+import moment from "moment";
 import * as d3 from "d3";
 
 import Text from "../atoms/Text";
-import moment from "moment";
 
 let dimensions = {
   width: 600,
@@ -22,12 +22,16 @@ const chartInit = (sales, id) => {
     .nice();
 
   const yAccessor = (d) => +d.price;
-
+  const maxYScale =
+    d3.max(sales, yAccessor) == 0 ? 1000 : d3.max(sales, yAccessor);
   const yScale = d3
     .scaleLinear()
-    .domain([0, d3.max(sales, yAccessor)])
+    .domain([0, maxYScale])
     .range([dimensions.ctrHeight, 0])
     .nice();
+
+  d3.selectAll(`#${id}`).selectAll("svg").remove();
+
   const svg = d3
     .select(`#${id}`)
     .append("svg")
@@ -142,7 +146,8 @@ const chartInit = (sales, id) => {
 const BarGraph = ({ id, data = [] }) => {
   useEffect(() => {
     if (id) chartInit(data, id);
-  }, []);
+  }, [data]);
+
   return id ? (
     <div id={id}></div>
   ) : (

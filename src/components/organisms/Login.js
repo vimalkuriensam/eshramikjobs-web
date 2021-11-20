@@ -27,10 +27,11 @@ const Login = ({ isLogin, dispatch }) => {
     setEmail(value);
   };
 
-  const onSubmitEmail = () => {
+  const onSubmitEmail = (e) => {
+    e.preventDefault();
     const isEmail = validator.isEmail(email);
     if (isEmail) {
-      dispatch(setLogin({ email }))
+      dispatch(setLogin({ email }));
     } else setError(INVALID_EMAIL);
   };
 
@@ -43,7 +44,10 @@ const Login = ({ isLogin, dispatch }) => {
           onClosePopup={onSetLogin}
           transition={{ horizontal: "top", vertical: null }}
         >
-          <div className="authentication__loginContainer">
+          <form
+            className="authentication__loginContainer"
+            onSubmit={onSubmitEmail}
+          >
             <div
               className={`authentication__loginEmailContainer ${
                 error ? "authentication__loginInputError" : null
@@ -61,27 +65,18 @@ const Login = ({ isLogin, dispatch }) => {
                 </Text>
               )}
             </div>
-            {/*<Input
-              placeholder="Password"
-              className="u-margin-top-50"
-              type="password"
-              variant="2"
-            />*/}
             <div className="authentication__loginCTA">
-              {/*<span>
-                <Text variant="pr-18-2">forgot password?</Text>
-              </span>*/}
               <span onClick={onSetSignup}>
                 <Text variant="pr-18-2">Sign up</Text>
               </span>
             </div>
             <Button
-              onButtonClick={onSubmitEmail}
+              type="submit"
               content="login"
               variant="1-4"
               className="u-margin-top-4"
             />
-          </div>
+          </form>
         </Popup>
       ) : null}
     </Fragment>

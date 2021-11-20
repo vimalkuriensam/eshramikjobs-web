@@ -27,6 +27,12 @@
     box-shadow: 0 0 0.6rem rgba($color-black, 0.16);
   }
 
+  &__radioGroup {
+    > .form__radioRows {
+      margin-top: 1.2rem;
+    }
+  }
+
   &__nav {
     text-align: center;
     padding: 3rem 1rem;

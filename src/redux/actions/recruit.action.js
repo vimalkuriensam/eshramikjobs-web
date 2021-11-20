@@ -1,4 +1,13 @@
 import apiService from "../../authInterceptor/authAxios";
+import {
+  addResume,
+  setProfileBasic,
+  setProfileEducation,
+  setProfileEmployment,
+  setProfileOverseas,
+  setProfileProfession,
+  setProfileSkills,
+} from "./user.actions";
 import { addMessage } from "./utils.action";
 
 export const SET_COMPANY_INFO = "SET_COMPANY_INFO";
@@ -8,6 +17,8 @@ export const SET_CURRENT_PLAN = "SET_CURRENT_PLAN";
 export const CLEAR_CURRENT_PLAN = "CLEAR_CURRENT_PLAN";
 export const SET_APPLICATION_LENGTH = "SET_APPLICATION_LENGTH";
 export const SET_APPLICATION_PAGE = "SET_APPLICATION_PAGE";
+export const SET_CANDIDATE_INFO = "SET_CANDIDATE_INFO";
+export const CLEAR_CANDIDATE_INFO = "CLEAR_CANDIDATE_INFO";
 
 export const buyPlan =
   ({ planId }) =>
@@ -17,7 +28,6 @@ export const buyPlan =
         "/payment/purchase_plan",
         { planId }
       );
-      console.log(status, data, "actions");
       if (status == 200) return data.data;
     } catch (e) {
       throw e;
@@ -39,7 +49,6 @@ export const confirmOrder = (info) => async (dispatch) => {
 export const getCompanyInfo = () => async (dispatch) => {
   try {
     const { status, data } = await apiService().get("/jobs/recruiter/company");
-    console.log(data, status);
     if (status == 200) {
       if (data.data.length) {
         const { name, logo } = data.data[0];
@@ -144,4 +153,39 @@ export const setApplicationLength = ({ total = 0 } = {}) => ({
 export const setApplicationPage = ({ page = 0 } = {}) => ({
   type: SET_APPLICATION_PAGE,
   page,
+});
+
+export const getCandidateInfo =
+  ({ profileId }) =>
+  async (dispatch) => {
+    try {
+      const { status, data } = await apiService().post(`/common/getresume`, {
+        profileId,
+      });
+      if (status == 200) {
+        dispatch(clearCandidateInfo());
+        console.log(data.data);
+        // dispatch(setCandidateInfo({ info: data?.data }));
+        dispatch(
+          addResume({
+            resume: {
+              ...data.data,
+              expiry: data?.message,
+            },
+          })
+        );
+        return true;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+export const clearCandidateInfo = () => ({
+  type: CLEAR_CANDIDATE_INFO,
+});
+
+export const setCandidateInfo = ({ info }) => ({
+  type: SET_CANDIDATE_INFO,
+  info,
 });

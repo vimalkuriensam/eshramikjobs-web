@@ -62,8 +62,8 @@ export const getActiveStatus = () => async (dispatch) => {
     if (status == 200) {
       const {
         activePerc: active,
-        trialPerc: expired,
-        expiredPerc: trial,
+        trialPerc: trial,
+        expiredPerc: expired,
       } = data.data;
       dispatch(setActiveStatus({ active, expired, trial }));
       return true;
@@ -136,7 +136,6 @@ export const getRevenueDetails = () => async (dispatch) => {
       for (let i = 0; i < 7; i++)
         updatedData[moment().subtract(i, "days").format("MM-DD-YYYY")] = 0;
       data.data.forEach((val) => {
-        console.log("val", val);
         updatedData[moment(+val.paymentDate).format("MM-DD-YYYY")] +=
           +val.price;
       });
@@ -170,7 +169,6 @@ export const getDetails = () => async (dispatch) => {
         },
       }
     );
-    console.log("details", status, data);
   } catch (e) {
     throw e;
   }

@@ -119,7 +119,6 @@ export const getResume =
         );
         return true;
       }
-      console.log(status, data);
     } catch (e) {
       throw e;
     }

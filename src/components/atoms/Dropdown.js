@@ -31,6 +31,7 @@ const Dropdown = ({
 
   useEffect(() => {
     if (value) setVal(value);
+    else setVal("");
   }, [value]);
   const menuRef = useRef();
 

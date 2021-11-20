@@ -5,6 +5,7 @@ import {
   getActiveStatus,
   getApplicationDetails,
   getCompanyList,
+  getEnrolledCompanies,
   getRevenueDetails,
   setSubscriptionCurrentPage,
 } from "../../redux/actions/admin.action";
@@ -256,6 +257,22 @@ export const HEADER_CONTENTS = [
 
 export const funcMap = {
   home: async (props) => history.push("/"),
+  homeContents: async (dispatch, isLogged) => {
+    const response = await Promise.all([
+      isLogged
+        ? dispatch(
+            getRecentJobs({
+              pageNumber: 0,
+              itemsPerPage: 4,
+              jobTitle: null,
+              location: null,
+            })
+          )
+        : true,
+      dispatch(getEnrolledCompanies({ companies: 12 })),
+    ]);
+    if (response) return true;
+  },
   adminDashboard: async (dispatch) => {
     const response = await dispatch(dashboardHero());
     if (response) history.push("/dashboard");
@@ -453,6 +470,10 @@ export const funcMap = {
           })
         );
     }
+  },
+  "post-jobs": async (dispatch) => {
+    const resp = await dispatch(getEnrolledCompanies({ companies: -1 }));
+    if (resp) history.push("/post-jobs");
   },
   jobDelete: async (dispatch, id, type) =>
     await dispatch(deleteJob({ id, type })),
@@ -775,8 +796,8 @@ export const NAVBAR_NAVS = [
   },
   {
     text: "Create Jobs",
-    link: "/post-jobs",
-    type: "link",
+    link: "post-jobs",
+    type: "process",
     to: "/post-jobs",
   },
 ];

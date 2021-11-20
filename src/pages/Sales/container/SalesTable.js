@@ -4,7 +4,6 @@ import Title from "../../../components/atoms/Title";
 import BarGraph from "../../../components/molecules/BarGraph";
 
 const SalesTable = ({ sales = [] }) => {
-  console.log("sales", sales);
   const revenue = sales.reduce((a, b) => a + +b.price, 0);
   return (
     <div className="dashboard__tableContainer" style={{ width: "70%" }}>

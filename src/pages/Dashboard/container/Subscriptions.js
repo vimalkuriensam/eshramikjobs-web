@@ -12,15 +12,13 @@ const Subscriptions = ({ dispatch, active = 0, expired = 0, trial = 0 }) => {
     expired,
     trial,
   });
-  const onHandleSubscription = (value) => funcMap[value](dispatch) //{
-  //   console.log(value);
-  //   history.push(value);
-  // };
+
+  const onHandleSubscription = (value) => funcMap[value](dispatch);
 
   const getStatusValue = (type) => subscriptionValues[type];
 
   return (
-    <div>
+    <div className="dashboard__subscriptionColumn">
       <div className="row">
         {SUBSCRIPTION_GROUP.map((subscription, index) => (
           <div className="col-1-of-3" key={index}>

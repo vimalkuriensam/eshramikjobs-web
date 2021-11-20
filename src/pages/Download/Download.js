@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from "react";
-
-import html2canvas from "html2canvas";
+import ReactPDF, { pdf } from "@react-pdf/renderer";
 
 import Text from "../../components/atoms/Text";
 import Title from "../../components/atoms/Title";
 
-import { jsPDF } from "jspdf";
+import { saveAs } from "file-saver";
 import { connect } from "react-redux";
 import { getResume } from "../../redux/actions/user.actions";
+import moment from "moment";
+import Icon from "../../components/atoms/Icon";
+import PDFSaver from "../../components/organisms/PDFSaver";
 
-const Download = ({ resume, match, dispatch }) => {
+const Download = ({ resume = {}, match, dispatch }) => {
   const [resumeLoader, setResumeLoader] = useState(false);
+  const { get1, get2, get3, get4, get5, get6 } = resume;
   console.log(resume);
-  useEffect(() => {
-    handleResume();
-    // html2canvas(document.getElementById("docs")).then((canvas) => {
-    //   const imgData = canvas.toDataURL("image/png");
-    //   const pdf = new jsPDF();
-    //   pdf.addImage(imgData, "JPEG", 0, 0);
-    //   pdf.save("download.pdf");
-    // });
-  }, []);
+  const lastEmployment = get5.sort((a, b) =>
+    moment(b.end_date).valueOf() < moment(a.end_date).valueOf() ? -1 : 1
+  );
 
   const handleResume = async () => {
     const id = match.params.id;
@@ -32,13 +29,30 @@ const Download = ({ resume, match, dispatch }) => {
     }
   };
 
+  const onDownloadResume = async () => {
+    const blob = await pdf(<PDFSaver resume={resume} />).toBlob();
+    if (blob)
+      saveAs(
+        blob,
+        `${get1[0].full_name.replace(/ +/g, "")}${moment().valueOf()}`
+      );
+  };
+
   const Resume = () => (
     <div className="recruit__resumeContainer">
-      <Title variant="pr-19-3" className="u-display-block">
-        Resume headline
-      </Title>
+      <div className="u-space-between">
+        <Title variant="pr-19-3" className="u-display-block">
+          Resume headline
+        </Title>
+        <div className="recruit__download" onClick={onDownloadResume}>
+          <Icon name="Download" />
+          <Text>Download Resume</Text>
+        </div>
+      </div>
       <Text variant="pl-14-1" className="u-display-block">
-        Construction supervisor
+        {lastEmployment.length
+          ? lastEmployment[0]?.title
+          : "No Employment Recorded"}
       </Text>
       <Title variant="pr-19-3" className="u-display-block u-margin-top-40">
         Qualification
@@ -75,26 +89,28 @@ const Download = ({ resume, match, dispatch }) => {
           ))}
       </div>
       <Title variant="pr-19-3" className="u-display-block u-margin-top-40">
-        Employement Details
+        Employment Details
       </Title>
-      <Text
-        variant="pl-14-1"
-        className="u-display-block u-max-width-60 u-text-justify"
-      >
-        Construction supervisor
-        <br />
-        Kumar constructions
-        <br />
-        Is simply dummy text of the printing and typesetting industry. Lorem
-        Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a
-        type specimen book.
-      </Text>
+      {get5.map((val, index) => (
+        <div key={index}>
+          <br />
+          <Text
+            variant="pl-14-1"
+            className="u-display-block u-max-width-60 u-text-justify"
+          >
+            {val.title}
+            <br />
+            {val.name}
+            <br />
+            {JSON.parse(val.job_description)}
+          </Text>
+        </div>
+      ))}
       <Title variant="pr-19-3" className="u-display-block u-margin-top-40">
         Overseas opportunity
       </Title>
       <Text variant="pl-14-1" className="u-display-block">
-        No
+        {get6[0].overseas ? "Yes" : "No"}
       </Text>
       <Title variant="pr-19-3" className="u-display-block u-margin-top-40">
         Personal information
@@ -105,31 +121,31 @@ const Download = ({ resume, match, dispatch }) => {
             Full Name
           </Text>
           <Text variant="pl-14-1" className="u-display-block">
-            Jhon Steve Dohe
+            {get1[0].full_name}
           </Text>
           <Text variant="pl-14-3" className="u-display-block u-margin-top-30">
             Date of Birth
           </Text>
           <Text variant="pl-14-1" className="u-display-block">
-            25 Feb 1990
+            {moment(get1[0].dob).format("DD MM YYYY")}
           </Text>
           <Text variant="pl-14-3" className="u-display-block u-margin-top-30">
             Gender
           </Text>
           <Text variant="pl-14-1" className="u-display-block">
-            Male
+            {get1[0].gender}
           </Text>
           <Text variant="pl-14-3" className="u-display-block u-margin-top-30">
             Area Pin Code
           </Text>
           <Text variant="pl-14-1" className="u-display-block">
-            416112
+            {get1[0].pin}
           </Text>
           <Text variant="pl-14-3" className="u-display-block u-margin-top-30">
             Marital Status
           </Text>
           <Text variant="pl-14-1" className="u-display-block">
-            Single
+            {get1[0].marital_status}
           </Text>
         </div>
         <div className="col-1-of-4">
@@ -137,25 +153,25 @@ const Download = ({ resume, match, dispatch }) => {
             Hometown
           </Text>
           <Text variant="pl-14-1" className="u-display-block">
-            Peth Vadgaon
+            {get1[0].per_street_locality}
           </Text>
           <Text variant="pl-14-3" className="u-display-block u-margin-top-30">
             Permanent Address
           </Text>
           <Text variant="pl-14-1" className="u-display-block">
-            House no. 21, Magarpatta road
+            {`${get1[0].per_house_no} ${get1[0].per_region} ${get1[0].per_street_locality} ${get1[0].per_state}`}
           </Text>
           <Text variant="pl-14-3" className="u-display-block u-margin-top-30">
             Pin code
           </Text>
           <Text variant="pl-14-1" className="u-display-block">
-            112054
+            {get1[0].per_pin}
           </Text>
           <Text variant="pl-14-3" className="u-display-block u-margin-top-30">
             Email
           </Text>
           <Text variant="pl-14-1" className="u-display-block">
-            jhondohe52@gmail.com
+            {get1[0].email}
           </Text>
         </div>
       </div>
@@ -164,13 +180,7 @@ const Download = ({ resume, match, dispatch }) => {
 
   return (
     <div id="docs">
-      {resumeLoader ? (
-        <Resume />
-      ) : (
-        <div className="u-width-100 u-height-100 u-content-center">
-          Loading Resume. Please Wait
-        </div>
-      )}
+      <Resume />
     </div>
   );
 };

@@ -21,7 +21,7 @@ export const recruiterRegister = (info) => async (dispatch) => {
     );
     if (status == 200) {
       const { accessToken, refreshToken } = data.data;
-      dispatch(setAccessToken({ accessToken, refreshToken }));
+      dispatch(setAccessToken({ accessToken, refreshToken, verified: 0 }));
       const response = await dispatch(getState());
       if (response) return true;
     }
@@ -44,7 +44,10 @@ export const setCompanyDetails = (info) => async (dispatch) => {
       "/auth/company_details",
       updatedInfo
     );
-    if (status == 200) return true;
+    if (status == 200) {
+      dispatch(setVerification({ id: 1 }));
+      return true;
+    }
   } catch (e) {
     throw e;
   }

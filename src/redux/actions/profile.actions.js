@@ -18,7 +18,6 @@ export const SET_NON_TECHNICAL_COURSE = "SET_NON_TECHNICAL_COURSE";
 
 export const createProfile = (info, step) => async (dispatch) => {
   try {
-    console.log(info);
     let resume = true;
     if (step == 1 && info.sameAsAddress) delete info.permanentAddress;
     if (step == 7) {
@@ -28,7 +27,6 @@ export const createProfile = (info, step) => async (dispatch) => {
     const { status } = await apiService().post(`/profile/create/${step}`, info);
     if (status == 200) {
       const response = await funcMap[step](dispatch);
-      console.log(response, resume);
       if (response && resume) history.push(`/register/profile/${+step + 1}`);
       else if (response && !resume) history.push("/");
     }
@@ -82,7 +80,10 @@ export const getDistrict =
       const { status, data } = await apiService().get(
         `profile/get_district/${state}`
       );
-      if (status == 200) dispatch(setAddressDistrict({ district: data.data }));
+      if (status == 200) {
+        dispatch(setAddressDistrict({ district: data.data }));
+        return true;
+      }
     } catch (e) {
       throw e;
     }
@@ -95,7 +96,10 @@ export const getRegion =
       const { status, data } = await apiService().get(
         `profile/get_city/${district}`
       );
-      if (status == 200) dispatch(setAddressRegion({ region: data.data }));
+      if (status == 200) {
+        dispatch(setAddressRegion({ region: data.data }));
+        return true;
+      }
     } catch (e) {
       throw e;
     }
@@ -196,7 +200,6 @@ export const onHandleResumeSend =
         !!email ? dispatch(sendMail({ email })) : Promise.resolve(),
         !!mobile ? dispatch(sendWhatsapp({ mobile })) : Promise.resolve(),
       ]);
-      console.log(response);
       // if (response) history.push('/')
     } catch (e) {
       throw e;
@@ -214,7 +217,6 @@ const sendWhatsapp =
         }
       );
       if (status == 200) {
-        console.log(data);
         return true;
       }
     } catch (e) {
@@ -230,7 +232,6 @@ const sendMail =
         mail: email,
       });
       if (status == 200) {
-        console.log(data);
         return true;
       }
     } catch (e) {

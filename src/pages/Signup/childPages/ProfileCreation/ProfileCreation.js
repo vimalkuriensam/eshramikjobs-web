@@ -167,7 +167,6 @@ const ProfileCreation = ({ match, dispatch }) => {
       const { url } = await dispatch(
         fileUpload({ file: profileProps[step]?.file })
       );
-      console.log(url);
       if (url) {
         dispatch(
           createProfile(

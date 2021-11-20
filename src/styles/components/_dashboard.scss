@@ -88,11 +88,22 @@
   &__userIcon {
     height: 6.1rem;
     width: 6.1rem;
+    border-radius: 3.2rem;
     fill: $color-grey-light-2;
     margin-top: 1.4rem;
   }
 
   &__salesCTA {
+    &--activeDay {
+      border-bottom: 2px solid $color-primary;
+    }
+
+    &--inactiveDay {
+      cursor: pointer;
+      color: $color-grey-dark;
+      border-bottom: 2px solid transparent;
+    }
+
     > * {
       &:not(:first-child) {
         margin-left: 1.2rem;
@@ -120,5 +131,33 @@
 
   &__rows1 {
     padding: 3.5rem 0;
+  }
+}
+
+@media only screen and (max-width: 60rem) {
+  .dashboard {
+    &__subscriptionColumn > div {
+      > div {
+        width: 100% !important;
+      }
+      > * {
+        &:not(:first-child) {
+          margin-top: 2rem;
+        }
+      }
+    }
+
+    &__tableContainer {
+      width: 100%;
+    }
+
+    &__lists {
+      > * {
+        width: 100% !important;
+        &:not(:first-child) {
+          margin-top: 2rem;
+        }
+      }
+    }
   }
 }

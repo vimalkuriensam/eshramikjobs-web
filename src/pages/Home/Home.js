@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Hero from "./container/Hero";
 import Categories from "./container/Categories";
@@ -6,8 +6,12 @@ import Feedback from "./container/Feedback";
 import Advertisement from "./container/Advertisement";
 import Samples from "./container/Samples";
 import { connect } from "react-redux";
+import { funcMap } from "../../utils/data";
 
-const Home = ({ isLogged }) => {
+const Home = ({ isLogged, dispatch }) => {
+  useEffect(() => {
+    funcMap["homeContents"](dispatch, isLogged)
+  }, []);
   return (
     <div className="page">
       <Hero />

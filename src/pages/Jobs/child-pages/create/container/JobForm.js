@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import Button from "../../../../../components/atoms/Button";
+import Image from "../../../../../components/atoms/Image";
 import Title from "../../../../../components/atoms/Title";
+import FormDropdown from "../../../../../components/molecules/FormDropdown";
 import FormInput from "../../../../../components/molecules/FormInput";
 import { createJobs } from "../../../../../redux/actions/jobs.action";
 import history from "../../../../../utils/history";
 
-const JobForm = ({ dispatch }) => {
+const JobForm = ({ dispatch, companies = [] }) => {
   const JOB_PROPS_DEFAULT_VALUE = {
     name: "",
     title: "",
@@ -26,6 +28,7 @@ const JobForm = ({ dispatch }) => {
       description: "",
       responsibility: "",
     },
+    c_logo: null,
   };
   const [jobProps, setJobProps] = useState({ ...JOB_PROPS_DEFAULT_VALUE });
 
@@ -71,6 +74,31 @@ const JobForm = ({ dispatch }) => {
   };
   return (
     <form className="jobs__form" onSubmit={onHandleJobSubmit}>
+      <div className="row">
+        <FormDropdown
+          title="Select Logo"
+          contents={companies.map((val) => val.name)}
+          className="jobs__dropdown"
+          onHandleDropdownValue={({ target }) => {
+            const { value } = target;
+            const logo = companies.find((val) => val.name == value).logo;
+            onHandleJobProps("c_logo", { target: { value: logo } });
+          }}
+        />
+      </div>
+      {jobProps.c_logo && (
+        <div>
+          <Title variant="pr-16-1">Selected Company Logo</Title>
+
+          <div className="row">
+            <Image
+              name={jobProps.c_logo}
+              type="binary"
+              className="jobs__logo"
+            />
+          </div>
+        </div>
+      )}
       <div className="row">
         <FormInput
           variant="1"
@@ -189,4 +217,8 @@ const JobForm = ({ dispatch }) => {
   );
 };
 
-export default connect()(JobForm);
+const mapStateToProps = (state) => ({
+  companies: state.admin.companies,
+});
+
+export default connect(mapStateToProps)(JobForm);

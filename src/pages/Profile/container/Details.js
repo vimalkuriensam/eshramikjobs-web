@@ -41,7 +41,14 @@ const Details = forwardRef((props, ref) => {
       </DetailsContainer>
 
       <DetailsContainer title="Personal Information" ref={ref6}>
-        <PersonalInfo info={props.info} />
+        <PersonalInfo
+          info={props.info}
+          getLocation={props.getLocation}
+          addressState={props.addressState}
+          addressDistrict={props.addressDistrict}
+          addressRegion={props.addressRegion}
+          updateInfo={props.updateDetails}
+        />
       </DetailsContainer>
     </div>
   );

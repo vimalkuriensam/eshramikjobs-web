@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
 import validator from "validator";
 
@@ -6,10 +7,9 @@ import Button from "../../../../../components/atoms/Button";
 import Image from "../../../../../components/atoms/Image";
 import Input from "../../../../../components/atoms/Input";
 import Title from "../../../../../components/atoms/Title";
-import { connect } from "react-redux";
-import { funcMap } from "../../../../../utils/data";
 import Text from "../../../../../components/atoms/Text";
 import { recruiterRegister } from "../../../../../redux/actions/authentication.action";
+import { funcMap } from "../../../../../utils/data";
 import history from "../../../../../utils/history";
 
 const Details = ({ dispatch }) => {

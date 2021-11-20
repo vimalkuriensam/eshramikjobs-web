@@ -14,7 +14,17 @@ import FormInput from "../../../components/molecules/FormInput";
 import FormRadioGroup from "../../../components/molecules/FormRadioGroup";
 import Popup from "../../../components/molecules/Popup";
 
-const PersonalEditInfo = function ({ onHandleClose }) {
+const PersonalEditInfo = function ({ info, onHandleClose }) {
+  const [edit, setEdit] = useState({ ...info });
+  console.log(edit);
+  const onHandlePersonalInfo = (type, { target }) => {
+    console.log(type, target);
+    const { value } = target;
+    setEdit((prevState) => ({
+      ...prevState,
+      [type]: value,
+    }));
+  };
   return (
     <Fragment>
       <Title variant="psm-23-1" className="profile__popupVerticalPadding">
@@ -22,20 +32,37 @@ const PersonalEditInfo = function ({ onHandleClose }) {
       </Title>
       <div className="profile__popupMainContent">
         <div className="row u-margin-top-30">
-          <FormInput variant="1" placeholder="" title="Full Name" />
+          <FormInput
+            variant="1"
+            value={edit.full_name}
+            placeholder=""
+            title="Full Name"
+            onHandleText={onHandlePersonalInfo.bind(this, "full_name")}
+          />
         </div>
         <div className="row u-margin-top-30">
           <div className="col-1-of-2">
-            <FormCalendar title="Date of Birth" />
+            <FormCalendar
+              title="Date of Birth"
+              value={moment(edit.dob).valueOf()}
+              onHandleCalendar={({ target }) => {
+                const date = moment(target.value).format("yyyy-MM-DD");
+                onHandlePersonalInfo("dob", {
+                  target: { value: date },
+                });
+              }}
+            />
           </div>
           <div className="col-1-of-2">
             <FormRadioGroup
               className="profile__radioGroup"
               title="Gender"
+              value={edit.gender}
               contents={[
                 { id: "male", title: "Male", name: "gender-personal" },
                 { id: "female", title: "Female", name: "gender-personal" },
               ]}
+              onHandleRadioClick={onHandlePersonalInfo.bind(this, "gender")}
             />
           </div>
         </div>
@@ -44,10 +71,15 @@ const PersonalEditInfo = function ({ onHandleClose }) {
             <FormRadioGroup
               className="profile__radioGroup"
               title="Marital Status"
+              value={edit.marital_status}
+              onHandleRadioClick={onHandlePersonalInfo.bind(
+                this,
+                "marital_status"
+              )}
               contents={[
                 { id: "married", title: "Married", name: "marital-personal" },
                 {
-                  id: "unmarried",
+                  id: "single",
                   title: "Unmarried",
                   name: "marital-personal",
                 },
@@ -56,25 +88,56 @@ const PersonalEditInfo = function ({ onHandleClose }) {
           </div>
         </div>
         <div className="row u-margin-top-30">
-          <FormInput variant="1" placeholder="" title="House Number" />
+          <FormInput
+            variant="1"
+            placeholder=""
+            title="House Number"
+            value={edit.per_house_no}
+            onHandleText={onHandlePersonalInfo.bind(this, "per_house_no")}
+          />
         </div>
         <div className="row u-margin-top-30">
-          <FormInput variant="1" placeholder="" title="Street Locality" />
+          <FormInput
+            variant="1"
+            placeholder=""
+            title="Street Locality"
+            value={edit.per_street_locality}
+            onHandleText={onHandlePersonalInfo.bind(
+              this,
+              "per_street_locality"
+            )}
+          />
         </div>
         <div className="row u-margin-top-30">
-          <FormInput variant="1" placeholder="" title="Pin code" />
+          <FormInput
+            variant="1"
+            placeholder=""
+            title="Pin code"
+            value={edit.per_pin}
+            onHandleText={onHandlePersonalInfo.bind(this, "per_pin")}
+          />
         </div>
         <div className="row u-margin-top-30">
-          <FormInput variant="1" placeholder="" title="House Number" />
+          <FormInput
+            variant="1"
+            placeholder=""
+            title="House Number"
+            value={edit.per_house_no}
+            onHandleText={onHandlePersonalInfo.bind(this, "per_house_no")}
+          />
         </div>
         <div className="row u-margin-top-30">
-          <FormDropdown title="State" placeholder="" />
+          <FormDropdown title="Region" placeholder="" value={edit.per_region} />
         </div>
         <div className="row u-margin-top-30">
-          <FormDropdown title="City" placeholder="" />
+          <FormDropdown
+            title="District"
+            placeholder=""
+            value={edit.per_district}
+          />
         </div>
         <div className="row u-margin-top-30">
-          <FormDropdown title="Region" placeholder="" />
+          <FormDropdown title="State" placeholder="" value={edit.per_state} />
         </div>
       </div>
       <div className="profile__popupCTA  profile__popupVerticalPadding">
@@ -115,7 +178,7 @@ const PersonalInfo = forwardRef((props, ref) => {
           className="profile__popupContainer"
           transition={{ horizontal: "top", vertical: null }}
         >
-          <PersonalEditInfo />
+          <PersonalEditInfo info={props.info} />
         </Popup>
       )}
       <div className="row u-margin-top-30">

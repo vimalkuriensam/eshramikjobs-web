@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
+import moment from "moment";
 import * as d3 from "d3";
 
 import Text from "../atoms/Text";
-import moment from "moment";
 
 let dimensions = {
   width: 600,

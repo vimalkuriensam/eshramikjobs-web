@@ -5,6 +5,7 @@ import React, {
   useImperativeHandle,
   useState,
 } from "react";
+
 import Button from "../../../components/atoms/Button";
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
@@ -75,11 +76,6 @@ const Overseas = forwardRef((props, ref) => {
     },
   }));
   const onClosePopup = () => setPopup(false);
-  // const [info, setInfo] = useState(props.info[0]);
-
-  // useEffect(() => {
-  //   if (props.info[0]) setInfo(props.info[0]);
-  // }, [props.info[0]]);
 
   return (
     <Fragment>

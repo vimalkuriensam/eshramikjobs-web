@@ -11,19 +11,13 @@ import moment from "moment";
 import Icon from "../../components/atoms/Icon";
 import PDFSaver from "../../components/organisms/PDFSaver";
 
-const Download = ({ resume, match, dispatch }) => {
+const Download = ({ resume = {}, match, dispatch }) => {
   const [resumeLoader, setResumeLoader] = useState(false);
-  console.log(resume);
   const { get1, get2, get3, get4, get5, get6 } = resume;
-  useEffect(() => {
-    // handleResume();
-    // html2canvas(document.getElementById("docs")).then((canvas) => {
-    //   const imgData = canvas.toDataURL("image/png");
-    //   const pdf = new jsPDF();
-    //   pdf.addImage(imgData, "JPEG", 0, 0);
-    //   pdf.save("download.pdf");
-    // });
-  }, []);
+  console.log(resume);
+  const lastEmployment = get5.sort((a, b) =>
+    moment(b.end_date).valueOf() < moment(a.end_date).valueOf() ? -1 : 1
+  );
 
   const handleResume = async () => {
     const id = match.params.id;
@@ -36,7 +30,7 @@ const Download = ({ resume, match, dispatch }) => {
   };
 
   const onDownloadResume = async () => {
-    const blob = await pdf(<PDFSaver />).toBlob();
+    const blob = await pdf(<PDFSaver resume={resume} />).toBlob();
     if (blob)
       saveAs(
         blob,
@@ -56,7 +50,9 @@ const Download = ({ resume, match, dispatch }) => {
         </div>
       </div>
       <Text variant="pl-14-1" className="u-display-block">
-        Construction supervisor
+        {lastEmployment.length
+          ? lastEmployment[0]?.title
+          : "No Employment Recorded"}
       </Text>
       <Title variant="pr-19-3" className="u-display-block u-margin-top-40">
         Qualification

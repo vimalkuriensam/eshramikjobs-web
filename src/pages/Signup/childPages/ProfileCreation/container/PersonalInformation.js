@@ -78,7 +78,7 @@ const PersonalInformation = ({
             <FormCalendar
               title="Date of birth"
               value={moment(info.dob).valueOf()}
-              onHandleDate={({ target }) => {
+              onHandleCalendar={({ target }) => {
                 const date = moment(target.value).format("yyyy-MM-DD");
                 onHandleProfileInfo("dob", { target: { value: date } });
               }}

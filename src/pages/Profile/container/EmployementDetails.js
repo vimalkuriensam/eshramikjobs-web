@@ -15,6 +15,7 @@ import FormCalendar from "../../../components/molecules/FormCalendar";
 import FormDropdown from "../../../components/molecules/FormDropdown";
 import FormInput from "../../../components/molecules/FormInput";
 import Popup from "../../../components/molecules/Popup";
+import { connect } from "react-redux";
 
 function EmploymentPopupContent({ info, onHandleClose }) {
   const [editInfo, setEditInfo] = useState([...info]);
@@ -31,6 +32,8 @@ function EmploymentPopupContent({ info, onHandleClose }) {
     );
   };
 
+  const onHandleSave = () => console.log(editInfo);
+
   return (
     <Fragment>
       <Title variant="psm-23-1" className="profile__popupVerticalPadding">
@@ -44,6 +47,7 @@ function EmploymentPopupContent({ info, onHandleClose }) {
               variant="1"
               placeholder=""
               value={val.name}
+              onHandleText={onHandleEditInfo.bind(this, "name", idx)}
             />
             <div className="row u-margin-top-30">
               <div className="col-1-of-2">
@@ -102,7 +106,7 @@ function EmploymentPopupContent({ info, onHandleClose }) {
       </div>
       <div className="profile__popupCTA  profile__popupVerticalPadding">
         <Button content="Cancel" onButtonClick={onHandleClose} variant="6" />
-        <Button content="Save" variant="1-4" />
+        <Button content="Save" variant="1-4" onButtonClick={onHandleSave} />
       </div>
     </Fragment>
   );
@@ -114,6 +118,8 @@ const EmployementDetails = forwardRef((props, ref) => {
       setPopup(true);
     },
   }));
+
+  // const get
   const [popup, setPopup] = useState(false);
   const onClosePopup = () => setPopup(false);
   return (

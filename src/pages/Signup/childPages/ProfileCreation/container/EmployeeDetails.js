@@ -66,7 +66,7 @@ const EmployeeDetails = ({
               <div className="row">
                 <FormCalendar
                   value={moment(info[index].startDate).valueOf()}
-                  onHandleDate={({ target }) => {
+                  onHandleCalendar={({ target }) => {
                     const date = moment(target.value).format("yyyy-MM-DD");
                     onHandleEmployeeDetails("startDate", index, {
                       target: { value: date },
@@ -78,7 +78,7 @@ const EmployeeDetails = ({
               <div className="row">
                 <FormCalendar
                   value={moment(info[index].endDate).valueOf()}
-                  onHandleDate={({ target }) => {
+                  onHandleCalendar={({ target }) => {
                     const date = moment(target.value).format("yyyy-MM-DD");
                     onHandleEmployeeDetails("endDate", index, {
                       target: { value: date },

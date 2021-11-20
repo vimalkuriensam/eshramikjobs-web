@@ -1,10 +1,11 @@
-import moment from "moment";
 import React, {
   forwardRef,
   Fragment,
   useImperativeHandle,
   useState,
 } from "react";
+import moment from "moment";
+
 import Button from "../../../components/atoms/Button";
 import Text from "../../../components/atoms/Text";
 import Title from "../../../components/atoms/Title";
@@ -14,16 +15,62 @@ import FormInput from "../../../components/molecules/FormInput";
 import FormRadioGroup from "../../../components/molecules/FormRadioGroup";
 import Popup from "../../../components/molecules/Popup";
 
-const PersonalEditInfo = function ({ info, onHandleClose }) {
+const PersonalEditInfo = function ({
+  info,
+  onHandleClose,
+  addressState,
+  addressDistrict,
+  addressRegion,
+  getLocation,
+  updateInfo,
+}) {
   const [edit, setEdit] = useState({ ...info });
-  console.log(edit);
+
   const onHandlePersonalInfo = (type, { target }) => {
-    console.log(type, target);
     const { value } = target;
     setEdit((prevState) => ({
       ...prevState,
       [type]: value,
     }));
+    if (["per_state", "per_district", "per_region"].includes(type))
+      onHandleRegion(type, value);
+  };
+
+  const getSubmitValue = () => {
+    return {
+      ...edit,
+      dob: moment(edit.dob).format("YYYY-MM-DD"),
+      permanent_address: {
+        houseNo: edit.per_house_no,
+        street: edit.per_street_locality,
+        state: edit.per_state,
+        district: edit.per_district,
+        region: edit.per_region,
+        pin: edit.per_pin,
+      },
+      address: {
+        houseNo: edit.house_no,
+        street: edit.street_locality,
+        state: edit.state,
+        district: edit.district,
+        region: edit.region,
+        pin: edit.pin,
+      },
+    };
+  };
+
+  const onHandleRegion = (location, value) => {
+    switch (location) {
+      case "per_state":
+        setEdit((prevState) => ({ ...prevState, per_district: "" }));
+      case "per_district":
+        setEdit((prevState) => ({ ...prevState, per_region: "" }));
+        break;
+    }
+    getLocation({
+      state: location === "per_state" ? value : edit.per_state,
+      district: location === "per_district" ? value : edit.per_district,
+    });
   };
   return (
     <Fragment>
@@ -127,22 +174,44 @@ const PersonalEditInfo = function ({ info, onHandleClose }) {
           />
         </div>
         <div className="row u-margin-top-30">
-          <FormDropdown title="Region" placeholder="" value={edit.per_region} />
+          <FormDropdown
+            title="Region"
+            placeholder=""
+            value={edit.per_region}
+            contents={addressRegion.map((val) => val.post_office)}
+          />
         </div>
         <div className="row u-margin-top-30">
           <FormDropdown
             title="District"
             placeholder=""
             value={edit.per_district}
+            contents={addressDistrict.map((val) => val.district)}
+            onHandleDropdownValue={onHandlePersonalInfo.bind(
+              this,
+              "per_district"
+            )}
           />
         </div>
         <div className="row u-margin-top-30">
-          <FormDropdown title="State" placeholder="" value={edit.per_state} />
+          <FormDropdown
+            title="State"
+            placeholder=""
+            value={edit.per_state}
+            contents={addressState.map((val) => val.state)}
+          />
         </div>
       </div>
       <div className="profile__popupCTA  profile__popupVerticalPadding">
         <Button content="Cancel" onButtonClick={onHandleClose} variant="6" />
-        <Button content="Save" variant="1-4" />
+        <Button
+          content="Save"
+          variant="1-4"
+          onButtonClick={async () => {
+            const resp = await updateInfo(1, getSubmitValue());
+            if (resp) onHandleClose();
+          }}
+        />
       </div>
     </Fragment>
   );
@@ -151,9 +220,17 @@ const PersonalEditInfo = function ({ info, onHandleClose }) {
 const PersonalInfo = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
     onHandleEdit() {
-      setPopup(true);
+      getPopup();
     },
   }));
+
+  const getPopup = async () => {
+    const resp = await props.getLocation({
+      state: props.info.per_state,
+      district: props.info.per_district,
+    });
+    if (resp) setPopup(true);
+  };
 
   const [popup, setPopup] = useState(false);
   const onClosePopup = () => setPopup(false);
@@ -178,7 +255,14 @@ const PersonalInfo = forwardRef((props, ref) => {
           className="profile__popupContainer"
           transition={{ horizontal: "top", vertical: null }}
         >
-          <PersonalEditInfo info={props.info} />
+          <PersonalEditInfo
+            info={props.info}
+            addressState={props.addressState}
+            addressDistrict={props.addressDistrict}
+            addressRegion={props.addressRegion}
+            getLocation={props.getLocation}
+            updateInfo={props.updateInfo}
+          />
         </Popup>
       )}
       <div className="row u-margin-top-30">

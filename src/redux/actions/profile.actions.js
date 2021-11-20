@@ -80,7 +80,10 @@ export const getDistrict =
       const { status, data } = await apiService().get(
         `profile/get_district/${state}`
       );
-      if (status == 200) dispatch(setAddressDistrict({ district: data.data }));
+      if (status == 200) {
+        dispatch(setAddressDistrict({ district: data.data }));
+        return true;
+      }
     } catch (e) {
       throw e;
     }
@@ -93,7 +96,10 @@ export const getRegion =
       const { status, data } = await apiService().get(
         `profile/get_city/${district}`
       );
-      if (status == 200) dispatch(setAddressRegion({ region: data.data }));
+      if (status == 200) {
+        dispatch(setAddressRegion({ region: data.data }));
+        return true;
+      }
     } catch (e) {
       throw e;
     }

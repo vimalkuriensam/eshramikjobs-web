@@ -20,8 +20,6 @@ import { connect } from "react-redux";
 function EmploymentPopupContent({ info, onHandleClose }) {
   const [editInfo, setEditInfo] = useState([...info]);
 
-  console.log(info);
-
   const onHandleEditInfo = (type, idx, { target }) => {
     const { value } = target;
     setEditInfo((prevState) =>

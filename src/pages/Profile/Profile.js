@@ -5,7 +5,10 @@ import { updateProfile } from "../../redux/actions/user.actions";
 import {
   getColleges,
   getDegrees,
+  getDistrict,
   getInstitutions,
+  getRegion,
+  getState,
 } from "../../redux/actions/profile.actions";
 import { addMessage } from "../../redux/actions/utils.action";
 import { funcMap } from "../../utils/data";
@@ -28,6 +31,9 @@ const Profile = ({
   boards,
   overseas,
   dispatch,
+  addressState,
+  addressRegion,
+  addressDistrict
 }) => {
   useEffect(() => {
     dispatch(getColleges());
@@ -79,8 +85,17 @@ const Profile = ({
             content: message,
           })
         );
-        return true;
+      return true;
     }
+  };
+
+  const getLocation = async ({ state, district }) => {
+    const resp = await Promise.all([
+      dispatch(getState()),
+      dispatch(getDistrict({ state })),
+      dispatch(getRegion({ district })),
+    ]);
+    if (resp) return true;
   };
 
   return (
@@ -105,6 +120,10 @@ const Profile = ({
               institutions={institutions}
               boards={boards}
               overseas={overseas}
+              getLocation={getLocation}
+              addressState={addressState}
+              addressDistrict={addressDistrict}
+              addressRegion={addressRegion}
             />
           </div>
         </div>
@@ -127,6 +146,9 @@ const mapStateToProps = (state) => ({
   degrees: state.profile.degrees,
   institutions: state.profile.institutionName,
   boards: state.profile.boardName,
+  addressState: state.profile.addressState,
+  addressDistrict: state.profile.addressDistrict,
+  addressRegion: state.profile.addressRegion
 });
 
 export default connect(mapStateToProps)(Profile);

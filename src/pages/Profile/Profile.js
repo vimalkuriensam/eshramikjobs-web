@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import { updateProfile } from "../../redux/actions/user.actions";
@@ -9,6 +9,7 @@ import {
   getInstitutions,
   getRegion,
   getState,
+  getTechnicalCourses,
 } from "../../redux/actions/profile.actions";
 import { addMessage } from "../../redux/actions/utils.action";
 import { funcMap } from "../../utils/data";
@@ -33,7 +34,8 @@ const Profile = ({
   dispatch,
   addressState,
   addressRegion,
-  addressDistrict
+  addressDistrict,
+  technical,
 }) => {
   useEffect(() => {
     dispatch(getColleges());
@@ -63,6 +65,10 @@ const Profile = ({
       left: 0,
       behavior: "smooth",
     });
+
+  const [employmentLocations, setEmploymentLocations] = useState(
+    employment.map(() => [])
+  );
 
   const employments = employment
     .map((val) => ({
@@ -98,6 +104,19 @@ const Profile = ({
     if (resp) return true;
   };
 
+  const getEmploymentLocation = async () => {
+    const resp1 = await Promise.all([
+      ...employments.map((val) =>
+        dispatch(getDistrict({ state: val.location_state }))
+      ),
+      dispatch(getTechnicalCourses()),
+    ]);
+    if (resp1) {
+      setEmploymentLocations(resp1.slice(0, -1));
+      return true;
+    }
+  };
+
   return (
     <div>
       <section className="section-profile">
@@ -124,6 +143,9 @@ const Profile = ({
               addressState={addressState}
               addressDistrict={addressDistrict}
               addressRegion={addressRegion}
+              employmentLocations={employmentLocations}
+              technical={technical}
+              getEmploymentLocation={getEmploymentLocation}
             />
           </div>
         </div>
@@ -146,9 +168,10 @@ const mapStateToProps = (state) => ({
   degrees: state.profile.degrees,
   institutions: state.profile.institutionName,
   boards: state.profile.boardName,
+  technical: state.profile.technical,
   addressState: state.profile.addressState,
   addressDistrict: state.profile.addressDistrict,
-  addressRegion: state.profile.addressRegion
+  addressRegion: state.profile.addressRegion,
 });
 
 export default connect(mapStateToProps)(Profile);

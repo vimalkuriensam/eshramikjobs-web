@@ -199,6 +199,7 @@ const PersonalEditInfo = function ({
             placeholder=""
             value={edit.per_state}
             contents={addressState.map((val) => val.state)}
+            onHandleDropdownValue={onHandlePersonalInfo.bind(this, "per_state")}
           />
         </div>
       </div>

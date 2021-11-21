@@ -82,7 +82,7 @@ export const getDistrict =
       );
       if (status == 200) {
         dispatch(setAddressDistrict({ district: data.data }));
-        return true;
+        return data.data;
       }
     } catch (e) {
       throw e;

@@ -1,0 +1,9 @@
+.section-profile {
+  padding: 6.4rem 14rem 4.6rem 14rem;
+}
+
+@media only screen and (max-width: 40rem) {
+  .section-profile {
+    padding: 6.4rem 5rem 4.6rem 5rem;
+  }
+}

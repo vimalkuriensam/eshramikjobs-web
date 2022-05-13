@@ -1,0 +1,27 @@
+.section-profile-creaton {
+  position: relative;
+  padding: 2.5rem 27rem 10rem 27rem;
+  overflow: hidden;
+}
+
+.section-admin {
+  width: 100vw;
+  height: 100vh;
+}
+
+.section-company-profile {
+  padding: 5rem 33.8rem 9.3rem 39rem;
+  position: relative;
+}
+
+@media only screen and (max-width: 70rem) {
+  .section-profile-creaton {
+    padding: 2.5rem 14rem 10rem 14rem;
+  }
+}
+
+@media only screen and (max-width: 60rem) {
+  .section-profile-creaton {
+    padding: 2.5rem 4rem 10rem 4rem;
+  }
+}

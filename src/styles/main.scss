@@ -1,3 +1,36 @@
+@font-face {
+  font-family: "poppins-bold";
+  src: url("/assets/fonts/Poppins-Bold.otf");
+}
+
+@font-face {
+  font-family: "poppins-semi-bold";
+  src: url("/assets/fonts/Poppins-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "poppins-regular";
+  src: url("/assets/fonts/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: "poppins-medium";
+  src: url("/assets/fonts/Poppins-Medium.ttf");
+}
+
+@font-face {
+  font-family: "poppins-light";
+  src: url("/assets/fonts/Poppins-Light.ttf");
+}
+
+@font-face {
+  font-family: "proxima-nova-regular";
+  src: url("/assets/fonts/ProximaNova-Regular.otf");
+}
+
+@import "aos/dist/aos.css";
+@import "react-datepicker/dist/react-datepicker.css";
+
 @import "./abstracts/variables";
 @import "./abstracts/functions";
 @import "./abstracts/mixins";
@@ -6,3 +39,35 @@
 @import "./base/base";
 @import "./base/typography";
 @import "./base/utilities";
+
+@import "./components/authentication";
+@import "./components/button";
+@import "./components/dashboard";
+@import "./components/form";
+@import "./components/home";
+@import "./components/jobs";
+@import "./components/message";
+@import "./components/notification";
+@import "./components/pagination";
+@import "./components/popup";
+@import "./components/profile";
+@import "./components/recruit";
+@import "./components/table";
+
+@import "./layout/footer";
+@import "./layout/header";
+@import "./layout/grid";
+@import "./layout/loader";
+@import "./layout/logout";
+@import "./layout/navbar";
+
+@import "./pages/authentication";
+@import "./pages/dashboard";
+@import "./pages/home";
+@import "./pages/jobs";
+@import "./pages/profile";
+@import "./pages/recruit";
+
+@import "./vendors/calendar";
+@import "./vendors/page-transition";
+@import "./vendors/scroll";

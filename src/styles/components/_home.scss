@@ -1,0 +1,306 @@
+.home {
+  &__hero {
+    background-image: url("/assets/images/home-banner.png");
+    background-size: cover;
+    height: calc(100vh - 10rem);
+  }
+
+  &__heroContainer {
+    padding: 14rem;
+  }
+
+  &__heroInput {
+    opacity: 0.85;
+    height: 5.4rem;
+    border: 3px solid transparent;
+    &:active,
+    &:focus {
+      border: 3px solid $color-secondary;
+    }
+  }
+
+  &__userIconContainer {
+    background: $color-grey-light-1;
+  }
+
+  &__userIcon {
+    height: 10.4rem;
+    width: 10rem;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    fill: $color-grey-dark;
+  }
+
+  &__feedback {
+    min-height: 66.5rem;
+    background: $color-secondary;
+    padding: 6.1rem 3.1rem;
+  }
+
+  &__ad {
+    min-height: 55.1rem;
+    text-align: center;
+    background-image: linear-gradient(
+        to right,
+        rgba($color-primary, 0.7),
+        rgba($color-primary, 0.7)
+      ),
+      url("/assets/images/home-ad.png");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__card {
+    background: $color-grey-light-3;
+    cursor: pointer;
+    min-height: 19.6rem;
+    border-radius: 0.8rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: 0.4s;
+    &:hover {
+      box-shadow: 1px 1px 2.5rem rgba($color-black, 0.25);
+      border: 1px solid $color-grey-light-2;
+    }
+    > * {
+      &:not(:first-child) {
+        margin-top: 1.6rem;
+      }
+    }
+  }
+
+  &__feedbackLists {
+    position: relative;
+    overflow: hidden;
+    min-height: 40rem;
+    margin-top: 3.5rem;
+    > ul {
+      display: flex;
+      left: 0%;
+      position: relative;
+      transition: 0.5s;
+      > li {
+        margin: 0rem 4.4rem;
+        list-style: none;
+        width: 33.3%;
+      }
+    }
+  }
+
+  &__feedbackArrow {
+    height: 20rem;
+    fill: $color-tertiary;
+    cursor: pointer;
+    opacity: 0.4;
+    z-index: 1000;
+    transition: 0.2s;
+    &:hover {
+      opacity: 1;
+    }
+
+    &--right {
+      position: absolute;
+      top: 5rem;
+      right: 0%;
+    }
+
+    &--left {
+      transform: rotateY(180deg);
+      position: absolute;
+      top: 5rem;
+      left: 0%;
+    }
+  }
+
+  &__feedbackContainer {
+    text-align: center;
+    max-width: 39.7rem;
+    height: 28.5rem;
+    transform: scale(0.8);
+    opacity: 0.3;
+    transition: 0.5s;
+    &--current {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+  &__feedbackText {
+    position: relative;
+    background: $color-white;
+    box-shadow: 0 0.3rem 1.9rem rgba($color-black, 0.14);
+    padding: 2.5rem 2.9rem;
+    border-radius: 0.5rem;
+  }
+
+  &__feedbackCaret {
+    position: absolute;
+    width: 3.5rem;
+    height: 3rem;
+    background: $color-white;
+    bottom: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+
+  &__sampleContainer {
+    display: flex;
+    width: 100%;
+    > * {
+      &:not(:first-child) {
+        margin-left: 1.6rem;
+      }
+    }
+  }
+
+  &__sampleJobs {
+    display: inline-block;
+    width: 66%;
+  }
+
+  &__sampleCompany {
+    display: inline-block;
+    width: 32.3%;
+  }
+
+  &__profileContainer {
+    position: relative;
+    width: 100%;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.1rem 0.6rem rgba($color-black, 0.16);
+    margin-top: -9.1rem;
+    background-color: $color-white;
+    padding: 6.4rem 2.4rem 2.1rem 2.8rem;
+    text-align: center;
+  }
+
+  &__profileImageWrapper {
+    position: absolute;
+    top: -7%;
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  &__profileImage {
+    transform: rotate(-90deg);
+    height: 9rem;
+    width: 9rem;
+  }
+
+  &__progress {
+    padding: 4.1rem 0 3.4rem 0;
+  }
+
+  &__lists {
+    display: flex;
+  }
+
+  &__listContainer {
+    width: 14.5rem;
+    box-shadow: 0 1px 0.6rem rgba($color-black, 0.12);
+    height: 13.2rem;
+    display: inline-block;
+    border-radius: 0.8rem;
+  }
+
+  &__imageContainer {
+    position: absolute;
+    left: 50%;
+    top: -5rem;
+    transform: translateX(-50%);
+  }
+
+  &__image {
+    width: 15rem;
+    height: 10rem;
+    position: absolute;
+    top: 0;
+    left: -50%;
+    transform: translateX(15%);
+  }
+}
+
+.octo,
+.octo div {
+  margin: 0 auto;
+  transform-origin: 50% 50%;
+  overflow: hidden;
+  width: 300px;
+  height: 300px;
+}
+.octo,
+.octo div {
+  width: 10rem;
+  height: 10rem;
+}
+.octo {
+  transform: rotate(45deg);
+}
+.octo1 {
+  transform: rotate(-45deg);
+  position: relative;
+}
+
+@media only screen and (max-width: 55rem) {
+  .home {
+    &__heroContainer {
+      padding: 8rem 4rem;
+      text-align: center;
+    }
+
+    &__heroInputContainer {
+      margin: 1rem 0;
+      width: 100% !important;
+      display: block;
+      > * {
+        width: 100%;
+      }
+    }
+
+    &__ad {
+      padding: 0 6rem;
+      text-align: center;
+      > * {
+        font-size: 4rem;
+      }
+    }
+    &__sampleContainer {
+      display: block;
+    }
+    &__sampleJobs {
+      width: 100%;
+    }
+
+    &__sampleCompany {
+      width: 100%;
+      margin-left: 0 !important;
+    }
+
+    &__profileContainer {
+      margin-top: 6rem;
+    }
+
+    &__listContainer {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 70rem) {
+  .home {
+    &__feedbackText {
+      height: 20rem;
+      > * {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

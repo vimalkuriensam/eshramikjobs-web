@@ -1,0 +1,38 @@
+.footer {
+  padding: 9rem 7rem;
+
+  &__linkContent {
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+      color: darken($color-grey-dark, 10%);
+    }
+  }
+
+  &__title {
+    margin-top: -1rem;
+  }
+
+  &__cta {
+    margin-top: 3.2rem;
+    opacity: 1;
+    padding: 0.8rem 4.5rem;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 65rem) {
+  .footer {
+    > .row {
+      > * {
+        &:not(:first-child) {
+          margin-top: 3rem;
+        }
+      }
+      > div {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}

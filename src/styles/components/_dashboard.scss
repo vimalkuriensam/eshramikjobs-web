@@ -1,0 +1,163 @@
+.dashboard {
+  &__subscriptionBox {
+    border-radius: 0.8rem;
+    min-height: 17.9rem;
+    background: $color-white;
+    box-shadow: 0 0.1rem 2rem rgba($color-black, 0.15);
+    padding: 2rem 2.3rem 1.1rem 2rem;
+  }
+
+  &__subscriptionValue {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__tableContainer {
+    padding: 2rem 2.5rem;
+    background: $color-white;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.1rem 2rem rgba($color-black, 0.15);
+    width: 100%;
+  }
+
+  &__companiesContainer {
+    height: 56.05rem;
+  }
+
+  &__companies {
+    padding: 0.8rem 0;
+  }
+
+  &__logo {
+    width: 3.7rem;
+    height: 3.7rem;
+    border-radius: 0.8rem;
+  }
+
+  &__logo-2 {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 0.8rem;
+  }
+
+  &__salesHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__salesTitle {
+    > * {
+      &:not(:first-child) {
+        margin-left: 2.4rem;
+      }
+    }
+  }
+
+  &__salesMonths {
+    font-size: 1.4rem;
+    font-family: "poppins-regular";
+    > g > text {
+      transform: translate(2rem, 2rem);
+      text-transform: lowercase;
+    }
+  }
+
+  &__salesRevenue {
+    font-size: 1.4rem;
+    font-family: "poppins-regular";
+  }
+
+  &__salesLabels {
+    fill: $color-secondary;
+    font-family: "poppins-semi-bold";
+    font-size: 1rem;
+  }
+
+  &__userIconContainer {
+    height: 6.1rem;
+    width: 6.1rem;
+    background: $color-grey-light-1;
+    border-radius: 3rem;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  &__userIcon {
+    height: 6.1rem;
+    width: 6.1rem;
+    border-radius: 3.2rem;
+    fill: $color-grey-light-2;
+    margin-top: 1.4rem;
+  }
+
+  &__salesCTA {
+    &--activeDay {
+      border-bottom: 2px solid $color-primary;
+    }
+
+    &--inactiveDay {
+      cursor: pointer;
+      color: $color-grey-dark;
+      border-bottom: 2px solid transparent;
+    }
+
+    > * {
+      &:not(:first-child) {
+        margin-left: 1.2rem;
+      }
+    }
+  }
+
+  &__tableList {
+    padding: 2rem;
+  }
+
+  &__tableText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+  }
+
+  &__loaderMessage {
+    display: flex;
+    margin-top: 4rem;
+    justify-content: center;
+    min-height: 96.6rem;
+  }
+
+  &__rows1 {
+    padding: 3.5rem 0;
+  }
+}
+
+@media only screen and (max-width: 60rem) {
+  .dashboard {
+    &__subscriptionColumn > div {
+      > div {
+        width: 100% !important;
+      }
+      > * {
+        &:not(:first-child) {
+          margin-top: 2rem;
+        }
+      }
+    }
+
+    &__tableContainer {
+      width: 100%;
+    }
+
+    &__lists {
+      > * {
+        width: 100% !important;
+        &:not(:first-child) {
+          margin-top: 2rem;
+        }
+      }
+    }
+  }
+}

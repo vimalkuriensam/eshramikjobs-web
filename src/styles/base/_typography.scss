@@ -7,3 +7,249 @@ body {
   color: $color-grey-dark;
   // padding: 3rem;
 }
+
+.title {
+  color: $color-grey-dark;
+  font-size: 1.8rem;
+  font-family: "poppins-regular";
+  display: inline-block;
+  &--pm-17-1 {
+    font-size: 1.7rem;
+    font-family: "poppins-medium";
+  }
+
+  &--psm-30-1 {
+    font-family: "poppins-semi-bold";
+    font-size: 3rem;
+  }
+
+  &--psm-23-1 {
+    font-family: "poppins-semi-bold";
+    font-size: 2.3rem;
+  }
+
+  &--psm-18-1 {
+    font-size: 1.8rem;
+    font-family: "poppins-semi-bold";
+  }
+
+  &--pr-13-1 {
+    font-size: 1.3rem;
+  }
+
+  &--pr-13-2 {
+    font-size: 1.3rem;
+    color: #535353;
+  }
+
+  &--pr-15-1 {
+    font-size: 1.5rem;
+  }
+
+  &--pr-15-2 {
+    font-size: 1.5rem;
+    color: $color-primary;
+  }
+
+  &--pr-15-3 {
+    font-size: 1.5rem;
+    color: $color-tertiary;
+  }
+
+  &--pr-16-1 {
+    font-size: 1.6rem;
+  }
+
+  &--pr-17-1 {
+    font-size: 1.7rem;
+    color: $color-primary;
+  }
+
+  &--pr-17-2 {
+    font-size: 1.7rem;
+    color: $color-white;
+  }
+
+  &--pr-17-3 {
+    font-size: 1.7rem;
+  }
+
+  &--pr-17-4 {
+    font-size: 1.7rem;
+    color: #535353;
+  }
+
+  &--pr-17-5 {
+    font-size: 1.7rem;
+    color: $color-secondary;
+  }
+
+  &--pr-19-1 {
+    font-size: 1.9rem;
+  }
+
+  &--pr-19-2 {
+    font-size: 1.9rem;
+    color: $color-tertiary;
+  }
+
+  &--pr-19-3 {
+    font-size: 1.9rem;
+    color: #535353;
+  }
+
+  &--pr-20-2 {
+    font-size: 2rem;
+  }
+
+  &--pr-21-1 {
+    font-size: 2.1rem;
+    color: $color-white;
+  }
+
+  &--pr-24-1 {
+    font-size: 2.4rem;
+    color: $color-primary;
+  }
+
+  &--pr-24-2 {
+    font-size: 2.4rem;
+  }
+
+  &--pr-25-1 {
+    font-size: 2.5rem;
+  }
+
+  &--pr-28-1 {
+    font-size: 2.8rem;
+  }
+
+  &--pr-30-1 {
+    font-size: 3rem;
+  }
+
+  &--pr-35-1 {
+    font-size: 3.5rem;
+    color: $color-white;
+  }
+
+  &--pr-36-1 {
+    font-size: 3.6rem;
+  }
+
+  &--pr-54-1 {
+    font-size: 5.4rem;
+    color: $color-white;
+  }
+
+  &--pm-26-1 {
+    font-size: 2.6rem;
+    font-family: "poppins-medium";
+  }
+
+  &--pm-30-1 {
+    font-size: 3rem;
+    font-family: "poppins-medium";
+  }
+
+  &--pb-21-1 {
+    font-size: 2.1rem;
+    color: $color-primary;
+    font-family: "poppins-bold";
+  }
+}
+
+.text {
+  font-size: 1.8rem;
+  color: $color-grey-dark;
+  font-family: "poppins-regular";
+  display: inline-block;
+
+  &--pr-14-1 {
+    font-size: 1.4rem;
+  }
+
+  &--pr-14-2 {
+    font-size: 1.4rem;
+    color: $color-primary;
+  }
+
+  &--pr-18-1 {
+    font-size: 1.8rem;
+  }
+
+  &--pr-18-2 {
+    font-size: 1.8rem;
+    color: $color-white;
+  }
+
+  &--pr-18-3 {
+    font-size: 1.8rem;
+    color: $color-primary;
+  }
+
+  &--pl-12-1 {
+    font-family: "poppins-light";
+    font-size: 1.2rem;
+  }
+
+  &--pl-12-2 {
+    font-family: "poppins-light";
+    font-size: 1.2rem;
+    color: $color-white;
+  }
+
+  &--pl-14-1 {
+    font-family: "poppins-light";
+    font-size: 1.4rem;
+  }
+
+  &--pl-14-2 {
+    font-family: "poppins-light";
+    font-size: 1.4rem;
+    color: $color-white;
+  }
+
+  &--pl-14-3 {
+    font-family: "poppins-light";
+    font-size: 1.4rem;
+    color: #535353;
+  }
+
+  &--pl-16-1 {
+    font-family: "poppins-light";
+    font-size: 1.6rem;
+  }
+
+  &--pl-17-1 {
+    font-family: "poppins-light";
+    font-size: 1.7rem;
+  }
+
+  &--pl-17-2 {
+    font-family: "poppins-light";
+    font-size: 1.7rem;
+    color: $color-primary;
+  }
+
+  &--pl-18-1 {
+    font-family: "poppins-light";
+    font-size: 1.8rem;
+    color: $color-primary;
+  }
+
+  &--pl-18-2 {
+    font-family: "poppins-light";
+    font-size: 1.8rem;
+  }
+
+  &--pm-16-1 {
+    font-size: 1.6rem;
+    font-family: "poppins-medium";
+  }
+
+  &--error {
+    font-size: 1.4rem;
+    color: #ce0606;
+  }
+}

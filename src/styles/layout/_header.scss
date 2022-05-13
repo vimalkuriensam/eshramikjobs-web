@@ -1,0 +1,329 @@
+.header {
+  width: 100%;
+  height: 10rem;
+  background: $color-grey-light-3;
+  display: flex;
+  align-items: center;
+  padding: 1rem 14rem;
+  justify-content: space-between;
+
+  &__menuContainer {
+    position: relative;
+    padding: 1rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      border: 1px solid #727272;
+      background: darken($color-grey-light-3, 3%);
+    }
+  }
+
+  &__menuDrawer {
+    position: fixed;
+    padding: 1rem;
+    height: 100vh;
+    width: 20rem;
+    z-index: 1005;
+    background: $color-grey-light-3;
+    top: 0;
+    right: 0;
+    animation: moveInLeft 0.3s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &--close {
+      animation: moveInRight 0.3s forwards;
+    }
+    > * {
+      margin: 1rem 0.5rem;
+    }
+    > button {
+      width: 100%;
+    }
+  }
+
+  &__menuWrapper {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.5;
+    z-index: 1000;
+  }
+
+  &__menu {
+    height: 4rem;
+    > g > path {
+      fill: #727272;
+    }
+  }
+
+  &__logo-box {
+    cursor: pointer;
+  }
+
+  &__link {
+    font-family: "poppins-regular";
+    font-size: 1.8rem;
+    color: $color-grey-dark;
+    text-decoration: none;
+    cursor: pointer;
+    &--active {
+      color: $color-black;
+    }
+  }
+
+  &__actions {
+    > * {
+      &:not(:first-child) {
+        margin-left: 3rem;
+      }
+    }
+  }
+
+  &__profileContainer {
+    position: absolute;
+    top: 4rem;
+    right: 0rem;
+    background: white;
+    min-width: 33rem;
+    padding: 1.7rem 2.5rem;
+    box-shadow: 0 0.3rem 1.4rem rgba($color-black, 0.2);
+    z-index: 1000;
+    > * {
+      &:not(:last-child) {
+        margin-bottom: 1.5rem !important;
+      }
+    }
+  }
+
+  &__profileCaret {
+    width: 1.4rem;
+    height: 1.2rem;
+    position: absolute;
+    right: 2rem;
+    top: -1.2rem;
+    background: $color-white;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  }
+
+  &__profileList {
+    cursor: pointer;
+    > div {
+      &:hover {
+        text-decoration: underline;
+        color: $color-black;
+      }
+    }
+  }
+}
+
+.adminHeader {
+  height: 9.4rem;
+  width: 100%;
+  background: $color-white;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &__logoBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 27.3rem;
+    height: 100%;
+    box-shadow: 0 0.3rem 0.6rem rgba($color-black, 0.16);
+  }
+
+  &__logo {
+    height: 4.4rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+
+  &__contentMain {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 1rem 4.3rem;
+
+    &--right {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      > * {
+        &:not(:first-child) {
+          margin-left: 4.2rem;
+        }
+      }
+    }
+  }
+
+  &__userBox {
+    height: 4.2rem;
+    width: 4.2rem;
+    border-radius: 2.1rem;
+    background-color: #f6f5fc;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &__userIcon {
+    height: 6rem;
+    width: 3.5rem;
+    fill: #ccc;
+    transform: translateX(3px);
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 8rem;
+    right: 2.5rem;
+    display: inline-block;
+    min-width: 8rem;
+    height: 3rem;
+    background: $color-white;
+    box-shadow: 0 0 6rem rgba($color-black, 0.16);
+    text-align: center;
+    cursor: pointer;
+    animation: moveInBig 0.1s ease;
+
+    &:hover {
+      background: darken($color-white, 2%);
+    }
+    &::before {
+      content: "";
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      top: -1rem;
+      right: 50%;
+      background: white;
+      transform: translateX(50%);
+      box-shadow: 0 0 6rem rgba($color-black, 0.16);
+    }
+  }
+
+  &__notificationIcon {
+    cursor: pointer;
+    &:hover {
+      animation: shake 0.3s ease;
+    }
+  }
+
+  &__notificationCount {
+    min-width: 1.8rem;
+    min-height: 1.8rem;
+    display: inline-block;
+    background: $color-primary;
+    color: $color-white;
+    font-family: "poppins-regular";
+    font-size: 1.1rem;
+    text-align: center;
+    border-radius: 0.9rem;
+    position: absolute;
+    top: -3px;
+    right: -7px;
+  }
+}
+
+.recruiterHeader {
+  height: 9.4rem;
+  width: 100%;
+  background: $color-white;
+  box-shadow: 0 1px 0.7rem rgba($color-black, 0.1);
+  padding: 2.5rem 4.2rem 2.5rem 10.6rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__userLogo {
+    height: 4.2rem;
+    width: 4.2rem;
+  }
+}
+
+@media only screen and (max-width: 70rem) {
+  .header {
+    &__actions {
+      > a {
+        font-size: 1.4rem;
+      }
+      > button {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 60rem) {
+  .header {
+    &__actions {
+      > a {
+        font-size: 1.2rem;
+      }
+      > button {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 55rem) {
+  .header {
+    padding: 1rem 4rem;
+  }
+}
+
+@keyframes moveInLeft {
+  0% {
+    transform: translate(20rem, 0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    transform: translate(0rem, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(20rem, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(12deg);
+  }
+
+  25% {
+    transform: rotate(-12deg);
+  }
+
+  50% {
+    transform: rotate(12deg);
+  }
+
+  90% {
+    transform: rotate(-12deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

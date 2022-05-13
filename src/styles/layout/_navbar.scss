@@ -1,0 +1,77 @@
+.navbar {
+  width: 27.3rem;
+  background: $color-primary;
+  &__outer {
+    width: 80%;
+  }
+
+  &__nav {
+    display: block;
+    padding: 3.5rem 4.5rem;
+    text-decoration: none;
+    color: $color-white;
+    font-size: 1.6rem;
+    font-family: "poppins-regular";
+    opacity: 0.8;
+    width: 27.3rem;
+    cursor: pointer;
+    &:hover {
+      background: darken($color-primary, 3%);
+      transition: 0.3s;
+    }
+    &--active {
+      opacity: 1;
+      background: darken($color-primary, 3%);
+    }
+  }
+}
+
+.recruiterNavbarContainer {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.recruiterNavbar {
+  width: 27.3rem;
+  background: $color-primary;
+  padding-top: 1.75rem;
+  &__nav {
+    display: block;
+    padding: 1.75rem 4.7rem;
+    text-decoration: none;
+    color: $color-white;
+    font-size: 1.6rem;
+    font-family: "poppins-regular";
+    opacity: 0.8;
+    width: 27.3rem;
+    cursor: pointer;
+    &--active {
+      opacity: 1;
+    }
+  }
+}
+
+@media only screen and (max-width: 60rem) {
+  .navbar {
+    width: 100%;
+    display: flex;
+
+    &__nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      font-size: 1.3rem;
+    }
+  }
+
+  .recruiterNavbar {
+    width: 100%;
+    display: flex;
+  }
+
+  .recruiterNavbarContainer {
+    display: block;
+  }
+}

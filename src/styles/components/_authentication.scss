@@ -1,0 +1,317 @@
+.authentication {
+  &__loginContainer {
+    background: $color-secondary;
+    padding: 6.4rem 7rem 5.7rem 7rem;
+  }
+
+  &__loginCTA {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    > * {
+      cursor: pointer;
+      &:not(:first-child) {
+        margin-left: 2.3rem;
+      }
+    }
+  }
+
+  &__signup-image {
+    height: calc(100vh - 10rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__signupInput {
+    > * {
+      &:first-child {
+        margin-top: 2.8rem;
+      }
+      &:not(:first-child) {
+        margin-top: 3.8rem;
+      }
+    }
+  }
+
+  &__signupInputContainer {
+    padding: 5rem 20rem 9rem 0;
+  }
+
+  &__signupCTA {
+    margin-top: 2.5rem;
+  }
+
+  &__stepBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  &__stepContainer {
+    display: flex;
+    align-items: center;
+    > * {
+      &:not(:first-child) {
+        margin-left: 5.2rem;
+      }
+    }
+  }
+
+  &__stepInfo {
+    width: 4.2rem;
+    height: 4.2rem;
+    border-radius: 2.1rem;
+    background: $color-primary;
+    color: $color-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "poppins-medium";
+    font-size: 24;
+  }
+
+  &__hexagon1 {
+    position: absolute;
+    top: 0;
+    left: -12rem;
+  }
+
+  &__hexagon2 {
+    position: absolute;
+    bottom: 0;
+    right: -12rem;
+  }
+
+  &__otpContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 7.1rem 10rem;
+    padding-left: 2rem;
+  }
+
+  &__loginEmailContainer {
+    position: relative;
+  }
+
+  &__loginInputError {
+    > input {
+      border: 2px solid #ce0606;
+    }
+  }
+
+  &__loginInputError2 {
+    border: 2px solid #ce0606 !important;
+  }
+
+  &__loginError {
+    position: absolute;
+    top: 5.4rem;
+    left: 0;
+  }
+
+  &__loginError2 {
+    position: absolute;
+    top: 6.4rem;
+    left: 0.3rem;
+    font-size: 1.2rem;
+  }
+
+  &__profileContainer {
+    height: 22.7rem;
+    border-radius: 1rem;
+    border: 2px solid $color-secondary;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  &__profileImage {
+    height: 22.7rem;
+  }
+
+  &__deleteContainer {
+    text-align: right;
+    > div {
+      display: block !important;
+    }
+  }
+
+  &__experienceContainer {
+    text-align: center;
+    padding: 2rem 0 4rem 0;
+  }
+
+  &__delete {
+    height: 3rem;
+    fill: $color-tertiary;
+  }
+
+  &__hexagon {
+    width: 100px;
+    height: 57.735px;
+    background: $color-secondary;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -28.8675px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 28.8675px solid $color-secondary;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -28.8675px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-top: 28.8675px solid $color-secondary;
+    }
+
+    &--inner {
+      @include displayCenter;
+      width: 100px;
+      height: 57.735px;
+      background: #ecf3f1;
+      transform: scale(0.9);
+      position: relative;
+      z-index: 2;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -28.8675px;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-bottom: 28.8675px solid #ecf3f1;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -28.8675px;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-top: 28.8675px solid #ecf3f1;
+      }
+    }
+  }
+
+  &__contact {
+    display: flex;
+    align-items: center;
+    > * {
+      &:not(:first-child) {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
+  &__adminDetails {
+    min-height: 100%;
+    min-width: 100%;
+    position: relative;
+    padding: 8rem 20rem 12.3rem 20rem;
+    text-align: center;
+  }
+
+  &__recruiterDetails {
+    min-height: 100vh;
+    min-width: 100%;
+  }
+
+  &__companyProfileCTA {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    > button {
+      width: 18.5rem;
+      height: 4.8rem;
+    }
+  }
+
+  &__adminLogo {
+    width: 9.9rem;
+    height: 7.2rem;
+    cursor: pointer;
+  }
+
+  &__adminLoginBox {
+    max-height: 43.5rem;
+    max-width: 48.4rem;
+    box-shadow: 0 1px 0.6rem rgba($color-black, 0.13);
+    margin: 0 auto;
+    margin-top: 2rem;
+    border-radius: 0.8rem;
+  }
+
+  &__adminInput {
+    padding: 2rem 2.5rem;
+  }
+
+  &__adminCTA {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    margin-bottom: 4rem;
+    > * {
+      cursor: pointer;
+      &:not(:last-child) {
+        margin-right: 1.5rem;
+      }
+    }
+  }
+
+  &__logo {
+    height: 22rem;
+    border: 1px solid $color-secondary;
+    display: inline-block;
+    border-radius: 1rem;
+    width: 100%;
+    &--empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $color-white;
+    }
+  }
+}
+
+@media only screen and (max-width: 70rem) {
+  .authentication {
+    &__adminDetails {
+      padding: 8rem 0 12.3rem 0;
+    }
+
+    &__signupInputContainer {
+      padding: 5rem 4rem 0 4rem;
+    }
+
+    &__signupMain {
+      > * {
+        &:first-child {
+          display: none;
+        }
+        display: block;
+        width: 100% !important;
+      }
+    }
+  }
+}

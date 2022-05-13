@@ -1,0 +1,38 @@
+export const APPLICATION_DEFAULT_VALUES = [
+  {
+    photo: "/resume-table/pic1",
+    fullName: "Steve White",
+    jobTitle: "Production Manager",
+    skills: "Word, Excel, PowerPoint, Client interaction",
+    education: "Graduate",
+    gender: "Male",
+    dob: "28",
+  },
+  {
+    photo: "/resume-table/pic2",
+    fullName: "Jason Black",
+    jobTitle: "Construction supervisor",
+    skills: "Autocad",
+    education: "Graduate",
+    gender: "Male",
+    dob: "30",
+  },
+  {
+    photo: "/resume-table/pic3",
+    fullName: "Leo Smith",
+    jobTitle: "Business Analyst",
+    skills: "Analytical Softwares",
+    education: "Graduate",
+    gender: "Male",
+    dob: "27",
+  },
+  {
+    photo: "/resume-table/pic4",
+    fullName: "Amit Patil",
+    jobTitle: "AutoCad Draftsman",
+    skills: "AutoCad, word, Excel",
+    education: "Graduate",
+    gender: "Male",
+    dob: "25",
+  },
+];

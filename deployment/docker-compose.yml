@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  eshramik-app-frontend:
+    build:
+      context: ../
+      dockerfile: ./deployment/DockerFile.dev
+    container_name: eshramik-frontend
+    ports:
+      - 4200:4200
+    env_file:
+      - ../src/environment/.env.development
+    volumes:
+      - ../src:/app/src
+      - /app/node_modules
+    stdin_open: true
+    tty: true
